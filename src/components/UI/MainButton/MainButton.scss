@@ -1,0 +1,10 @@
+@import '../../../scss/style';
+
+.MainButton{
+  border: none;
+  border-radius: 20px;
+  background-color: $lightGreenColor;
+  padding: 10px 20px;
+  color: $darkGreenColor;
+  font-weight: 700;
+}
