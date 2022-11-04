@@ -1,6 +1,8 @@
 import React from 'react';
 import './Footer.scss';
 import Logo from "../UI/Logo/Logo";
+import FooterIcon from "./FooterIcon/FooterIcon";
+import FooterLink from "./FooterLink/FooterLink";
 
 const Footer = () => {
   return (
@@ -8,35 +10,35 @@ const Footer = () => {
       <div className={'container'}>
         <div className={'footer_top'}>
           <div className={'footer_top_col'}>
-            <div className={'footer_logo'}>
-              <Logo/>
+            <div className={'footer_top_logo'}>
+              <Logo className={'footer_logo'}/>
             </div>
             <div className={'footer_top_social_icons'}>
-              <a href="#" className={'footer_link'}>1</a>
-              <a href="#" className={'footer_link'}>2</a>
-              <a href="#" className={'footer_link'}>3</a>
-              <a href="#" className={'footer_link'}>4</a>
+              <FooterIcon href='#' className={'footer_link footer_link_vk'}/>
+              <FooterIcon href='#' className={'footer_link footer_link_yt'}/>
+              <FooterIcon href='#' className={'footer_link footer_link_tg'}/>
+              <FooterIcon href='#' className={'footer_link footer_link_inst'}/>
             </div>
           </div>
           <div className={'footer_top_col'}>
             <h6 className={'footer_top_title'}>Курсы</h6>
-            <a href="#" className={'footer_link'}>Web-дизайнер</a>
-            <a href="#" className={'footer_link'}>UX-UI дизайнер</a>
-            <a href="#" className={'footer_link'}>Front-end разработчик</a>
+            <FooterLink href="#" className={'footer_link'}>Web-дизайнер</FooterLink>
+            <FooterLink href="#" className={'footer_link'}>UX-UI дизайнер</FooterLink>
+            <FooterLink href="#" className={'footer_link'}>Front-end разработчик</FooterLink>
           </div>
           <div className={'footer_top_col'}>
             <h6 className={'footer_top_title'}>Информация</h6>
-            <a href="#" className={'footer_link'}>Об Eduspace</a>
-            <a href="#" className={'footer_link'}>Преподователи</a>
-            <a href="#" className={'footer_link'}>Партнеры</a>
-            <a href="#" className={'footer_link'}>Тарифы</a>
-            <a href="#" className={'footer_link'}>Контакты</a>
+            <FooterLink href="#" className={'footer_link'}>Об Eduspace</FooterLink>
+            <FooterLink href="#" className={'footer_link'}>Преподователи</FooterLink>
+            <FooterLink href="#" className={'footer_link'}>Партнеры</FooterLink>
+            <FooterLink href="#" className={'footer_link'}>Тарифы</FooterLink>
+            <FooterLink href="#" className={'footer_link'}>Контакты</FooterLink>
           </div>
           <div className={'footer_top_col'}>
             <h6 className={'footer_top_title'}>Контакты</h6>
-            <p className={'footer_top_text'}>space@eduspace.kg</p>
-            <p className={'footer_top_text'}>+996 777 09 07 09</p>
-            <p className={'footer_top_text'}>ул. Неизвестно 105</p>
+            <p className={'footer_top_text footer_top_text_email'}>space@eduspace.kg</p>
+            <p className={'footer_top_text footer_top_text_phone'}>+996 777 09 07 09</p>
+            <p className={'footer_top_text footer_top_text_pin'}>ул. Неизвестно 105</p>
           </div>
         </div>
       </div>
@@ -44,8 +46,8 @@ const Footer = () => {
         <div className={'container'}>
           <div className={'footer_bottom_inner'}>
             <p>«Eduspace» © Все права защищены / 2022</p>
-            <a className={'footer_link'} href="#">Политика конфиденциальности</a>
-            <a className={'footer_link'} href="#">Публичная оферта</a>
+            <FooterLink className={'footer_link'} href="#">Политика конфиденциальности</FooterLink>
+            <FooterLink className={'footer_link'} href="#">Публичная оферта</FooterLink>
           </div>
         </div>
       </div>
