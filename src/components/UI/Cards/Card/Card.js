@@ -3,7 +3,7 @@ import './Card.scss';
 
 const Card = ({children, className}) => {
     return (
-        <div className={className}>
+        <div className={`Card ${className}`}>
             {children}
         </div>
     );
