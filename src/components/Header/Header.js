@@ -10,10 +10,12 @@ const Header = () => {
     };
 
     return (
-        <header className={'container header'}>
-            <Logo className={'header_logo'}/>
-            <Nav/>
-            <MainButton className={'header_MainButton'} onClick={onHeaderButton} text={'Войти'}/>
+        <header className={' header'}>
+           <div className={'container header__container'}>
+               <Logo className={'header_logo'}/>
+               <Nav/>
+               <MainButton className={'header_MainButton'} onClick={onHeaderButton} text={'Войти'}/>
+           </div>
         </header>
     );
 };
