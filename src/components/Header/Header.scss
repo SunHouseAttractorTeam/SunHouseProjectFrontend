@@ -1,0 +1,17 @@
+@import '../../scss/style';
+
+.header{
+  background: transparent;
+  padding: 25px 0 !important;
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+  justify-content: space-between;
+  &_logo{
+    font-size: 30px;
+    margin-right: 50px;
+  }
+  &_MainButton{
+    font-size: 16px;
+  }
+}
