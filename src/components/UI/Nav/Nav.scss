@@ -1,3 +1,5 @@
+@import '../../../scss/style';
+
 .main-nav{
   padding: 0 15px;
   &__list{
@@ -7,24 +9,17 @@
     padding: 0;
     justify-content: space-between;
     transition: all 0.5s;
-    //@include md{
-    //  grid-column: 1/10;
-    //}
   }
   &__item{
-    padding: 0 70px 0 7px;
+    padding: 0 50px 0 7px;
     transition: all 0.5s;
-    //@include md{
-    //  width: 50%;
-    //  margin-bottom: 20px;
-    //}
   }
   &__link{
     text-decoration: none;
     text-transform: capitalize;
     color: #fff;
-    //&:hover{
-    //  text-decoration: 3px underline $baseColorRed;
-    //}
+    &:hover{
+      color:  $lightGreenColor;
+    }
   }
 }
