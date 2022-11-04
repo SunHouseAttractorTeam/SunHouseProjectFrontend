@@ -1,0 +1,72 @@
+@import '../../../../scss/style';
+
+.CardCourse,
+.CardTeacher,
+.CardSponsor,
+.CardRate,
+.ReviewCard,
+.CourseSendCard {
+  border-radius: 16px;
+  border: none;
+}
+
+.CardCourse {
+  border: none;
+  background-color: $greyColor;
+  width: 380px;
+  height: 280px;
+}
+
+.CardTeacher {
+  background-color: $totalWhiteColor;
+  width: 580px;
+  height: 174px;
+}
+
+.CardSponsor {
+  background-color: $totalWhiteColor;
+  width: 380px;
+  height: 130px;
+}
+
+.CardRate {
+  background-color: $totalWhiteColor;
+  width: 380px;
+  height: 560px;
+}
+
+.ReviewCard {
+  width: 580px;
+  height: 246px;
+  background-color: $totalWhiteColor;
+}
+
+.CourseSendCard {
+  width: 1179px;
+  height: 407px;
+  background-color: $totalWhiteColor;
+}
+
+.RegisterLoginCard {
+  width: 480px;
+  height: 512px;
+  background-color: $totalWhiteColor;
+}
+
+.WhoYouCard {
+  width: 980px;
+  height: 193px;
+  background-color: $totalWhiteColor;
+}
+
+.ProfileCard {
+  width: 300px;
+  height: 122px;
+  background-color: $greyColor;
+}
+
+.NotificationsCard {
+  background-color: $totalWhiteColor;
+  width: 800px;
+  height: 122px;
+}
