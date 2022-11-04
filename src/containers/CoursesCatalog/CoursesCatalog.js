@@ -1,6 +1,7 @@
 import React from 'react';
 import CourseCard from "../../components/CourseCard/CourseCard";
 import coursesData from "./coursesData";
+import './CoursesCatalog.scss';
 
 const CoursesCatalog = () => {
     return (
@@ -13,8 +14,7 @@ const CoursesCatalog = () => {
                             key={item.title}
                             title={item.title}
                             date={item.date}
-                            list={item.list}
-                            link={item.link}
+                            isLast={item.isLast}
                         />
                     ))}
                 </div>

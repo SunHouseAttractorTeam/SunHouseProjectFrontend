@@ -21,10 +21,6 @@ export default [
     },
     {
         title: 'Все наши курсы',
-        list: ['Программирование', 'Дизайн и UX', 'Маркетинг'],
-        link: {
-            label: 'Подробнее',
-            linkTo: '#'
-        }
+        isLast: true
     }
 ]
