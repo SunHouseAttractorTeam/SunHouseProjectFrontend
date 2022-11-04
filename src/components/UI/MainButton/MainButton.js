@@ -3,7 +3,7 @@ import './MainButton.scss';
 
 const MainButton = ({text, onClick, className}) => {
     return (
-        <button className={`CourseButton ${className}`} onClick={onClick}>
+        <button className={`MainButton ${className}`} onClick={onClick}>
             {text}
         </button>
     );

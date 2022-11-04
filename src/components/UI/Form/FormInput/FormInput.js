@@ -9,7 +9,7 @@ const FormInput = ({type, name, value, onChange, placeholder, className, require
                 value={value}
                 onChange={onChange}
                 placeholder={placeholder}
-                className={className}
+                className={`InputStyle ${className}`}
                 required={required}
             />
     );

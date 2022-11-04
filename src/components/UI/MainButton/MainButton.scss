@@ -1,60 +1,25 @@
 @import '../../../scss/style';
 
-
 .MainButton{
-  border: none;
-  border-radius: 20px;
-  background-color: $lightGreenColor;
-  padding: 10px 30px;
-  color: $darkGreenColor;
-  font-weight: 700;
-}
-
-.CourseButton,
-.HeaderButton,
-.LoginButton,
-.RegisterHomeButton {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  background-color: $lightGreenColor;
-  color: $darkGreenColor;
-  font-style: normal;
   border: none;
   border-radius: 50px;
+  gap: 10px;
+  padding: 10px 32px;
+  color: $darkGreenColor;
   font-weight: 700;
-}
-
-.CourseButton {
-  padding: 12px 84px;
-  width: 291px;
-  height: 49px;
+  font-style: normal;
   font-size: 20px;
-  line-height: 25px;
-}
-
-.HeaderButton {
-  padding: 10px 32px;
-  width: 110px;
-  height: 40px;
-  font-size: 16px;
   line-height: 20px;
 }
 
-.RegisterHomeButton {
-  padding: 10px 32px;
-  width: 295px;
-  height: 57px;
-  font-size: 20px;
-  line-height: 25px;
+.GreenButton {
+  background-color: $lightGreenColor;
 }
 
-.LoginButton {
-  padding: 12px 188px;
-  width: 416px;
-  height: 44px;
-  font-size: 16px;
-  line-height: 20px;
+.WhiteButton {
+  background-color: $totalWhiteColor;
 }

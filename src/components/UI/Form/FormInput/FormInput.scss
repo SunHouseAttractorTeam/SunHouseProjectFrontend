@@ -1,29 +1,24 @@
 @import '../../../../scss/style';
 
-.InputCourse{
+.InputStyle{
   border: none;
   border-radius: 90px;
-  background-color: $greyColor;
-  width: 480px;
-  height: 50px;
+  box-sizing: border-box;
   color: $blackDarkColor;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
-  padding: 0 0 0 33px;
+  padding: 15px 30px;
 }
 
-.InputRegister{
+.InputGrey{
   border: 1px solid $whiteBorderColor;
-  border-radius: 90px;
-  background-color: $totalWhiteColor;
-  width: 416px;
-  height: 50px;
+  background-color: $greyColor;
   color: $blackDarkColor;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
-  padding: 0 0 0 33px;
+}
+
+.InputWhite{
+  border: 2px solid $whiteBorderColor;
+  background-color: $totalWhiteColor;
 }
