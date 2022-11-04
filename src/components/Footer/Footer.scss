@@ -1,0 +1,127 @@
+@import '../../scss/style';
+
+.footer {
+  color: #FFFFFF;
+  font-size: 16px;
+  background: transparent;
+  padding: 64px 0 41px !important;
+  &_top {
+    display: flex;
+    gap: 1rem;
+    padding-bottom: 126px;
+    &_col {
+      flex: 1 1 calc((100% / 3) - 2rem);
+      display: flex;
+      flex-direction: column;
+    }
+    &_title {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 0 34px;
+    }
+    &_social_icons {
+      display: flex;
+      gap: 1rem
+    }
+    &_text {
+      margin: 0 0 12px;
+      &_email {
+        &:before {
+          content: '';
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          background: url('../../assets/icons/email_icon.svg') 0 no-repeat;
+          margin-right: 20px;
+        }
+      }
+      &_phone {
+        &:before {
+          content: '';
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          background: url('../../assets/icons/phone_icon.svg') 0 no-repeat;
+          margin-right: 20px;
+        }
+      }
+      &_pin {
+        &:before {
+          content: '';
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          background: url('../../assets/icons/pin_icon.svg') 0 no-repeat;
+          margin-right: 20px;
+        }
+      }
+    }
+    &_logo {
+      margin: 0 0 20px;
+    }
+    a {
+      margin-bottom: 14px;
+    }
+  }
+  &_bottom {
+    font-size: 14px;
+    padding-top: 18px;
+    border-top: 2px solid #2C2C2E;
+    &_inner {
+      display: flex;
+      gap: 7rem;
+      align-items: center;
+    }
+  }
+  &_logo {
+    img {
+      width: 185px;
+      height: 29px;
+    }
+  }
+  &_link {
+    text-decoration: none;
+    color: inherit;
+    &:hover {
+      color:  $lightGreenColor;
+    }
+    &_vk {
+      margin-left: 5px;
+      &:before {
+        content: '';
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background: url('../../assets/icons/vk_icon.svg') 0 no-repeat;
+      }
+    }
+    &_yt {
+      &:before {
+        content: '';
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background: url('../../assets/icons/youtube_icon.svg') 0 no-repeat;
+      }
+    }
+    &_tg {
+      &:before {
+        content: '';
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background: url('../../assets/icons/telegram_icon.svg') 0 no-repeat;
+      }
+    }
+    &_inst {
+      &:before {
+        content: '';
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background: url('../../assets/icons/instagram_icon.svg') 0 no-repeat;
+      }
+    }
+  }
+}
+
