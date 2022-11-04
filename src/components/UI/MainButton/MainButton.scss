@@ -23,3 +23,8 @@
 .WhiteButton {
   background-color: $totalWhiteColor;
 }
+
+.TransparentButton {
+  background-color: transparent;
+  border: 2px solid $whiteBorderColor;
+}
