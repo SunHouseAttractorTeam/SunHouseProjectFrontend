@@ -9,10 +9,10 @@ const About = () => {
       <div className={'container about_con'}>
         <div className={'about_con_left'}>
           <div className={'about_con_left_imgUnderBlock'}>
-            <img src={Vector} className={'about_con_left_imgUnderBlock_image'} alt=""/>
+            <img src={Vector} className={'about_con_left_imgUnderBlock_image'} alt="Eduspace"/>
           </div>
           <div className={'about_con_left_imgUpBlock'}>
-            <img src={PlanetImage} className={'about_con_left_imgUpBlock_image'} alt=""/>
+            <img src={PlanetImage} className={'about_con_left_imgUpBlock_image'} alt="Eduspace"/>
           </div>
         </div>
         <div className={'about_con_right'}>
