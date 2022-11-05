@@ -1,10 +1,30 @@
 @import '../../../scss/style';
 
 .MainButton{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   border: none;
-  border-radius: 20px;
-  background-color: $lightGreenColor;
-  padding: 10px 30px;
+  border-radius: 50px;
+  gap: 10px;
+  padding: 10px 32px;
   color: $darkGreenColor;
   font-weight: 700;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 20px;
+}
+
+.GreenButton {
+  background-color: $lightGreenColor;
+}
+
+.WhiteButton {
+  background-color: $totalWhiteColor;
+}
+
+.TransparentButton {
+  background-color: transparent;
+  border: 2px solid $whiteBorderColor;
 }
