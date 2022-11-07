@@ -1,0 +1,60 @@
+@import '../../scss/style';
+
+.selection-help-form {
+  background: linear-gradient(94.18deg, #ADFA00 -12.69%, #A8E063 117.44%);
+  padding: 84px 0;
+}
+.help-form {
+  background: #fff;
+  color: $blueDarkColor;
+  border-radius: 16px;
+  display: flex;
+  &_left {
+    width: 50%;
+    padding: 25px 0 84px 32px;
+    &_title {
+      font-size: 48px;
+      line-height: 59px;
+      width: 400px;
+      &_exclamation-point{
+        color: $lightGreenColor !important;
+        font-style: oblique;
+      }
+    }
+    &_info {
+      font-size: 18px;
+      line-height: 27px;
+      width: 450px;
+    }
+  }
+  &_right {
+    width: 50%;
+    padding: 54px 0 84px 32px;
+    &_info {
+      font-size: 10px;
+      line-height: 12px;
+      padding-left: 10px;
+    }
+    &_style {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  &_input {
+    border: none !important;
+    margin-bottom: 24px;
+    color: #2C2C2E;
+    padding: 15px 245px 16px 33px !important;
+    &:hover {
+      background: $whiteBorderColor;
+    }
+    &:focus {
+      outline: 3px solid #5AC8FA;
+    }
+  }
+  &_button {
+    padding: 12px 188px;
+    margin-bottom: 16px;
+  }
+}
