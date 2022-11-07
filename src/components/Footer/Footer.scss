@@ -3,8 +3,8 @@
 .footer {
   color: #FFFFFF;
   font-size: 16px;
-  background: transparent;
-  padding: 64px 0 41px;
+  background: $darkGreenColor;
+  padding: 64px 0 41px !important;
   &_top {
     display: flex;
     gap: 1rem;

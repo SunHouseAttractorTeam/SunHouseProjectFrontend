@@ -1,12 +1,15 @@
 @import '../../scss/style';
 
 .header{
-  background: transparent;
+  background: $darkGreenColor;
   padding: 25px 0 !important;
-  display: flex;
   font-size: 14px;
-  align-items: center;
-  justify-content: space-between;
+  &__container{
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+  }
   &_logo{
     font-size: 30px;
     margin-right: 50px;

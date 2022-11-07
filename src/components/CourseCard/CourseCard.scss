@@ -1,0 +1,90 @@
+@import '../../scss/style';
+
+.course-card {
+  position: relative;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  z-index: 1;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 206px;
+    height: 206px;
+    border-radius: 50%;
+    background: $lightGreenColor;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transform: translate(50%, 50%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  &:not(.course-card--is-last) .course-card__title {
+    flex-grow: 1;
+  }
+
+  &--is-last .course-card__list {
+    flex-grow: 1;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+
+    @media screen and (min-width: 469px) {
+      min-height: 280px;
+    }
+  }
+
+  &__profession {
+    margin-bottom: 20px;
+    font-size: 20px;
+
+  }
+
+  &__list {
+    margin-top: 20px;
+    padding-left: 5px;
+    list-style-position: inside;
+
+    &-item {
+      font-size: 16px;
+
+      &:not(:last-child) {
+        margin-bottom: 12px;
+      }
+    }
+  }
+
+  &__date {
+    justify-self: flex-end;
+    font-size: 20px;
+  }
+
+  &__title {
+    font-size: 30px;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 171px;
+    height: 45px;
+    font-weight: 700;
+    font-size: 20px;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: all .2s ease;
+    margin-top: 50px;
+
+    &:hover {
+      background: transparent;
+      border-color: $lightGreenColor;
+    }
+  }
+}

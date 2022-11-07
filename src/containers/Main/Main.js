@@ -6,6 +6,7 @@ import Rates from "../../components/Rates/Rates";
 import './Main.scss';
 import TeachersBlock from "../../components/TeachersBlock/TeachersBlock";
 import Promo from "../../components/Promo/Promo";
+import CoursesCatalog from "../CoursesCatalog/CoursesCatalog";
 
 const Main = () => {
     return (
@@ -15,6 +16,7 @@ const Main = () => {
             <TeachersBlock/>
             <Rates/>
             <SelectionHelpForm/>
+            <CoursesCatalog/>
             <Footer/>
         </div>
     );
