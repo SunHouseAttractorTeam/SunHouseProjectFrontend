@@ -1,0 +1,42 @@
+.button {
+  background-color: #FFFFFF;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 90px;
+  position: absolute;
+  bottom: -50px;
+  cursor: pointer;
+
+  & svg {
+    fill: #F2F2F7;
+  }
+
+  &:hover {
+    background-color: #ADFA00;
+
+    & svg {
+      fill: #FFFFFF;
+    }
+  }
+
+  &_prev {
+    left: 46%;
+  }
+
+  &_next {
+    right: 48%;
+  }
+}
+
+.slick-list {
+  overflow: visible;
+  width: auto;
+}
+
+.slick-list {
+  margin: 0 -12px 0 -10px !important;
+}
+

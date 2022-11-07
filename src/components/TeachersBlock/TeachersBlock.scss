@@ -1,8 +1,9 @@
 .teachersBlock {
   background: #F5F5F5;
-  height: 550px;
+  padding: 60px 0 200px ;
   margin: 0;
-  padding-top: 60px;
+  min-width: 100%;
+  overflow: hidden;
 
   &_headline {
     margin-bottom: 30px;
