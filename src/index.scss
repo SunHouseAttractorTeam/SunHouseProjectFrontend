@@ -8,13 +8,13 @@
 
 body {
   margin: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: $roboto, sans-serif;
   font-size: 13px;
   color: $blueDarkColor;
   font-weight: 500;
 }
 .container {
-  max-width: 1180px;
+  max-width: 1200px;
   padding: 0 10px;
   margin: 0 auto;
 }
