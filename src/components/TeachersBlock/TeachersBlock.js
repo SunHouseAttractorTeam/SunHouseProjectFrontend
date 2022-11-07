@@ -1,22 +1,22 @@
 import React from 'react';
 import TeacherCard from "./TeacherCard/TeacherCard";
+import CustomSlider from "../UI/CustomSlider/CustomSlider";
 import './TeachersBlock.scss';
 import teacher_1 from '../../assets/icons/teacher_1.svg';
 import teacher_2 from '../../assets/icons/teacher_2.svg';
 import teacher_3 from '../../assets/icons/teacher_3.svg';
-import CustomSlider from "../UI/CustomSlider/CustomSlider";
 
 const TeachersBlock = () => {
 
     return (
         <>
-            <div className={'teachersBlock'}>
+            <div className={'teachers_block'}>
                 <div className={'container'}>
 
-                    <div className={'teachersBlock_headline'}>
-                        <div className='teachersBlock_text'>
-                            <h5 className={'teachersBlock_title'}>Преподаватели — практикующие эксперты</h5>
-                            <span className={'teachersBlock_subtitle'}>Доверьте свое обучение специалистам</span>
+                    <div className={'teachers_block_headline'}>
+                        <div className='teachers_block_text'>
+                            <h5 className={'teachers_block_title'}>Преподаватели — практикующие эксперты</h5>
+                            <span className={'teachers_block_subtitle'}>Доверьте свое обучение специалистам</span>
                         </div>
                     </div>
                     <CustomSlider>

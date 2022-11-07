@@ -1,7 +1,9 @@
-.teacherCard {
+@import '../../../scss/partials/colors';
+
+.teacher_card {
   width: 580px;
   height: 174px;
-  background: #FFFFFF;
+  background: $totalWhiteColor;
   border-radius: 16px;
   &_content {
     padding: 33px 0 0 33px;
@@ -11,7 +13,7 @@
   &_avatar {
     width: 95px;
     height: 100px;
-    background: #F2F2F7;
+    background: $greyColor;
     border-radius: 50%;
 
     &_image {
