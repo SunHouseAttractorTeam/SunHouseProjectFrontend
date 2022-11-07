@@ -4,11 +4,13 @@ import Footer from "../../components/Footer/Footer";
 import SelectionHelpForm from "../../components/SelectionHelpForm/SelectionHelpForm";
 import Rates from "../../components/Rates/Rates";
 import './Main.scss';
+import TeachersBlock from "../../components/TeachersBlock/TeachersBlock";
 
 const Main = () => {
     return (
         <div className={'main'}>
             <Header/>
+            <TeachersBlock/>
             <Rates/>
             <SelectionHelpForm/>
             <Footer/>
