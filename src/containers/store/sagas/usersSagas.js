@@ -6,11 +6,13 @@ import {
     registrationFailure,
 
 } from "../actions/usersActions";
+import {historyPush} from "../actions/historyActions";
 
 export function* registrationUserSaga({payload: userData}) {
     try {
         const response = yield axiosApi.post('/users', userData);
         yield put(registrationSuccess(response.data));
+        yield put(historyPush('/'));
     }
     catch (e) {
         if (e.response && e.response.data ){
