@@ -1,5 +1,6 @@
 import React from 'react';
 import './Nav.scss';
+import {NavLink} from "react-router-dom";
 
 const Nav = () => {
     return (
@@ -18,7 +19,7 @@ const Nav = () => {
                     <a href="#" className="main-nav__link">Отзывы</a>
                 </li>
                 <li className="main-nav__item">
-                    <a href="#" className="main-nav__link">Регистрация</a>
+                    <NavLink to={'/registration'} className="main-nav__link">Регистрация</NavLink>
                 </li>
             </ul>
         </nav>
