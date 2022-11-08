@@ -1,12 +1,15 @@
 import React from 'react';
-import './Header.scss';
+import {useDispatch} from "react-redux";
 import Nav from "../UI/Nav/Nav";
 import MainButton from "../UI/MainButton/MainButton";
 import Logo from "../UI/Logo/Logo";
+import './Header.scss';
+import {historyPush} from "../../containers/store/actions/historyActions";
 
 const Header = () => {
+    const dispatch = useDispatch();
     const onHeaderButton = () => {
-
+        dispatch(historyPush('/login'))
     };
 
     return (

@@ -6,6 +6,8 @@ export const initialState = {
     user: null,
     registerLoading: false,
     registerError: null,
+    loginLoading: false,
+    loginError: null,
 };
 
 const usersSlice = createSlice({
@@ -23,6 +25,18 @@ const usersSlice = createSlice({
         registrationFailure(state, action) {
             state.registerLoading = false;
             state.registerError = action.payload;
+        },
+        loginUserRequest(state) {
+            state.loginLoading = true;
+            state.loginError = null;
+        },
+        loginUserSuccess(state, action) {
+            state.loginLoading = false;
+            state.user = action.payload;
+        },
+        loginUserFailure(state, action) {
+            state.loginLoading = false;
+            state.loginError = action.payload;
         },
     }
 });
