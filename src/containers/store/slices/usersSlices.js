@@ -38,6 +38,54 @@ const usersSlice = createSlice({
             state.loginLoading = false;
             state.loginError = action.payload;
         },
+        facebookLoginRequest(state) {
+            state.loginLoading = true;
+            state.loginError = null;
+        },
+        facebookLoginSuccess(state, action) {
+            state.loginLoading = false;
+            state.user = action.payload;
+        },
+        facebookLoginFailure(state, action) {
+            state.loginLoading = false;
+            state.loginError = action.payload;
+        },
+        googleLoginRequest(state) {
+            state.loginLoading = true;
+            state.loginError = null;
+        },
+        googleLoginSuccess(state, action) {
+            state.loginLoading = false;
+            state.user = action.payload;
+        },
+        googleLoginFailure(state, action) {
+            state.loginLoading = false;
+            state.loginError = action.payload;
+        },
+        appleLoginRequest(state) {
+            state.loginLoading = true;
+            state.loginError = null;
+        },
+        appleLoginSuccess(state, action) {
+            state.loginLoading = false;
+            state.user = action.payload;
+        },
+        appleLoginFailure(state, action) {
+            state.loginLoading = false;
+            state.loginError = action.payload;
+        },
+        vkLoginRequest(state) {
+            state.loginLoading = true;
+            state.loginError = null;
+        },
+        vkLoginSuccess(state, action) {
+            state.loginLoading = false;
+            state.user = action.payload;
+        },
+        vkLoginFailure(state, action) {
+            state.loginLoading = false;
+            state.loginError = action.payload;
+        },
     }
 });
 
