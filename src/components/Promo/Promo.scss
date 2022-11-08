@@ -1,40 +1,66 @@
 @import '../../scss/style';
 
 .promo{
-  //background-color: #FFFFFF;
-  padding: 47px 0 0;
+  padding: 130px 0 175px;
+  position: relative;
   background-color: $darkGreenColor;
+  &_inner{
+    display: flex;
+    @include xl {
+      flex-direction: column-reverse;
+    }
+  }
+  &_column_left{
+    width: 50%;
+  }
+  &_column_right{
+    width: 40%;
+  }
   &_title{
     font-size: 74px;
     margin: 0;
     color: $totalWhiteColor;
   }
+  &_logo{
+    @include xl{
+      //right: 8%;
+      width: 40%;
+
+    }
+  }
   &_button{
+    padding: 16px 48px;
+    font-size: 20px;
   }
   &_text{
     font-style: normal;
     font-weight: 500;
     font-size: 20px;
     line-height: 35px;
+    margin-bottom: 40px;
     color: $totalWhiteColor;
   }
-  &_inner{
-    display: flex;
-  }
-  &_halfColumn{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    height: 100%;
-  }
-  &_column{
-    flex-basis: 50%;
-  }
-  &_img{
-    display: block;
-    margin-bottom: -10px;
-    width: auto;
-    height: 100%;
+  &_image{
+    position: absolute;
+    top: 8%;
+    right: 10%;
+    @include xxl{
+      right: 8%;
+    }
+    @include xfl{
+      //right: 8%;
+      width: 40%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    @include xl {
+      width: 40%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    &_img{
+      width: 100%;
+      height: auto;
+    }
   }
 }
