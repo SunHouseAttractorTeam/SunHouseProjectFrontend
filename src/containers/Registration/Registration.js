@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
 import FormInput from "../../components/UI/Form/FormInput/FormInput";
 import {registrationRequest} from "../store/actions/usersActions";
-import {historyPush} from "../store/actions/historyActions";
 
 const Registration = () => {
     const dispatch = useDispatch();
@@ -20,7 +19,6 @@ const Registration = () => {
     const submitFormHandler = e => {
         e.preventDefault();
         dispatch(registrationRequest(user));
-        dispatch(historyPush('/'));
     };
 
     return (

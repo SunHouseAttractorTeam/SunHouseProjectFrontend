@@ -1,21 +1,14 @@
-import {combineReducers} from "redux";
 import createSagaMiddleware from "redux-saga";
 import {configureStore} from "@reduxjs/toolkit";
 import axiosApi from "../../axiosApi";
+import rootReducer from "./rootReducer";
 import rootSagas from "./rootSagas";
-import usersSlice from "./slices/usersSlices";
-
-const rootReducer = combineReducers({
-  users: usersSlice.reducer,
-});
 
 const sagaMiddleware = createSagaMiddleware();
 
-const middleware = [sagaMiddleware];
-
 const store = configureStore({
   reducer: rootReducer,
-  middleware,
+  middleware: [sagaMiddleware],
   devTools: true,
 });
 
