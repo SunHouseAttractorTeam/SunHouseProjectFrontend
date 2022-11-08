@@ -1,7 +1,8 @@
 @import '../../scss/style';
 
 .about {
-  background: transparent;
+  background: $darkGreenColor;
+  margin-bottom: 45px;
   position: relative;
   &_con {
     display: flex;
