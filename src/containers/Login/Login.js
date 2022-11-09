@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
 import FormInput from "../../components/UI/Form/FormInput/FormInput";
-import {loginUserRequest} from "../store/actions/usersActions";
+import {loginUserRequest} from "../../store/actions/usersActions";
 
 const Login = () => {
     const dispatch = useDispatch();

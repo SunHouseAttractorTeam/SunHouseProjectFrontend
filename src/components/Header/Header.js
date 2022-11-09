@@ -4,7 +4,7 @@ import Nav from "../UI/Nav/Nav";
 import MainButton from "../UI/MainButton/MainButton";
 import Logo from "../UI/Logo/Logo";
 import './Header.scss';
-import {historyPush} from "../../containers/store/actions/historyActions";
+import {historyPush} from "../../store/actions/historyActions";
 
 const Header = () => {
     const dispatch = useDispatch();
