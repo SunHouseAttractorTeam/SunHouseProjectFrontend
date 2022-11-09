@@ -10,18 +10,15 @@
       width: 40.7%;
       &_imgUnderBlock {
         position: absolute;
-        left: 8%;
+        left: 9.5%;
         top: 0;
         @include xxl{
-          left: 2%;
+          left: 3%;
         }
         @include xfl{
-          transform: translateX(-17%);
-        }
-        @include xl {
-          width: 60%;
-          top: 50%;
-          left: -90px;
+          width: 50%;
+          top: 60%;
+          left: -60px;
           transform: translateY(-50%);
         }
         &_image {
@@ -30,17 +27,15 @@
       }
       &_imgUpBlock {
         position: absolute;
-        left: 12.7%;
-        top: 5%;
+        left: 12.4%;
+        top: 12%;
         @include xxl{
-          left: 8%;
+          left: 6%;
         }
         @include xfl{
           left: 0;
-        }
-        @include xl {
           width: 40%;
-          top: 50%;
+          top: 60%;
           transform: translateY(-50%);
         }
         &_image {
@@ -54,7 +49,7 @@
         position: relative;
         font-size: 36px;
         font-weight: 700;
-        line-height: 44px;
+        line-height: 45px;
         color: $lightGreenColor;
         padding-left: 80px;
         margin-top: 100px;
@@ -69,18 +64,18 @@
         }
       }
       &_sub-title {
-        font-size: 24px;
-        font-weight: 400;
-        line-height: 36px;
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 40px;
         color: $totalWhiteColor;
-        margin-bottom: 5px;
+        margin-bottom: 24px;
       }
       &_text {
         font-size: 16px;
         font-weight: 500;
         line-height: 24px;
         color: $totalWhiteColor;
-        margin-bottom: 90px;
+        margin-bottom: 100px;
       }
     }
   }
