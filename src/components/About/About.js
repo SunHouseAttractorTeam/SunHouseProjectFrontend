@@ -1,6 +1,6 @@
 import React from 'react';
 import './About.scss';
-import PlanetImage from '../../assets/images/Planet.H03.png';
+import BigLogo from '../../assets/images/BigLogo.png';
 import Vector from '../../assets/images/Vector.png';
 
 const About = () => {
@@ -12,22 +12,18 @@ const About = () => {
             <img src={Vector} className={'about_con_left_imgUnderBlock_image'} alt="Eduspace"/>
           </div>
           <div className={'about_con_left_imgUpBlock'}>
-            <img src={PlanetImage} className={'about_con_left_imgUpBlock_image'} alt="Eduspace"/>
+            <img src={BigLogo} className={'about_con_left_imgUpBlock_image'} alt="Eduspace"/>
           </div>
         </div>
         <div className={'about_con_right'}>
           <h3 className={'about_con_right_title'}>О школе</h3>
           <p className={'about_con_right_sub-title'}>
-            Миссия Eduspace — дать возможность каждому быть
-            актуальным и востребованным специалистом прямо сейчас.
-            Вне зависимости от возраста и географии.
+            Мы современная платформа для развития
+            и профессионального роста
           </p>
           <p className={'about_con_right_text'}>
-            Значимость этих проблем настолько очевидна, что новая модель организационной
-            деятельности играет важную роль в формировании систем массового участия.
-            Идейные соображения высшего порядка, а также консультация с широким активом
-            способствует подготовки и реализации направлений прогрессивного развития.
-            Повседневная практика показывает
+            У нас вы можете увидеть сочетание новейших образовательных, информационных
+            технологий и экспертных руководителей курсов, работающих в своей сфере по сей день.
           </p>
         </div>
       </div>
