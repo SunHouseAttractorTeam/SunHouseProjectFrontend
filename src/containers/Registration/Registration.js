@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
 import FormInput from "../../components/UI/Form/FormInput/FormInput";
-import {registrationRequest} from "../store/actions/usersActions";
+import {registrationRequest} from "../../store/actions/usersActions";
 import FacebookLogin from "../../components/services/FacebookLogin/FacebookLogin";
 import GoogleLogin from "../../components/services/GoogleLogin/GoogleLogin";
 import AppleLogin from "../../components/services/AppleLogin/AppleLogin";

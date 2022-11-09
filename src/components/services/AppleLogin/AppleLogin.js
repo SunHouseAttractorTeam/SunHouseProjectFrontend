@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
-import {appleLoginRequest} from "../../../containers/store/actions/usersActions";
+import {appleLoginRequest} from "../../../store/actions/usersActions";
 import {LoginSocialApple} from "reactjs-social-login";
 import {appleAppId} from "../../../config";
 import appleIcon from "../../../assets/icons/appleicon.svg";

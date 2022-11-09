@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
-import {googleLoginRequest} from "../../../containers/store/actions/usersActions";
+import {googleLoginRequest} from "../../../store/actions/usersActions";
 import {LoginSocialGoogle} from "reactjs-social-login";
 import {googleAppId} from "../../../config";
 import googleicon from "../../../assets/icons/google.svg";

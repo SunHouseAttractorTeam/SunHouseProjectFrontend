@@ -1,5 +1,5 @@
 import {put, takeEvery} from "redux-saga/effects";
-import axiosApi from "../../../axiosApi";
+import axiosApi from "../../axiosApi";
 import {historyPush} from "../actions/historyActions";
 import {
     registrationRequest,

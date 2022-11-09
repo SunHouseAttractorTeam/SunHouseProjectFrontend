@@ -1,6 +1,6 @@
 import createSagaMiddleware from "redux-saga";
 import {configureStore} from "@reduxjs/toolkit";
-import axiosApi from "../../axiosApi";
+import axiosApi from "../axiosApi";
 import rootReducer from "./rootReducer";
 import rootSagas from "./rootSagas";
 
