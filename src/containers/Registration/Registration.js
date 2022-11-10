@@ -1,11 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import FormInput from '../../components/UI/Form/FormInput/FormInput'
+import FormComponent from '../../components/UI/Form/FormComponent/FormComponent'
 import { registrationRequest } from '../../store/actions/usersActions'
-import FacebookLogin from '../../components/services/FacebookLogin/FacebookLogin'
-import GoogleLogin from '../../components/services/GoogleLogin/GoogleLogin'
-import AppleLogin from '../../components/services/AppleLogin/AppleLogin'
-import VkontakteLogin from '../../components/services/VkontakteLogin/VkontakteLogin'
 
 const Registration = () => {
   const dispatch = useDispatch()
@@ -27,29 +23,14 @@ const Registration = () => {
 
   return (
     <>
-      <form onSubmit={submitFormHandler}>
-        <FormInput
-          required
-          placeholder="Username"
-          name="username"
-          value={user.username}
-          onChange={inputChangeHandler}
-        />
-        <FormInput required placeholder="Email" name="email" value={user.email} onChange={inputChangeHandler} />
-        <FormInput
-          type="password"
-          required
-          placeholder="Password"
-          name="password"
-          value={user.password}
-          onChange={inputChangeHandler}
-        />
-        <button type="submit">Sign Up</button>
-        <FacebookLogin />
-        <GoogleLogin />
-        <AppleLogin />
-        <VkontakteLogin />
-      </form>
+      <FormComponent
+        typeForm="Зарегистрироваться"
+        submit={submitFormHandler}
+        onChange={inputChangeHandler}
+        inputName={['username', 'email', 'password']}
+        placeholderName={['Имя', 'Электронная почта', 'Создайте пароль']}
+        inputType={['text', 'text', 'password']}
+      />
     </>
   )
 }
