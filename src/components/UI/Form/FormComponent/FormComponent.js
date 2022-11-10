@@ -5,7 +5,7 @@ import GoogleLogin from '../../../services/GoogleLogin/GoogleLogin'
 import AppleLogin from '../../../services/AppleLogin/AppleLogin'
 import VkontakteLogin from '../../../services/VkontakteLogin/VkontakteLogin'
 
-const FormComponent = ({ inputName, inputType, submit, value, onChange, typeForm, error }) => {
+const FormComponent = ({ inputName, inputType, submit, value, onChange, typeForm, placeholderName }) => {
   let form = null
 
   if (inputName) {
@@ -14,7 +14,7 @@ const FormComponent = ({ inputName, inputType, submit, value, onChange, typeForm
         key={name[index]}
         type={inputType[index]}
         required
-        placeholder={name}
+        placeholder={placeholderName[index]}
         name={name}
         value={value}
         onChange={onChange}
