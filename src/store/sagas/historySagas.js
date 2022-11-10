@@ -1,15 +1,13 @@
-import {takeEvery} from "redux-saga/effects";
-import {historyPush, historyReplace} from "../actions/historyActions";
+import { takeEvery } from 'redux-saga/effects'
+import { historyPush, historyReplace } from '../actions/historyActions'
 
-const historySagas = history  => {
-    return [
-        takeEvery(historyPush, function* ({payload}) {
-            yield history.push(payload);
-        }),
-        takeEvery(historyReplace, function* ({payload}) {
-            yield history.replace(payload);
-        }),
-    ];
-};
+const historySagas = history => [
+  takeEvery(historyPush, function* ({ payload }) {
+    yield history.push(payload)
+  }),
+  takeEvery(historyReplace, function* ({ payload }) {
+    yield history.replace(payload)
+  }),
+]
 
-export default historySagas;
+export default historySagas

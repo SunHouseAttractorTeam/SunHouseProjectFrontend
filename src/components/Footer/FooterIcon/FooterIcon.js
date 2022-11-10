@@ -1,9 +1,5 @@
-import React from 'react';
+import React from 'react'
 
-const FooterIcon = ({href, className}) => {
-  return (
-    <a href={href} className={className}/>
-  );
-};
+const FooterIcon = ({ href, className }) => <a href={href} className={className} />
 
-export default FooterIcon;
+export default FooterIcon
