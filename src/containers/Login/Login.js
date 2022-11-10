@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import FormInput from '../../components/UI/Form/FormInput/FormInput'
+import FormComponent from '../../components/UI/Form/FormComponent/FormComponent'
 import { loginUserRequest } from '../../store/actions/usersActions'
 
 const Login = () => {
@@ -22,19 +22,14 @@ const Login = () => {
 
   return (
     <>
-      <form onSubmit={submitFormHandler}>
-        <FormInput required label="Email" name="email" value={user.email} onChange={inputChangeHandler} />
-
-        <FormInput
-          type="password"
-          required
-          label="Password"
-          name="password"
-          value={user.password}
-          onChange={inputChangeHandler}
-        />
-        <button>Sign In</button>
-      </form>
+      <FormComponent
+        typeForm="Войти"
+        submit={submitFormHandler}
+        onChange={inputChangeHandler}
+        inputName={['email', 'password']}
+        placeholderName={['Электронная почта', 'Пароль']}
+        inputType={['text', 'password']}
+      />
     </>
   )
 }
