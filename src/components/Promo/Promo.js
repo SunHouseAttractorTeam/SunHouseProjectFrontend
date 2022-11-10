@@ -24,7 +24,7 @@ const Promo = () => {
           </div>
           <div className="promo_column_right">
             <div className="promo_image">
-              <img src={PromoImage} alt="Promo image" className="promo_image_img" />
+              <img src={PromoImage} alt="Promo" className="promo_image_img" />
             </div>
           </div>
         </div>
