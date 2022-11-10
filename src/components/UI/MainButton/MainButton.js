@@ -1,12 +1,10 @@
-import React from 'react';
-import './MainButton.scss';
+import React from 'react'
+import './MainButton.scss'
 
-const MainButton = ({text, onClick, className}) => {
-    return (
-        <button className={`MainButton ${className}`} onClick={onClick}>
-            {text}
-        </button>
-    );
-};
+const MainButton = ({ text, onClick, className }) => (
+  <button className={`MainButton ${className}`} onClick={onClick}>
+    {text}
+  </button>
+)
 
-export default MainButton;
+export default MainButton
