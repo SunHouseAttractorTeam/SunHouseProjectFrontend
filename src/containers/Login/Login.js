@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import FormComponent from '../../components/UI/Form/FormComponent/FormComponent'
 import { loginUserRequest } from '../../store/actions/usersActions'
+import { inputChangeHandler, submitFormHandler } from '../../components/UI/Form/Handlers/Handlers'
 
 const Login = () => {
   const dispatch = useDispatch()
@@ -10,22 +11,12 @@ const Login = () => {
     password: '',
   })
 
-  const inputChangeHandler = e => {
-    const { name, value } = e.target
-    setUser(prev => ({ ...prev, [name]: value }))
-  }
-
-  const submitFormHandler = async e => {
-    e.preventDefault()
-    await dispatch(loginUserRequest({ ...user }))
-  }
-
   return (
     <>
       <FormComponent
         typeForm="Войти"
-        submit={submitFormHandler}
-        onChange={inputChangeHandler}
+        submit={e => submitFormHandler(e, dispatch(loginUserRequest({ ...user })))}
+        onChange={e => inputChangeHandler(e, setUser)}
         inputName={['email', 'password']}
         placeholderName={['Электронная почта', 'Пароль']}
         inputType={['text', 'password']}
