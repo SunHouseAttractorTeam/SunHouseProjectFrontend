@@ -1,8 +1,8 @@
 @import '../../scss/style';
 
-.registration {
+.loginRegisterForm {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   margin: 235px 0 263px;
 }
 
@@ -10,8 +10,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 32px;
   background: white;
-  width: 50%;
+  width: 47%;
   border-radius: 16px;
 
   &_title {
@@ -24,7 +25,7 @@
   &_input {
     margin-bottom: 16px;
     padding: 15px 250px 15px 30px;
-    border: 1px solid #D1D1D6;
+    border: 2px solid #D1D1D6;
   }
 
   &_btn {
@@ -49,7 +50,7 @@
   &_text {
     font-size: 16px;
     font-weight: 400;
-    margin: 16px 0;
+    margin: 24px 0 16px;
   }
 
   &_googleLink {
@@ -66,11 +67,15 @@
     color: #ADFA00;
     text-decoration: none;
   }
+
+  &_forgotPass {
+    text-align: right;
+  }
 }
 
-.register-block {
+.formBlock {
   width: 50%;
-  padding: 0 90px;
+  padding: 0 72px;
 
   &_content {
     font-size: 40px;

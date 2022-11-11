@@ -78,6 +78,13 @@
       gap: 7rem;
       align-items: center;
     }
+
+    &_loginRegisterForm {
+      display: flex;
+      gap: 7rem;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
 
   &_logo {

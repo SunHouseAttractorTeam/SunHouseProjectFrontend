@@ -38,7 +38,7 @@ const Registration = () => {
         </div>
       </header>
       <div className="container">
-        <div className="registration">
+        <div className="loginRegisterForm">
           <form onSubmit={submitFormHandler} className="form">
             <h4 className="form_title">Создайте свой профиль</h4>
             <FormInput
@@ -85,15 +85,15 @@ const Registration = () => {
               </span>
             </p>
           </form>
-          <div className="register-block">
-            <p className="register-block_content">Добро пожаловать в Eduspace</p>
+          <div className="formBlock">
+            <p className="formBlock_content">Добро пожаловать в Eduspace</p>
             <img src={VectorImage} alt="Vector" />
           </div>
         </div>
       </div>
       <footer className="footer_login">
         <div className="container">
-          <div className="footer_bottom_inner">
+          <div className="footer_bottom_loginRegisterForm">
             <p>«Eduspace» © Все права защищены / 2022</p>
             <FooterLink className="footer_link" href="#">
               Политика конфиденциальности
