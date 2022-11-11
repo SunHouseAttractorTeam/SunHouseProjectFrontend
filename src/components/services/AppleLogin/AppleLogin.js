@@ -4,6 +4,7 @@ import { LoginSocialApple } from 'reactjs-social-login'
 import { appleLoginRequest } from '../../../store/actions/usersActions'
 import { appleAppId } from '../../../config'
 import appleIcon from '../../../assets/icons/appleicon.svg'
+import './AppleLogin.scss'
 
 const AppleLogin = () => {
   const dispatch = useDispatch()
@@ -14,14 +15,14 @@ const AppleLogin = () => {
     <LoginSocialApple
       client_id={appleAppId}
       scope="name email"
-      onResolve={({ provider, data }) => {
+      onResolve={({ data }) => {
         appleResponse(data)
       }}
       onReject={err => {
         console.log(err)
       }}
     >
-      <img alt="apple" src={appleIcon} />
+      <img alt="apple" src={appleIcon} className="apple" />
     </LoginSocialApple>
   )
 }

@@ -14,14 +14,14 @@ const FacebookLogin = () => {
     <LoginSocialFacebook
       isOnlyGetToken
       appId={facebookAppId}
-      onResolve={({ provider, data }) => {
+      onResolve={({ data }) => {
         facebookResponse(data)
       }}
       onReject={err => {
         console.log(err)
       }}
     >
-      <img alt="fb" src={fbIcon} />
+      <img alt="fb" src={fbIcon} style={{ margin: '0 30px' }} />
     </LoginSocialFacebook>
   )
 }

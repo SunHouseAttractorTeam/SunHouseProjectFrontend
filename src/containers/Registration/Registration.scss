@@ -2,7 +2,8 @@
 
 .registration {
   display: flex;
-  padding: 351px 0;
+  justify-content: center;
+  margin: 235px 0 263px;
 }
 
 .form {
@@ -12,6 +13,48 @@
   background: white;
   width: 50%;
   border-radius: 16px;
+
+  &_title {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: left;
+    margin: 32px 0;
+  }
+
+  &_input {
+    margin-bottom: 16px;
+    padding: 15px 250px 15px 30px;
+    border: 1px solid #D1D1D6;
+  }
+
+  &_btn {
+    background: #ADFA00;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 15px 160.5px;
+  }
+
+  &_socialLinks {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  &_socialItems {
+    padding: 0 10px;
+  }
+
+  &_text {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 16px 0;
+  }
+
+  &_googleLink {
+    border: 1px solid black;
+  }
 }
 
 .register-block {

@@ -14,7 +14,9 @@ const VkontakteLogin = () => {
     <VkLogin
       apiId={vkAppId}
       callback={responseVk}
-      render={renderProps => <img alt="vkicon" src={vkicon} onClick={renderProps.onClick} />}
+      render={renderProps => (
+        <img alt="vkicon" src={vkicon} onClick={renderProps.onClick} style={{ margin: '0 30px' }} />
+      )}
     />
   )
 }

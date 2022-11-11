@@ -36,35 +36,50 @@ const Registration = () => {
           <Logo className="header_logo" />
         </div>
       </header>
-      <div className={`${'container'} ${'registration'}`}>
-        <form onSubmit={submitFormHandler} className="form">
-          <FormInput
-            required
-            placeholder="Username"
-            name="username"
-            value={user.username}
-            onChange={inputChangeHandler}
-          />
-          <FormInput required placeholder="Email" name="email" value={user.email} onChange={inputChangeHandler} />
-          <FormInput
-            type="password"
-            required
-            placeholder="Password"
-            name="password"
-            value={user.password}
-            onChange={inputChangeHandler}
-          />
-          <button type="submit">Sign Up</button>
-          <FacebookLogin />
-          <GoogleLogin />
-          <AppleLogin />
-          <VkontakteLogin />
-        </form>
-        <div className="register-block">
-          <p className="register-block_content">
-            Авторизуйтесь, чтоб начать <span className="register-block_word">учиться</span>
-          </p>
-          <img src={VectorImage} alt="Vector" />
+      <div className="container">
+        <div className="registration">
+          <form onSubmit={submitFormHandler} className="form">
+            <h4 className="form_title">Создайте свой профиль</h4>
+            <FormInput
+              required
+              placeholder="Username"
+              name="username"
+              value={user.username}
+              onChange={inputChangeHandler}
+              className="form_input"
+            />
+            <FormInput
+              required
+              placeholder="Email"
+              name="email"
+              value={user.email}
+              onChange={inputChangeHandler}
+              className="form_input"
+            />
+            <FormInput
+              type="password"
+              required
+              placeholder="Password"
+              name="password"
+              value={user.password}
+              onChange={inputChangeHandler}
+              className="form_input"
+            />
+            <button type="submit" className="form_btn">
+              Зарегестрироваться
+            </button>
+            <span className="form_text">или регистрация с помощью</span>
+            <div className="form_socialLinks">
+              <FacebookLogin />
+              <VkontakteLogin />
+              <GoogleLogin />
+              <AppleLogin />
+            </div>
+          </form>
+          <div className="register-block">
+            <p className="register-block_content">Добро пожаловать в Eduspace</p>
+            <img src={VectorImage} alt="Vector" />
+          </div>
         </div>
       </div>
       <footer className="footer_login">
