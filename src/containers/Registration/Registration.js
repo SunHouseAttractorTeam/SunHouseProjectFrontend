@@ -1,55 +1,29 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import FormInput from '../../components/UI/Form/FormInput/FormInput'
+import { useDispatch, useSelector } from 'react-redux'
+import FormComponent from '../../components/UI/Form/FormComponent/FormComponent'
+import { inputChangeHandler, submitFormHandler } from '../../components/UI/Form/Handlers/Handlers'
 import { registrationRequest } from '../../store/actions/usersActions'
-import FacebookLogin from '../../components/services/FacebookLogin/FacebookLogin'
-import GoogleLogin from '../../components/services/GoogleLogin/GoogleLogin'
-import AppleLogin from '../../components/services/AppleLogin/AppleLogin'
-import VkontakteLogin from '../../components/services/VkontakteLogin/VkontakteLogin'
 
 const Registration = () => {
   const dispatch = useDispatch()
+  const error = useSelector(state => state.users.registerError)
   const [user, setUser] = useState({
     username: '',
     email: '',
     password: '',
   })
 
-  const inputChangeHandler = e => {
-    const { name, value } = e.target
-    setUser(prev => ({ ...prev, [name]: value }))
-  }
-
-  const submitFormHandler = e => {
-    e.preventDefault()
-    dispatch(registrationRequest(user))
-  }
-
   return (
     <>
-      <form onSubmit={submitFormHandler}>
-        <FormInput
-          required
-          placeholder="Username"
-          name="username"
-          value={user.username}
-          onChange={inputChangeHandler}
-        />
-        <FormInput required placeholder="Email" name="email" value={user.email} onChange={inputChangeHandler} />
-        <FormInput
-          type="password"
-          required
-          placeholder="Password"
-          name="password"
-          value={user.password}
-          onChange={inputChangeHandler}
-        />
-        <button type="submit">Sign Up</button>
-        <FacebookLogin />
-        <GoogleLogin />
-        <AppleLogin />
-        <VkontakteLogin />
-      </form>
+      <FormComponent
+        typeForm="Зарегистрироваться"
+        submit={e => submitFormHandler(e, dispatch(registrationRequest({ ...user })))}
+        onChange={e => inputChangeHandler(e, setUser)}
+        inputName={['username', 'email', 'password']}
+        placeholderName={['Имя', 'Электронная почта', 'Создайте пароль']}
+        inputType={['text', 'text', 'password']}
+        error={error}
+      />
     </>
   )
 }

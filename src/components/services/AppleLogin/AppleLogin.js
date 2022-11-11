@@ -2,7 +2,6 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { LoginSocialApple } from 'reactjs-social-login'
 import { appleLoginRequest } from '../../../store/actions/usersActions'
-import { appleAppId } from '../../../config'
 import appleIcon from '../../../assets/icons/appleicon.svg'
 
 const AppleLogin = () => {
@@ -12,7 +11,7 @@ const AppleLogin = () => {
 
   return (
     <LoginSocialApple
-      client_id={appleAppId}
+      client_id={process.env.appleAppId}
       scope="name email"
       onResolve={({ provider, data }) => {
         appleResponse(data)
