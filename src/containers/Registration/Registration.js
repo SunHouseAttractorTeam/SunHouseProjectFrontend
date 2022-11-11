@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 import FormInput from '../../components/UI/Form/FormInput/FormInput'
 import { registrationRequest } from '../../store/actions/usersActions'
 import FacebookLogin from '../../components/services/FacebookLogin/FacebookLogin'
@@ -75,6 +76,14 @@ const Registration = () => {
               <GoogleLogin />
               <AppleLogin />
             </div>
+            <p className="form_loginLink">
+              Уже есть профиль?{' '}
+              <span>
+                <Link to="/login" className="form_loginLink_span">
+                  Войдите
+                </Link>
+              </span>
+            </p>
           </form>
           <div className="register-block">
             <p className="register-block_content">Добро пожаловать в Eduspace</p>

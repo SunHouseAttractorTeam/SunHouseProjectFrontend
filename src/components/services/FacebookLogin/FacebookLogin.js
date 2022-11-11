@@ -4,6 +4,7 @@ import { LoginSocialFacebook } from 'reactjs-social-login'
 import { facebookAppId } from '../../../config'
 import { facebookLoginRequest } from '../../../store/actions/usersActions'
 import fbIcon from '../../../assets/icons/facebookicon.svg'
+import './FacebookLogin.scss'
 
 const FacebookLogin = () => {
   const dispatch = useDispatch()
@@ -21,7 +22,7 @@ const FacebookLogin = () => {
         console.log(err)
       }}
     >
-      <img alt="fb" src={fbIcon} style={{ margin: '0 30px' }} />
+      <img alt="fb" src={fbIcon} className="facebook" />
     </LoginSocialFacebook>
   )
 }

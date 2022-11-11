@@ -55,6 +55,17 @@
   &_googleLink {
     border: 1px solid black;
   }
+
+  &_loginLink {
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 32px;
+  }
+
+  &_loginLink_span {
+    color: #ADFA00;
+    text-decoration: none;
+  }
 }
 
 .register-block {
