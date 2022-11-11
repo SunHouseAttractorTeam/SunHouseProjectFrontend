@@ -6,6 +6,8 @@ import FacebookLogin from '../../components/services/FacebookLogin/FacebookLogin
 import GoogleLogin from '../../components/services/GoogleLogin/GoogleLogin'
 import AppleLogin from '../../components/services/AppleLogin/AppleLogin'
 import VkontakteLogin from '../../components/services/VkontakteLogin/VkontakteLogin'
+import Logo from '../../components/UI/Logo/Logo'
+import FooterLink from '../../components/Footer/FooterLink/FooterLink'
 
 const Registration = () => {
   const dispatch = useDispatch()
@@ -26,7 +28,12 @@ const Registration = () => {
   }
 
   return (
-    <>
+    <div className="main">
+      <header className="header">
+        <div className="container header__container">
+          <Logo className="header_logo" />
+        </div>
+      </header>
       <form onSubmit={submitFormHandler}>
         <FormInput
           required
@@ -50,7 +57,20 @@ const Registration = () => {
         <AppleLogin />
         <VkontakteLogin />
       </form>
-    </>
+      <footer className="footer_login">
+        <div className="container">
+          <div className="footer_bottom_inner">
+            <p>«Eduspace» © Все права защищены / 2022</p>
+            <FooterLink className="footer_link" href="#">
+              Политика конфиденциальности
+            </FooterLink>
+            <FooterLink className="footer_link" href="#">
+              Публичная оферта
+            </FooterLink>
+          </div>
+        </div>
+      </footer>
+    </div>
   )
 }
 
