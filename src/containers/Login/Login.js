@@ -59,8 +59,12 @@ const Login = () => {
               onChange={inputChangeHandler}
               className="form_input"
             />
-            <span className="form-login_forgotPass">Забыли пароль?</span>
-            <button className="form-login_btn">Войти</button>
+            <a href="#" className="form-login_forgotPass">
+              Забыли пароль?
+            </a>
+            <button type="submit" className="form-login_btn">
+              Войти
+            </button>
             <span className="form_text">или войдите с помощью</span>
             <div className="form_socialLinks">
               <FacebookLogin />
