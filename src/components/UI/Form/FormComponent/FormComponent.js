@@ -4,8 +4,9 @@ import FacebookLogin from '../../../services/FacebookLogin/FacebookLogin'
 import GoogleLogin from '../../../services/GoogleLogin/GoogleLogin'
 import AppleLogin from '../../../services/AppleLogin/AppleLogin'
 import VkontakteLogin from '../../../services/VkontakteLogin/VkontakteLogin'
+import { getFieldError } from '../Handlers/Handlers'
 
-const FormComponent = ({ inputName, inputType, submit, value, onChange, typeForm, placeholderName }) => {
+const FormComponent = ({ inputName, inputType, submit, value, onChange, typeForm, placeholderName, error }) => {
   let form = null
 
   if (inputName) {
@@ -18,6 +19,7 @@ const FormComponent = ({ inputName, inputType, submit, value, onChange, typeForm
         name={name}
         value={value}
         onChange={onChange}
+        error={getFieldError(error, name)}
       />
     ))
   }

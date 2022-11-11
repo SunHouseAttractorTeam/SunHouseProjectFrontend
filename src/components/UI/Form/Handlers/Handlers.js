@@ -3,7 +3,15 @@ export const inputChangeHandler = (e, setState) => {
   return setState(prev => ({ ...prev, [name]: value }))
 }
 
-export const submitFormHandler = async (e, fetch) => {
+export const submitFormHandler = (e, fetch) => {
   e.preventDefault()
-  await fetch
+  return fetch
+}
+
+export const getFieldError = (error, fieldName) => {
+  try {
+    return error.errors[fieldName].message
+  } catch {
+    return undefined
+  }
 }
