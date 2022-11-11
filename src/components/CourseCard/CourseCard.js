@@ -19,6 +19,6 @@ const CourseCard = ({ isLast, title, date }) => (
       {isLast && <MainButton className="course-card__button" text="Подробнее" />}
     </div>
   </div>
-)
+);
 
 export default CourseCard
