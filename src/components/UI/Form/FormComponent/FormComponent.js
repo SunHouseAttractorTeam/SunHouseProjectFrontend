@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import FormInput from '../FormInput/FormInput'
 import FacebookLogin from '../../../services/FacebookLogin/FacebookLogin'
 import GoogleLogin from '../../../services/GoogleLogin/GoogleLogin'
@@ -7,7 +8,19 @@ import VkontakteLogin from '../../../services/VkontakteLogin/VkontakteLogin'
 import { getFieldError } from '../Handlers/Handlers'
 import './FormComponent.scss'
 
-const FormComponent = ({ inputName, inputType, submit, value, onChange, typeForm, placeholderName, error }) => {
+const FormComponent = ({
+  title,
+  inputName,
+  inputType,
+  submit,
+  value,
+  onChange,
+  typeForm,
+  placeholderName,
+  error,
+  linkToPage,
+  endPoint,
+}) => {
   let form = null
 
   if (inputName) {
@@ -28,6 +41,7 @@ const FormComponent = ({ inputName, inputType, submit, value, onChange, typeForm
   return (
     <>
       <form onSubmit={submit} className="form">
+        <h4 className="form_title">{title}</h4>
         {form}
         <button type="submit" className="form_btn">
           {typeForm}
@@ -39,6 +53,14 @@ const FormComponent = ({ inputName, inputType, submit, value, onChange, typeForm
           <GoogleLogin />
           <AppleLogin />
         </div>
+        <p className="form_loginLink">
+          Уже есть профиль?{' '}
+          <span>
+            <Link to={endPoint} className="form_loginLink_span">
+              {linkToPage}
+            </Link>
+          </span>
+        </p>
       </form>
     </>
   )
