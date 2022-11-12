@@ -1,6 +1,6 @@
 @import '../../../../scss/style';
 
-.InputStyle{
+.InputStyle {
   border-radius: 90px;
   color: $blackDarkColor;
   font-weight: 400;
@@ -9,12 +9,16 @@
   padding: 15px 30px;
 }
 
-.InputGrey{
+.InputGrey {
   border: 1px solid $whiteBorderColor;
   background-color: $greyColor;
 }
 
-.InputWhite{
+.InputWhite {
   border: 2px solid $whiteBorderColor;
   background-color: $totalWhiteColor;
+}
+
+.helper {
+  color: red;
 }
