@@ -5,6 +5,7 @@ import GoogleLogin from '../../../services/GoogleLogin/GoogleLogin'
 import AppleLogin from '../../../services/AppleLogin/AppleLogin'
 import VkontakteLogin from '../../../services/VkontakteLogin/VkontakteLogin'
 import { getFieldError } from '../Handlers/Handlers'
+import './FormComponent.scss'
 
 const FormComponent = ({ inputName, inputType, submit, value, onChange, typeForm, placeholderName, error }) => {
   let form = null
@@ -20,18 +21,24 @@ const FormComponent = ({ inputName, inputType, submit, value, onChange, typeForm
         value={value}
         onChange={onChange}
         error={getFieldError(error, name)}
+        className="form_input"
       />
     ))
   }
   return (
     <>
-      <form onSubmit={submit}>
+      <form onSubmit={submit} className="form">
         {form}
-        <button type="submit">{typeForm}</button>
-        <FacebookLogin />
-        <GoogleLogin />
-        <AppleLogin />
-        <VkontakteLogin />
+        <button type="submit" className="form_btn">
+          {typeForm}
+        </button>
+        <span className="form_text">или регистрация с помощью</span>
+        <div className="form_socialLinks">
+          <FacebookLogin />
+          <VkontakteLogin />
+          <GoogleLogin />
+          <AppleLogin />
+        </div>
       </form>
     </>
   )

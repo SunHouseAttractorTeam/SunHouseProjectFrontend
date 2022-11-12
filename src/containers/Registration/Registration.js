@@ -1,19 +1,10 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
-import FormInput from '../../components/UI/Form/FormInput/FormInput'
 import { useDispatch, useSelector } from 'react-redux'
 import FormComponent from '../../components/UI/Form/FormComponent/FormComponent'
 import { inputChangeHandler, submitFormHandler } from '../../components/UI/Form/Handlers/Handlers'
 import { registrationRequest } from '../../store/actions/usersActions'
-import FacebookLogin from '../../components/services/FacebookLogin/FacebookLogin'
-import GoogleLogin from '../../components/services/GoogleLogin/GoogleLogin'
-import AppleLogin from '../../components/services/AppleLogin/AppleLogin'
-import VkontakteLogin from '../../components/services/VkontakteLogin/VkontakteLogin'
-import Logo from '../../components/UI/Logo/Logo'
-import FooterLink from '../../components/Footer/FooterLink/FooterLink'
-import VectorImage from '../../assets/images/Vector-2.png'
 import './Registration.scss'
+import Logo from '../../components/UI/Logo/Logo'
 
 const Registration = () => {
   const dispatch = useDispatch()
@@ -25,17 +16,26 @@ const Registration = () => {
   })
 
   return (
-    <>
-      <FormComponent
-        typeForm="Зарегистрироваться"
-        submit={e => submitFormHandler(e, dispatch(registrationRequest({ ...user })))}
-        onChange={e => inputChangeHandler(e, setUser)}
-        inputName={['username', 'email', 'password']}
-        placeholderName={['Имя', 'Электронная почта', 'Создайте пароль']}
-        inputType={['text', 'text', 'password']}
-        error={error}
-      />
-    </>
+    <div className="main">
+      <header className="header">
+        <div className="container header__container">
+          <Logo className="header_logo" />
+        </div>
+      </header>
+      <div className="container">
+        <div className="loginRegisterForm">
+          <FormComponent
+            typeForm="Зарегистрироваться"
+            submit={e => submitFormHandler(e, dispatch(registrationRequest({ ...user })))}
+            onChange={e => inputChangeHandler(e, setUser)}
+            inputName={['username', 'email', 'password']}
+            placeholderName={['Имя', 'Электронная почта', 'Создайте пароль']}
+            inputType={['text', 'text', 'password']}
+            error={error}
+          />
+        </div>
+      </div>
+    </div>
     // <div className="main">
     //   <header className="header">
     //     <div className="container header__container">
