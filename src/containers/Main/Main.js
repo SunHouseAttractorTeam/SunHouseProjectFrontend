@@ -8,6 +8,7 @@ import TeachersBlock from '../../components/TeachersBlock/TeachersBlock'
 import Promo from '../../components/Promo/Promo'
 import CoursesCatalog from '../CoursesCatalog/CoursesCatalog'
 import './Main.scss'
+import Partners from "../Partners/Partners";
 
 const Main = () => (
   <div className="main">
@@ -16,6 +17,7 @@ const Main = () => (
     <CoursesCatalog />
     <About />
     <TeachersBlock />
+      <Partners/>
     <Rates />
     <SelectionHelpForm />
     <Footer />
