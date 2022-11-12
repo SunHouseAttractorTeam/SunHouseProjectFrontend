@@ -9,7 +9,7 @@ const CoursesCatalog = () => (
       <h2 className="courses-section__title">Каталог курсов</h2>
       <div className="courses-section__cards">
         {coursesData.map(item => (
-          <CourseCard key={item.title} title={item.title} date={item.date} isLast={item.isLast} />
+          <CourseCard key={item.title} title={item.title} date={item.date} isLast={item.isLast} list={item.list} />
         ))}
       </div>
     </div>
