@@ -34,6 +34,7 @@ const Registration = () => {
             inputName={['username', 'email', 'password']}
             placeholderName={['Имя', 'Электронная почта', 'Создайте пароль']}
             inputType={['text', 'text', 'password']}
+            value={user}
             error={error}
             endPoint="/login"
             linkToPage="Войти"

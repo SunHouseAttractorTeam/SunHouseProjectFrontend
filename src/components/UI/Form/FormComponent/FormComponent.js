@@ -31,7 +31,7 @@ const FormComponent = ({
         required
         placeholder={placeholderName[index]}
         name={name}
-        value={value}
+        value={value[name]}
         onChange={onChange}
         error={getFieldError(error, name)}
         className="form_input"
