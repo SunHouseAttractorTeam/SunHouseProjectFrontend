@@ -1,5 +1,5 @@
 import React from 'react'
-import CourseCard from '../../components/CourseCard/CourseCard'
+import CourseCard from '../CourseCard/CourseCard'
 import coursesData from './coursesData'
 import './CoursesCatalog.scss'
 

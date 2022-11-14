@@ -4,8 +4,8 @@ import Footer from '../../components/Footer/Footer'
 import About from '../../components/About/About'
 import TeachersBlock from '../../components/TeachersBlock/TeachersBlock'
 import Promo from '../../components/Promo/Promo'
-import CoursesCatalog from '../CoursesCatalog/CoursesCatalog'
-import Partners from '../Partners/Partners'
+import CoursesCatalog from '../../components/CoursesCatalog/CoursesCatalog'
+import Partners from '../../components/Partners/Partners'
 import './Main.scss'
 
 const Main = () => (
