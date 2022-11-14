@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { vkLoginRequest } from '../../../store/actions/usersActions'
 import vkicon from '../../../assets/icons/vkicon.svg'
 import './VkontakteLogin.scss'
+import { VKAppId } from '../../../config'
 
 const VkontakteLogin = () => {
   const dispatch = useDispatch()
@@ -12,7 +13,7 @@ const VkontakteLogin = () => {
 
   return (
     <VkLogin
-      apiId={process.env.vkAppId}
+      apiId={VKAppId}
       callback={responseVk}
       render={renderProps => <img alt="vkicon" src={vkicon} onClick={renderProps.onClick} className="vkontakte" />}
     />
