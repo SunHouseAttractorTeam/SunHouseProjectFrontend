@@ -4,6 +4,7 @@ import { LoginSocialGoogle } from 'reactjs-social-login'
 import { googleLoginRequest } from '../../../store/actions/usersActions'
 import googleicon from '../../../assets/icons/google.svg'
 import './GoogleLogin.scss'
+import { GoogleAppId } from '../../../config'
 
 const GoogleLogin = () => {
   const dispatch = useDispatch()
@@ -13,7 +14,7 @@ const GoogleLogin = () => {
   return (
     <LoginSocialGoogle
       isOnlyGetToken
-      client_id={process.env.googleAppId}
+      client_id={GoogleAppId}
       onResolve={({ provider, data }) => {
         googleResponse(data)
       }}

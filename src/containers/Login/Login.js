@@ -33,6 +33,7 @@ const Login = () => {
             inputName={['email', 'password']}
             placeholderName={['Электронная почта', 'Пароль']}
             inputType={['text', 'password']}
+            value={user}
             error={error}
             endPoint="/registration"
             linkToPage="Зарегистрируйтесь"

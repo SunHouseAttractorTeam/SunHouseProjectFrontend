@@ -20,7 +20,7 @@ const FormInput = ({ type, name, value, onChange, placeholder, className, requir
 FormInput.propTypes = {
   type: PropTypes.string,
   name: PropTypes.string.isRequired,
-
+  value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
   error: PropTypes.string,

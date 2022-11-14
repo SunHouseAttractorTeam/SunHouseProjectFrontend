@@ -4,6 +4,7 @@ import { LoginSocialFacebook } from 'reactjs-social-login'
 import { facebookLoginRequest } from '../../../store/actions/usersActions'
 import fbIcon from '../../../assets/icons/facebookicon.svg'
 import './FacebookLogin.scss'
+import { FacebookAppId } from '../../../config'
 
 const FacebookLogin = () => {
   const dispatch = useDispatch()
@@ -13,7 +14,7 @@ const FacebookLogin = () => {
   return (
     <LoginSocialFacebook
       isOnlyGetToken
-      appId={process.env.facebookAppId}
+      appId={FacebookAppId}
       onResolve={({ provider, data }) => {
         facebookResponse(data)
       }}
