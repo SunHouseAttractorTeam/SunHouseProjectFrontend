@@ -22,16 +22,16 @@ const Footer = () => (
         </div>
         <div className="footer_top_col">
           <h6 className="footer_top_title">Курсы</h6>
-          {courses.map(course => (
-            <FooterLink href="#" className="footer_link">
+          {courses.map((course, index) => (
+            <FooterLink key={index} href="#" className="footer_link">
               {course}
             </FooterLink>
           ))}
         </div>
         <div className="footer_top_col">
           <h6 className="footer_top_title">Информация</h6>
-          {information.map(info => (
-            <FooterLink href="#" className="footer_link">
+          {information.map((info, index) => (
+            <FooterLink key={index} href="#" className="footer_link">
               {info}
             </FooterLink>
           ))}
