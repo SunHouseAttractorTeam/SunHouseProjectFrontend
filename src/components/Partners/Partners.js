@@ -1,6 +1,6 @@
 import React from 'react'
 import './Partners.scss'
-import PartnerCard from '../../components/PartnerCard/PartnerCard'
+import PartnerCard from '../PartnerCard/PartnerCard'
 import partnersData from './partnersData'
 
 const Partners = () => (
