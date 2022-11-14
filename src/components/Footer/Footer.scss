@@ -1,7 +1,7 @@
 @import '../../scss/style';
 
 .footer {
-  color: #FFFFFF;
+  color: $totalWhiteColor;
   font-size: 16px;
   background: $darkGreenColor;
   padding: 64px 0 41px !important;
@@ -71,7 +71,7 @@
   &_bottom {
     font-size: 14px;
     padding-top: 18px;
-    border-top: 2px solid #2C2C2E;
+    border-top: 2px solid $blackDarkColor;
 
     &_inner {
       display: flex;
@@ -94,22 +94,14 @@
     }
   }
 
-  &_link {
-    text-decoration: none;
-    color: inherit;
-
-    &:hover {
-      color: $lightGreenColor;
-    }
-
-    &:before {
+  &_icon {
+    i:before {
       content: '';
       display: inline-block;
       width: 16px;
       height: 16px;
     }
-
-    &_vk {
+    &_vk i {
       margin-left: 5px;
 
       &:before {
@@ -117,22 +109,31 @@
       }
     }
 
-    &_yt {
+    &_yt i {
       &:before {
         background: url('../../assets/icons/youtube_icon.svg') 0 no-repeat;
       }
     }
 
-    &_tg {
+    &_tg i {
       &:before {
         background: url('../../assets/icons/telegram_icon.svg') 0 no-repeat;
       }
     }
 
-    &_inst {
+    &_inst i {
       &:before {
         background: url('../../assets/icons/instagram_icon.svg') 0 no-repeat;
       }
+    }
+  }
+
+  &_link {
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      color: $lightGreenColor;
     }
   }
 
