@@ -1,7 +1,7 @@
 @import '../../scss/style';
 
 .footer {
-  color: #FFFFFF;
+  color: $totalWhiteColor;
   font-size: 16px;
   background: $darkGreenColor;
   padding: 64px 0 41px !important;
@@ -71,7 +71,7 @@
   &_bottom {
     font-size: 14px;
     padding-top: 18px;
-    border-top: 2px solid #2C2C2E;
+    border-top: 2px solid $blackDarkColor;
 
     &_inner {
       display: flex;

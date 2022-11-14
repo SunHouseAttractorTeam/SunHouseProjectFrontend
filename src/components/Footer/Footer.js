@@ -3,6 +3,7 @@ import './Footer.scss'
 import Logo from '../UI/Logo/Logo'
 import FooterIcon from './FooterIcon/FooterIcon'
 import FooterLink from './FooterLink/FooterLink'
+import { courses, information } from './footerData'
 
 const Footer = () => (
   <footer className="footer">
@@ -21,33 +22,19 @@ const Footer = () => (
         </div>
         <div className="footer_top_col">
           <h6 className="footer_top_title">Курсы</h6>
-          <FooterLink href="#" className="footer_link">
-            Web-дизайнер
-          </FooterLink>
-          <FooterLink href="#" className="footer_link">
-            UX-UI дизайнер
-          </FooterLink>
-          <FooterLink href="#" className="footer_link">
-            Front-end разработчик
-          </FooterLink>
+          {courses.map(course => (
+            <FooterLink href="#" className="footer_link">
+              {course}
+            </FooterLink>
+          ))}
         </div>
         <div className="footer_top_col">
           <h6 className="footer_top_title">Информация</h6>
-          <FooterLink href="#" className="footer_link">
-            Об Eduspace
-          </FooterLink>
-          <FooterLink href="#" className="footer_link">
-            Преподователи
-          </FooterLink>
-          <FooterLink href="#" className="footer_link">
-            Партнеры
-          </FooterLink>
-          <FooterLink href="#" className="footer_link">
-            Тарифы
-          </FooterLink>
-          <FooterLink href="#" className="footer_link">
-            Контакты
-          </FooterLink>
+          {information.map(info => (
+            <FooterLink href="#" className="footer_link">
+              {info}
+            </FooterLink>
+          ))}
         </div>
         <div className="footer_top_col">
           <h6 className="footer_top_title">Контакты</h6>
@@ -60,7 +47,7 @@ const Footer = () => (
     <div className="footer_bottom">
       <div className="container">
         <div className="footer_bottom_inner">
-          <p>«Eduspace» © Все права защищены / 2022</p>
+          <p>«Eduspace» © Все права защищены / {new Date().getFullYear()}</p>
           <FooterLink className="footer_link" href="#">
             Политика конфиденциальности
           </FooterLink>
