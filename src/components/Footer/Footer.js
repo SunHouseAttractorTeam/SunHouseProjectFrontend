@@ -13,10 +13,10 @@ const Footer = () => (
             <Logo className="footer_logo" />
           </div>
           <div className="footer_top_social_icons">
-            <FooterIcon href="#" className="footer_link footer_link_vk" />
-            <FooterIcon href="#" className="footer_link footer_link_yt" />
-            <FooterIcon href="#" className="footer_link footer_link_tg" />
-            <FooterIcon href="#" className="footer_link footer_link_inst" />
+            <FooterIcon href="#" className="footer_icon footer_icon_vk" />
+            <FooterIcon href="#" className="footer_icon footer_icon_yt" />
+            <FooterIcon href="#" className="footer_icon footer_icon_tg" />
+            <FooterIcon href="#" className="footer_icon footer_icon_inst" />
           </div>
         </div>
         <div className="footer_top_col">

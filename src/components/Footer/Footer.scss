@@ -94,22 +94,14 @@
     }
   }
 
-  &_link {
-    text-decoration: none;
-    color: inherit;
-
-    &:hover {
-      color: $lightGreenColor;
-    }
-
-    &:before {
+  &_icon {
+    i:before {
       content: '';
       display: inline-block;
       width: 16px;
       height: 16px;
     }
-
-    &_vk {
+    &_vk i {
       margin-left: 5px;
 
       &:before {
@@ -117,22 +109,31 @@
       }
     }
 
-    &_yt {
+    &_yt i {
       &:before {
         background: url('../../assets/icons/youtube_icon.svg') 0 no-repeat;
       }
     }
 
-    &_tg {
+    &_tg i {
       &:before {
         background: url('../../assets/icons/telegram_icon.svg') 0 no-repeat;
       }
     }
 
-    &_inst {
+    &_inst i {
       &:before {
         background: url('../../assets/icons/instagram_icon.svg') 0 no-repeat;
       }
+    }
+  }
+
+  &_link {
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      color: $lightGreenColor;
     }
   }
 
