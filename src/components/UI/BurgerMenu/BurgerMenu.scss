@@ -1,0 +1,57 @@
+@import '../../../scss/style';
+
+.burger-menu {
+  &__button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 30;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: $totalWhiteColor;
+    -webkit-transition: 0.4s;
+    -moz-transition: 0.4s;
+    -o-transition: 0.4s;
+    transition: 0.4s;
+
+    &:hover {
+      background-color: $greyColor;
+    }
+  }
+
+  &__button, &__lines {
+    &:hover {
+      filter: brightness(0.6);
+    }
+  }
+
+  &__lines,
+  &__lines:after,
+  &__lines:before {
+    position: absolute;
+    width: 18px;
+    height: 2px;
+    background-color: $totalBlackColor;
+    -webkit-transition: 0.4s;
+    -moz-transition: 0.4s;
+    -o-transition: 0.4s;
+    transition: 0.4s;
+  }
+
+  &__lines {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &:before {
+      content: '';
+      top: -6px;
+    }
+
+    &:after {
+      content: '';
+      top: 6px;
+    }
+  }
+}
