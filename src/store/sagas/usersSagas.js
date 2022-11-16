@@ -2,24 +2,24 @@ import { put, takeEvery } from 'redux-saga/effects'
 import axiosApi from '../../axiosApi'
 import { historyPush } from '../actions/historyActions'
 import {
-  registrationRequest,
-  registrationSuccess,
-  registrationFailure,
-  loginUserSuccess,
-  loginUserFailure,
-  loginUserRequest,
-  facebookLoginSuccess,
+  appleLoginFailure,
+  appleLoginRequest,
+  appleLoginSuccess,
   facebookLoginFailure,
   facebookLoginRequest,
-  googleLoginSuccess,
+  facebookLoginSuccess,
   googleLoginFailure,
   googleLoginRequest,
-  appleLoginRequest,
-  appleLoginFailure,
-  appleLoginSuccess,
+  googleLoginSuccess,
+  loginUserFailure,
+  loginUserRequest,
+  loginUserSuccess,
+  registrationFailure,
+  registrationRequest,
+  registrationSuccess,
   vkLoginFailure,
-  vkLoginSuccess,
   vkLoginRequest,
+  vkLoginSuccess,
 } from '../actions/usersActions'
 
 export function* registrationUserSaga({ payload: userData }) {
@@ -38,7 +38,9 @@ export function* loginUserSaga({ payload: userData }) {
   try {
     const response = yield axiosApi.post('/users/sessions', userData)
     yield put(loginUserSuccess(response.data))
-    yield put(historyPush('/'))
+    if (userData) {
+      yield put(historyPush('/'))
+    }
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(loginUserFailure(e.response.data))
