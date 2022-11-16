@@ -4,5 +4,22 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 21px;
+  }
+
+  &__bottom {
+    &-courses {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 20px;
+    }
+
+    .course-card {
+      transition: all .3s ease;
+
+      &:hover {
+        transform: translateY(-8px);
+      }
+    }
   }
 }
