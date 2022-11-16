@@ -1,9 +1,10 @@
 import React from 'react'
-import './Nav.scss'
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import './Nav.scss'
 
 const Nav = () => {
-  const catalogs = ['Первый', 'Второй', 'Третий']
+  const category = useSelector(state => state.categories.categories)
 
   const funcIsOpenMenu = event => {
     event.preventDefault()
@@ -21,13 +22,14 @@ const Nav = () => {
 
           <div className="dropdown__drawer">
             <ul className="menu">
-              {catalogs.map((list, index) => (
-                <li key={index}>
-                  <NavLink className="menu__link" to={`/${list}`}>
-                    {list}
-                  </NavLink>
-                </li>
-              ))}
+              {category &&
+                category.map(list => (
+                  <li key={list._id}>
+                    <NavLink className="menu__link" to={`/${list._id}`}>
+                      {list.title}
+                    </NavLink>
+                  </li>
+                ))}
             </ul>
           </div>
         </div>
