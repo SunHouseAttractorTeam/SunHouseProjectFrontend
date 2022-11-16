@@ -1,8 +1,6 @@
 .avatar {
   border-radius: 50%;
+  vertical-align: middle;
   width: 74px;
   height: 74px;
-  display: grid;
-  place-content: center;
-  background: #000;
 }

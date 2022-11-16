@@ -8,10 +8,10 @@ const MyProfileTop = ({ user }) => (
       <Logo className="profile_logo" />
     </div>
     <div className="profile_sidebar_top_user">
-      <Avatar className="profile_sidebar_top_user_avatar" />
+      <Avatar className="profile_sidebar_top_user_avatar" user={user} />
       <div>
-        <p className="profile_sidebar_top_user_username">{user?.username} Асанов Усон</p>
-        <p className="profile_sidebar_top_user_role">{user?.role} преподователь</p>
+        <p className="profile_sidebar_top_user_username">{user?.username}</p>
+        <p className="profile_sidebar_top_user_role">{user?.role}</p>
       </div>
     </div>
   </div>
