@@ -13,6 +13,9 @@ import {
   fetchCoursesRequest,
   fetchCoursesSuccess,
   fetchCourseSuccess,
+  fetchUserCoursesFailure,
+  fetchUserCoursesRequest,
+  fetchUserCoursesSuccess,
   updateCourseFailure,
   updateCourseRequest,
   updateCourseSuccess,
@@ -33,6 +36,15 @@ export function* fetchCourse({ payload: id }) {
     yield put(fetchCourseSuccess(response.data))
   } catch (e) {
     yield put(fetchCourseFailure(e))
+  }
+}
+
+export function* fetchUserCourses({ payload: userId }) {
+  try {
+    const response = yield axiosApi(`/courses?user=${userId}`)
+    yield put(fetchUserCoursesSuccess(response.data))
+  } catch (e) {
+    yield put(fetchUserCoursesFailure(e))
   }
 }
 
@@ -68,6 +80,7 @@ export function* deleteCourse({ payload: id }) {
 const coursesSagas = [
   takeEvery(fetchCoursesRequest, fetchCourses),
   takeEvery(fetchCourseRequest, fetchCourse),
+  takeEvery(fetchUserCoursesRequest, fetchUserCourses),
   takeEvery(createCourseRequest, createCourse),
   takeEvery(updateCourseRequest, updateCourse),
   takeEvery(deleteCourseRequest, deleteCourse),
