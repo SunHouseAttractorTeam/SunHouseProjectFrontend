@@ -2,8 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const MyProfileSidebarLink = ({ className, children, to }) => (
-  <li className="profile_sidebar_bottom_nav_list_item">
-    <Link className={`profile_sidebar_bottom_nav_list_item_link ${className}`} to={to}>
+  <li className="profile__sidebar-bottom-nav-list-item">
+    <Link className={`profile__sidebar-bottom-nav-list-item-link ${className}`} to={to}>
       {children}
     </Link>
   </li>

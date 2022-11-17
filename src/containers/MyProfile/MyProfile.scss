@@ -3,29 +3,29 @@
 .profile {
   background: linear-gradient(to right, $totalWhiteColor 0%, $totalWhiteColor 30%, $greyColor 30%, $greyColor 100%);
 
-  &_inner {
+  &__inner {
     display: flex;
   }
 
-  &_logo {
+  &__logo {
     img {
       width: 280px;
       height: 40px;
     }
   }
 
-  &_sidebar {
+  &__sidebar {
     width: 349px;
     background: $totalWhiteColor;
     padding: 32px 42px 0 7px;
     border-radius: 0 16px 16px 0;
 
-    &_top {
-      &_logo {
+    &-top {
+      &-logo {
         margin-bottom: 51px;
       }
 
-      &_user {
+      &-user {
         background: $greyColor;
         display: flex;
         align-items: center;
@@ -33,36 +33,36 @@
         border-radius: 16px;
         margin-bottom: 77px;
 
-        &_avatar {
+        &-avatar {
           margin-right: 16px;
         }
 
-        &_username {
+        &-username {
           font-size: 20px;
           font-weight: 700;
           margin-bottom: 9px;
         }
 
-        &_role {
+        &-role {
           font-size: 16px;
           font-weight: 400;
         }
       }
     }
 
-    &_bottom {
+    &-bottom {
       padding-bottom: 226px;
 
-      &_nav {
+      &-nav {
         font-size: 20px;
         font-weight: 700;
 
-        &_list {
+        &-list {
           list-style: none;
           margin: 0;
           padding: 0;
 
-          &_item {
+          &-item {
             padding: 22px 0;
             border-bottom: 2px solid $darkGreyColor;
 
@@ -74,14 +74,14 @@
               }
             }
 
-            &_link {
+            &-link {
               text-decoration: none;
               color: inherit;
               display: flex;
               align-items: center;
             }
 
-            &_icon {
+            &-icon {
               width: 24px;
               height: 24px;
               padding-right: 56px;
@@ -92,7 +92,7 @@
     }
   }
 
-  &_right {
+  &__right {
     flex: 1;
     padding: 28px 0 32px 38px;
   }
