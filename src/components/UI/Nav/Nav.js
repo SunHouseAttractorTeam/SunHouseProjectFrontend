@@ -9,6 +9,9 @@ const Nav = () => {
   const funcIsOpenMenu = event => {
     event.preventDefault()
     const dropdown = event.target.parentNode
+    if (event._reactName === 'onBlur') {
+      dropdown.classList.add('dropdown')
+    }
     dropdown.classList.toggle('dropdown__is-open')
   }
 
@@ -16,7 +19,7 @@ const Nav = () => {
     <nav className="main-nav">
       <ul className="main-nav__list">
         <div className="dropdown">
-          <button type="button" className="dropdown__toggle" onClick={funcIsOpenMenu}>
+          <button type="button" className="dropdown__toggle" onClick={funcIsOpenMenu} onBlur={funcIsOpenMenu}>
             Каталог курсов
           </button>
 
