@@ -23,7 +23,10 @@ const MyProfileBottom = () => (
         <MyProfileSidebarLink to="/user/certificates" className="profile_sidebar_bottom_nav_list_item_link_certificate">
           Мои сертификаты
         </MyProfileSidebarLink>
-        <MyProfileSidebarLink to="/user/settings" className="profile_sidebar_bottom_nav_list_item_link_settings">
+        <MyProfileSidebarLink
+          to="/user/settings/personal_data"
+          className="profile_sidebar_bottom_nav_list_item_link_settings"
+        >
           Насройки профиля
         </MyProfileSidebarLink>
         <MyProfileSidebarLink className="profile_sidebar_bottom_nav_list_item_link_logout">Выйти</MyProfileSidebarLink>

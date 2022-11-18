@@ -1,0 +1,31 @@
+@import "../../../scss/style";
+
+.active {
+  background: $greyColor;
+  box-shadow: 0 2px 4px -2px rgba(24, 39, 75, 0.12), 0px 4px 4px -2px rgba(24, 39, 75, 0.08);
+}
+
+.block-buttons {
+  display: flex;
+  justify-content: space-between;
+  background: $totalWhiteColor;
+  padding: 10px;
+  border-radius: 16px;
+  margin-bottom: 27px;
+
+  &__button {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    padding: 15px 110px;
+    border-radius: 16px;
+    text-decoration: none;
+    text-align: center;
+    color: $blueDarkColor;
+
+    &:hover {
+      background: $greyColor;
+      box-shadow: 0 2px 4px -2px rgba(24, 39, 75, 0.12), 0px 4px 4px -2px rgba(24, 39, 75, 0.08);
+    }
+  }
+}
