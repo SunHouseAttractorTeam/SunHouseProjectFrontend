@@ -13,8 +13,12 @@ const GoogleLogin = () => {
 
   return (
     <LoginSocialGoogle
-      isOnlyGetToken
       client_id={GoogleAppId}
+      scope="openid profile email"
+      redirect_uri="http://localhost:3000"
+      discoveryDocs="claims_supported"
+      access_type="offline"
+      typeResponse="idToken"
       onResolve={({ provider, data }) => {
         googleResponse(data)
       }}
