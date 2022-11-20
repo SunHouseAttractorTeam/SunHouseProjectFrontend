@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import PersonalForm from './PersonalForm/PersonalForm'
 import LocationForm from './LocationForm/LocationForm'
 import ImageForm from './ImageForm/ImageForm'
-import MainButton from '../../UI/MainButton/MainButton'
+import SettingsButton from '../SettingsButton/SettingsButton'
 import './ProfileForm.scss'
+import { inputChangeHandler } from '../../UI/Form/Handlers/Handlers'
 
 const ProfileForm = () => {
   const [state, setState] = useState({
@@ -22,12 +23,7 @@ const ProfileForm = () => {
   }
 
   const onChangeData = e => {
-    const { name, value } = e.target
-
-    setState(prev => ({
-      ...prev,
-      [name]: value,
-    }))
+    inputChangeHandler(e, setState)
   }
 
   return (
@@ -37,7 +33,7 @@ const ProfileForm = () => {
         <LocationForm onChangeData={onChangeData} onChangeCountry={onChangeCountry} city={state.city} />
         <ImageForm />
       </div>
-      <MainButton className="profile-form__button" text="Сохранить изменения" />
+      <SettingsButton />
     </form>
   )
 }
