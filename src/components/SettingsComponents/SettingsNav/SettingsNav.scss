@@ -7,11 +7,13 @@
 
 .block-buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  gap: 20px;
   background: $totalWhiteColor;
   padding: 10px;
   border-radius: 16px;
   margin-bottom: 27px;
+  flex-wrap: wrap;
 
   &__button {
     font-weight: 500;
@@ -22,6 +24,11 @@
     text-decoration: none;
     text-align: center;
     color: $blueDarkColor;
+
+    @include xl {
+      padding-left: 60px;
+      padding-right: 60px;
+    }
 
     &:hover {
       background: $greyColor;

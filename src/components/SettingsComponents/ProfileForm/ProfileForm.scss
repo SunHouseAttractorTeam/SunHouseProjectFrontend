@@ -4,6 +4,7 @@
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
+  justify-content: center;
 
   &__button {
     width: 280px;
@@ -15,5 +16,9 @@
     background: $lightGreenColor;
     border-radius: 50px;
     margin-top: 30px;
+    @include xl {
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 }

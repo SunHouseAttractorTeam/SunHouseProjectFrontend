@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import PersonalForm from './PersonalForm/PersonalForm'
 import LocationForm from './LocationForm/LocationForm'
-import './ProfileForm.scss'
 import ImageForm from './ImageForm/ImageForm'
 import MainButton from '../../UI/MainButton/MainButton'
+import './ProfileForm.scss'
 
 const ProfileForm = () => {
   const [state, setState] = useState({
@@ -13,6 +13,13 @@ const ProfileForm = () => {
     country: '',
     city: '',
   })
+
+  const onChangeCountry = country => {
+    setState(prev => ({
+      ...prev,
+      country: country.label,
+    }))
+  }
 
   const onChangeData = e => {
     const { name, value } = e.target
@@ -27,11 +34,10 @@ const ProfileForm = () => {
     <form>
       <div className="profile-form">
         <PersonalForm onChangeData={onChangeData} phone={state.phone} email={state.email} username={state.username} />
-        <LocationForm onChangeData={onChangeData} city={state.city} country={state.country} />
+        <LocationForm onChangeData={onChangeData} onChangeCountry={onChangeCountry} city={state.city} />
         <ImageForm />
-
-        <MainButton className="profile-form__button" text="Сохранить изменения" />
       </div>
+      <MainButton className="profile-form__button" text="Сохранить изменения" />
     </form>
   )
 }
