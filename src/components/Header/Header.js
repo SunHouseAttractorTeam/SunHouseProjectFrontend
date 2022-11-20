@@ -23,7 +23,7 @@ const Header = () => {
       <div className="container header__container">
         <Logo className="header_logo" />
         <Nav />
-        <MainButton className="header_MainButton" onClick={onHeaderButton} text="Войти" />
+        <MainButton className="header_MainButton GreenButton" onClick={onHeaderButton} text="Войти" />
       </div>
     </header>
   )

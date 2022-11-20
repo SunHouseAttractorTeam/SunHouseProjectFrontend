@@ -6,36 +6,23 @@ import './Nav.scss'
 const Nav = () => {
   const category = useSelector(state => state.categories.categories)
 
-  const funcIsOpenMenu = event => {
-    event.preventDefault()
-    const dropdown = event.target.parentNode
-    if (event._reactName === 'onBlur') {
-      dropdown.classList.add('dropdown')
-    }
-    dropdown.classList.toggle('dropdown__is-open')
-  }
-
   return (
     <nav className="main-nav">
       <ul className="main-nav__list">
-        <div className="dropdown">
-          <button type="button" className="dropdown__toggle" onClick={funcIsOpenMenu} onBlur={funcIsOpenMenu}>
-            Каталог курсов
-          </button>
+        <li className="main-nav__item">
+          <span className="main-nav__link">Каталог курсов</span>
 
-          <div className="dropdown__drawer">
-            <ul className="menu">
-              {category &&
-                category.map(list => (
-                  <li key={list._id}>
-                    <NavLink className="menu__link" to={`/${list._id}`}>
-                      {list.title}
-                    </NavLink>
-                  </li>
-                ))}
-            </ul>
-          </div>
-        </div>
+          <ul className="main-nav__item__menu">
+            {category &&
+              category.map(list => (
+                <li key={list._id}>
+                  <NavLink className="main-nav__item__menu__link" to={`/${list._id}`}>
+                    {list.title}
+                  </NavLink>
+                </li>
+              ))}
+          </ul>
+        </li>
         <li className="main-nav__item">
           <a href="#" className="main-nav__link">
             Бесплатные курсы
