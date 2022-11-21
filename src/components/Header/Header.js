@@ -11,6 +11,7 @@ import { fetchCategoriesRequest } from '../../store/actions/categoriesActions'
 
 const Header = () => {
   const dispatch = useDispatch()
+  const user = useSelector(state => state.users.user)
 
   useEffect(() => {
     dispatch(fetchCategoriesRequest())
