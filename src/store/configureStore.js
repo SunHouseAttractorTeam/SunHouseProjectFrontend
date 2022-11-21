@@ -22,6 +22,8 @@ axiosApi.interceptors.request.use(config => {
   return config
 })
 
+axiosApi.defaults.withCredentials = true
+
 axiosApi.interceptors.response.use(
   res => res,
   e => {

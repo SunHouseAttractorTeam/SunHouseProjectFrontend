@@ -13,7 +13,6 @@ const FacebookLogin = () => {
 
   return (
     <LoginSocialFacebook
-      isOnlyGetToken
       appId={FacebookAppId}
       onResolve={({ provider, data }) => {
         facebookResponse(data)

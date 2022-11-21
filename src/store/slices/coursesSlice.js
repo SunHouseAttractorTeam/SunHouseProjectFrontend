@@ -39,6 +39,19 @@ const coursesSlice = createSlice({
       state.error = action.payload
     },
 
+    fetchUserCoursesRequest(state) {
+      state.loading = true
+      state.error = null
+    },
+    fetchUserCoursesSuccess(state, action) {
+      state.loading = false
+      state.courses = action.payload
+    },
+    fetchUserCoursesFailure(state, action) {
+      state.loading = false
+      state.error = action.payload
+    },
+
     createCourseRequest(state) {
       state.loading = true
       state.error = null

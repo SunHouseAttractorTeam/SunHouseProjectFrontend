@@ -1,8 +1,9 @@
 @import '../../../scss/style';
 
-.main-nav{
+.main-nav {
   padding: 0 15px;
-  &__list{
+
+  &__list {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
@@ -10,16 +11,53 @@
     justify-content: space-between;
     transition: all 0.5s;
   }
-  &__item{
-    padding: 0 50px 0 7px;
+
+  &__item {
+    padding: 0 50px 10px 7px;
     transition: all 0.5s;
+    position: relative;
+
+    &__menu {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 20px;
+      background: $totalWhiteColor;
+      z-index: 100;
+      box-shadow: 0 8px 22px -6px rgba(24, 39, 75, 0.12), 0px 14px 64px -4px rgba(24, 39, 75, 0.12);
+      border-radius: 16px;
+      list-style: none;
+
+      &__link {
+        color: $blackDarkColor;
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+
+        &:hover {
+          color: $lightGreenColor;
+        }
+      }
+    }
+
+    &:hover &__menu {
+      display: inline-block;
+      color: $lightGreenColor;
+    }
   }
-  &__link{
+
+  &__link {
     text-decoration: none;
     text-transform: capitalize;
     color: #fff;
-    &:hover{
-      color:  $lightGreenColor;
+    cursor: pointer;
+
+    &:hover {
+      color: $lightGreenColor;
     }
   }
 }
+
+
+
+

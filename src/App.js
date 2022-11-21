@@ -4,15 +4,18 @@ import Main from './containers/Main/Main'
 import Registration from './containers/Registration/Registration'
 import './scss/style.scss'
 import Login from './containers/Login/Login'
+import MyProfile from './containers/MyProfile/MyProfile'
+import CookieProvider from './components/UI/CookieProvider/CookieProvider'
 
 const App = () => (
-  <>
+  <CookieProvider>
     <Switch>
       <Route path="/" exact component={Main} />
       <Route path="/registration" component={Registration} />
       <Route path="/login" component={Login} />
+      <Route path="/user" component={MyProfile} />
     </Switch>
-  </>
+  </CookieProvider>
 )
 
 export default App

@@ -7,6 +7,7 @@ import Promo from '../../components/Promo/Promo'
 import CoursesCatalog from '../../components/CoursesCatalog/CoursesCatalog'
 import Partners from '../../components/Partners/Partners'
 import './Main.scss'
+import ReviewsBlock from '../../components/ReviewsBlock/ReviewsBlock'
 
 const Main = () => (
   <div className="main">
@@ -16,6 +17,7 @@ const Main = () => (
     <About />
     <TeachersBlock />
     <Partners />
+    <ReviewsBlock />
     <Footer />
   </div>
 )
