@@ -1,9 +1,11 @@
+import { useDispatch, useSelector } from 'react-redux'
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
 import Nav from '../UI/Nav/Nav'
 import MainButton from '../UI/MainButton/MainButton'
 import Logo from '../UI/Logo/Logo'
 import { historyPush } from '../../store/actions/historyActions'
+import UserMenu from './UserMenu/UserMenu'
+
 import './Header.scss'
 import { fetchCategoriesRequest } from '../../store/actions/categoriesActions'
 
@@ -23,7 +25,11 @@ const Header = () => {
       <div className="container header__container">
         <Logo className="header_logo" />
         <Nav />
-        <MainButton className="header_MainButton GreenButton" onClick={onHeaderButton} text="Войти" />
+        {!user ? (
+          <MainButton className="header_MainButton" onClick={onHeaderButton} text="Войти" />
+        ) : (
+          <UserMenu user={user} />
+        )}
       </div>
     </header>
   )

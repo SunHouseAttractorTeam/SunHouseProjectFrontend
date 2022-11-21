@@ -1,0 +1,47 @@
+@import '../../../scss/style';
+
+.user__menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 50px;
+  gap: 10px;
+  padding: 10px 32px;
+  color: $darkGreenColor;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 20px;
+  cursor: pointer;
+  background: $lightGreenColor;
+  position: relative;
+  height: 40px;
+  width: 150px;
+  margin: 0;
+
+  &_img {
+    height: 50px;
+  }
+
+  &_list {
+    position: absolute;
+    z-index: 100000;
+    margin: auto;
+    color: $darkGreenColor;
+    text-decoration: none;
+
+    &_item {
+      background: $lightGreenColor;
+      text-align: center;
+      vertical-align: baseline;
+      line-height: 50px;
+      height: 50px;
+      width: 177px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+    }
+  }
+}

@@ -86,6 +86,9 @@ const usersSlice = createSlice({
       state.loginLoading = false
       state.loginError = action.payload
     },
+    logoutUser(state) {
+      state.user = null
+    },
   },
 })
 
