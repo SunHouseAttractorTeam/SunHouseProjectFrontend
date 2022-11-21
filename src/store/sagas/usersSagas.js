@@ -51,7 +51,7 @@ export function* loginUserSaga({ payload: userData }) {
 export function* facebookLoginSaga({ payload: userData }) {
   try {
     const response = yield axiosApi.post('/users/facebookLogin/', userData)
-    yield facebookLoginSuccess(response.data.user)
+    yield put(facebookLoginSuccess(response.data.user))
     yield put(historyPush('/'))
   } catch (e) {
     if (e.response && e.response.data) {
@@ -63,7 +63,7 @@ export function* facebookLoginSaga({ payload: userData }) {
 export function* googleLoginSaga({ payload: userData }) {
   try {
     const response = yield axiosApi.post('/users/googleLogin/', userData)
-    yield googleLoginSuccess(response.data.user)
+    yield put(googleLoginSuccess(response.data.user))
     yield put(historyPush('/'))
   } catch (e) {
     if (e.response && e.response.data) {
@@ -75,7 +75,7 @@ export function* googleLoginSaga({ payload: userData }) {
 export function* appleLoginSaga({ payload: userData }) {
   try {
     const response = yield axiosApi.post('/users/appleLogin/', userData)
-    yield appleLoginSuccess(response.data.user)
+    yield put(appleLoginSuccess(response.data.user))
     yield put(historyPush('/'))
   } catch (e) {
     if (e.response && e.response.data) {
@@ -87,7 +87,7 @@ export function* appleLoginSaga({ payload: userData }) {
 export function* vkLoginSaga({ payload: userData }) {
   try {
     const response = yield axiosApi.post('/users/vkLogin/', userData)
-    yield vkLoginSuccess(response.data.user)
+    yield put(vkLoginSuccess(response.data.user))
     yield put(historyPush('/'))
   } catch (e) {
     if (e.response && e.response.data) {
