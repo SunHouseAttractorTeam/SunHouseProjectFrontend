@@ -1,0 +1,70 @@
+@import '../../scss/style';
+
+.notifications-card{
+  &__title {
+    font-size: 30px;
+    padding-bottom: 55px;
+
+    &:before {
+      content: '';
+      display: inline-block;
+      width: 48px;
+      height: 37px;
+      margin-right: 15px;
+      background: url('../../assets/icons/greenSpot.svg') 0 no-repeat;
+    }
+  }
+  &__text{
+    background: $totalWhiteColor;
+    padding: 24px 124px 41px 24px ;
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-top: 20px;
+  }
+
+  &__view-status{
+    background: $totalWhiteColor;
+    display: flex;
+    margin-bottom: 34px;
+    letter-spacing: 0em;
+    min-width: 155px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-radius: 15px;
+
+    &__view,
+    &__unview{
+      display: flex;
+      align-items: center;
+      padding: 15px 117px;
+      background: $totalWhiteColor;
+      border: none;
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 24px;
+      border-radius: 15px;
+
+      &.active {
+        background: $greyColor;
+        box-shadow: 0px 2px 4px -2px rgba(24, 39, 75, 0.12), 0px 4px 4px -2px rgba(24, 39, 75, .08);
+      }
+
+      &.new-notifications {
+        &::before {
+          content: "";
+          display: inline-block;
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          margin-right: 12px;
+          background: #ADFA00;
+        }
+      }
+    }
+  }
+}
