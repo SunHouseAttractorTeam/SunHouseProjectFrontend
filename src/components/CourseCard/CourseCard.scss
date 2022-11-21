@@ -62,11 +62,18 @@
 
   &__date {
     justify-self: flex-end;
-    font-size: 20px;
+    font-size: 15px;
   }
 
   &__title {
     font-size: 30px;
+  }
+
+  &__price {
+    font-size: 32px;
+    font-weight: 700;
+    color: $lightGreenColor;
+    margin-bottom: 18px;
   }
 
   &__button {

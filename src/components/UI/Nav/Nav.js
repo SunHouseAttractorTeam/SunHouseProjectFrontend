@@ -1,36 +1,28 @@
 import React from 'react'
-import './Nav.scss'
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import './Nav.scss'
 
 const Nav = () => {
-  const catalogs = ['Первый', 'Второй', 'Третий']
-
-  const funcIsOpenMenu = event => {
-    event.preventDefault()
-    const dropdown = event.target.parentNode
-    dropdown.classList.toggle('dropdown__is-open')
-  }
+  const category = useSelector(state => state.categories.categories)
 
   return (
     <nav className="main-nav">
       <ul className="main-nav__list">
-        <div className="dropdown">
-          <button type="button" className="dropdown__toggle" onClick={funcIsOpenMenu}>
-            Каталог курсов
-          </button>
+        <li className="main-nav__item">
+          <span className="main-nav__link">Каталог курсов</span>
 
-          <div className="dropdown__drawer">
-            <ul className="menu">
-              {catalogs.map((list, index) => (
-                <li key={index}>
-                  <NavLink className="menu__link" to={`/${list}`}>
-                    {list}
+          <ul className="main-nav__item__menu">
+            {category &&
+              category.map(list => (
+                <li key={list._id}>
+                  <NavLink className="main-nav__item__menu__link" to={`/${list._id}`}>
+                    {list.title}
                   </NavLink>
                 </li>
               ))}
-            </ul>
-          </div>
-        </div>
+          </ul>
+        </li>
         <li className="main-nav__item">
           <a href="#" className="main-nav__link">
             Бесплатные курсы
