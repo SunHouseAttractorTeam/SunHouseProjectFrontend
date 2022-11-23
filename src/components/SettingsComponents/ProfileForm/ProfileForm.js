@@ -13,6 +13,7 @@ const ProfileForm = () => {
     phone: '',
     country: '',
     city: '',
+    avatar: '',
   })
 
   const onChangeCountry = country => {
@@ -26,12 +27,19 @@ const ProfileForm = () => {
     inputChangeHandler(e, setState)
   }
 
+  const onChangeAvatar = avatar => {
+    setState(prev => ({
+      ...prev,
+      avatar,
+    }))
+  }
+
   return (
     <form>
       <div className="profile-form">
         <PersonalForm onChangeData={onChangeData} phone={state.phone} email={state.email} username={state.username} />
         <LocationForm onChangeData={onChangeData} onChangeCountry={onChangeCountry} city={state.city} />
-        <ImageForm />
+        <ImageForm onChangeAvatar={onChangeAvatar} avatar={state.avatar} />
       </div>
       <SettingsButton />
     </form>

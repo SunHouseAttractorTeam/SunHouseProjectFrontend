@@ -24,9 +24,12 @@
     }
 
     &-button {
+      font-size: 16px;
       background: $totalWhiteColor;
       border-radius: 57px;
       margin-top: 16px;
+      padding-right: 29px;
+      padding-left: 29px;
     }
   }
 }

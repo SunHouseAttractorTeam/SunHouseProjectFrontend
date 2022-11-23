@@ -53,7 +53,7 @@ export function* loginUserSaga({ payload: userData }) {
 export function* facebookLoginSaga({ payload: userData }) {
   try {
     const response = yield axiosApi.post('/users/facebookLogin/', userData)
-    yield put(facebookLoginSuccess(response.data.user))
+    yield put(facebookLoginSuccess(response.data))
     yield put(historyPush('/'))
   } catch (e) {
     if (e.response && e.response.data) {
@@ -65,7 +65,7 @@ export function* facebookLoginSaga({ payload: userData }) {
 export function* googleLoginSaga({ payload: userData }) {
   try {
     const response = yield axiosApi.post('/users/googleLogin/', userData)
-    yield put(googleLoginSuccess(response.data.user))
+    yield put(googleLoginSuccess(response.data))
     yield put(historyPush('/'))
   } catch (e) {
     if (e.response && e.response.data) {
@@ -89,7 +89,7 @@ export function* appleLoginSaga({ payload: userData }) {
 export function* vkLoginSaga({ payload: userData }) {
   try {
     const response = yield axiosApi.post('/users/vkLogin/', userData)
-    yield put(vkLoginSuccess(response.data.user))
+    yield put(vkLoginSuccess(response.data))
     yield put(historyPush('/'))
   } catch (e) {
     if (e.response && e.response.data) {
