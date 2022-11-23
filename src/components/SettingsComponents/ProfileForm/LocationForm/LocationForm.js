@@ -10,7 +10,7 @@ const OPTIONS = [
   { value: 'kz', label: 'Казахстан' },
 ]
 
-const LocationForm = ({ onChangeData, onChangeCountry, city, countries }) => (
+const LocationForm = ({ onChangeData, onChangeCountry, city }) => (
   <div className="location-block">
     <ProfileDescription title="Укажите местоположение" text="Разнообразный и богатый опыт сложившаяся структура" />
     <div className="location-block__form">
@@ -23,7 +23,7 @@ const LocationForm = ({ onChangeData, onChangeCountry, city, countries }) => (
               padding: '7px 10px 7px 20px',
               borderRadius: '90px',
               borderWidth: '2px',
-              borderColor: '#E5E5EA',
+              borderColor: state.isFocused ? 'black' : '#E5E5EA',
               fontSize: '14px',
             }),
           }}
