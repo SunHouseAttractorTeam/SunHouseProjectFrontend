@@ -20,6 +20,7 @@ import {
   updateCourseRequest,
   updateCourseSuccess,
 } from '../actions/coursesActions'
+import { historyPush } from '../actions/historyActions'
 
 export function* fetchCourses() {
   try {
@@ -50,8 +51,10 @@ export function* fetchUserCourses({ payload: userId }) {
 
 export function* createCourse({ payload: courseData }) {
   try {
-    yield axiosApi.post('/courses', courseData)
+    const response = yield axiosApi.post('/courses', courseData)
     yield put(createCourseSuccess())
+
+    yield historyPush(`/course/${response.data._id}`)
   } catch (e) {
     yield put(createCourseFailure(e))
   }
