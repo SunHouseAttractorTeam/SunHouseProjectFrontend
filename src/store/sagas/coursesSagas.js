@@ -66,6 +66,8 @@ export function* updateCourse({ payload }) {
   try {
     yield axiosApi.put(`/courses/${id}`, courseData)
     yield put(updateCourseSuccess())
+
+    yield put(historyPush(`/course/${id}`))
   } catch (e) {
     yield put(updateCourseFailure(e))
   }

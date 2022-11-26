@@ -1,0 +1,12 @@
+@import '../../scss/style';
+
+.header-2 {
+  background: $greyColor;
+  padding: 25px 0;
+  border-bottom: 2px solid $darkGreyColor;
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+  }
+}

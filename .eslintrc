@@ -31,6 +31,7 @@
     "react/button-has-type": 1,
     "jsx-a11y/anchor-has-content": 1,
     "jsx-a11y/no-noninteractive-element-interactions": 0,
+    "jsx-a11y/no-static-element-interactions": 1,
     "react-hooks/exhaustive-deps": 0,
     "react/destructuring-assignment": 0,
     "react/jsx-props-no-spreading": 0,
