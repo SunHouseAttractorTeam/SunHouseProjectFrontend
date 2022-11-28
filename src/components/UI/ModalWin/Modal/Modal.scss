@@ -1,17 +1,24 @@
 .Modal {
-    position: fixed;
-    z-index: 500;
-    background-color: transparent;
-    width: 70%;
-    right: 70%;
-    top: 10%;
-    border: none;
-    transition: all 0.3s ease-out;
+  position: fixed;
+  z-index: 500;
+  background-color: transparent;
+  width: 70%;
+  right: 70%;
+  top: 10%;
+  border: none;
+  transition: all 0.3s ease-out;
+  transform: translateY(0);
+  opacity: 1;
+
+  &__notShow {
+    transition: translateY(-100vh);
+    opacity: 0;
+  }
 }
 
 @media (min-width: 600px) {
-    .Modal {
-        width: 500px;
-        left: calc(50% - 250px);
-    }
+  .Modal {
+    width: 500px;
+    left: calc(50% - 250px);
+  }
 }
