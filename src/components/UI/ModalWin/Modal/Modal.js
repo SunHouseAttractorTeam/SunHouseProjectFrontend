@@ -9,7 +9,7 @@ const Modal = props => (
     {props.show ? (
       <div className="modal modal--show">{props.children}</div>
     ) : (
-      <div className="modal--not-show">{props.children}</div>
+      <div className="modal modal--not-show">{props.children}</div>
     )}
   </>
 )
