@@ -1,4 +1,4 @@
-.Modal {
+.modal {
   position: fixed;
   z-index: 500;
   background-color: transparent;
@@ -10,14 +10,14 @@
   transform: translateY(0);
   opacity: 1;
 
-  &__notShow {
+  &__not-show {
     transition: translateY(-100vh);
     opacity: 0;
   }
 }
 
 @media (min-width: 600px) {
-  .Modal {
+  .modal {
     width: 500px;
     left: calc(50% - 250px);
   }

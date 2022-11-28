@@ -7,9 +7,9 @@ const Modal = props => (
     <Backdrop show={props.show} clicked={props.clicked} />
 
     {props.show ? (
-      <div className="Modal">{props.children}</div>
+      <div className="modal">{props.children}</div>
     ) : (
-      <div className="Modal__notShow">{props.children}</div>
+      <div className="modal__not-show">{props.children}</div>
     )}
   </>
 )

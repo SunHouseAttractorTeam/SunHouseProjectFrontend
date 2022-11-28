@@ -24,22 +24,22 @@ const TeacherMode = () => {
   const goToEditCourse = () => {}
 
   return (
-    <div className="AllCard">
+    <div className="all-card">
       {courses &&
         courses.map(item => (
-          <Card key={item._id} className="WhiteCard AllCard__teacher">
+          <Card key={item._id} className="WhiteCard all-card__teacher">
             <span className="course-card__profession">профессия</span>
             <Title>{item.title}</Title>
             <MainButton className="GreenButton" text="Изменить курс" onClick={goToEditCourse} />
           </Card>
         ))}
-      <Card className="WhiteCard AllCard__teacher">
+      <Card className="WhiteCard all-card__teacher">
         <MainButton className="WhiteButton" text={<img src={addIcon} alt="add" onClick={OpenModal} />} />
         <span className="course-card__profession">Создать курс</span>
       </Card>
 
       <Modal show={show} clicked={closeModal}>
-        <Card className="WhiteCard AllCard__teacher">
+        <Card className="WhiteCard all-card__teacher">
           <MainButton className="GreenButton" text="ok" onClick={closeModal} />
         </Card>
       </Modal>
