@@ -1,4 +1,4 @@
-.AllCard {
+.all-card {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -9,7 +9,7 @@
     flex-direction: column;
     align-items: center;
     width: 45%;
-    
+
     &:hover {
       transform: translateY(-8px);
     }
