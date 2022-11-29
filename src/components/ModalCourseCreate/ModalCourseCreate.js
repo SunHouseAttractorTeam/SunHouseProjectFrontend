@@ -17,9 +17,8 @@ const ModalCourseCreate = ({ show, clicked }) => {
   })
 
   return (
-    <Modal show={show} clicked={clicked}>
+    <Modal show={show} clicked={clicked} title="Создание курса">
       <Card className="Card WhiteCard">
-        <h3>Создание курса</h3>
         <form onSubmit={e => submitFormHandler(e, dispatch(createCourseRequest({ ...course })))}>
           <FormInput
             onChange={e => inputChangeHandler(e, setCourse)}
