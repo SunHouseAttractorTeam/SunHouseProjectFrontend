@@ -1,11 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import FormInput from '../../../components/UI/Form/FormInput/FormInput'
-import { deleteCourseRequest, updateCourseRequest } from '../../../store/actions/coursesActions'
+import { deleteCourseRequest, fetchCourseRequest, updateCourseRequest } from '../../../store/actions/coursesActions'
 
 const CourseSettings = () => {
+  const { id } = useParams()
   const dispatch = useDispatch()
   const course = useSelector(state => state.courses.course)
+
+  useEffect(() => {
+    if (!course) {
+      dispatch(fetchCourseRequest(id))
+    }
+  }, [dispatch, id, course])
 
   const [state, setState] = useState({
     title: '',
@@ -31,33 +39,42 @@ const CourseSettings = () => {
   }
 
   return (
-    <div className="course-settings">
-      <div className="course-settings__left">
-        <div className="course-settings__left-card">
-          <img src={course.image} alt={course.title} className="course-settings__left-card-image" />
-          <p className="course-settings__left-card-status">{course.publish}</p>
-          <p className="course-settings__left-card-title">{course.title}</p>
-          <p className="course-settings__left-card-description">{course.description}</p>
-        </div>
-      </div>
-      <div className="course-settings__right">
-        <form className="course-settings__right-form" onSubmit={submitFormHandler}>
-          <div>
-            <FormInput onChange={inputChangeHandler} name="title" placeholder="Название курса" value={state.title} />
-            <FormInput
-              onChange={inputChangeHandler}
-              name="description"
-              placeholder="Описание курса"
-              value={state.description}
-            />
-            <button type="button" onClick={handleDelete}>
-              Удалить курс
-            </button>
+    <>
+      {course && (
+        <div className="course-settings">
+          <div className="course-settings__left">
+            <div className="course-settings__left-card">
+              <img src={course.image} alt={course.title} className="course-settings__left-card-image" />
+              <p className="course-settings__left-card-status">{course.publish}</p>
+              <p className="course-settings__left-card-title">{course.title}</p>
+              <p className="course-settings__left-card-description">{course.description}</p>
+            </div>
           </div>
-          <button type="submit">Сохранить изменения</button>
-        </form>
-      </div>
-    </div>
+          <div className="course-settings__right">
+            <form className="course-settings__right-form" onSubmit={submitFormHandler}>
+              <div>
+                <FormInput
+                  onChange={inputChangeHandler}
+                  name="title"
+                  placeholder="Название курса"
+                  value={state.title}
+                />
+                <FormInput
+                  onChange={inputChangeHandler}
+                  name="description"
+                  placeholder="Описание курса"
+                  value={state.description}
+                />
+                <button type="button" onClick={handleDelete}>
+                  Удалить курс
+                </button>
+              </div>
+              <button type="submit">Сохранить изменения</button>
+            </form>
+          </div>
+        </div>
+      )}
+    </>
   )
 }
 

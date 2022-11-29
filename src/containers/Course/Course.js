@@ -17,8 +17,10 @@ const Course = () => {
   const course = useSelector(state => state.courses.course)
 
   useEffect(() => {
-    dispatch(fetchCourseRequest(id))
-  }, [])
+    if (user) {
+      dispatch(fetchCourseRequest(id))
+    }
+  }, [dispatch, id, user])
 
   let image = imageNotFound
 
@@ -41,34 +43,38 @@ const Course = () => {
             в Мой профиль
           </Link>
         </div>
-        <div className="course__top-banner">
-          <div className="container course__top-banner-container">
-            <img src={image} alt="course-banner" className="course__top-banner-img" />
-            {user?.role === 'teacher' && (
-              <Link to={`/course/${id}/edit`} className="course__top-banner-edit-button">
-                <i>
-                  <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M0 15.4601V18.5001C0 18.7801 0.22 19.0001 0.5 19.0001H3.54C3.67 19.0001 3.8 18.9501 3.89 18.8501L14.81 7.94006L11.06 4.19006L0.15 15.1001C0.0500001 15.2001 0 15.3201 0 15.4601ZM17.71 5.04006C18.1 4.65006 18.1 4.02006 17.71 3.63006L15.37 1.29006C14.98 0.900059 14.35 0.900059 13.96 1.29006L12.13 3.12006L15.88 6.87006L17.71 5.04006V5.04006Z"
-                      fill="#2C2C2E"
-                    />
-                  </svg>
-                </i>
-                Редактор курса
-              </Link>
-            )}
+        {course && (
+          <div className="course__top-banner">
+            <div className="container course__top-banner-container">
+              <img src={image} alt="course-banner" className="course__top-banner-img" />
+              {user?.role === 'teacher' && (
+                <Link to={`/course/${id}/edit`} className="course__top-banner-edit-button">
+                  <i>
+                    <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M0 15.4601V18.5001C0 18.7801 0.22 19.0001 0.5 19.0001H3.54C3.67 19.0001 3.8 18.9501 3.89 18.8501L14.81 7.94006L11.06 4.19006L0.15 15.1001C0.0500001 15.2001 0 15.3201 0 15.4601ZM17.71 5.04006C18.1 4.65006 18.1 4.02006 17.71 3.63006L15.37 1.29006C14.98 0.900059 14.35 0.900059 13.96 1.29006L12.13 3.12006L15.88 6.87006L17.71 5.04006V5.04006Z"
+                        fill="#2C2C2E"
+                      />
+                    </svg>
+                  </i>
+                  Редактор курса
+                </Link>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+      {course && (
+        <div className="course__bottom">
+          <div className="container">
+            <Switch>
+              <Route path="/course/:id" exact component={CourseReview} />
+              <Route path="/course/:id/settings" exact component={CourseSettings} />
+              <Route path="/course/:id/edit" exact component={CourseEdit} />
+            </Switch>
           </div>
         </div>
-      </div>
-      <div className="course__bottom">
-        <div className="container">
-          <Switch>
-            <Route path="/course/:id" exact render={() => <CourseReview user={user} course={course} />} />
-            <Route path="/course/:id/settings" exact render={() => <CourseSettings user={user} course={course} />} />
-            <Route path="/course/:id/edit" exact render={() => <CourseEdit user={user} course={course} />} />
-          </Switch>
-        </div>
-      </div>
+      )}
       <Footer />
     </div>
   )
