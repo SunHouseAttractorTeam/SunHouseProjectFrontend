@@ -8,6 +8,7 @@ import Footer from '../../components/Footer/Footer'
 import CourseReview from './CourseReview/CourseReview'
 import { fetchCourseRequest } from '../../store/actions/coursesActions'
 import CourseSettings from './CourseSettings/CourseSettings'
+import CourseEdit from './CourseEdit/CourseEdit'
 
 const Course = () => {
   const { id } = useParams()
@@ -44,7 +45,7 @@ const Course = () => {
           <div className="container course__top-banner-container">
             <img src={image} alt="course-banner" className="course__top-banner-img" />
             {user?.role === 'teacher' && (
-              <Link to="/course/edit" className="course__top-banner-edit-button">
+              <Link to={`/course/${id}/edit`} className="course__top-banner-edit-button">
                 <i>
                   <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -63,7 +64,8 @@ const Course = () => {
         <div className="container">
           <Switch>
             <Route path="/course/:id" exact render={() => <CourseReview user={user} course={course} />} />
-            <Route path="/course/:id/settings" render={() => <CourseSettings user={user} course={course} />} />
+            <Route path="/course/:id/settings" exact render={() => <CourseSettings user={user} course={course} />} />
+            <Route path="/course/:id/edit" exact render={() => <CourseEdit user={user} course={course} />} />
           </Switch>
         </div>
       </div>
