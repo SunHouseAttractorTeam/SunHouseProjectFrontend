@@ -70,7 +70,7 @@ const Course = () => {
             <Switch>
               <Route path="/course/:id" exact component={CourseReview} />
               <Route path="/course/:id/settings" exact component={CourseSettings} />
-              <Route path="/course/:id/edit" exact component={CourseEdit} />
+              <Route path="/course/:id/edit" component={CourseEdit} />
             </Switch>
           </div>
         </div>

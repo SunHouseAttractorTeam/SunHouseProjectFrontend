@@ -1,3 +1,3 @@
-import lessonsSlice from '../slices/lessonsSlice'
+import testsSlice from '../slices/testsSlice'
 
-export const { createLessonRequest, createLessonSuccess, createLessonFailure } = lessonsSlice.actions
+export const { createTestRequest, createTestSuccess, createTestFailure } = testsSlice.actions

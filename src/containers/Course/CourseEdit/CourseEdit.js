@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchCourseRequest } from '../../../store/actions/coursesActions'
 import Modal from '../../../components/UI/ModalWin/Modal/Modal'
@@ -7,6 +7,7 @@ import FormInput from '../../../components/UI/Form/FormInput/FormInput'
 import { createModuleRequest } from '../../../store/actions/modulesActions'
 import { createTaskRequest } from '../../../store/actions/tasksActions'
 import { createLessonRequest } from '../../../store/actions/lessonsActions'
+import { createTestRequest } from '../../../store/actions/testsActions'
 
 const CourseEdit = () => {
   const { id } = useParams()
@@ -54,17 +55,19 @@ const CourseEdit = () => {
       setModalType('task')
     } else if (contentType === 'lesson') {
       setModalType('lesson')
+    } else if (contentType === 'test') {
+      setModalType('test')
     }
   }
 
-  const handleCreateTask = () => {
+  const handleCreateContent = () => {
     if (contentType === 'task') {
       dispatch(createTaskRequest({ courseId: id, moduleId, taskData: state }))
     } else if (contentType === 'lesson') {
       dispatch(createLessonRequest({ courseId: id, moduleId, lessonData: state }))
+    } else if (contentType === 'test') {
+      dispatch(createTestRequest({ courseId: id, moduleId, testData: state }))
     }
-
-    dispatch(createTaskRequest({ courseId: id, moduleId, taskData: state }))
 
     setOpen(false)
   }
@@ -86,7 +89,7 @@ const CourseEdit = () => {
                           key={item.id}
                           className={`course-edit__left-card-module-list-item course-edit__left-card-module-list-item--${item.type}`}
                         >
-                          {item.title}
+                          <Link to={`/course/${id}/edit/${item.type}/${item.id}`}> {item.title}</Link>
                         </li>
                       ))}
                     </ul>
@@ -167,7 +170,7 @@ const CourseEdit = () => {
                 placeholder="Название задания"
                 value={state.title}
               />
-              <button type="button" onClick={handleCreateTask}>
+              <button type="button" onClick={handleCreateContent}>
                 Добавить задание
               </button>
             </Modal>
@@ -181,8 +184,17 @@ const CourseEdit = () => {
                 placeholder="Название занятия"
                 value={state.title}
               />
-              <button type="button" onClick={handleCreateTask}>
+              <button type="button" onClick={handleCreateContent}>
                 Добавить занятие
+              </button>
+            </Modal>
+          )}
+          {modalType === 'test' && (
+            <Modal setOpen={setOpen}>
+              <h6>Настройте тест</h6>
+              <FormInput onChange={inputChangeHandler} name="title" placeholder="Название теста" value={state.title} />
+              <button type="button" onClick={handleCreateContent}>
+                Добавить тест
               </button>
             </Modal>
           )}

@@ -7,7 +7,7 @@ export function* createLesson({ payload }) {
   const { courseId, moduleId, lessonData } = payload
 
   try {
-    yield axiosApi.post(`/modules?module=${moduleId}`, lessonData)
+    yield axiosApi.post(`/lessons?module=${moduleId}`, lessonData)
     yield put(createLessonSuccess())
     yield put(fetchCourseRequest(courseId))
   } catch (e) {
