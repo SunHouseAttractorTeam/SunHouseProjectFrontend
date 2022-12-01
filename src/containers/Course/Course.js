@@ -31,7 +31,7 @@ const Course = () => {
       <Header2 />
       <div className="course__top">
         <div className="container">
-          <Link to="/user" className="course__top-my-profile-button">
+          <Link to={`/course/${id}`} className="course__top-my-profile-button">
             <i>
               <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -40,7 +40,7 @@ const Course = () => {
                 />
               </svg>
             </i>
-            в Мой профиль
+            Главная страница курса
           </Link>
         </div>
         {course && (
