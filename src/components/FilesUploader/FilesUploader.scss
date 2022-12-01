@@ -1,6 +1,8 @@
 @import '../../scss/style';
 
 .video-card {
+  margin-top: 33px;
+
   &::before {
     width: 64px;
     height: 64px;
