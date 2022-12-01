@@ -53,3 +53,30 @@
     }
   }
 }
+
+.file-card{
+  display: flex;
+  align-items: center;
+
+  &_button {
+    background: $greyColor;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    margin-right: 24px;
+    width: 280px;
+
+    &::before {
+      content: '';
+      width: 24px;
+      height: 24px;
+      background: url("../../assets/icons/chain.svg") no-repeat;
+    }
+  }
+
+  &_placeholder{
+    font-size: 12px;
+    line-height: 14px;
+    color: $lightGrey;
+  }
+}

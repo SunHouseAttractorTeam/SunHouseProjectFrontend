@@ -20,7 +20,14 @@ const FilesUploader = ({ type, title }) => {
     )
   }
 
-  return <div>Прикрепить файл</div>
+  return (
+    <div className="file-card">
+      <button className="file-card_button MainButton">Прикрепить файл</button>
+      <p className="file-card_placeholder">
+        Любые файлы размером <br /> не более 2 гигабайт
+      </p>
+    </div>
+  )
 }
 
 export default FilesUploader

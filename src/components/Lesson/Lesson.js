@@ -12,8 +12,11 @@ const Lesson = () => (
       <SunEditorWYSIWYG />
       <FilesUploader type="video" />
       <FilesUploader type="audio" />
-      <FilesUploader />
       <AddContentBlock />
+      <div className="lesson-block_files">
+        <p className="lesson-block_files-title">Прикреплённые файлы</p>
+        <FilesUploader />
+      </div>
     </div>
   </div>
 )
