@@ -1,0 +1,55 @@
+@import '../../scss/style';
+
+.video-card {
+  &::before {
+    width: 64px;
+    height: 64px;
+    background:url("../../assets/icons/video.svg")  no-repeat;
+  }
+}
+
+.audio-card {
+  &::before {
+    width: 52px;
+    height: 64px;
+    background: url("../../assets/icons/audio.svg") no-repeat;
+  }
+}
+
+.uploader-block {
+  border: 2px solid $greyColor;
+  border-radius: 16px;
+  background: $totalWhiteColor;
+  padding: 60px;
+  margin-bottom: 32px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  &::before {
+    content: "";
+    display: block;
+    margin-bottom: 24px;
+  }
+
+  &_label {
+    margin-bottom: 32px;
+    font-size: 16px;
+  }
+
+  &_button {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    border: 2px solid transparent;
+    transition: all .5s ease;
+
+    &:hover {
+      background: transparent;
+      border-color: $lightGreenColor;
+    }
+  }
+}
