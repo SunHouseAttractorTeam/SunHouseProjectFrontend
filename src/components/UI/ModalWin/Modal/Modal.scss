@@ -17,6 +17,13 @@
     transition: translateY(-100vh);
     opacity: 0;
   }
+
+  &__title {
+    font-size: 20px;
+    position: absolute;
+    top: 5px;
+    left: 150px;
+  }
 }
 
 @media (min-width: 600px) {
