@@ -6,6 +6,7 @@ import './scss/style.scss'
 import Login from './containers/Login/Login'
 import MyProfile from './containers/MyProfile/MyProfile'
 import CookieProvider from './components/UI/CookieProvider/CookieProvider'
+import Course from './containers/Course/Course'
 
 const App = () => (
   <CookieProvider>
@@ -14,6 +15,7 @@ const App = () => (
       <Route path="/registration" component={Registration} />
       <Route path="/login" component={Login} />
       <Route path="/user" component={MyProfile} />
+      <Route path="/course/:id" component={Course} />
     </Switch>
   </CookieProvider>
 )

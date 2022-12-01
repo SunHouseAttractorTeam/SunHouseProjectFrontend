@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import Title from '../../components/UI/Title/Title'
 import BurgerMenu from '../../components/UI/BurgerMenu/BurgerMenu'
 import './UserCourses.scss'
@@ -7,6 +8,7 @@ import { fetchUserCoursesRequest } from '../../store/actions/coursesActions'
 import CourseCard from '../../components/CourseCard/CourseCard'
 
 const UserCourses = () => {
+  const history = useHistory()
   const user = useSelector(state => state.users.user)
   const courses = useSelector(state => state.courses.courses)
   const dispatch = useDispatch()
@@ -14,6 +16,10 @@ const UserCourses = () => {
   useEffect(() => {
     dispatch(fetchUserCoursesRequest(user?._id))
   }, [])
+
+  const handleCourse = id => {
+    history.push(`/course/${id}`)
+  }
 
   return (
     <div className="user-courses">
@@ -26,7 +32,13 @@ const UserCourses = () => {
           <CourseCard title="Web-дизайнер" price="5500 сом" date="24 месяца" />
           <CourseCard title="UX-UI дизайнер" price="5500 сом" date="24 месяца" />
           {courses.map(course => (
-            <CourseCard title={course.title} price={course.price} date={course.date} />
+            <CourseCard
+              key={course._id}
+              title={course.title}
+              price={course.price}
+              date={course.date}
+              onClick={() => handleCourse(course._id)}
+            />
           ))}
         </div>
       </div>

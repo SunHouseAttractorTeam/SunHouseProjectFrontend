@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchCoursesRequest } from '../../store/actions/coursesActions'
+import { createCourseRequest, fetchCoursesRequest } from '../../store/actions/coursesActions'
 import Card from '../../components/UI/Cards/Card/Card'
 import Title from '../../components/UI/Title/Title'
 import MainButton from '../../components/UI/MainButton/MainButton'
@@ -22,7 +22,7 @@ const TeacherMode = () => {
   const closeModal = () => setShow(false)
 
   const goToEditCourse = () => {}
-
+  
   return (
     <div className="all-card">
       {courses &&
@@ -35,6 +35,7 @@ const TeacherMode = () => {
         ))}
       <Card className="WhiteCard all-card__teacher">
         <MainButton className="WhiteButton" text={<img src={addIcon} alt="add" onClick={OpenModal} />} />
+
         <span className="course-card__profession">Создать курс</span>
       </Card>
 
