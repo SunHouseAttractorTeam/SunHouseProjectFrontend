@@ -16,8 +16,8 @@ const CourseSettings = () => {
   }, [dispatch, id, course])
 
   const [state, setState] = useState({
-    title: '',
-    description: '',
+    title: course?.title || '',
+    description: course?.description || '',
     category: course.category,
     price: course.price,
   })

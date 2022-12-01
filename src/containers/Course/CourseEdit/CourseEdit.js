@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchCourseRequest } from '../../../store/actions/coursesActions'
-import Modal from '../../../components/UI/ModalWin/Modal/Modal'
+import Modal from '../../../components/UI/Modal2/Modal'
 import FormInput from '../../../components/UI/Form/FormInput/FormInput'
 import { createModuleRequest } from '../../../store/actions/modulesActions'
 import { createTaskRequest } from '../../../store/actions/tasksActions'
@@ -42,6 +42,9 @@ const CourseEdit = () => {
   const handleCreateModule = () => {
     dispatch(createModuleRequest({ id, moduleData: state }))
     setOpen(false)
+    setState({
+      title: '',
+    })
   }
 
   const handleAddContent = idModule => {
@@ -70,6 +73,9 @@ const CourseEdit = () => {
     }
 
     setOpen(false)
+    setState({
+      title: '',
+    })
   }
 
   return (
