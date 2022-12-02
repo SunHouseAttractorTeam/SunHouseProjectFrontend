@@ -2,13 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchCourseRequest } from '../../../store/actions/coursesActions'
-import Modal from '../../../components/UI/Modal2/Modal'
-import FormInput from '../../../components/UI/Form/FormInput/FormInput'
-import { createModuleRequest } from '../../../store/actions/modulesActions'
-import { createTaskRequest } from '../../../store/actions/tasksActions'
-import { createLessonRequest } from '../../../store/actions/lessonsActions'
-import { createTestRequest } from '../../../store/actions/testsActions'
 import ModalTaskSetting from '../../../components/Modals/ModalTaskSetting/ModalTaskSetting'
+import ModalCreateModal from '../../../components/Modals/ModalCreateModule/ModalCreateModule'
+import CreateLessonModal from '../../../components/Modals/CreateLessonModal/CreateLessonModal'
+import CreateTestModal from '../../../components/Modals/CreateTestModal/CreateTestModal'
+import Modal from '../../../components/UI/Modal2/Modal'
 
 const CourseEdit = () => {
   const { id } = useParams()
@@ -17,9 +15,6 @@ const CourseEdit = () => {
 
   const [open, setOpen] = useState(false)
   const [modalType, setModalType] = useState('')
-  const [state, setState] = useState({
-    title: '',
-  })
   const [contentType, setContentType] = useState('')
   const [moduleId, setModuleId] = useState(null)
 
@@ -32,20 +27,6 @@ const CourseEdit = () => {
   const handleAddModule = () => {
     setOpen(true)
     setModalType('module')
-  }
-
-  const inputChangeHandler = e => {
-    const { name, value } = e.target
-
-    setState(prev => ({ ...prev, [name]: value }))
-  }
-
-  const handleCreateModule = () => {
-    dispatch(createModuleRequest({ id, moduleData: state }))
-    setOpen(false)
-    setState({
-      title: '',
-    })
   }
 
   const handleAddContent = idModule => {
@@ -62,21 +43,6 @@ const CourseEdit = () => {
     } else if (contentType === 'test') {
       setModalType('test')
     }
-  }
-
-  const handleCreateContent = () => {
-    if (contentType === 'task') {
-      dispatch(createTaskRequest({ courseId: id, moduleId, taskData: state }))
-    } else if (contentType === 'lesson') {
-      dispatch(createLessonRequest({ courseId: id, moduleId, lessonData: state }))
-    } else if (contentType === 'test') {
-      dispatch(createTestRequest({ courseId: id, moduleId, testData: state }))
-    }
-
-    setOpen(false)
-    setState({
-      title: '',
-    })
   }
 
   return (
@@ -115,20 +81,7 @@ const CourseEdit = () => {
       )}
       {open && (
         <>
-          {modalType === 'module' && (
-            <Modal setOpen={setOpen}>
-              <h6>Создать модуля</h6>
-              <FormInput
-                onChange={inputChangeHandler}
-                name="title"
-                placeholder="Введите название модуля"
-                value={state.title}
-              />
-              <button type="button" onClick={handleCreateModule}>
-                Создать модуль
-              </button>
-            </Modal>
-          )}
+          {modalType === 'module' && <ModalCreateModal setOpen={setOpen} />}
           {modalType === 'content' && (
             <Modal setOpen={setOpen}>
               <h6>Добавить контент</h6>
@@ -168,30 +121,9 @@ const CourseEdit = () => {
               </button>
             </Modal>
           )}
-          {modalType === 'task' && <ModalTaskSetting clicked={setOpen} />}
-          {modalType === 'lesson' && (
-            <Modal setOpen={setOpen}>
-              <h6>Настройте занятие</h6>
-              <FormInput
-                onChange={inputChangeHandler}
-                name="title"
-                placeholder="Название занятия"
-                value={state.title}
-              />
-              <button type="button" onClick={handleCreateContent}>
-                Добавить занятие
-              </button>
-            </Modal>
-          )}
-          {modalType === 'test' && (
-            <Modal setOpen={setOpen}>
-              <h6>Настройте тест</h6>
-              <FormInput onChange={inputChangeHandler} name="title" placeholder="Название теста" value={state.title} />
-              <button type="button" onClick={handleCreateContent}>
-                Добавить тест
-              </button>
-            </Modal>
-          )}
+          {modalType === 'task' && <ModalTaskSetting clicked={setOpen} courseId={id} moduleId={moduleId} />}
+          {modalType === 'lesson' && <CreateLessonModal setOpen={setOpen} courseId={id} moduleId={moduleId} />}
+          {modalType === 'test' && <CreateTestModal setOpen={setOpen} courseId={id} moduleId={moduleId} />}
         </>
       )}
     </>

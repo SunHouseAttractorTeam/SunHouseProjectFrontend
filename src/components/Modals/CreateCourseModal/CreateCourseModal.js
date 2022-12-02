@@ -8,7 +8,7 @@ import FormInput from '../../UI/Form/FormInput/FormInput'
 import FormSelect from '../../UI/Form/FormSelect/FormSelect'
 import MainButton from '../../UI/MainButton/MainButton'
 
-const CreateCourseModal = ({ clicked }) => {
+const CreateCourseModal = ({ setOpen }) => {
   const dispatch = useDispatch()
   const categories = useSelector(state => state.categories.categories)
   const [course, setCourse] = useState({
@@ -18,11 +18,11 @@ const CreateCourseModal = ({ clicked }) => {
 
   const handlerClick = e => {
     submitFormHandler(e, dispatch(createCourseRequest({ ...course })))
-    clicked(false)
+    setOpen(false)
   }
 
   return (
-    <Modal setOpen={clicked}>
+    <Modal setOpen={setOpen}>
       <Card className="Card WhiteCard">
         <form>
           <FormInput

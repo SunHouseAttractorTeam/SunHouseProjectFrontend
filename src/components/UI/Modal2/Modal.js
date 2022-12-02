@@ -3,7 +3,7 @@ import './Modal.scss'
 
 const Modal = ({ setOpen, children }) => (
   <>
-    <div className="backdrop" onClick={() => setOpen(true)} />
+    <div className="backdrop" onClick={() => setOpen(false)} />
     <div className="modal">
       <div className="modal__inner">
         <div className="modal__content">{children}</div>

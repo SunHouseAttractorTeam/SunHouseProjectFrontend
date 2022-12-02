@@ -7,23 +7,23 @@ import Card from '../../UI/Cards/Card/Card'
 import FormInput from '../../UI/Form/FormInput/FormInput'
 import MainButton from '../../UI/MainButton/MainButton'
 
-const ModalTaskSetting = ({ clicked }) => {
+const ModalTaskSetting = ({ setOpen, courseId, moduleId }) => {
   const dispatch = useDispatch()
-  const [task, setTask] = useState({ title: '' })
+  const [taskData, setTaskData] = useState({ title: '' })
 
   const handlerClick = e => {
-    submitFormHandler(e, dispatch(createTaskRequest({ ...task })))
-    clicked(false)
+    submitFormHandler(e, dispatch(createTaskRequest({ courseId, moduleId, taskData })))
+    setOpen(false)
   }
 
   return (
-    <Modal setOpen={clicked}>
+    <Modal setOpen={setOpen}>
       <Card className="Card WhiteCard">
         <h6>Настройте задание</h6>
         <form>
           <FormInput
-            onChange={e => inputChangeHandler(e, setTask)}
-            value={task.title}
+            onChange={e => inputChangeHandler(e, setTaskData)}
+            value={taskData.title}
             name="title"
             placeholder="введите название задания"
           />
