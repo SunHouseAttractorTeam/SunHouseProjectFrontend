@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchCourseRequest } from '../../../store/actions/coursesActions'
 import ModalTaskSetting from '../../../components/Modals/ModalTaskSetting/ModalTaskSetting'
-import ModalCreateModal from '../../../components/Modals/ModalCreateModule/ModalCreateModule'
+import ModalCreateModal from '../../../components/Modals/ModuleCreateModal/ModuleCreateModal'
 import CreateLessonModal from '../../../components/Modals/CreateLessonModal/CreateLessonModal'
 import CreateTestModal from '../../../components/Modals/CreateTestModal/CreateTestModal'
 import Modal from '../../../components/UI/Modal2/Modal'
@@ -81,7 +81,7 @@ const CourseEdit = () => {
       )}
       {open && (
         <>
-          {modalType === 'module' && <ModalCreateModal setOpen={setOpen} />}
+          {modalType === 'module' && <ModalCreateModal id={id} setOpen={setOpen} />}
           {modalType === 'content' && (
             <Modal setOpen={setOpen}>
               <h6>Добавить контент</h6>
@@ -121,7 +121,7 @@ const CourseEdit = () => {
               </button>
             </Modal>
           )}
-          {modalType === 'task' && <ModalTaskSetting clicked={setOpen} courseId={id} moduleId={moduleId} />}
+          {modalType === 'task' && <ModalTaskSetting setOpen={setOpen} courseId={id} moduleId={moduleId} />}
           {modalType === 'lesson' && <CreateLessonModal setOpen={setOpen} courseId={id} moduleId={moduleId} />}
           {modalType === 'test' && <CreateTestModal setOpen={setOpen} courseId={id} moduleId={moduleId} />}
         </>

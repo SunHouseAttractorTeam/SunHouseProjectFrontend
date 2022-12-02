@@ -7,14 +7,14 @@ import Card from '../../UI/Cards/Card/Card'
 import FormInput from '../../UI/Form/FormInput/FormInput'
 import MainButton from '../../UI/MainButton/MainButton'
 
-const ModalCreateModal = ({ setOpen }) => {
+const ModuleCreateModal = ({ setOpen, id }) => {
   const dispatch = useDispatch()
-  const [modal, setModal] = useState({ title: '' })
+  const [moduleData, setModuleData] = useState({ title: '' })
 
   const handlerClick = e => {
-    submitFormHandler(e, dispatch(createModuleRequest({ ...modal })))
+    submitFormHandler(e, dispatch(createModuleRequest({ id, moduleData })))
     setOpen(false)
-    setModal({ title: '' })
+    setModuleData({ title: '' })
   }
 
   return (
@@ -22,8 +22,8 @@ const ModalCreateModal = ({ setOpen }) => {
       <Card className="Card WhiteCard">
         <form>
           <FormInput
-            onChange={e => inputChangeHandler(e, setModal)}
-            value={modal.title}
+            onChange={e => inputChangeHandler(e, setModuleData)}
+            value={moduleData.title}
             name="title"
             placeholder="введите название модуля"
           />
@@ -34,4 +34,4 @@ const ModalCreateModal = ({ setOpen }) => {
   )
 }
 
-export default ModalCreateModal
+export default ModuleCreateModal
