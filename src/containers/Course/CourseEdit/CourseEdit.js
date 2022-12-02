@@ -8,6 +8,7 @@ import { createModuleRequest } from '../../../store/actions/modulesActions'
 import { createTaskRequest } from '../../../store/actions/tasksActions'
 import { createLessonRequest } from '../../../store/actions/lessonsActions'
 import { createTestRequest } from '../../../store/actions/testsActions'
+import ModalTaskSetting from '../../../components/Modals/ModalTaskSetting/ModalTaskSetting'
 
 const CourseEdit = () => {
   const { id } = useParams()
@@ -167,20 +168,7 @@ const CourseEdit = () => {
               </button>
             </Modal>
           )}
-          {modalType === 'task' && (
-            <Modal setOpen={setOpen}>
-              <h6>Настройте задание</h6>
-              <FormInput
-                onChange={inputChangeHandler}
-                name="title"
-                placeholder="Название задания"
-                value={state.title}
-              />
-              <button type="button" onClick={handleCreateContent}>
-                Добавить задание
-              </button>
-            </Modal>
-          )}
+          {modalType === 'task' && <ModalTaskSetting clicked={setOpen} />}
           {modalType === 'lesson' && (
             <Modal setOpen={setOpen}>
               <h6>Настройте занятие</h6>
