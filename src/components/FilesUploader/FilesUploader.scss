@@ -82,3 +82,10 @@
     color: $lightGrey;
   }
 }
+
+.uploader-block,
+.file-card {
+  input[type=file] {
+    display: none;
+  }
+}
