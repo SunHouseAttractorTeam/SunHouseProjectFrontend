@@ -10,6 +10,7 @@ import Certificates from '../Certificates/Certificates'
 import Settings from '../Settings/Settings'
 import Footer from '../../components/Footer/Footer'
 import './MyProfile.scss'
+import { ProtectedRoute } from '../../utils/utils'
 
 const MyProfile = () => {
   const user = useSelector(state => state.users.user)
@@ -24,7 +25,12 @@ const MyProfile = () => {
           </div>
           <div className="profile__right">
             <Switch>
-              <Route path="/user/teacher_mode" component={TeacherMode} />
+              <ProtectedRoute
+                isAllowed={user?.token}
+                redirectTo="/login"
+                path="/user/teacher_mode"
+                component={TeacherMode}
+              />
               <Route path="/user/courses" component={UserCourses} />
               <Route path="/user/notifications" component={Notifications} />
               <Route path="/user/certificates" component={Certificates} />
