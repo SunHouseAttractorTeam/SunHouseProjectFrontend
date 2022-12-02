@@ -1,0 +1,30 @@
+.sun-editor {
+  border: 2px solid #F2F2F7;
+  border-radius: 16px;
+
+  .se-toolbar {
+    padding: 16px;
+    background: transparent;
+    outline: none;
+    border-bottom: 2px solid #F2F2F7;
+  }
+
+  .se-tooltip{
+    border: 2px solid #F2F2F7;
+    border-radius: 5px;
+    background: transparent;
+    margin: 10px !important;
+  }
+
+  .se-resizing-bar {
+    border-top: 2px solid #F2F2F7;
+    background: transparent;
+    padding: 9px 24px;
+
+    .se-char-counter-wrapper {
+      font-size: 12px;
+      line-height: 14px;
+      color: #828282;
+    }
+  }
+}
