@@ -21,8 +21,6 @@ const TeacherMode = () => {
 
   const OpenModal = () => setShow(true)
 
-  const closeModal = () => setShow(false)
-
   const goToEditCourse = () => {}
 
   return (
@@ -41,7 +39,7 @@ const TeacherMode = () => {
         <span className="course-card__profession">Создать курс</span>
       </Card>
 
-      {show ? <CreateCourseModal clicked={closeModal} /> : null}
+      {show && <CreateCourseModal setOpen={setShow} />}
     </div>
   )
 }
