@@ -4,7 +4,20 @@ import historySagas from './sagas/historySagas'
 import history from '../history'
 import coursesSagas from './sagas/coursesSagas'
 import categoriesSaga from './sagas/categoriesSaga'
+import modulesSagas from './sagas/modulesSagas'
+import tasksSagas from './sagas/tasksSagas'
+import lessonsSagas from './sagas/lessonsSagas'
+import testsSagas from './sagas/testsSagas'
 
 export default function* rootSagas() {
-  yield all([...userSagas, ...coursesSagas, ...categoriesSaga, ...historySagas(history)])
+  yield all([
+    ...userSagas,
+    ...coursesSagas,
+    ...categoriesSaga,
+    ...modulesSagas,
+    ...tasksSagas,
+    ...lessonsSagas,
+    ...testsSagas,
+    ...historySagas(history),
+  ])
 }

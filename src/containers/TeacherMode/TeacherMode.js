@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchCoursesRequest } from '../../store/actions/coursesActions'
+import { fetchCategoriesRequest } from '../../store/actions/categoriesActions'
 import Card from '../../components/UI/Cards/Card/Card'
 import Title from '../../components/UI/Title/Title'
 import MainButton from '../../components/UI/MainButton/MainButton'
+import CreateCourseModal from '../../components/Modals/CreateCourseModal/CreateCourseModal'
 import addIcon from '../../assets/icons/addIcon.svg'
 import './TeacherMode.scss'
-import Modal from '../../components/UI/ModalWin/Modal/Modal'
 
 const TeacherMode = () => {
   const dispatch = useDispatch()
@@ -15,6 +16,7 @@ const TeacherMode = () => {
 
   useEffect(() => {
     dispatch(fetchCoursesRequest())
+    dispatch(fetchCategoriesRequest())
   }, [dispatch])
 
   const OpenModal = () => setShow(true)
@@ -35,14 +37,11 @@ const TeacherMode = () => {
         ))}
       <Card className="WhiteCard all-card__teacher">
         <MainButton className="WhiteButton" text={<img src={addIcon} alt="add" onClick={OpenModal} />} />
+
         <span className="course-card__profession">Создать курс</span>
       </Card>
 
-      <Modal show={show} clicked={closeModal}>
-        <Card className="WhiteCard all-card__teacher">
-          <MainButton className="GreenButton" text="ok" onClick={closeModal} />
-        </Card>
-      </Modal>
+      {show ? <CreateCourseModal clicked={closeModal} /> : null}
     </div>
   )
 }
