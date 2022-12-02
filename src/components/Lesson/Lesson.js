@@ -4,12 +4,13 @@ import FilesUploader from '../FilesUploader/FilesUploader'
 import './Lesson.scss'
 import AddContentBlock from '../AddContentBlock/AddContentBlock'
 
-const Lesson = () => (
+const Lesson = ({ title }) => (
   <div className="lesson-container container">
     <div className="lesson-module">Блок добавления модуля</div>
     <div className="lesson-blank">
       <div className="lesson-block">
-        <h1 className="lesson-block_title">Первый урок</h1>
+        <button className="lesson-block_remove" type="button" />
+        <h1 className="lesson-block_title">Тут будет title</h1>
         <div className="lesson-block_editor">
           <p className="lesson-block_editor_title">Содержимое занятия</p>
           <SunEditorWYSIWYG />

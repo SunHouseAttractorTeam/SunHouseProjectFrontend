@@ -19,6 +19,7 @@
   margin: 0 auto;
   background: white;
   border-radius: 16px;
+  position: relative;
 
   &_files_title{
     font-weight: 500;
@@ -33,11 +34,26 @@
     font-weight: 700;
     font-size: 24px;
   }
+
   &_editor_title{
     font-weight: 500;
     font-size: 20px;
     line-height: 24px;
     margin-bottom: 24px;
+  }
+
+  &_remove{
+    cursor: pointer;
+    position: absolute;
+    width: 19px;
+    height: 24px;
+    background-image: url("../../assets/icons/remove.svg");
+    background-size: cover;
+    background-position: center;
+    top: 24px;
+    right: 27px;
+    border: none;
+    background-color: transparent;
   }
 }
 
