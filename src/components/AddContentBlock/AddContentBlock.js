@@ -3,16 +3,16 @@ import './AddContentBlock.scss'
 
 const AddContentBlock = () => (
   <div className="add-content-block">
-    <h3 className="add-content-block_title">Добавить контент</h3>
-    <div className="add-content-block_types">
-      <button className="add-content-block_type text">
-        <p className="add-content-block_type_label">Text</p>
+    <h3 className="add-content-block__title">Добавить контент</h3>
+    <div className="add-content-block__types">
+      <button className="add-content-block__type add-content-block__type--text" type="button">
+        <p className="add-content-block_type-label">Text</p>
       </button>
-      <button className="add-content-block_type video">
-        <p className="add-content-block_type_label">Video</p>
+      <button className="add-content-block__type add-content-block__type--video" type="button">
+        <p className="add-content-block_type-label">Video</p>
       </button>
-      <button className="add-content-block_type audio">
-        <p className="add-content-block_type_label">Audio</p>
+      <button className="add-content-block__type add-content-block__type--audio" type="button">
+        <p className="add-content-block__type-label">Audio</p>
       </button>
     </div>
   </div>

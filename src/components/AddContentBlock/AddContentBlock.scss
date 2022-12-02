@@ -10,13 +10,13 @@
   background: $greyColor;
   border-radius: 16px;
 
-  &_title{
+  &__title{
     font-weight: 700;
     font-size: 20px;
     line-height: 25px;
   }
 
-  &_types {
+  &__types {
     margin-top: 32px;
     width: 100%;
     max-width: 580px;
@@ -24,7 +24,7 @@
     justify-content: space-between;
   }
 
-  &_type {
+  &__type {
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -50,7 +50,7 @@
       background-size: cover;
     }
 
-    &.text {
+    &--text {
       &::before {
         width: 40px;
         height: 40px;
@@ -58,7 +58,7 @@
       }
     }
 
-    &.video {
+    &--video {
       &::before {
         width: 48px;
         height: 48px;
@@ -66,7 +66,7 @@
       }
     }
 
-    &.audio {
+    &--audio {
       &::before {
         width: 39px;
         height: 48px;
@@ -74,7 +74,7 @@
       }
     }
 
-    &_label {
+    &-label {
       font-weight: 500;
       font-size: 16px;
       line-height: 19px;

@@ -21,8 +21,8 @@ const FilesUploader = ({ type, title }) => {
     return (
       <div className="video-card uploader-block">
         <input type="file" onChange={onFileChange} ref={inputRef} />
-        <p className="uploader-block_label">{title || 'Перетащите видеофайл или нажмите для загрузки'}</p>
-        <button className="MainButton GreenButton uploader-block_button" onClick={activateInput}>
+        <p className="uploader-block__label">{title || 'Перетащите видеофайл или нажмите для загрузки'}</p>
+        <button className="MainButton GreenButton uploader-block__button" onClick={activateInput} type="button">
           Выбрать файл
         </button>
       </div>
@@ -33,8 +33,8 @@ const FilesUploader = ({ type, title }) => {
     return (
       <div className="audio-card uploader-block">
         <input type="file" onChange={onFileChange} ref={inputRef} />
-        <p className="uploader-block_label">{title || 'Перетащите .mp3 аудиофайл или нажмите для загрузки'}</p>
-        <button className="MainButton GreenButton uploader-block_button" onClick={activateInput}>
+        <p className="uploader-block__label">{title || 'Перетащите .mp3 аудиофайл или нажмите для загрузки'}</p>
+        <button className="MainButton GreenButton uploader-block__button" onClick={activateInput} type="button">
           Выбрать файл
         </button>
       </div>
@@ -44,10 +44,10 @@ const FilesUploader = ({ type, title }) => {
   return (
     <div className="file-card">
       <input type="file" onChange={onFileChange} ref={inputRef} />
-      <button className="file-card_button MainButton" onClick={activateInput}>
+      <button className="file-card__button MainButton" onClick={activateInput} type="button">
         Прикрепить файл
       </button>
-      <p className="file-card_placeholder">
+      <p className="file-card__placeholder">
         Любые файлы размером <br /> не более 2 гигабайт
       </p>
     </div>

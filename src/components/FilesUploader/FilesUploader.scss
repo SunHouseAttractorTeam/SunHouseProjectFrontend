@@ -37,12 +37,12 @@
     margin-bottom: 24px;
   }
 
-  &_label {
+  &__label {
     margin-bottom: 32px;
     font-size: 16px;
   }
 
-  &_button {
+  &__button {
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -60,7 +60,7 @@
   display: flex;
   align-items: center;
 
-  &_button {
+  &__button {
     background: $greyColor;
     font-weight: 700;
     font-size: 16px;
@@ -76,7 +76,7 @@
     }
   }
 
-  &_placeholder{
+  &__placeholder{
     font-size: 12px;
     line-height: 14px;
     color: $lightGrey;

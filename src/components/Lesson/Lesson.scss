@@ -21,7 +21,7 @@
   border-radius: 16px;
   position: relative;
 
-  &_files_title{
+  &__files-title{
     font-weight: 500;
     font-size: 20px;
     line-height: 24px;
@@ -29,20 +29,20 @@
     margin-bottom: 24px;
   }
 
-  &_title{
+  &__title{
     margin-bottom: 48px;
     font-weight: 700;
     font-size: 24px;
   }
 
-  &_editor_title{
+  &__editor-title{
     font-weight: 500;
     font-size: 20px;
     line-height: 24px;
     margin-bottom: 24px;
   }
 
-  &_remove {
+  &__remove {
     cursor: pointer;
     position: absolute;
     width: 19px;
