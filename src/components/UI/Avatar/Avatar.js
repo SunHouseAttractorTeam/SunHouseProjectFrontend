@@ -5,7 +5,6 @@ import imageNotFound from '../../../assets/icons/image_not_found.svg'
 
 const Avatar = ({ user, className }) => {
   let avatarImage = imageNotFound
-
   if (user?.avatar) {
     avatarImage = `${apiUrl}/${user.avatar}`
   }

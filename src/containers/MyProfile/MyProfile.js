@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Route, Switch } from 'react-router-dom'
+import { Switch } from 'react-router-dom'
 import MyProfileTop from './MyProfileTop/MyProfileTop'
 import MyProfileBottom from './MyProfileBottom/MyProfileBottom'
 import UserCourses from '../UserCourses/UserCourses'
@@ -14,7 +14,6 @@ import { ProtectedRoute } from '../../utils/utils'
 
 const MyProfile = () => {
   const user = useSelector(state => state.users.user)
-
   return (
     <div className="profile">
       <div className="container">
@@ -31,10 +30,25 @@ const MyProfile = () => {
                 path="/user/teacher_mode"
                 component={TeacherMode}
               />
-              <Route path="/user/courses" component={UserCourses} />
-              <Route path="/user/notifications" component={Notifications} />
-              <Route path="/user/certificates" component={Certificates} />
-              <Route path="/user/settings" component={Settings} />
+              <ProtectedRoute
+                isAllowed={user?.token}
+                redirectTo="/login"
+                path="/user/courses"
+                component={UserCourses}
+              />
+              <ProtectedRoute
+                isAllowed={user?.token}
+                redirectTo="/login"
+                path="/user/notifications"
+                component={Notifications}
+              />
+              <ProtectedRoute
+                isAllowed={user?.token}
+                redirectTo="/login"
+                path="/user/certificates"
+                component={Certificates}
+              />
+              <ProtectedRoute isAllowed={user?.token} redirectTo="/login" path="/user/settings" component={Settings} />
             </Switch>
           </div>
         </div>
