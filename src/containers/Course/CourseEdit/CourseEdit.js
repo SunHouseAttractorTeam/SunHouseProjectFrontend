@@ -45,8 +45,6 @@ const CourseEdit = () => {
     }
   }
 
-  console.log(contentType)
-
   return (
     <>
       {course && (
