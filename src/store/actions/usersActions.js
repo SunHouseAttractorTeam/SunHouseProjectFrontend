@@ -20,4 +20,7 @@ export const {
   vkLoginRequest,
   vkLoginSuccess,
   vkLoginFailure,
+  verifyUserRequest,
+  verifyUserSuccess,
+  verifyUserFailure,
 } = usersSlice.actions

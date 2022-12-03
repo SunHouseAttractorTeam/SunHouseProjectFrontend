@@ -19,6 +19,9 @@ import {
   registrationFailure,
   registrationRequest,
   registrationSuccess,
+  verifyUserFailure,
+  verifyUserRequest,
+  verifyUserSuccess,
   vkLoginFailure,
   vkLoginRequest,
   vkLoginSuccess,
@@ -106,6 +109,15 @@ export function* logoutUserSaga() {
   } catch (e) {}
 }
 
+export function* verifyUserSaga(confirmationCode) {
+  try {
+    const response = yield axiosApi.get(`confirm/${confirmationCode}`)
+    yield put(verifyUserSuccess(response.data))
+  } catch (e) {
+    yield put(verifyUserFailure(e))
+  }
+}
+
 const userSagas = [
   takeEvery(registrationRequest, registrationUserSaga),
   takeEvery(loginUserRequest, loginUserSaga),
@@ -114,6 +126,7 @@ const userSagas = [
   takeEvery(googleLoginRequest, googleLoginSaga),
   takeEvery(appleLoginRequest, appleLoginSaga),
   takeEvery(vkLoginRequest, vkLoginSaga),
+  takeEvery(verifyUserRequest, verifyUserSaga),
 ]
 
 export default userSagas
