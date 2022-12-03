@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, Route, Switch, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchCourseRequest } from '../../../store/actions/coursesActions'
 import ModalTaskSetting from '../../../components/Modals/ModalTaskSetting/ModalTaskSetting'
@@ -7,6 +7,7 @@ import ModalCreateModal from '../../../components/Modals/ModuleCreateModal/Modul
 import CreateLessonModal from '../../../components/Modals/CreateLessonModal/CreateLessonModal'
 import CreateTestModal from '../../../components/Modals/CreateTestModal/CreateTestModal'
 import Modal from '../../../components/UI/Modal2/Modal'
+import Lesson from '../../../components/Lesson/Lesson'
 
 const CourseEdit = () => {
   const { id } = useParams()
@@ -76,7 +77,11 @@ const CourseEdit = () => {
               </button>
             </div>
           </div>
-          <div className="course-edit__right" />
+          <div className="course-edit__right">
+            <Switch>
+              <Route path="/course/:courseId/edit/Lesson/:lessonId" component={Lesson} />
+            </Switch>
+          </div>
         </div>
       )}
       {open && (
