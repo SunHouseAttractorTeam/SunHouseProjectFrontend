@@ -6,7 +6,7 @@ import ModalTaskSetting from '../../../components/Modals/ModalTaskSetting/ModalT
 import ModalCreateModal from '../../../components/Modals/ModuleCreateModal/ModuleCreateModal'
 import CreateLessonModal from '../../../components/Modals/CreateLessonModal/CreateLessonModal'
 import CreateTestModal from '../../../components/Modals/CreateTestModal/CreateTestModal'
-import Modal from '../../../components/UI/Modal2/Modal'
+import ModalAddContent from '../../../components/Modals/ModalAddContent/ModalAddContent'
 
 const CourseEdit = () => {
   const { id } = useParams()
@@ -45,6 +45,8 @@ const CourseEdit = () => {
     }
   }
 
+  console.log(contentType)
+
   return (
     <>
       {course && (
@@ -81,46 +83,15 @@ const CourseEdit = () => {
       )}
       {open && (
         <>
-          {modalType === 'module' && <ModalCreateModal id={id} setOpen={setOpen} />}
           {modalType === 'content' && (
-            <Modal setOpen={setOpen}>
-              <h6>Добавить контент</h6>
-              <form>
-                <div>
-                  <div>
-                    <input
-                      type="radio"
-                      value="lesson"
-                      checked={contentType === 'lesson'}
-                      onChange={e => setContentType(e.target.value)}
-                    />
-                    Lesson
-                  </div>
-                  <div>
-                    <input
-                      type="radio"
-                      value="task"
-                      checked={contentType === 'task'}
-                      onChange={e => setContentType(e.target.value)}
-                    />
-                    Task
-                  </div>
-                  <div>
-                    <input
-                      type="radio"
-                      value="test"
-                      checked={contentType === 'test'}
-                      onChange={e => setContentType(e.target.value)}
-                    />
-                    Test
-                  </div>
-                </div>
-              </form>
-              <button type="button" onClick={handleClickNext}>
-                Далее
-              </button>
-            </Modal>
+            <ModalAddContent
+              setOpen={setOpen}
+              contentType={contentType}
+              setContentType={setContentType}
+              handleClick={handleClickNext}
+            />
           )}
+          {modalType === 'module' && <ModalCreateModal id={id} setOpen={setOpen} />}
           {modalType === 'task' && <ModalTaskSetting setOpen={setOpen} courseId={id} moduleId={moduleId} />}
           {modalType === 'lesson' && <CreateLessonModal setOpen={setOpen} courseId={id} moduleId={moduleId} />}
           {modalType === 'test' && <CreateTestModal setOpen={setOpen} courseId={id} moduleId={moduleId} />}
