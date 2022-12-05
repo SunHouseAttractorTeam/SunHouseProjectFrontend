@@ -10,15 +10,15 @@ const ModalAddContent = ({ setOpen, handleClick, setContentType }) => {
   const changeContentTypeAndClass = (event, content) => {
     event.preventDefault()
     setContentType(content)
-    const active = event.target.parentNode
-    if (active.className !== 'modal__content' && active.className !== 'content') {
-      active.classList.toggle('cont__active')
+    const element = event.target.parentNode
+    if (element.className !== 'modal__content' && element.className !== 'content') {
+      element.classList.toggle('content__select-button__active')
     }
   }
 
   const backToClass = event => {
-    event.target.classList.remove('cont__active')
-    event.target.classList.add('cont')
+    event.target.classList.remove('content__select-button__active')
+    event.target.classList.add('content__select-button')
   }
 
   return (
@@ -26,23 +26,33 @@ const ModalAddContent = ({ setOpen, handleClick, setContentType }) => {
       <h6 className="content__title">Добавить контент</h6>
       <div className="content">
         <button
-          className="cont"
+          className="content__select-button"
           onClick={e => changeContentTypeAndClass(e, 'lesson')}
           onBlur={backToClass}
           type="button"
         >
-          <img src={lesson} alt="lesson" className="cont__img" />
-          <h6 className="cont__sub">Занятие</h6>
+          <img src={lesson} alt="lesson" className="content__select-button__img" />
+          <h6 className="content__select-button__sub">Занятие</h6>
         </button>
 
-        <button className="cont" onClick={e => changeContentTypeAndClass(e, 'task')} onBlur={backToClass} type="button">
-          <img src={task} alt="task" className="cont__img" />
-          <h6 className="cont__sub">Задание</h6>
+        <button
+          className="content__select-button"
+          onClick={e => changeContentTypeAndClass(e, 'task')}
+          onBlur={backToClass}
+          type="button"
+        >
+          <img src={task} alt="task" className="content__select-button__img" />
+          <h6 className="content__select-button__sub">Задание</h6>
         </button>
 
-        <button className="cont" onClick={e => changeContentTypeAndClass(e, 'test')} onBlur={backToClass} type="button">
-          <img src={test} alt="test" className="cont__img" />
-          <h6 className="cont__sub">Тест</h6>
+        <button
+          className="content__select-button"
+          onClick={e => changeContentTypeAndClass(e, 'test')}
+          onBlur={backToClass}
+          type="button"
+        >
+          <img src={test} alt="test" className="content__select-button__img" />
+          <h6 className="content__select-button__sub">Тест</h6>
         </button>
       </div>
       <p className="content__text">

@@ -20,36 +20,36 @@
   &__text {
     padding: 30px;
   }
-}
 
-.cont {
-  background-color: white;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  &__select-button {
+    background-color: white;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: normal;
+    width: 140px;
+    height: 140px;
+    transition: all 0.5s ease-out;
 
-  &__active {
-    background-color: #F2F2F7;
-  }
+    &__active {
+      background-color: #F2F2F7;
+    }
 
-  &__img {
-    width: 70px;
-  }
-  
-  &__sub {
-    font-size: 20px;
-    padding: 10px;
-  }
+    &__img {
+      width: 80px;
+    }
 
-  &__btn {
-    background-color: #F2F2F7;
-  }
+    &__sub {
+      font-size: 20px;
+      padding: 10px;
+    }
 
-  &:hover {
-    background-color: #F2F2F7;
+    &:hover {
+      background-color: #F2F2F7;
+
+    }
   }
 }
