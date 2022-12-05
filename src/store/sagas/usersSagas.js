@@ -1,5 +1,6 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import Cookies from 'js-cookie'
+import { toast } from 'react-toastify'
 import axiosApi from '../../axiosApi'
 import { historyPush } from '../actions/historyActions'
 import {
@@ -31,7 +32,16 @@ export function* registrationUserSaga({ payload: userData }) {
   try {
     const response = yield axiosApi.post('/users', userData)
     yield put(registrationSuccess(response.data))
-    yield put(historyPush('/'))
+    // yield put(historyPush('/'))
+    yield toast.success('Подтвердите email', {
+      position: 'top-right',
+      autoClose: 3500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(registrationFailure(e.response.data))
@@ -105,7 +115,6 @@ export function* logoutUserSaga() {
   try {
     yield axiosApi.delete('users/sessions')
     yield Cookies.remove('jwt')
-    yield put(historyPush('/'))
   } catch (e) {}
 }
 

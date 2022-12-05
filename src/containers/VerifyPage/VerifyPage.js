@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { verifyUserSaga } from '../../store/sagas/usersSagas'
-import './VerifyPage.css'
+import './VerifyPage.scss'
 
 const VerifyPage = props => {
   if (props.match.path === '/confirm/:confirmationCode') {
@@ -9,10 +9,12 @@ const VerifyPage = props => {
   }
   return (
     <div className="container">
-      <header className="verify-block">
-        <h3>Account confirmed!</h3>
-      </header>
-      <Link to="/login">Please Login</Link>
+      <div className="verify-block">
+        <h3>Аккаунт подтвержден, можете зактрыть данную вкладку</h3>
+        <Link to="/login" className="verify-block__link">
+          Нажмите сюда
+        </Link>
+      </div>
     </div>
   )
 }
