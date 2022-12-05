@@ -10,11 +10,15 @@
     padding: 20px;
   }
 
-  &__butt {
+  &__buttons-block {
     display: flex;
     padding: 30px;
     justify-content: space-evenly;
     align-items: center;
+  }
+
+  &__btn {
+    background-color: #F2F2F7;
   }
 
   &__text {

@@ -56,8 +56,8 @@ const ModalAddContent = ({ setOpen, handleClick, setContentType }) => {
         <strong>Занятие</strong> этих проблем настолько очевидна, что рамки и место обучения кадров позволяет оценить
         значение
       </p>
-      <div className="content__butt">
-        <MainButton className="WhiteButton cont__btn" text="Отмена" onClick={() => setOpen(false)} type="text" />
+      <div className="content__buttons-block">
+        <MainButton className="WhiteButton content__btn" text="Отмена" onClick={() => setOpen(false)} type="text" />
         <MainButton className="GreenButton" text="Далее" onClick={handleClick} type="text" />
       </div>
     </Modal>
