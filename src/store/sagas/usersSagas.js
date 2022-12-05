@@ -120,7 +120,7 @@ export function* logoutUserSaga() {
 
 export function* verifyUserSaga(confirmationCode) {
   try {
-    const response = yield axiosApi.get(`confirm/${confirmationCode}`)
+    const response = yield axiosApi.get(`/users/confirm/${confirmationCode.payload}`)
     yield put(verifyUserSuccess(response.data))
   } catch (e) {
     yield put(verifyUserFailure(e))

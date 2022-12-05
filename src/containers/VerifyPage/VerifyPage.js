@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { verifyUserSaga } from '../../store/sagas/usersSagas'
 import './VerifyPage.scss'
+import { verifyUserRequest } from '../../store/actions/usersActions'
 
-const VerifyPage = props => {
-  if (props.match.path === '/confirm/:confirmationCode') {
-    verifyUserSaga(props.match.params.confirmationCode)
-  }
+const VerifyPage = ({ match }) => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(verifyUserRequest(match.params.confirmationCode))
+  }, [match.params])
+
   return (
     <div className="container">
       <div className="verify-block">
