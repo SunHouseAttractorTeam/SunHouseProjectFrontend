@@ -8,6 +8,7 @@ import { ProtectedRoute } from './utils/utils'
 import CookieProvider from './components/UI/CookieProvider/CookieProvider'
 import Course from './containers/Course/Course'
 import MyProfile from './containers/MyProfile/MyProfile'
+import VerifyPage from './containers/VerifyPage/VerifyPage'
 import './scss/style.scss'
 import VerifyPage from './containers/VerifyPage/VerifyPage'
 
