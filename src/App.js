@@ -1,25 +1,31 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import Main from './containers/Main/Main'
 import Registration from './containers/Registration/Registration'
-import './scss/style.scss'
 import Login from './containers/Login/Login'
-import MyProfile from './containers/MyProfile/MyProfile'
+import { ProtectedRoute } from './utils/utils'
 import CookieProvider from './components/UI/CookieProvider/CookieProvider'
 import Course from './containers/Course/Course'
+import MyProfile from './containers/MyProfile/MyProfile'
+import './scss/style.scss'
 import VerifyPage from './containers/VerifyPage/VerifyPage'
 
-const App = () => (
-  <CookieProvider>
-    <Switch>
-      <Route path="/" exact component={Main} />
-      <Route path="/registration" component={Registration} />
-      <Route path="/login" component={Login} />
-      <Route path="/user" component={MyProfile} />
-      <Route path="/course/:id" component={Course} />
-      <Route path="/confirm/:confirmationCode" component={VerifyPage} />
-    </Switch>
-  </CookieProvider>
-)
+const App = () => {
+  const user = useSelector(state => state.users.user)
+
+  return (
+    <CookieProvider>
+      <Switch>
+        <Route path="/" exact component={Main} />
+        <Route path="/registration" component={Registration} />
+        <Route path="/login" component={Login} />
+        <ProtectedRoute isAllowed={user?.token} redirectTo="/login" path="/user" component={MyProfile} />
+        <ProtectedRoute isAllowed={user?.token} redirectTo="/login" path="/course/:id" component={Course} />
+        <Route path="/confirm/:confirmationCode" component={VerifyPage} />
+      </Switch>
+    </CookieProvider>
+  )
+}
 
 export default App
