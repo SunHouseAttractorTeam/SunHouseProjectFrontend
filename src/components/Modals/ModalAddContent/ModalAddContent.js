@@ -58,7 +58,7 @@ const ModalAddContent = ({ setOpen, handleClick, setContentType }) => {
       </p>
       <div className="content__buttons-block">
         <MainButton className="WhiteButton content__btn" text="Отмена" onClick={() => setOpen(false)} type="text" />
-        <MainButton className="GreenButton" text="Далее" onClick={handleClick} type="text" />
+        <MainButton className="GreenButton" text="Далее" onClick={handleClick} type="button" />
       </div>
     </Modal>
   )
