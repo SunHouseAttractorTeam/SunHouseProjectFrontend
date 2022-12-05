@@ -10,10 +10,7 @@ const ModalAddContent = ({ setOpen, handleClick, setContentType }) => {
   const changeContentTypeAndClass = (event, content) => {
     event.preventDefault()
     setContentType(content)
-    const element = event.target.parentNode
-    if (element.className !== 'modal__content' && element.className !== 'content') {
-      element.classList.toggle('content__select-button__active')
-    }
+    event.currentTarget.classList.toggle('content__select-button__active')
   }
 
   const backToClass = event => {
