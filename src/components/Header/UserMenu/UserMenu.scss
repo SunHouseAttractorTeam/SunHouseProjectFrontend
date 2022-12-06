@@ -1,39 +1,31 @@
 @import '../../../scss/style';
 
-.user__menu {
+.user-menu {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border: none;
-  border-radius: 50px;
-  gap: 10px;
-  padding: 10px 32px;
-  color: $darkGreenColor;
-  font-weight: 700;
-  font-style: normal;
-  font-size: 20px;
-  line-height: 20px;
-  cursor: pointer;
-  background: $lightGreenColor;
   position: relative;
-  height: 40px;
-  width: 150px;
-  margin: 0;
 
-  &_img {
-    height: 50px;
+  &__icon {
+    margin-right: 20px;
   }
 
-  &_list {
+  &__img {
+    height: 40px !important;
+    width: 40px !important;
+  }
+
+  &__list {
     position: absolute;
+    top: 110%;
     z-index: 100000;
     margin: auto;
+    background: $lightGreenColor;
     color: $darkGreenColor;
     text-decoration: none;
 
-    &_item {
-      background: $lightGreenColor;
+    &__item {
       text-align: center;
       vertical-align: baseline;
       line-height: 50px;
@@ -43,5 +35,9 @@
       cursor: pointer;
       border: none;
     }
+  }
+
+  &__button {
+    border: none;
   }
 }
