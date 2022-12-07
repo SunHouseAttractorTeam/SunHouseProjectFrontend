@@ -1,0 +1,92 @@
+@import '../../scss/style';
+
+.question-block {
+  margin: 20px 200px;
+  background: $totalWhiteColor;
+  border-radius: 16px;
+  padding: 24px 24px;
+
+  &__title{
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+
+  .border-style {
+    border: 2px solid  $greyColor;
+    border-radius: 8px;
+    height: 40px;
+  }
+
+  &__input{
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  &__add-description{
+    cursor: pointer;
+    border: 0;
+    background: transparent;
+    font-size: 14px;
+    color: $lightGreenColor;
+    margin-bottom: 32px;
+  }
+
+  &__answer {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    &:hover .question-block__answer-buttons {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 16px;
+    }
+
+    &-remove {
+      cursor: pointer;
+      width: 12px;
+      height: 16px;
+      background-image: url("../../assets/icons/remove.svg");
+      background-size: cover;
+      background-position: center;
+      border: none;
+      background-color: transparent;
+    }
+
+    &-input {
+      flex: 1;
+      width: 100%;
+      font-size: 14px;
+      line-height: 17px;
+    }
+
+    &-checkbox {
+      width: 280px;
+      margin-left: 20px;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: flex-start;
+      cursor: pointer;
+    }
+
+    &-buttons {
+      opacity: 0;
+      pointer-events: none;
+      transition: all .2s ease-in;
+
+      button {
+        margin-left: 18px;
+      }
+
+      button {
+        margin-left: 18px;
+      }
+    }
+  }
+}
