@@ -35,14 +35,23 @@ const lessonsSlice = createSlice({
       state.loading = false
       state.error = action.payload
     },
-    addContentInLessonRequest(state) {
+    addContentInLesson(state, action) {
+      state.lesson.data = [...state.lesson.data, action.payload]
+    },
+    changeLessonText(state, { payload: { index, value } }) {
+      state.lesson.data[index].description = value
+    },
+    changeLessonAudio(state, { payload: { index, file } }) {
+      state.lesson.data[index].audio = file
+    },
+    editLessonRequest(state) {
       state.loading = true
       state.error = null
     },
-    addContentInLessonSuccess(state) {
+    editLessonSuccess(state) {
       state.loading = false
     },
-    addContentInLessonFailure(state, action) {
+    editLessonFailure(state, action) {
       state.loading = false
       state.error = action.payload
     },

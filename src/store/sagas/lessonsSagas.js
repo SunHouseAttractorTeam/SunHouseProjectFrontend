@@ -1,12 +1,12 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import axiosApi from '../../axiosApi'
 import {
-  addContentInLessonFailure,
-  addContentInLessonRequest,
-  addContentInLessonSuccess,
   createLessonFailure,
   createLessonRequest,
   createLessonSuccess,
+  editLessonFailure,
+  editLessonRequest,
+  editLessonSuccess,
   fetchLessonFailure,
   fetchLessonRequest,
   fetchLessonSuccess,
@@ -34,22 +34,22 @@ export function* createLesson({ payload }) {
   }
 }
 
-export function* addContentInLesson({ payload }) {
-  const { lessonId, type } = payload
+export function* editLesson({ payload }) {
+  const { courseId, lessonId, data } = payload
 
   try {
-    yield axiosApi.put(`/lessons/${lessonId}?type=${type}`)
-    yield put(addContentInLessonSuccess())
+    yield axiosApi.put(`/lessons/${lessonId}?course=${courseId}`, data)
+    yield put(editLessonSuccess())
     yield put(fetchLessonRequest(lessonId))
   } catch (e) {
-    yield put(addContentInLessonFailure(e))
+    yield put(editLessonFailure(e))
   }
 }
 
 const lessonsSagas = [
   takeEvery(fetchLessonRequest, fetchLesson),
   takeEvery(createLessonRequest, createLesson),
-  takeEvery(addContentInLessonRequest, addContentInLesson),
+  takeEvery(editLessonRequest, editLesson),
 ]
 
 export default lessonsSagas

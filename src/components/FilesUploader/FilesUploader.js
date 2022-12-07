@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import './FilesUploader.scss'
 
-const FilesUploader = ({ type, title }) => {
+const FilesUploader = ({ type, title, onChange }) => {
   const inputRef = useRef()
   const [filename, setFilename] = useState('')
 
@@ -11,6 +11,8 @@ const FilesUploader = ({ type, title }) => {
     } else {
       setFilename('')
     }
+
+    onChange(e)
   }
 
   const activateInput = () => {
