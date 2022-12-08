@@ -3,9 +3,10 @@ import { useDispatch } from 'react-redux'
 import { inputChangeHandler, submitFormHandler } from '../../UI/Form/Handlers/Handlers'
 import { createLessonRequest } from '../../../store/actions/lessonsActions'
 import Modal from '../../UI/Modal2/Modal'
-import Card from '../../UI/Cards/Card/Card'
 import FormInput from '../../UI/Form/FormInput/FormInput'
 import MainButton from '../../UI/MainButton/MainButton'
+import lesson from '../../../assets/icons/lesson.svg'
+import './CreateLessonModal.scss'
 
 const CreateLessonModal = ({ setOpen, courseId, moduleId }) => {
   const dispatch = useDispatch()
@@ -19,18 +20,28 @@ const CreateLessonModal = ({ setOpen, courseId, moduleId }) => {
 
   return (
     <Modal setOpen={setOpen}>
-      <Card className="Card WhiteCard">
-        <h6>Настройте занятие</h6>
-        <form>
-          <FormInput
-            onChange={e => inputChangeHandler(e, setLessonData)}
-            value={lessonData.title}
-            name="title"
-            placeholder="введите название занятия"
-          />
-          <MainButton className="GreenButton" text="Создать занятие" onClick={e => handlerClick(e)} type="submit" />
-        </form>
-      </Card>
+      <div className="content">
+        <img src={lesson} alt="lesson" className="content__lesson__img" />
+        <span className="content__lesson__title">Настройте занятие</span>
+        <div className="content__lesson">
+          <form className="content__lesson__form">
+            <span className="content__lesson__label">Введите название занятия</span>
+            <FormInput
+              onChange={e => inputChangeHandler(e, setLessonData)}
+              value={lessonData.title}
+              name="title"
+              placeholder="Название"
+              className="inputModal"
+            />
+            <MainButton
+              className="GreenButton content__lesson__button"
+              text="Создать занятие"
+              onClick={e => handlerClick(e)}
+              type="submit"
+            />
+          </form>
+        </div>
+      </div>
     </Modal>
   )
 }

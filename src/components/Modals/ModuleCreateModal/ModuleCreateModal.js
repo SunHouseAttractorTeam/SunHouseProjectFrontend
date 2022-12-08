@@ -3,9 +3,9 @@ import { useDispatch } from 'react-redux'
 import { inputChangeHandler, submitFormHandler } from '../../UI/Form/Handlers/Handlers'
 import { createModuleRequest } from '../../../store/actions/modulesActions'
 import Modal from '../../UI/Modal2/Modal'
-import Card from '../../UI/Cards/Card/Card'
 import FormInput from '../../UI/Form/FormInput/FormInput'
 import MainButton from '../../UI/MainButton/MainButton'
+import './ModuleCreateModal.scss'
 
 const ModuleCreateModal = ({ setOpen, id }) => {
   const dispatch = useDispatch()
@@ -19,17 +19,27 @@ const ModuleCreateModal = ({ setOpen, id }) => {
 
   return (
     <Modal setOpen={setOpen}>
-      <Card className="Card WhiteCard">
-        <form>
-          <FormInput
-            onChange={e => inputChangeHandler(e, setModuleData)}
-            value={moduleData.title}
-            name="title"
-            placeholder="введите название модуля"
-          />
-          <MainButton className="GreenButton" text="Создать модуль" onClick={e => handlerClick(e)} type="submit" />
-        </form>
-      </Card>
+      <div className="content">
+        <span className="content__module__title">Создание модуля</span>
+        <div className="content__module">
+          <form className="content__module__form">
+            <span className="content__module__label">Введите название модуля</span>
+            <FormInput
+              onChange={e => inputChangeHandler(e, setModuleData)}
+              value={moduleData.title}
+              name="title"
+              placeholder="Название"
+              className="inputModal"
+            />
+            <MainButton
+              className="GreenButton content__module__button"
+              text="Создать модуль"
+              onClick={e => handlerClick(e)}
+              type="submit"
+            />
+          </form>
+        </div>
+      </div>
     </Modal>
   )
 }

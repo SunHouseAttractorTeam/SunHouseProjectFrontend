@@ -3,9 +3,10 @@ import { useDispatch } from 'react-redux'
 import { inputChangeHandler, submitFormHandler } from '../../UI/Form/Handlers/Handlers'
 import { createTaskRequest } from '../../../store/actions/tasksActions'
 import Modal from '../../UI/Modal2/Modal'
-import Card from '../../UI/Cards/Card/Card'
 import FormInput from '../../UI/Form/FormInput/FormInput'
 import MainButton from '../../UI/MainButton/MainButton'
+import task from '../../../assets/icons/task.svg'
+import './ModalTaskSetting.scss'
 
 const ModalTaskSetting = ({ setOpen, courseId, moduleId }) => {
   const dispatch = useDispatch()
@@ -18,18 +19,28 @@ const ModalTaskSetting = ({ setOpen, courseId, moduleId }) => {
 
   return (
     <Modal setOpen={setOpen}>
-      <Card className="Card WhiteCard">
-        <h6>Настройте задание</h6>
-        <form>
-          <FormInput
-            onChange={e => inputChangeHandler(e, setTaskData)}
-            value={taskData.title}
-            name="title"
-            placeholder="введите название задания"
-          />
-          <MainButton className="GreenButton" text="Создать задание" onClick={e => handlerClick(e)} type="submit" />
-        </form>
-      </Card>
+      <div className="content">
+        <div className="content__block">
+          <img src={task} alt="task" className="content__block__img" />
+          <h6 className="content__title">Настройте задание</h6>
+          <form>
+            <span className="content__block__label">Название задания</span>
+            <FormInput
+              onChange={e => inputChangeHandler(e, setTaskData)}
+              value={taskData.title}
+              name="title"
+              placeholder="Название"
+              className="inputModal"
+            />
+            <MainButton
+              className="GreenButton content__block__button"
+              text="Добавить задание"
+              onClick={e => handlerClick(e)}
+              type="submit"
+            />
+          </form>
+        </div>
+      </div>
     </Modal>
   )
 }
