@@ -3,6 +3,13 @@ import './QuestionsBlock.scss'
 
 const QuestionsBlock = () => (
   <div className="question-block">
+    <div className="question-block__buttons">
+      <button type="button" className="question-block__check check-button icon-style" />
+      <div className="question-block__buttons-right">
+        <button type="button" className="question-block__remove remove-button icon-style" />
+        <button type="button" className="question-block__stripes stripes-button icon-style" />
+      </div>
+    </div>
     <p className="question-block__title">Введите вопрос:</p>
     <input type="text" className="question-block__input border-style" />
     <button type="button" className="question-block__add-description">
@@ -17,7 +24,8 @@ const QuestionsBlock = () => (
           <p>Правильный ответ</p>
         </label>
         <div className="question-block__answer-buttons">
-          <button type="button" className="question-block__answer-remove" />
+          <button type="button" className="question-block__answer-remove remove-button icon-style" />
+          <button type="button" className="question-block__answer-stripes stripes-button icon-style" />
         </div>
       </div>
       <div className="question-block__answer">
@@ -27,9 +35,13 @@ const QuestionsBlock = () => (
           <p>Правильный ответ</p>
         </label>
         <div className="question-block__answer-buttons">
-          <button type="button" className="question-block__answer-remove" />
+          <button type="button" className="question-block__answer-remove remove-button icon-style" />
+          <button type="button" className="question-block__answer-stripes stripes-button icon-style" />
         </div>
       </div>
+      <button type="button" className="question-block__add-button MainButton">
+        + Добавить вариант
+      </button>
     </div>
   </div>
 )

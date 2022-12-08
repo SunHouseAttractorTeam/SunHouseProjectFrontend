@@ -1,10 +1,55 @@
 @import '../../scss/style';
 
+.icon-style{
+  display: block;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  border: none;
+  background-color: transparent;
+}
+
+.remove-button{
+  width: 12px;
+  height: 16px;
+  background-image: url("../../assets/icons/remove.svg");
+}
+
+.stripes-button{
+  width: 16px;
+  height: 11px;
+  background-image: url("../../assets/icons/stripes.svg");
+}
+
+.check-button{
+  width: 24px;
+  height: 24px;
+  background-image: url("../../assets/icons/check.svg");
+}
+
 .question-block {
-  margin: 20px 200px;
+  width: 100%;
   background: $totalWhiteColor;
   border-radius: 16px;
   padding: 24px 24px;
+  color: $blackDarkColor;
+
+  &__buttons{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+
+    &-right{
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__stripes{
+    margin-left: 18px;
+  }
 
   &__title{
     font-size: 16px;
@@ -20,6 +65,10 @@
   &__input{
     width: 100%;
     margin-bottom: 16px;
+    padding: 12px 19px 11px 19px;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    line-height: 17px;
   }
 
   &__add-description{
@@ -47,22 +96,21 @@
       margin-bottom: 16px;
     }
 
-    &-remove {
-      cursor: pointer;
-      width: 12px;
-      height: 16px;
-      background-image: url("../../assets/icons/remove.svg");
-      background-size: cover;
-      background-position: center;
-      border: none;
-      background-color: transparent;
-    }
-
     &-input {
       flex: 1;
       width: 100%;
-      font-size: 14px;
-      line-height: 17px;
+      padding: 12px 19px 11px 19px;
+      text-overflow: ellipsis;
+
+      &,
+      &::placeholder{
+        font-size: 14px;
+        line-height: 17px;
+      }
+
+      &::placeholder{
+        color: $whiteBorderColor;
+      }
     }
 
     &-checkbox {
@@ -73,20 +121,62 @@
       align-items: center;
       justify-content: flex-start;
       cursor: pointer;
+      padding: 11px 0 11px 27px;
+
+      &:hover input[type=checkbox]:not(:checked) ~ p::before{
+        background-color: lighten($lightGreenColor, 45%);
+      }
+
+      input[type=checkbox]{
+        opacity: 0;
+        width: 0;
+        height: 0;
+
+        &:not(:checked) ~ p::before{
+        border: 2px solid $greyColor;
+      }
+
+        &:checked ~ p::before{
+          background-image: url("../../assets/icons/green-check.svg");
+        }
+      }
+
+      p{
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        line-height: 17px;
+
+        &::before {
+          content: "";
+          display: block;
+          width: 18px;
+          height: 18px;
+          border-radius: 2px;
+          margin-right: 19px;
+          transition: all .7s ease;
+        }
+      }
     }
 
     &-buttons {
       opacity: 0;
       pointer-events: none;
       transition: all .2s ease-in;
-
-      button {
-        margin-left: 18px;
-      }
-
-      button {
-        margin-left: 18px;
-      }
+      display: flex;
+      align-items: center;
     }
+
+    &-remove,
+    &-stripes{
+      margin-left: 18px;
+    }
+  }
+
+  &__add-button{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    margin-top: 24px;
   }
 }
