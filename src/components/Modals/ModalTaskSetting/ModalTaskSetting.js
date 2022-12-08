@@ -30,7 +30,7 @@ const ModalTaskSetting = ({ setOpen, courseId, moduleId }) => {
               value={taskData.title}
               name="title"
               placeholder="Название"
-              className="content__block__input"
+              className="inputModal"
             />
             <MainButton
               className="GreenButton content__block__button"
