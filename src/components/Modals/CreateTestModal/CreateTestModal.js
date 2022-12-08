@@ -5,24 +5,39 @@ import { createTestRequest } from '../../../store/actions/testsActions'
 import Modal from '../../UI/Modal2/Modal'
 import FormInput from '../../UI/Form/FormInput/FormInput'
 import MainButton from '../../UI/MainButton/MainButton'
+import test from '../../../assets/icons/test.svg'
+import './CreateTestModal.scss'
 
 const CreateTestModal = ({ setOpen, courseId, moduleId }) => {
   const dispatch = useDispatch()
-  const [testData, setTestData] = useState({ title: '' })
+  const [testData, setTestData] = useState({
+    title: '',
+    correct: 0,
+    random: false,
+    count: 0,
+  })
+
+  const [isChecked, setIsChecked] = useState(true)
+
+  const handleOnChangeChecked = () => {
+    setIsChecked(!isChecked)
+    setTestData({ ...testData, random: isChecked })
+  }
 
   const handlerClick = e => {
     submitFormHandler(e, dispatch(createTestRequest({ courseId, moduleId, testData })))
     setOpen(false)
-    setTestData({ title: '' })
+    setTestData({ title: '', correct: 0, random: false, count: 0 })
   }
 
   return (
     <Modal setOpen={setOpen}>
       <div className="content">
-        <span>Настройте тест</span>
+        <img src={test} alt="test" className="content__test__img" />
+        <span className="content__test__title">Настройте тест</span>
         <div className="content__test">
           <form>
-            <span className="">Настройте тест</span>
+            <span className="content__test__label">Название теста</span>
             <FormInput
               onChange={e => inputChangeHandler(e, setTestData)}
               value={testData.title}
@@ -30,7 +45,41 @@ const CreateTestModal = ({ setOpen, courseId, moduleId }) => {
               placeholder="Название"
               className="inputModal"
             />
-            <MainButton className="GreenButton" text="Создать тест" onClick={e => handlerClick(e)} type="submit" />
+            <span className="content__test__label">Процент правильных ответов для выполнения</span>
+            <FormInput
+              onChange={e => inputChangeHandler(e, setTestData)}
+              type="number"
+              value={testData.correct}
+              name="correct"
+              placeholder="0"
+              className="inputModal"
+            />
+            <div className="content__test__checkbox">
+              <FormInput onChange={handleOnChangeChecked} type="checkbox" name="random" />
+              <span>Случайный порядок вопросов</span>
+            </div>
+            <span className="content__test__subtitle">Вопросы будут задаваться в случайном порядке</span>
+            <div className="content__test__count">
+              <span className="content__test__label">Количество попыток</span>
+              <FormInput
+                onChange={e => inputChangeHandler(e, setTestData)}
+                type="number"
+                value={testData.count}
+                name="count"
+                placeholder="0"
+                className="inputModal content__test__input"
+              />
+            </div>
+            <span className="content__test__subtitle">Добавьте описание</span>
+            <div className="content__test__button-block">
+              <MainButton className="WhiteButton content__btn" text="Назад" type="button" />
+              <MainButton
+                className="GreenButton content__btn-two"
+                text="Создать тест"
+                onClick={e => handlerClick(e)}
+                type="submit"
+              />
+            </div>
           </form>
         </div>
       </div>
