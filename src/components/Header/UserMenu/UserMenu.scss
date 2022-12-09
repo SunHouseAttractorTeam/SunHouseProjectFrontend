@@ -34,6 +34,8 @@
     margin: auto;
     color: $darkGreenColor;
     text-decoration: none;
+    display: flex;
+    flex-direction: column;
 
     &__item {
       margin-bottom: 3px;
@@ -47,11 +49,20 @@
       cursor: pointer;
       border: none;
       background: $lightGreenColor;
+      display: flex;
+      
+      &__child {
+        color: black;
+        font-weight: 700;
+        text-decoration: none;
+        flex-grow: 1;
+      }
+
+      &:hover {
+        background: #fff;;
+      }
     }
 
-    &__item:hover {
-      background: #fff;;
-    }
 
   }
 

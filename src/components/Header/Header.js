@@ -12,6 +12,7 @@ import { fetchCategoriesRequest } from '../../store/actions/categoriesActions'
 const Header = () => {
   const dispatch = useDispatch()
   const user = useSelector(state => state.users.user)
+  let name = ''
 
   useEffect(() => {
     dispatch(fetchCategoriesRequest())
@@ -21,11 +22,16 @@ const Header = () => {
     dispatch(historyPush('/login'))
   }
 
+  const classChange = () => {
+    name = 'header--scroll'
+  }
+
   return (
-    <header className=" header">
+    <header className={`${name} header`} onScroll={() => classChange}>
       <div className="container header__container">
         <Logo className="header_logo" />
         <Nav />
+
         {!user ? (
           <MainButton className="header_MainButton" onClick={onHeaderButton} text="Войти" />
         ) : (
