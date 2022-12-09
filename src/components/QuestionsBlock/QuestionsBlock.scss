@@ -7,24 +7,25 @@
   background-position: center;
   border: none;
   background-color: transparent;
+  & path {
+    fill: #D1D1D6;
+    transition: 0.3ms;
+  }
 }
 
 .remove-button{
   width: 12px;
   height: 16px;
-  background-image: url("../../assets/icons/remove.svg");
 }
 
 .stripes-button{
   width: 16px;
   height: 11px;
-  background-image: url("../../assets/icons/stripes.svg");
 }
 
 .check-button{
   width: 24px;
   height: 24px;
-  background-image: url("../../assets/icons/check.svg");
 }
 
 .question-block {
@@ -175,7 +176,7 @@
 
   &__add-button{
     font-weight: 700;
-    font-size: 16px;
+    font-size: 16px !important;
     line-height: 20px;
     margin-top: 24px;
   }
