@@ -3,7 +3,7 @@ import './TestBlock.scss'
 import ContentForm from '../ContentForm/ContentForm'
 
 const Test = () => (
-  <div className="test-block container">
+  <div className="test-block ">
     <ContentForm title="Test" type="test">
       <div className="lesson-block__editor">
         <p className="lesson-block__editor-title">Содержимое занятия</p>
