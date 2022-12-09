@@ -64,7 +64,6 @@ const CreateTestModal = ({ setOpen, courseId, moduleId, setModalType }) => {
               <FormInput
                 onChange={e => inputChangeHandler(e, setTestData)}
                 type="number"
-                min={0}
                 value={testData.count}
                 name="count"
                 placeholder="0"
