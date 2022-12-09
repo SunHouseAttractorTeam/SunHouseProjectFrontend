@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import './FilesUploader.scss'
 
-const FilesUploader = ({ type, title }) => {
+const FilesUploader = ({ type, title, ...props }) => {
   const inputRef = useRef()
   const [filename, setFilename] = useState('')
 
@@ -19,7 +19,7 @@ const FilesUploader = ({ type, title }) => {
 
   if (type === 'video') {
     return (
-      <div className="video-card uploader-block">
+      <div className={`video-card uploader-block${props.className ? ` ${props.className}` : ''}`}>
         <input type="file" onChange={onFileChange} ref={inputRef} />
         <p className="uploader-block__label">{title || 'Перетащите видеофайл или нажмите для загрузки'}</p>
         <button className="MainButton GreenButton uploader-block__button" onClick={activateInput} type="button">
@@ -31,7 +31,7 @@ const FilesUploader = ({ type, title }) => {
 
   if (type === 'audio') {
     return (
-      <div className="audio-card uploader-block">
+      <div className={`audio-card uploader-block${props.className ? ` ${props.className}` : ''}`}>
         <input type="file" onChange={onFileChange} ref={inputRef} />
         <p className="uploader-block__label">{title || 'Перетащите .mp3 аудиофайл или нажмите для загрузки'}</p>
         <button className="MainButton GreenButton uploader-block__button" onClick={activateInput} type="button">
@@ -42,7 +42,7 @@ const FilesUploader = ({ type, title }) => {
   }
 
   return (
-    <div className="file-card">
+    <div className={`file-card${props.className ? ` ${props.className}` : ''}`}>
       <input type="file" onChange={onFileChange} ref={inputRef} />
       <button className="file-card__button MainButton" onClick={activateInput} type="button">
         Прикрепить файл
