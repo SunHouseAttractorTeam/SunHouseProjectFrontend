@@ -1,3 +1,16 @@
 import lessonsSlice from '../slices/lessonsSlice'
 
-export const { createLessonRequest, createLessonSuccess, createLessonFailure } = lessonsSlice.actions
+export const {
+  fetchLessonRequest,
+  fetchLessonSuccess,
+  fetchLessonFailure,
+  createLessonRequest,
+  createLessonSuccess,
+  createLessonFailure,
+  editLessonRequest,
+  editLessonSuccess,
+  editLessonFailure,
+  deleteLessonRequest,
+  deleteLessonSuccess,
+  deleteLessonFailure,
+} = lessonsSlice.actions
