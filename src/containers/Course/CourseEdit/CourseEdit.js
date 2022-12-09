@@ -59,7 +59,7 @@ const CourseEdit = () => {
                     <ul className="course-edit__left-card-module-list">
                       {module.data.map(item => (
                         <li
-                          key={item.id}
+                          key={item._id}
                           className={`course-edit__left-card-module-list-item course-edit__left-card-module-list-item--${item.type}`}
                         >
                           <Link to={`/course/${id}/edit/${item.type}/${item.id}`}> {item.title}</Link>
@@ -92,7 +92,9 @@ const CourseEdit = () => {
           {modalType === 'module' && <ModalCreateModal id={id} setOpen={setOpen} />}
           {modalType === 'task' && <ModalTaskSetting setOpen={setOpen} courseId={id} moduleId={moduleId} />}
           {modalType === 'lesson' && <CreateLessonModal setOpen={setOpen} courseId={id} moduleId={moduleId} />}
-          {modalType === 'test' && <CreateTestModal setOpen={setOpen} courseId={id} moduleId={moduleId} />}
+          {modalType === 'test' && (
+            <CreateTestModal setOpen={setOpen} courseId={id} moduleId={moduleId} setModalType={setModalType} />
+          )}
         </>
       )}
     </>

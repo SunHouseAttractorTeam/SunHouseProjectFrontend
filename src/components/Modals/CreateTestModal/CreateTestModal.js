@@ -8,7 +8,7 @@ import MainButton from '../../UI/MainButton/MainButton'
 import test from '../../../assets/icons/test.svg'
 import './CreateTestModal.scss'
 
-const CreateTestModal = ({ setOpen, courseId, moduleId }) => {
+const CreateTestModal = ({ setOpen, courseId, moduleId, setModalType }) => {
   const dispatch = useDispatch()
   const [testData, setTestData] = useState({
     title: '',
@@ -72,7 +72,12 @@ const CreateTestModal = ({ setOpen, courseId, moduleId }) => {
             </div>
             <span className="content__test__subtitle">Добавьте описание</span>
             <div className="content__test__button-block">
-              <MainButton className="WhiteButton content__btn" text="Назад" type="button" />
+              <MainButton
+                className="WhiteButton content__btn"
+                text="Назад"
+                type="button"
+                onClick={() => setModalType('content')}
+              />
               <MainButton
                 className="GreenButton content__btn-two"
                 text="Создать тест"
