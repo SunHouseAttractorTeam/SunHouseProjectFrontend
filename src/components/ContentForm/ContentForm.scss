@@ -37,13 +37,16 @@
     position: absolute;
     width: 19px;
     height: 24px;
-    background-image: url("../../assets/icons/remove.svg");
     background-size: cover;
     background-position: center;
     top: 24px;
     right: 27px;
     border: none;
     background-color: transparent;
+    & path {
+      fill: #D1D1D6;
+      transition: 0.3ms;
+    }
   }
 }
 
