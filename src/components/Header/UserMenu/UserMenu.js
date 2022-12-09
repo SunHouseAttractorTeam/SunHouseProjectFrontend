@@ -45,14 +45,14 @@ const UserMenu = ({ user }) => {
         <>
           <div className="user-menu__backdrop" onClick={clickHandler} />
           <div className="user-menu__list">
-            <div className="user-menu__list__item">
-              <Link className="user-menu__list__item__child" to="/user">
+            <div className="user-menu__list-item">
+              <Link className="user-menu__list-item-child" to="/user">
                 Profile
               </Link>
             </div>
-            <div className="user-menu__list__item">
-              <button type="button" className="user-menu__list__item GreenButton" onClick={logoutHandler}>
-                <p className="user-menu__list__item__child"> Log out </p>
+            <div className="user-menu__list-item">
+              <button type="button" className="user-menu__list-item GreenButton" onClick={logoutHandler}>
+                <p className="user-menu__list-item-child"> Log out </p>
               </button>
             </div>
           </div>

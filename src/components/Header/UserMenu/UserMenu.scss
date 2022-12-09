@@ -37,7 +37,7 @@
     display: flex;
     flex-direction: column;
 
-    &__item {
+    &-item {
       margin-bottom: 3px;
       border-radius: 15px;
       text-align: center;
@@ -50,8 +50,8 @@
       border: none;
       background: $lightGreenColor;
       display: flex;
-      
-      &__child {
+
+      &-child {
         color: black;
         font-weight: 700;
         text-decoration: none;
