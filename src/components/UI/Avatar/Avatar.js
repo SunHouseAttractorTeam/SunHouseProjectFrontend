@@ -12,7 +12,6 @@ const Avatar = ({ user, className }) => {
     } else {
       avatarImage = `http://localhost:8000/uploads/${user.avatar}`
     }
-    avatarImage = `${apiUrl}/${user.avatar}`
   }
 
   return <img className={`avatar ${className}`} src={avatarImage} alt={user?.username} />
