@@ -8,7 +8,7 @@ import MainButton from '../../UI/MainButton/MainButton'
 import task from '../../../assets/icons/task.svg'
 import './ModalTaskSetting.scss'
 
-const ModalTaskSetting = ({ setOpen, courseId, moduleId }) => {
+const ModalTaskSetting = ({ setOpen, courseId, moduleId, setModalType }) => {
   const dispatch = useDispatch()
   const [taskData, setTaskData] = useState({ title: '' })
 
@@ -32,12 +32,20 @@ const ModalTaskSetting = ({ setOpen, courseId, moduleId }) => {
               placeholder="Название"
               className="inputModal"
             />
-            <MainButton
-              className="GreenButton content__block__button"
-              text="Добавить задание"
-              onClick={e => handlerClick(e)}
-              type="submit"
-            />
+            <div className="content__test__button-block">
+              <MainButton
+                className="WhiteButton content__btn"
+                text="Назад"
+                type="button"
+                onClick={() => setModalType('content')}
+              />
+              <MainButton
+                className="GreenButton content__btn-two"
+                text="Добавить задание"
+                onClick={e => handlerClick(e)}
+                type="submit"
+              />
+            </div>
           </form>
         </div>
       </div>
