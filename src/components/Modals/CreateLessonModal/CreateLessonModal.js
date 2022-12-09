@@ -8,7 +8,7 @@ import MainButton from '../../UI/MainButton/MainButton'
 import lesson from '../../../assets/icons/lesson.svg'
 import './CreateLessonModal.scss'
 
-const CreateLessonModal = ({ setOpen, courseId, moduleId }) => {
+const CreateLessonModal = ({ setOpen, courseId, moduleId, setModalType }) => {
   const dispatch = useDispatch()
   const [lessonData, setLessonData] = useState({ title: '' })
 
@@ -33,12 +33,20 @@ const CreateLessonModal = ({ setOpen, courseId, moduleId }) => {
               placeholder="Название"
               className="inputModal"
             />
-            <MainButton
-              className="GreenButton content__lesson__button"
-              text="Создать занятие"
-              onClick={e => handlerClick(e)}
-              type="submit"
-            />
+            <div className="content__test__button-block">
+              <MainButton
+                className="WhiteButton content__btn"
+                text="Назад"
+                type="button"
+                onClick={() => setModalType('content')}
+              />
+              <MainButton
+                className="GreenButton  content__btn-two"
+                text="Создать занятие"
+                onClick={e => handlerClick(e)}
+                type="submit"
+              />
+            </div>
           </form>
         </div>
       </div>
