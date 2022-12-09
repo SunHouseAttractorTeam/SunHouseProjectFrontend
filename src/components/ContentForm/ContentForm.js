@@ -4,7 +4,7 @@ import FilesUploader from '../FilesUploader/FilesUploader'
 import SunEditorWYSIWYG from '../UI/SunEditorWYSIWYG/SunEditorWYSIWYG'
 import AddContentBlock from '../AddContentBlock/AddContentBlock'
 
-const ContentForm = ({ title = 'Title', type = 'lesson' }) => {
+const ContentForm = ({ title = 'Title' }) => {
   const [data, setData] = useState([])
   return (
     <>
