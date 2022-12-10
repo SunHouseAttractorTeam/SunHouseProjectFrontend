@@ -18,6 +18,8 @@ const UserMenu = ({ user }) => {
 
   return (
     <div className="user-menu">
+      {/* <Backdrop show={menu} clicked={clickHandler} classname="user-menu__backdrop" /> */}
+
       <Link className="user-menu__notification" to="/user/notifications">
         <i className="user-menu__icon">
           <svg width="35" height="35" viewBox="0 0 35 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -40,25 +42,21 @@ const UserMenu = ({ user }) => {
         <Avatar user={user} className="user-menu__img" />
       </button>
       {menu ? (
-        <div className="user-menu__list">
-          <div className="user-menu__list__item">
-            <Link
-              style={{
-                color: 'black',
-                fontWeight: 700,
-                textDecoration: 'none',
-              }}
-              to="/user"
-            >
-              Profile
-            </Link>
+        <>
+          <div className="user-menu__backdrop" onClick={clickHandler} />
+          <div className="user-menu__list">
+            <div className="user-menu__list-item">
+              <Link className="user-menu__list-item-child" to="/user">
+                Profile
+              </Link>
+            </div>
+            <div className="user-menu__list-item">
+              <button type="button" className="user-menu__list-item GreenButton" onClick={logoutHandler}>
+                <p className="user-menu__list-item-child"> Log out </p>
+              </button>
+            </div>
           </div>
-          <div>
-            <button type="button" className=" GreenButton user-menu__list__item" onClick={logoutHandler}>
-              Log out
-            </button>
-          </div>
-        </div>
+        </>
       ) : null}
     </div>
   )

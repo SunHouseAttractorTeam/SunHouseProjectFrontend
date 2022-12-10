@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import FormInput from '../FormInput/FormInput'
 import FacebookLogin from '../../../services/FacebookLogin/FacebookLogin'
 import GoogleLogin from '../../../services/GoogleLogin/GoogleLogin'
-import AppleLogin from '../../../services/AppleLogin/AppleLogin'
 import VkontakteLogin from '../../../services/VkontakteLogin/VkontakteLogin'
 import { getFieldError } from '../Handlers/Handlers'
 import './FormComponent.scss'
@@ -51,7 +50,6 @@ const FormComponent = ({
           <FacebookLogin />
           <VkontakteLogin />
           <GoogleLogin />
-          <AppleLogin />
         </div>
         <p className="form_loginLink">
           Уже есть профиль?{' '}

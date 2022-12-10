@@ -7,6 +7,17 @@
   align-items: center;
   position: relative;
 
+  &__backdrop {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 1000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0);
+  }
+
   &__icon {
     margin-right: 20px;
   }
@@ -21,11 +32,14 @@
     top: 110%;
     z-index: 100000;
     margin: auto;
-    background: $lightGreenColor;
     color: $darkGreenColor;
     text-decoration: none;
+    display: flex;
+    flex-direction: column;
 
-    &__item {
+    &-item {
+      margin-bottom: 3px;
+      border-radius: 15px;
       text-align: center;
       vertical-align: baseline;
       line-height: 50px;
@@ -34,7 +48,22 @@
       font-weight: 700;
       cursor: pointer;
       border: none;
+      background: $lightGreenColor;
+      display: flex;
+
+      &-child {
+        color: black;
+        font-weight: 700;
+        text-decoration: none;
+        flex-grow: 1;
+      }
+
+      &:hover {
+        background: #fff;;
+      }
     }
+
+
   }
 
   &__button {
