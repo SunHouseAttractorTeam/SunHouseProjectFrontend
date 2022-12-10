@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import SunEditorWYSIWYG from '../UI/SunEditorWYSIWYG/SunEditorWYSIWYG'
 import FilesUploader from '../FilesUploader/FilesUploader'
-import './Lesson.scss'
 import AddContentBlock from '../AddContentBlock/AddContentBlock'
 import { editLessonRequest, fetchLessonRequest } from '../../store/actions/lessonsActions'
+import './Lesson.scss'
 
 const Lesson = () => {
   const { lessonId, courseId } = useParams()
@@ -18,27 +18,16 @@ const Lesson = () => {
     dispatch(fetchLessonRequest(lessonId))
   }, [dispatch, lessonId])
 
-  const handleAddContent = type => {
-    if (type === 'text') {
-      setData([...data, { type, description: '' }])
-      // dispatch(addContentInLesson({ type, description: '' }))
-    } else if (type === 'video') {
-      setData([...data, { type, video: '' }])
-      // dispatch(
-      //   addContentInLesson({
-      //     type,
-      //     link: '',
-      //   }),
-      // )
-    } else if (type === 'audio') {
-      setData([...data, { type, audio: '' }])
-      // dispatch(
-      //   addContentInLesson({
-      //     type,
-      //     audio: '',
-      //   }),
-      // )
+  useEffect(() => {
+    if (lesson) {
+      if (data.length === 0) {
+        setData([{ title: lesson.title }])
+      }
     }
+  }, [lesson])
+
+  const handleAddContent = type => {
+    setData([...data, { [type]: '' }])
   }
 
   const inputChangeHandler = (e, index) => {
@@ -47,7 +36,7 @@ const Lesson = () => {
     setData(prevState => {
       const contentCopy = {
         ...prevState[index],
-        description: value,
+        text: value,
       }
 
       return prevState.map((content, i) => {
@@ -60,15 +49,7 @@ const Lesson = () => {
   }
 
   const fileChangeHandler = (index, e) => {
-    // const dataAudioCount = data.filter(content => content.type === 'audio')
-    //
-    // const fileIndex = dataAudioCount.length - 1
-    //
-    // console.log(fileIndex)
-
     const file = e.target.files[0]
-
-    console.log(e.target.files)
 
     setData(prevState => {
       const contentCopy = {
@@ -78,37 +59,32 @@ const Lesson = () => {
 
       return prevState.map((content, i) => {
         if (index === i) {
-          console.log(contentCopy)
           return contentCopy
         }
         return content
       })
     })
+  }
 
-    // dispatch(changeLessonAudio({ index, file }))
+  const lastFileChangeHandler = e => {
+    const file = e.target.files[0]
+    setData(prevState => [...prevState, { file }])
   }
 
   const handleSave = () => {
     const formData = new FormData()
 
-    // data.forEach(obj => {
-    //   Object.keys(obj).forEach(key => {})
-    // })
+    data.forEach(elem => {
+      Object.keys(elem).forEach(key => {
+        if (key === 'audio' || key === 'file') {
+          formData.append(key, elem[key])
+        }
+      })
+    })
 
-    formData.append('data', JSON.stringify(data))
+    formData.append('payload', JSON.stringify(data))
 
-    console.log(formData)
-    // const dataCopy = data.map(content => {
-    //   const formData = new FormData()
-    //
-    //   Object.keys(content).forEach(key => {
-    //     formData.append(key, content[key])
-    //   })
-    //
-    //   return formData
-    // })
-
-    dispatch(editLessonRequest({ courseId, lessonId, data: formData }))
+    dispatch(editLessonRequest({ courseId, lessonId, data: formData, title: lesson.title }))
   }
 
   return (
@@ -117,10 +93,10 @@ const Lesson = () => {
         <div className="lesson-blank">
           <div className="lesson-block">
             <button className="lesson-block__remove" type="button" />
-            <h1 className="lesson-block__title">{lesson.title}</h1>
+            <h1 className="lesson-block__title">{lesson?.title}</h1>
             <p className="lesson-block__editor-title">Содержимое занятия</p>
             {data.map((content, index) => {
-              switch (content.type) {
+              switch (Object.keys(content)[0]) {
                 case 'text':
                   return (
                     <div key={index} className="lesson-block__editor">
@@ -135,21 +111,22 @@ const Lesson = () => {
                   return null
               }
             })}
-            {/* <div className="lesson-block__editor"> */}
-            {/*  <p className="lesson-block__editor-title">{lesson.description}</p> */}
-            {/*  <SunEditorWYSIWYG /> */}
-            {/* </div> */}
-            {/* <FilesUploader type="video" /> */}
-            {/* <FilesUploader type="audio" /> */}
             <AddContentBlock addContent={handleAddContent} />
             <div className="lesson-block__files">
               <p className="lesson-block__files-title">Прикреплённые файлы</p>
-              <FilesUploader />
+              <FilesUploader type="file" onChange={lastFileChangeHandler} />
             </div>
           </div>
           <button className="MainButton GreenButton lesson-save-button" type="button" onClick={handleSave}>
             Сохранить
           </button>
+          {data.map(item => (
+            <>
+              {item.title && <div style={{ marginBottom: '20px' }}>{item.title}</div>}
+              {item.text && <div style={{ marginBottom: '20px' }}>{item.text}</div>}
+              {item.audio && <div style={{ marginBottom: '20px' }}>audio</div>}
+            </>
+          ))}
         </div>
       )}
     </>
