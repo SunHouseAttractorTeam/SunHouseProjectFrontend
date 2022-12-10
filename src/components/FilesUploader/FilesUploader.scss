@@ -1,8 +1,6 @@
 @import '../../scss/style';
 
 .video-card {
-  margin-top: 33px;
-
   &::before {
     width: 64px;
     height: 64px;
@@ -23,7 +21,6 @@
   border-radius: 16px;
   background: $totalWhiteColor;
   padding: 60px;
-  margin-bottom: 32px;
   width: 100%;
   display: flex;
   flex-direction: column;

@@ -1,8 +1,8 @@
 import React from 'react'
 import './AddContentBlock.scss'
 
-const AddContentBlock = () => (
-  <div className="add-content-block">
+const AddContentBlock = ({ ...props }) => (
+  <div className={`add-content-block${props.className ? ` ${props.className}` : ''}`}>
     <h3 className="add-content-block__title">Добавить контент</h3>
     <div className="add-content-block__types">
       <button className="add-content-block__type add-content-block__type--text" type="button">
