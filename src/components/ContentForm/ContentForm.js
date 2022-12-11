@@ -4,7 +4,7 @@ import FilesUploader from '../FilesUploader/FilesUploader'
 import SunEditorWYSIWYG from '../UI/SunEditorWYSIWYG/SunEditorWYSIWYG'
 import AddContentBlock from '../AddContentBlock/AddContentBlock'
 
-const ContentForm = ({ title = 'Title' }) => {
+const ContentForm = ({ title = 'Title', subtitle = 'Subtitle' }) => {
   const [data, setData] = useState([])
   return (
     <>
@@ -24,7 +24,7 @@ const ContentForm = ({ title = 'Title' }) => {
             </svg>
           </i>
         </button>
-        <p className="content-form__editor-title">Содержимое занятия</p>
+        <p className="content-form__editor-title">{subtitle}</p>
         {data.map((content, index) => {
           switch (content.type) {
             case 'text':

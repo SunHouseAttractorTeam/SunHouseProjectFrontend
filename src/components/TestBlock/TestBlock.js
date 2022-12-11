@@ -2,14 +2,10 @@ import React from 'react'
 import './TestBlock.scss'
 import ContentForm from '../ContentForm/ContentForm'
 
-const Test = () => (
+const TestBlock = () => (
   <div className="content-form ">
-    <ContentForm title="Test" type="test">
-      <div className="content-form__editor">
-        <p className="content-form__editor-title">Содержимое теста</p>
-      </div>
-    </ContentForm>
+    <ContentForm title="Тест" type="test" subtitle="Содержимое теста" />
   </div>
 )
 
-export default Test
+export default TestBlock
