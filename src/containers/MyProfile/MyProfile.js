@@ -1,4 +1,5 @@
 import React from 'react'
+import Cookies from 'js-cookie'
 import { useSelector } from 'react-redux'
 import { Switch } from 'react-router-dom'
 import MyProfileTop from './MyProfileTop/MyProfileTop'
@@ -25,30 +26,35 @@ const MyProfile = () => {
           <div className="profile__right">
             <Switch>
               <ProtectedRoute
-                isAllowed={user?.token}
+                isAllowed={Cookies.get('jwt')}
                 redirectTo="/login"
                 path="/user/teacher_mode"
                 component={TeacherMode}
               />
               <ProtectedRoute
-                isAllowed={user?.token}
+                isAllowed={Cookies.get('jwt')}
                 redirectTo="/login"
                 path="/user/courses"
                 component={UserCourses}
               />
               <ProtectedRoute
-                isAllowed={user?.token}
+                isAllowed={Cookies.get('jwt')}
                 redirectTo="/login"
                 path="/user/notifications"
                 component={Notifications}
               />
               <ProtectedRoute
-                isAllowed={user?.token}
+                isAllowed={Cookies.get('jwt')}
                 redirectTo="/login"
                 path="/user/certificates"
                 component={Certificates}
               />
-              <ProtectedRoute isAllowed={user?.token} redirectTo="/login" path="/user/settings" component={Settings} />
+              <ProtectedRoute
+                isAllowed={Cookies.get('jwt')}
+                redirectTo="/login"
+                path="/user/settings"
+                component={Settings}
+              />
             </Switch>
           </div>
         </div>
