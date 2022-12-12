@@ -7,6 +7,7 @@ import ModalCreateModal from '../../../components/Modals/ModuleCreateModal/Modul
 import CreateLessonModal from '../../../components/Modals/CreateLessonModal/CreateLessonModal'
 import CreateTestModal from '../../../components/Modals/CreateTestModal/CreateTestModal'
 import ModalAddContent from '../../../components/Modals/ModalAddContent/ModalAddContent'
+import ContentForm from '../../../components/ContentForm/ContentForm'
 
 const CourseEdit = () => {
   const { id } = useParams()
@@ -78,7 +79,7 @@ const CourseEdit = () => {
           </div>
           <div className="course-edit__right">
             <Switch>
-              <Route path="/course/:courseId/edit/Lesson/:lessonId" component={C} />
+              <Route path="/course/:courseId/edit/Lesson/:lessonId" component={ContentForm} />
             </Switch>
           </div>
         </div>

@@ -12,7 +12,7 @@ const FilesUploader = ({ ...props }) => {
       setFilename('')
     }
 
-    props.onChange(e)
+    props.onChange(e, props.index)
   }
 
   const activateInput = () => {

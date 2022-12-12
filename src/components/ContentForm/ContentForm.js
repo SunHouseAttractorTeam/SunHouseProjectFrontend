@@ -1,15 +1,92 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import './ContentForm.scss'
 import FilesUploader from '../FilesUploader/FilesUploader'
 import SunEditorWYSIWYG from '../UI/SunEditorWYSIWYG/SunEditorWYSIWYG'
 import AddContentBlock from '../AddContentBlock/AddContentBlock'
+import { editLessonRequest, fetchLessonRequest } from '../../store/actions/lessonsActions'
 
-const ContentForm = ({ title = 'Title' }) => {
+const ContentForm = () => {
   const [data, setData] = useState([])
+  const { lessonId, courseId } = useParams()
+  const dispatch = useDispatch()
+  const lesson = useSelector(state => state.lessons.lesson)
+
+  useEffect(() => {
+    dispatch(fetchLessonRequest(lessonId))
+  }, [dispatch, lessonId])
+
+  useEffect(() => {
+    if (lesson) {
+      if (data.length === 0) {
+        setData([{ title: lesson.title }])
+      }
+    }
+  }, [lesson])
+
+  const handleAddContent = type => {
+    setData([...data, { [type]: '' }])
+  }
+
+  const inputChangeHandler = (e, index) => {
+    const value = JSON.stringify(e)
+    setData(prevState => {
+      const contentCopy = {
+        ...prevState[index],
+        text: value,
+      }
+
+      return prevState.map((content, i) => {
+        if (index === i) {
+          return contentCopy
+        }
+        return content
+      })
+    })
+  }
+
+  const fileChangeHandler = (e, index) => {
+    const file = e.target.files[0]
+
+    setData(prevState => {
+      const contentCopy = {
+        ...prevState[index],
+        audio: file,
+      }
+
+      return prevState.map((content, i) => {
+        if (index === i) {
+          return contentCopy
+        }
+        return content
+      })
+    })
+  }
+
+  const lastFileChangeHandler = (e, index) => {
+    const file = e.target.files[0]
+    setData(prevState => [...prevState, { file }])
+  }
+
+  const handleSave = () => {
+    const formData = new FormData()
+    data.forEach(elem => {
+      Object.keys(elem).forEach(key => {
+        if (key === 'audio' || key === 'file') {
+          formData.append(key, elem[key])
+        }
+      })
+    })
+
+    formData.append('payload', JSON.stringify(data))
+
+    dispatch(editLessonRequest({ courseId, lessonId, data: formData, title: lesson.title }))
+  }
   return (
     <>
       <div className="content-form">
-        <h1 className="content-form__title">{title}</h1>
+        <h1 className="content-form__title">{lesson?.title}</h1>
         <button className="content-form__remove">
           <i>
             <svg width="12" height="16" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,36 +103,42 @@ const ContentForm = ({ title = 'Title' }) => {
         </button>
         <p className="content-form__editor-title">Содержимое занятия</p>
         {data.map((content, index) => {
-          switch (content.type) {
+          switch (Object.keys(content)[0]) {
             case 'text':
               return (
-                <div key={index} className="content-form__editor content-form__item">
-                  <SunEditorWYSIWYG value={content.description} />
+                <div key={`${index}textDW`} className="content-form__editor content-form__item">
+                  <SunEditorWYSIWYG value={content.description} onChange={e => inputChangeHandler(e, index)} />
                 </div>
               )
             case 'video':
               return (
                 <>
-                  <FilesUploader type="video" key={index} className="content-form__item" />
+                  <FilesUploader type="video" key={`${index}videoDW`} className="content-form__item" />
                 </>
               )
             case 'audio':
               return (
                 <>
-                  <FilesUploader type="audio" key={index} className="content-form__item" />
+                  <FilesUploader
+                    type="audio"
+                    key={`${index}audioDWA`}
+                    className="content-form__item"
+                    onChange={fileChangeHandler}
+                    index={index}
+                  />
                 </>
               )
             default:
               return null
           }
         })}
-        <AddContentBlock className="content-form__item" />
+        <AddContentBlock addContent={handleAddContent} className="content-form__item" />
         <div className="content-form__files ">
           <p className="content-form__files-title ">Прикреплённые файлы</p>
-          <FilesUploader type="file" />
+          <FilesUploader type="file" onChange={lastFileChangeHandler} />
         </div>
       </div>
-      <button className="MainButton GreenButton content-form-save" type="button">
+      <button className="MainButton GreenButton content-form-save" type="button" onClick={handleSave}>
         Сохранить
       </button>
     </>
