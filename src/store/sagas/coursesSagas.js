@@ -53,7 +53,7 @@ export function* createCourse({ payload: courseData }) {
   try {
     const response = yield axiosApi.post('/courses', courseData)
     yield put(createCourseSuccess())
-
+    yield put(fetchCoursesRequest())
     yield historyPush(`/course/${response.data._id}`)
   } catch (e) {
     yield put(createCourseFailure(e))
