@@ -81,7 +81,7 @@ const ContentForm = () => {
 
     formData.append('payload', JSON.stringify(data))
 
-    dispatch(editLessonRequest({ courseId, lessonId, data: formData, title: lesson.title }))
+    dispatch(editLessonRequest({ courseId, lessonId, data: formData }))
   }
   return (
     <>
