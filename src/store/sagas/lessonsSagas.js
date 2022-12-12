@@ -67,6 +67,7 @@ const lessonsSagas = [
   takeEvery(fetchLessonRequest, fetchLesson),
   takeEvery(createLessonRequest, createLesson),
   takeEvery(editLessonRequest, editLesson),
+
   takeEvery(deleteLessonRequest, deleteLesson),
 ]
 

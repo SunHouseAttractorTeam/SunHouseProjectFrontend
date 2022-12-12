@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, Route, Switch, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchCourseRequest } from '../../../store/actions/coursesActions'
 import ModalTaskSetting from '../../../components/Modals/ModalTaskSetting/ModalTaskSetting'
@@ -7,6 +7,7 @@ import ModalCreateModal from '../../../components/Modals/ModuleCreateModal/Modul
 import CreateLessonModal from '../../../components/Modals/CreateLessonModal/CreateLessonModal'
 import CreateTestModal from '../../../components/Modals/CreateTestModal/CreateTestModal'
 import ModalAddContent from '../../../components/Modals/ModalAddContent/ModalAddContent'
+import ContentForm from '../../../components/ContentForm/ContentForm'
 
 const CourseEdit = () => {
   const { id } = useParams()
@@ -59,10 +60,10 @@ const CourseEdit = () => {
                     <ul className="course-edit__left-card-module-list">
                       {module.data.map(item => (
                         <li
-                          key={item._id}
+                          key={item.id}
                           className={`course-edit__left-card-module-list-item course-edit__left-card-module-list-item--${item.type}`}
                         >
-                          <Link to={`/course/${id}/edit/${item.type}/${item._id}`}> {item.title}</Link>
+                          <Link to={`/course/${id}/edit/${item.type}/${item.id}`}> {item.title}</Link>
                         </li>
                       ))}
                     </ul>
@@ -76,7 +77,11 @@ const CourseEdit = () => {
               </button>
             </div>
           </div>
-          <div className="course-edit__right" />
+          <div className="course-edit__right">
+            <Switch>
+              <Route path="/course/:courseId/edit/Lesson/:lessonId" component={ContentForm} />
+            </Switch>
+          </div>
         </div>
       )}
       {open && (
