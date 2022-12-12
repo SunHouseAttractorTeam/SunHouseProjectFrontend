@@ -7,10 +7,10 @@ export const {
   createLessonRequest,
   createLessonSuccess,
   createLessonFailure,
-  addContentInLesson,
-  changeLessonText,
-  changeLessonAudio,
   editLessonRequest,
   editLessonSuccess,
   editLessonFailure,
+  deleteLessonRequest,
+  deleteLessonSuccess,
+  deleteLessonFailure,
 } = lessonsSlice.actions
