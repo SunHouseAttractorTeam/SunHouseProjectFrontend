@@ -26,15 +26,6 @@ export function* fetchLesson({ payload: id }) {
   }
 }
 
-export function* fetchLesson({ payload: id }) {
-  try {
-    const response = yield axiosApi(`/lessons/${id}`)
-    yield put(fetchLessonSuccess(response.data))
-  } catch (e) {
-    yield put(fetchLessonFailure(e))
-  }
-}
-
 export function* createLesson({ payload }) {
   const { courseId, moduleId, lessonData } = payload
 
