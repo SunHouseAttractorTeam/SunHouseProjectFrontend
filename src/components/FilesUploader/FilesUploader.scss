@@ -64,6 +64,11 @@
     line-height: 20px;
     margin-right: 24px;
     width: 280px;
+    transition: all .5s ease;
+
+    &:hover {
+      background: $lightGreenColor;
+    }
 
     &::before {
       content: '';

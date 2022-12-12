@@ -1,3 +1,5 @@
+@import '../../scss/style';
+
 .content-form{
   width: 100%;
   padding: 24px 24px 32px;
@@ -43,9 +45,14 @@
     right: 27px;
     border: none;
     background-color: transparent;
-    & path {
+
+    &:hover path {
+      fill: $lightGreenColor;
+    }
+
+    path {
       fill: #D1D1D6;
-      transition: 0.3ms;
+      transition: all 0.5s ease;
     }
   }
 }
