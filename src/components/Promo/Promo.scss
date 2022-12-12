@@ -1,38 +1,44 @@
 @import '../../scss/style';
 
-.promo{
+.promo {
   padding: 130px 0 175px;
   position: relative;
   background-color: $darkGreenColor;
-  &_inner{
+
+  &_inner {
     display: flex;
     @include xl {
       flex-direction: column-reverse;
     }
   }
-  &_column_left{
+
+  &_column_left {
     width: 50%;
   }
-  &_column_right{
+
+  &_column_right {
     width: 40%;
   }
-  &_title{
+
+  &_title {
     font-size: 74px;
     margin: 0;
     color: $totalWhiteColor;
   }
-  &_logo{
-    @include xl{
-      //right: 8%;
+
+  &_logo {
+    @include xl {
       width: 40%;
 
     }
   }
-  &_button{
+
+  &_button {
     padding: 16px 48px;
     font-size: 20px;
   }
-  &_text{
+
+  &_text {
     font-style: normal;
     font-weight: 500;
     font-size: 20px;
@@ -40,27 +46,40 @@
     margin-bottom: 40px;
     color: $totalWhiteColor;
   }
-  &_image{
+
+  &_image {
     position: absolute;
     top: 8%;
     right: 10%;
-    @include xxl{
+    transform: scale(1) rotate(0);
+    animation: anim 2s alternate infinite;
+    @include xxl {
       right: 8%;
     }
-    @include xfl{
-      //right: 8%;
+    @include xfl {
       width: 40%;
-      top: 50%;
-      transform: translateY(-50%);
+      top: 60%;
+      transform: translateY(20%);
     }
     @include xl {
       width: 40%;
       top: 50%;
-      transform: translateY(-50%);
+      transform: translateY(10%);
     }
-    &_img{
+
+    &_img {
       width: 100%;
       height: auto;
     }
   }
+}
+
+@keyframes anim {
+  0% {
+    top: 6%;
+  }
+  100% {
+    top: 9%;
+  }
+
 }

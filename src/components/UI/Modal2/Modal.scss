@@ -3,10 +3,10 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 999;
+  width: 38%;
 
   &__inner {
-    width: 250px;
-    height: 170px;
     background: white;
     color: white;
     z-index: 10;
@@ -36,12 +36,12 @@
 }
 
 .backdrop {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
   height: 100vh;
   z-index: 0;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  position: absolute;
+  position: fixed;
 }

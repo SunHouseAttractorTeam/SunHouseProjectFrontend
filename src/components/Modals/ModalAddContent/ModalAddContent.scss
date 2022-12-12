@@ -1,0 +1,80 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 48px 20px;
+
+  &__title {
+    font-size: 20px;
+    padding: 0 0 20px 0;
+  }
+
+  &__buttons-block {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 50px;
+  }
+
+  &__btn {
+    background-color: #F2F2F7;
+    border: 3px solid transparent;
+
+    &:hover {
+      border: 3px solid #F2F2F7;
+      background-color: white;
+    }
+  }
+
+  &__btn-two {
+    border: 3px solid transparent;
+
+    &:hover {
+      border: 3px solid #ADFA00;
+      background-color: white;
+    }
+  }
+
+  &__text {
+    margin: 50px 0;
+    display: inline-block;
+  }
+
+  &__select-buttons-block {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+  }
+
+  &__select-button {
+    background-color: white;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.5s ease-out;
+    width: 140px;
+    height: 140px;
+    padding: 10px 0;
+
+    &__active {
+      background-color: #F2F2F7;
+    }
+
+    &__img {
+      width: 50px;
+      flex-grow: 1;
+    }
+
+    &__sub {
+      font-size: 20px;
+    }
+
+    &:hover {
+      background-color: #F2F2F7;
+    }
+  }
+}

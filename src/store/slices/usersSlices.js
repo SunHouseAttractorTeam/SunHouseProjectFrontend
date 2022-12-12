@@ -89,6 +89,18 @@ const usersSlice = createSlice({
     logoutUser(state) {
       state.user = null
     },
+    verifyUserRequest(state) {
+      state.verifyUserLoading = true
+      state.verifyUserError = null
+    },
+    verifyUserSuccess(state, action) {
+      state.verifyUserLoading = false
+      state.verifyUserError = action.payload
+    },
+    verifyUserFailure(state, action) {
+      state.verifyUserLoading = false
+      state.verifyUserError = action.payload
+    },
   },
 })
 

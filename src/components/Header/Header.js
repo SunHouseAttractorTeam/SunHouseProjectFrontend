@@ -22,10 +22,11 @@ const Header = () => {
   }
 
   return (
-    <header className=" header">
+    <header className="header">
       <div className="container header__container">
         <Logo className="header_logo" />
         <Nav />
+
         {!user ? (
           <MainButton className="header_MainButton" onClick={onHeaderButton} text="Войти" />
         ) : (

@@ -1,5 +1,6 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import Cookies from 'js-cookie'
+import { toast } from 'react-toastify'
 import axiosApi from '../../axiosApi'
 import { historyPush } from '../actions/historyActions'
 import {
@@ -19,6 +20,9 @@ import {
   registrationFailure,
   registrationRequest,
   registrationSuccess,
+  verifyUserFailure,
+  verifyUserRequest,
+  verifyUserSuccess,
   vkLoginFailure,
   vkLoginRequest,
   vkLoginSuccess,
@@ -28,7 +32,16 @@ export function* registrationUserSaga({ payload: userData }) {
   try {
     const response = yield axiosApi.post('/users', userData)
     yield put(registrationSuccess(response.data))
-    yield put(historyPush('/'))
+    // yield put(historyPush('/'))
+    yield toast.success('Подтвердите email', {
+      position: 'top-right',
+      autoClose: 3500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(registrationFailure(e.response.data))
@@ -102,8 +115,16 @@ export function* logoutUserSaga() {
   try {
     yield axiosApi.delete('users/sessions')
     yield Cookies.remove('jwt')
-    yield put(historyPush('/'))
   } catch (e) {}
+}
+
+export function* verifyUserSaga(confirmationCode) {
+  try {
+    const response = yield axiosApi.get(`/users/confirm/${confirmationCode.payload}`)
+    yield put(verifyUserSuccess(response.data))
+  } catch (e) {
+    yield put(verifyUserFailure(e))
+  }
 }
 
 const userSagas = [
@@ -114,6 +135,7 @@ const userSagas = [
   takeEvery(googleLoginRequest, googleLoginSaga),
   takeEvery(appleLoginRequest, appleLoginSaga),
   takeEvery(vkLoginRequest, vkLoginSaga),
+  takeEvery(verifyUserRequest, verifyUserSaga),
 ]
 
 export default userSagas

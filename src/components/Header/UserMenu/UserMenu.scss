@@ -1,39 +1,45 @@
 @import '../../../scss/style';
 
-.user__menu {
+.user-menu {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border: none;
-  border-radius: 50px;
-  gap: 10px;
-  padding: 10px 32px;
-  color: $darkGreenColor;
-  font-weight: 700;
-  font-style: normal;
-  font-size: 20px;
-  line-height: 20px;
-  cursor: pointer;
-  background: $lightGreenColor;
   position: relative;
-  height: 40px;
-  width: 150px;
-  margin: 0;
 
-  &_img {
-    height: 50px;
+  &__backdrop {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 1000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0);
   }
 
-  &_list {
+  &__icon {
+    margin-right: 20px;
+  }
+
+  &__img {
+    height: 50px !important;
+    width: 50px !important;
+  }
+
+  &__list {
     position: absolute;
+    top: 110%;
     z-index: 100000;
     margin: auto;
     color: $darkGreenColor;
     text-decoration: none;
+    display: flex;
+    flex-direction: column;
 
-    &_item {
-      background: $lightGreenColor;
+    &-item {
+      margin-bottom: 3px;
+      border-radius: 15px;
       text-align: center;
       vertical-align: baseline;
       line-height: 50px;
@@ -42,6 +48,25 @@
       font-weight: 700;
       cursor: pointer;
       border: none;
+      background: $lightGreenColor;
+      display: flex;
+
+      &-child {
+        color: black;
+        font-weight: 700;
+        text-decoration: none;
+        flex-grow: 1;
+      }
+
+      &:hover {
+        background: #fff;;
+      }
     }
+
+
+  }
+
+  &__button {
+    border: none;
   }
 }
