@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const name = 'tasks'
 
 export const initialState = {
-  tasks: null,
+  task: null,
   loading: false,
   error: null,
 }
@@ -12,6 +12,18 @@ const tasksSlice = createSlice({
   name,
   initialState,
   reducers: {
+    fetchTaskRequest(state) {
+      state.loading = true
+      state.error = null
+    },
+    fetchTaskSuccess(state, { payload: task }) {
+      state.loading = false
+      state.task = task
+    },
+    fetchTaskFailure(state, action) {
+      state.loading = false
+      state.error = action.payload
+    },
     createTaskRequest(state) {
       state.loading = true
       state.error = null
@@ -20,6 +32,28 @@ const tasksSlice = createSlice({
       state.loading = false
     },
     createTaskFailure(state, action) {
+      state.loading = false
+      state.error = action.payload
+    },
+    editTaskRequest(state) {
+      state.loading = true
+      state.error = null
+    },
+    editTaskSuccess(state) {
+      state.loading = false
+    },
+    editTaskFailure(state, action) {
+      state.loading = false
+      state.error = action.payload
+    },
+    deleteTaskRequest(state) {
+      state.loading = true
+      state.error = null
+    },
+    deleteTaskSuccess(state) {
+      state.loading = false
+    },
+    deleteTaskFailure(state, action) {
       state.loading = false
       state.error = action.payload
     },
