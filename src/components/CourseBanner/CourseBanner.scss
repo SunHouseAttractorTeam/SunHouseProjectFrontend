@@ -1,25 +1,98 @@
 @import '../../scss/style';
 
 .course-banner {
+  &__top {
+    display: inline-block;
+  }
+
   &__course-button {
     font-size: 24px;
     text-decoration: none;
     color: $blackDarkColor;
-    padding: 10px 0;
+    padding: 15px;
     display: flex;
     align-items: center;
+    margin: 18px 0 18px 3px;
 
     & i {
-      padding-right: 5px;
+      padding-right: 28px;
+    }
+
+    &:hover {
+      color: $lightGreenColor;
+
+      & path {
+        fill: $lightGreenColor;
+        transition: 0.3ms;
+      }
     }
   }
 
   &__image {
     height: 424px;
+    position: relative;
+    margin-bottom: 10px;
 
     & img {
-      max-width: 100%;
-      height: auto;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &-input-file {
+      cursor: pointer;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    &-edit-button {
+      z-index: 10;
+      position: absolute;
+      top: 32px;
+      right: 18.5%;
+      padding: 12px 62px;
+      border-radius: 50px;
+      background: $greyColor;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: $blackDarkColor;
+      font-size: 16px;
+      font-weight: 700;
+
+      & i {
+        padding-right: 17px;;
+      }
+
+      &:hover {
+        background: $lightGreenColor;
+      }
+    }
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+
+    &-left {
+      display: flex;
+
+      &-image {
+        width: 84px;
+        height: 84px;
+        border-radius: 50%;
+        overflow: hidden;
+
+        & img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
     }
   }
 }
