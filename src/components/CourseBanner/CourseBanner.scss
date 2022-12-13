@@ -1,0 +1,25 @@
+@import '../../scss/style';
+
+.course-banner {
+  &__course-button {
+    font-size: 24px;
+    text-decoration: none;
+    color: $blackDarkColor;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+
+    & i {
+      padding-right: 5px;
+    }
+  }
+
+  &__image {
+    height: 424px;
+
+    & img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
