@@ -47,7 +47,7 @@ const CourseEdit = () => {
   }
 
   return (
-    <>
+    <div className="container">
       {course && (
         <div className="course-edit">
           <div className="course-edit__left">
@@ -106,7 +106,7 @@ const CourseEdit = () => {
           )}
         </>
       )}
-    </>
+    </div>
   )
 }
 

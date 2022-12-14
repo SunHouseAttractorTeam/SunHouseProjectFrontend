@@ -31,15 +31,30 @@
   &__image {
     height: 424px;
     position: relative;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
+    background: $totalBlackColor;
+
+    &:hover {
+      & i {
+        display: block;
+      }
+
+      & img {
+        opacity: 0.55;
+        background: url("../../assets/icons/addImage.svg") 0 0 no-repeat;
+      }
+    }
 
     & img {
+      opacity: 1;
+      display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
     &-input-file {
+      z-index: 9;
       cursor: pointer;
       opacity: 0;
       position: absolute;
@@ -50,7 +65,7 @@
     }
 
     &-edit-button {
-      z-index: 10;
+      z-index: 11;
       position: absolute;
       top: 32px;
       right: 18.5%;
@@ -71,6 +86,14 @@
       &:hover {
         background: $lightGreenColor;
       }
+    }
+
+    &-add-icon {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 
