@@ -10,7 +10,7 @@ const Avatar = ({ user, className }) => {
     if (user?.avatar.match(/http/) || user?.avatar.match(/https/)) {
       avatarImage = user.avatar
     } else {
-      avatarImage = `http://localhost:8000/uploads/${user.avatar}`
+      avatarImage = `${apiUrl}/${user.avatar}`
     }
   }
 

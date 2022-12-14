@@ -62,18 +62,6 @@ const usersSlice = createSlice({
       state.loginLoading = false
       state.loginError = action.payload
     },
-    appleLoginRequest(state) {
-      state.loginLoading = true
-      state.loginError = null
-    },
-    appleLoginSuccess(state, action) {
-      state.loginLoading = false
-      state.user = action.payload
-    },
-    appleLoginFailure(state, action) {
-      state.loginLoading = false
-      state.loginError = action.payload
-    },
     vkLoginRequest(state) {
       state.loginLoading = true
       state.loginError = null

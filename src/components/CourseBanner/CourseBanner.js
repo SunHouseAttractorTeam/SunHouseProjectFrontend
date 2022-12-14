@@ -43,7 +43,7 @@ const CourseBanner = ({ course, userRole, handleSave }) => {
           </Link>
         </div>
       </div>
-      <div className="course-banner__image">
+      <div className={`course-banner__image ${userRole === 'teacher' && 'course-banner__image--edit'}`}>
         <img src={image} alt={course.title} />
         {userRole === 'teacher' && (
           <>

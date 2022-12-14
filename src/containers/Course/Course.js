@@ -31,7 +31,7 @@ const Course = () => {
       {course && (
         <div className="course">
           <Header2 />
-          <CourseBanner course={course} userRole={user.role} handleSave={handleSave} />
+          <CourseBanner course={course} userRole={user?.role} handleSave={handleSave} />
           {course && (
             <div className="course__bottom">
               <Switch>

@@ -34,14 +34,16 @@
     margin-bottom: 25px;
     background: $totalBlackColor;
 
-    &:hover {
-      & i {
-        display: block;
-      }
+    &--edit {
+      &:hover {
+        & i {
+          display: block;
+        }
 
-      & img {
-        opacity: 0.55;
-        background: url("../../assets/icons/addImage.svg") 0 0 no-repeat;
+        & img {
+          opacity: 0.55;
+          background: url("../../assets/icons/addImage.svg") 0 0 no-repeat;
+        }
       }
     }
 
