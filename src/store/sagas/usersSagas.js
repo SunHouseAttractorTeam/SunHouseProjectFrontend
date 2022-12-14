@@ -4,9 +4,6 @@ import { toast } from 'react-toastify'
 import axiosApi from '../../axiosApi'
 import { historyPush } from '../actions/historyActions'
 import {
-  appleLoginFailure,
-  appleLoginRequest,
-  appleLoginSuccess,
   facebookLoginFailure,
   facebookLoginRequest,
   facebookLoginSuccess,
@@ -87,18 +84,6 @@ export function* googleLoginSaga({ payload: userData }) {
   }
 }
 
-export function* appleLoginSaga({ payload: userData }) {
-  try {
-    const response = yield axiosApi.post('/users/appleLogin/', userData)
-    yield put(appleLoginSuccess(response.data.user))
-    yield put(historyPush('/'))
-  } catch (e) {
-    if (e.response && e.response.data) {
-      yield put(appleLoginFailure(e.response.data))
-    }
-  }
-}
-
 export function* vkLoginSaga({ payload: userData }) {
   try {
     const response = yield axiosApi.post('/users/vkLogin/', userData)
@@ -115,6 +100,7 @@ export function* logoutUserSaga() {
   try {
     yield axiosApi.delete('users/sessions')
     yield Cookies.remove('jwt')
+    yield put(historyPush('/'))
   } catch (e) {}
 }
 
@@ -133,7 +119,6 @@ const userSagas = [
   takeEvery(logoutUser, logoutUserSaga),
   takeEvery(facebookLoginRequest, facebookLoginSaga),
   takeEvery(googleLoginRequest, googleLoginSaga),
-  takeEvery(appleLoginRequest, appleLoginSaga),
   takeEvery(vkLoginRequest, vkLoginSaga),
   takeEvery(verifyUserRequest, verifyUserSaga),
 ]
