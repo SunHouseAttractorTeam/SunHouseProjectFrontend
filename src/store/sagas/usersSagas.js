@@ -10,6 +10,8 @@ import {
   facebookLoginFailure,
   facebookLoginRequest,
   facebookLoginSuccess,
+  forgotPasswordFailure,
+  forgotPasswordRequest,
   googleLoginFailure,
   googleLoginRequest,
   googleLoginSuccess,
@@ -127,6 +129,15 @@ export function* verifyUserSaga(confirmationCode) {
   }
 }
 
+export function* forgotPasswordSaga() {
+  try {
+    const response = yield axiosApi.post(`/users/forgot/`)
+    yield put(verifyUserSuccess(response.data))
+  } catch (e) {
+    yield put(forgotPasswordFailure(e))
+  }
+}
+
 const userSagas = [
   takeEvery(registrationRequest, registrationUserSaga),
   takeEvery(loginUserRequest, loginUserSaga),
@@ -136,6 +147,7 @@ const userSagas = [
   takeEvery(appleLoginRequest, appleLoginSaga),
   takeEvery(vkLoginRequest, vkLoginSaga),
   takeEvery(verifyUserRequest, verifyUserSaga),
+  takeEvery(forgotPasswordRequest, forgotPasswordSaga),
 ]
 
 export default userSagas

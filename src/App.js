@@ -9,6 +9,7 @@ import CookieProvider from './components/UI/CookieProvider/CookieProvider'
 import Course from './containers/Course/Course'
 import MyProfile from './containers/MyProfile/MyProfile'
 import VerifyPage from './containers/VerifyPage/VerifyPage'
+import ForgotPasswordPage from './containers/ForgotPasswordPage/ForgotPasswordPage'
 import './scss/style.scss'
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
         <ProtectedRoute isAllowed={user?.token} redirectTo="/login" path="/user" component={MyProfile} />
         <ProtectedRoute isAllowed={user?.token} redirectTo="/login" path="/course/:id" component={Course} />
         <Route path="/confirm/:confirmationCode" component={VerifyPage} />
+        <Route path="/forgot" component={ForgotPasswordPage} />
       </Switch>
     </CookieProvider>
   )
