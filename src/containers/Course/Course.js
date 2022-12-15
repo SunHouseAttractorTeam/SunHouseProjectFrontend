@@ -2,13 +2,13 @@ import React, { useEffect } from 'react'
 import { Route, Switch, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Header2 from '../../components/Header2/Header2'
-import './Course.scss'
 import Footer from '../../components/Footer/Footer'
-import CourseReview from './CourseReview/CourseReview'
+import CourseHomepage from './CourseHomepage/CourseHomepage'
 import { fetchCourseRequest, updateCourseRequest } from '../../store/actions/coursesActions'
 import CourseSettings from './CourseSettings/CourseSettings'
 import CourseEdit from './CourseEdit/CourseEdit'
 import CourseBanner from '../../components/CourseBanner/CourseBanner'
+import './Course.scss'
 
 const Course = () => {
   const { id } = useParams()
@@ -35,7 +35,7 @@ const Course = () => {
           {course && (
             <div className="course__bottom">
               <Switch>
-                <Route path="/course/:id" exact component={CourseReview} />
+                <Route path="/course/:id" exact component={CourseHomepage} />
                 <Route path="/course/:id/settings" exact component={CourseSettings} />
                 <Route path="/course/:id/edit" component={CourseEdit} />
               </Switch>

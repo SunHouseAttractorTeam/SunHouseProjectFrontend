@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchCourseRequest } from '../../../store/actions/coursesActions'
 import CourseTitle from '../../../components/CourseTitle/CourseTitle'
 
-const CourseReview = () => {
+const CourseHomepage = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const course = useSelector(state => state.courses.course)
@@ -36,4 +36,4 @@ const CourseReview = () => {
   )
 }
 
-export default CourseReview
+export default CourseHomepage
