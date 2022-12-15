@@ -1,0 +1,34 @@
+.block {
+  &__paragraph {
+    display: flex;
+    align-items: center;
+    margin-bottom: 54px;
+  }
+
+  svg {
+    margin-left: 24px;
+  }
+
+  &__title {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 45px;
+    margin-bottom: 16px;
+  }
+
+  &__add-link {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+    border: none;
+    background: transparent;
+    color: #828282;;
+  }
+
+  &__card-description{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 24px;
+  }
+}
