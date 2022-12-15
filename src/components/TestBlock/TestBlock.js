@@ -3,7 +3,7 @@ import './TestBlock.scss'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import ContentForm from '../ContentForm/ContentForm'
-import { fetchTestRequest } from '../../store/actions/testsActions'
+import { editTestRequest, fetchTestRequest } from '../../store/actions/testsActions'
 import QuestionsBlock from '../QuestionsBlock/QuestionsBlock'
 
 const Test = () => {
@@ -15,11 +15,15 @@ const Test = () => {
     dispatch(fetchTestRequest(testId))
   }, [dispatch, testId])
 
+  const handleSaveTest = data => {
+    dispatch(editTestRequest(data))
+  }
+
   return (
     <>
       {test && (
         <>
-          <ContentForm contentData={test} contentId={testId} />
+          <ContentForm contentData={test} contentId={testId} handleSave={handleSaveTest} />
           <QuestionsBlock />
         </>
       )}

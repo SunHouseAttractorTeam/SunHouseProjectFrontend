@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import ContentForm from '../ContentForm/ContentForm'
-import { fetchLessonRequest } from '../../store/actions/lessonsActions'
+import { editLessonRequest, fetchLessonRequest } from '../../store/actions/lessonsActions'
 
 const LessonBlock = () => {
   const { lessonId } = useParams()
@@ -13,7 +13,11 @@ const LessonBlock = () => {
     dispatch(fetchLessonRequest(lessonId))
   }, [dispatch, lessonId])
 
-  return <> {lesson && <ContentForm contentData={lesson} contentId={lessonId} />}</>
+  const handleSaveLesson = data => {
+    dispatch(editLessonRequest(data))
+  }
+
+  return <> {lesson && <ContentForm contentData={lesson} contentId={lessonId} handleSave={handleSaveLesson} />}</>
 }
 
 export default LessonBlock

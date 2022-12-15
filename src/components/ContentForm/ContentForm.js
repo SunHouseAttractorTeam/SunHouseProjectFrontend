@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
 import './ContentForm.scss'
 import FilesUploader from '../FilesUploader/FilesUploader'
 import SunEditorWYSIWYG from '../UI/SunEditorWYSIWYG/SunEditorWYSIWYG'
 import AddContentBlock from '../AddContentBlock/AddContentBlock'
-import { editLessonRequest } from '../../store/actions/lessonsActions'
 
-const ContentForm = ({ contentData, contentId }) => {
+const ContentForm = ({ contentData, contentId, handleSave }) => {
   const { courseId } = useParams()
-  const dispatch = useDispatch()
   const [data, setData] = useState([])
+  const [lastFile, setLastFile] = useState('')
 
   useEffect(() => {
     if (contentData) {
@@ -61,10 +59,10 @@ const ContentForm = ({ contentData, contentId }) => {
 
   const lastFileChangeHandler = e => {
     const file = e.target.files[0]
-    setData(prevState => [...prevState, { file }])
+    setLastFile(file)
   }
 
-  const handleSave = () => {
+  const onClickSave = () => {
     const formData = new FormData()
     data.forEach(elem => {
       Object.keys(elem).forEach(key => {
@@ -73,10 +71,14 @@ const ContentForm = ({ contentData, contentId }) => {
         }
       })
     })
+    if (lastFile) {
+      formData.append('file', lastFile)
+      formData.append('payload', JSON.stringify([...data, { file: lastFile }]))
+    } else {
+      formData.append('payload', JSON.stringify(data))
+    }
 
-    formData.append('payload', JSON.stringify(data))
-
-    dispatch(editLessonRequest({ courseId, contentId, data: formData }))
+    handleSave({ courseId, contentId, data: formData })
   }
   return (
     <>
@@ -135,7 +137,7 @@ const ContentForm = ({ contentData, contentId }) => {
               <FilesUploader type="file" onChange={lastFileChangeHandler} />
             </div>
           </div>
-          <button className="MainButton GreenButton content-form-save" type="button" onClick={handleSave}>
+          <button className="MainButton GreenButton content-form-save" type="button" onClick={onClickSave}>
             Сохранить
           </button>
         </>
