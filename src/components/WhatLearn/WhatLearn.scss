@@ -1,0 +1,61 @@
+.learn-plan-block{
+  margin-top: 120px;
+  &__paragraph{
+    display: flex;
+    align-items: center;
+    margin-bottom: 54px;
+  }
+
+  svg{
+    margin-left: 24px;
+  }
+
+  &__title{
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 45px;
+    margin-bottom: 16px;
+  }
+
+  &__add-link{
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+    border: none;
+    background: transparent;
+    color: #828282;;
+  }
+
+  &__cards{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-bottom: 120px;
+  }
+
+  &__card{
+    display: flex;
+    border-radius: 16px;
+    background: #FFFFFF;
+    width: 580px;
+    height: 148px;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  &__card-title{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    margin-bottom: 12px;
+  }
+
+  &__card-description{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 24px;
+  }
+}
