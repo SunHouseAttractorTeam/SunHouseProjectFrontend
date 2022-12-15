@@ -25,7 +25,8 @@ const CourseHomepage = () => {
             title={course.title}
             description={course.description}
             image={course.image}
-            userRole={user.role}
+            user={user._id}
+            courseCreator={course.user}
           />
           <div className="container">
             <div className="course-review__bottom" />

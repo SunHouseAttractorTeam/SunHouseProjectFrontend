@@ -4,7 +4,7 @@ import banner from '../../assets/images/banner.svg'
 import './CourseBanner.scss'
 import MainButton from '../UI/MainButton/MainButton'
 
-const CourseBanner = ({ course, userRole, handleSave }) => {
+const CourseBanner = ({ course, user, handleSave }) => {
   const location = useLocation()
 
   let image = banner
@@ -49,9 +49,9 @@ const CourseBanner = ({ course, userRole, handleSave }) => {
           </Link>
         </div>
       </div>
-      <div className={`course-banner__image ${userRole === 'teacher' && 'course-banner__image--edit'}`}>
+      <div className={`course-banner__image ${user === course.user && 'course-banner__image--edit'}`}>
         <img src={image} alt={course.title} />
-        {userRole === 'teacher' && (
+        {user === course.user && (
           <>
             <i className="course-banner__image-add-icon">
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
