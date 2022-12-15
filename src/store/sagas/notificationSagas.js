@@ -46,10 +46,10 @@ export function* createNotification({ payload: notificationData }) {
 }
 
 export function* editNotification({ payload }) {
-  const { notificationId, notificationData } = payload
+  const { id, notificationData } = payload
 
   try {
-    yield axiosApi.put(`/notifications/${notificationId}`, notificationData)
+    yield axiosApi.put(`/notifications/${id}`, notificationData)
     yield put(editNotificationSuccess())
   } catch (e) {
     yield put(editNotificationFailure(e))
