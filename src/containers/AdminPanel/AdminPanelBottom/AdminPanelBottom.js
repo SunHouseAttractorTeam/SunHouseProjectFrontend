@@ -23,7 +23,6 @@ const AdminPanelBottom = () => {
             </i>
             Главная
           </ProfileSidebarLink>
-          /// Users
           <ProfileSidebarLink to="/admin_panel/all_users">
             <i className="profile__sidebar-bottom-nav-list-item-icon">
               <svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -35,7 +34,6 @@ const AdminPanelBottom = () => {
             </i>
             Список пользователей
           </ProfileSidebarLink>
-          /// Notifications
           <ProfileSidebarLink to="/admin_panel/notifications">
             <i className="profile__sidebar-bottom-nav-list-item-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -51,7 +49,6 @@ const AdminPanelBottom = () => {
             </i>
             Отправить объявления
           </ProfileSidebarLink>
-          /// Courses
           <ProfileSidebarLink to="/admin_panel/courses">
             <i className="profile__sidebar-bottom-nav-list-item-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -71,7 +68,6 @@ const AdminPanelBottom = () => {
             </i>
             Курсы
           </ProfileSidebarLink>
-          /// Reviews
           <ProfileSidebarLink to="/admin_panel/reviews">
             <i className="profile__sidebar-bottom-nav-list-item-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -98,7 +94,6 @@ const AdminPanelBottom = () => {
             </i>
             Отзывы
           </ProfileSidebarLink>
-          /// Exit
           <ProfileSidebarLink to="/">
             <i className="profile__sidebar-bottom-nav-list-item-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
