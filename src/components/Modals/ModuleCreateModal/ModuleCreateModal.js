@@ -7,7 +7,7 @@ import FormInput from '../../UI/Form/FormInput/FormInput'
 import MainButton from '../../UI/MainButton/MainButton'
 import './ModuleCreateModal.scss'
 
-const ModuleCreateModal = ({ setOpen, id, setModalType }) => {
+const ModuleCreateModal = ({ setOpen, id }) => {
   const dispatch = useDispatch()
   const [moduleData, setModuleData] = useState({ title: '' })
 
@@ -32,12 +32,6 @@ const ModuleCreateModal = ({ setOpen, id, setModalType }) => {
               className="inputModal"
             />
             <div className="content__test__button-block">
-              <MainButton
-                className="WhiteButton content__btn"
-                text="Назад"
-                type="button"
-                onClick={() => setModalType('content')}
-              />
               <MainButton
                 className="GreenButton content__module__button"
                 text="Создать модуль"
