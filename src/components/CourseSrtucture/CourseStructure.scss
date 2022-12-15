@@ -1,11 +1,13 @@
 .course-structure-block{
-  max-width: 380px;
-  height: 278px;
-  padding-left: 24px;
-  padding-right: 24px;
-  margin: 0 auto;
-  background: white;
-  border-radius: 16px;
+  &__container {
+    max-width: 380px;
+    height: 278px;
+    padding-left: 24px;
+    padding-right: 24px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 16px;
+  }
 
   &__title{
     font-size: 24px;
@@ -71,5 +73,16 @@
       }
     }
   }
+  &__btn-module{
+    background-color: #ADFA00;
+    width: 332px;
+    margin-top: 32px;
+    border: 2px solid transparent;
+    transition: all .5s ease;
 
+    &:hover {
+      background: transparent;
+      border-color: #ADFA00;
+    }
+  }
 }
