@@ -14,8 +14,10 @@ const UserCourses = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchUserCoursesRequest(user?._id))
-  }, [])
+    if (user) {
+      dispatch(fetchUserCoursesRequest(user._id))
+    }
+  }, [dispatch, user])
 
   const handleCourse = id => {
     history.push(`/course/${id}`)
@@ -29,8 +31,6 @@ const UserCourses = () => {
       </div>
       <div className="user-courses__bottom">
         <div className="user-courses__bottom-courses">
-          <CourseCard title="Web-дизайнер" price="5500 сом" date="24 месяца" />
-          <CourseCard title="UX-UI дизайнер" price="5500 сом" date="24 месяца" />
           {courses.map(course => (
             <CourseCard
               key={course._id}

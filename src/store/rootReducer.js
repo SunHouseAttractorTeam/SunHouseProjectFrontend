@@ -3,6 +3,8 @@ import usersSlice from './slices/usersSlices'
 import coursesSlice from './slices/coursesSlice'
 import categoriesSlice from './slices/categoriesSlice'
 import lessonsSlice from './slices/lessonsSlice'
+import tasksSlice from './slices/tasksSlice'
+import testsSlice from './slices/testsSlice'
 import notificationsSlice from './slices/notificationsSlice'
 import reviewsSlice from './slices/reviewsSlice'
 
@@ -11,6 +13,8 @@ const rootReducer = combineReducers({
   courses: coursesSlice.reducer,
   categories: categoriesSlice.reducer,
   lessons: lessonsSlice.reducer,
+  tasks: tasksSlice.reducer,
+  tests: testsSlice.reducer,
   notifications: notificationsSlice.reducer,
   reviews: reviewsSlice.reducer,
 })

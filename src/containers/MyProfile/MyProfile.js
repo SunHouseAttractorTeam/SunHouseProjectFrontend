@@ -10,8 +10,8 @@ import Notifications from '../Notifications/Notifications'
 import Certificates from '../Certificates/Certificates'
 import Settings from '../Settings/Settings'
 import Footer from '../../components/Footer/Footer'
-import './MyProfile.scss'
 import { ProtectedRoute } from '../../utils/utils'
+import './MyProfile.scss'
 
 const MyProfile = () => {
   const user = useSelector(state => state.users.user)

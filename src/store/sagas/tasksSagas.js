@@ -30,9 +30,10 @@ export function* createTask({ payload }) {
   const { courseId, moduleId, taskData } = payload
 
   try {
-    yield axiosApi.post(`/tasks?module=${moduleId}`, taskData)
+    const response = yield axiosApi.post(`/tasks?module=${moduleId}`, taskData)
     yield put(createTaskSuccess())
     yield put(fetchCourseRequest(courseId))
+    yield put(historyPush(`/course/${courseId}/edit/task/${response.data._id}`))
   } catch (e) {
     yield put(createTaskFailure(e))
   }
