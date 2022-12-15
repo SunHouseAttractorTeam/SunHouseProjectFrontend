@@ -63,7 +63,6 @@
           padding: 0;
 
           &-item {
-            padding: 22px 0;
             border-bottom: 2px solid $darkGreyColor;
 
             &:hover {
@@ -76,6 +75,7 @@
             }
 
             &-link {
+              padding: 22px 0;
               text-decoration: none;
               color: inherit;
               display: flex;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, Route, Switch, useParams } from 'react-router-dom'
+import { Route, Switch, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchCourseRequest } from '../../../store/actions/coursesActions'
 import ModalTaskSetting from '../../../components/Modals/ModalTaskSetting/ModalTaskSetting'
@@ -7,7 +7,10 @@ import ModalCreateModal from '../../../components/Modals/ModuleCreateModal/Modul
 import CreateLessonModal from '../../../components/Modals/CreateLessonModal/CreateLessonModal'
 import CreateTestModal from '../../../components/Modals/CreateTestModal/CreateTestModal'
 import ModalAddContent from '../../../components/Modals/ModalAddContent/ModalAddContent'
-import ContentForm from '../../../components/ContentForm/ContentForm'
+import CourseModules from '../../../components/CourseModules/CourseModules'
+import LessonBlock from '../../../components/LessonBlock/LessonBlock'
+import TaskBlock from '../../../components/TaskBlock/TaskBlock'
+import TestBlock from '../../../components/TestBlock/TestBlock'
 
 const CourseEdit = () => {
   const { id } = useParams()
@@ -51,35 +54,18 @@ const CourseEdit = () => {
       {course && (
         <div className="course-edit">
           <div className="course-edit__left">
-            <div className="course-edit__left-card">
-              <h6 className="course-edit__left-card-title">Структура курса</h6>
-              {course.modules.length > 0 &&
-                course.modules.map(module => (
-                  <div key={module._id}>
-                    <h6 className="course-edit__left-card-module-title">{module.title}</h6>
-                    <ul className="course-edit__left-card-module-list">
-                      {module.data.map(item => (
-                        <li
-                          key={item.id}
-                          className={`course-edit__left-card-module-list-item course-edit__left-card-module-list-item--${item.type}`}
-                        >
-                          <Link to={`/course/${id}/edit/${item.type}/${item.id}`}> {item.title}</Link>
-                        </li>
-                      ))}
-                    </ul>
-                    <button type="button" onClick={() => handleAddContent(module._id)}>
-                      + Занятие
-                    </button>
-                  </div>
-                ))}
-              <button type="button" onClick={handleAddModule}>
-                + Модуль
-              </button>
-            </div>
+            <CourseModules
+              id={id}
+              course={course}
+              handleAddModule={handleAddModule}
+              handleAddContent={handleAddContent}
+            />
           </div>
           <div className="course-edit__right">
             <Switch>
-              <Route path="/course/:courseId/edit/Lesson/:lessonId" component={ContentForm} />
+              <Route path="/course/:courseId/edit/lesson/:lessonId" component={LessonBlock} />
+              <Route path="/course/:courseId/edit/task/:taskId" component={TaskBlock} />
+              <Route path="/course/:courseId/edit/test/:testId" component={TestBlock} />
             </Switch>
           </div>
         </div>
@@ -94,7 +80,7 @@ const CourseEdit = () => {
               handleClick={handleClickNext}
             />
           )}
-          {modalType === 'module' && <ModalCreateModal id={id} setOpen={setOpen} setModalType={setModalType} />}
+          {modalType === 'module' && <ModalCreateModal id={id} setOpen={setOpen} />}
           {modalType === 'task' && (
             <ModalTaskSetting setOpen={setOpen} courseId={id} moduleId={moduleId} setModalType={setModalType} />
           )}

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchCourseRequest } from '../../../store/actions/coursesActions'
 import CourseTitle from '../../../components/CourseTitle/CourseTitle'
 
-const CourseReview = () => {
+const CourseHomepage = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const course = useSelector(state => state.courses.course)
@@ -25,7 +25,8 @@ const CourseReview = () => {
             title={course.title}
             description={course.description}
             image={course.image}
-            userRole={user.role}
+            user={user._id}
+            courseCreator={course.user}
           />
           <div className="container">
             <div className="course-review__bottom" />
@@ -36,4 +37,4 @@ const CourseReview = () => {
   )
 }
 
-export default CourseReview
+export default CourseHomepage

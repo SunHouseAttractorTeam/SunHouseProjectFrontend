@@ -30,9 +30,10 @@ export function* createLesson({ payload }) {
   const { courseId, moduleId, lessonData } = payload
 
   try {
-    yield axiosApi.post(`/lessons?module=${moduleId}`, lessonData)
+    const response = yield axiosApi.post(`/lessons?module=${moduleId}`, lessonData)
     yield put(createLessonSuccess())
     yield put(fetchCourseRequest(courseId))
+    yield put(historyPush(`/course/${courseId}/edit/lesson/${response.data._id}`))
   } catch (e) {
     yield put(createLessonFailure(e))
   }

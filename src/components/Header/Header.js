@@ -25,7 +25,7 @@ const Header = () => {
     <header className="header">
       <div className="container header__container">
         <Logo className="header_logo" />
-        <Nav />
+        <Nav user={user} />
 
         {!user ? (
           <MainButton className="header_MainButton" onClick={onHeaderButton} text="Войти" />
