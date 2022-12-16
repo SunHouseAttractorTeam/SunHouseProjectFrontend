@@ -99,8 +99,8 @@ export function* vkLoginSaga({ payload: userData }) {
 export function* logoutUserSaga() {
   try {
     yield axiosApi.delete('users/sessions')
-    yield Cookies.remove('jwt')
     yield put(historyPush('/'))
+    yield Cookies.remove('jwt')
   } catch (e) {}
 }
 

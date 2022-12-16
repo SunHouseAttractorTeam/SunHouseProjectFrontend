@@ -40,12 +40,12 @@ export function* createLesson({ payload }) {
 }
 
 export function* editLesson({ payload }) {
-  const { courseId, lessonId, data } = payload
+  const { courseId, contentId, data } = payload
 
   try {
-    yield axiosApi.put(`/lessons/${lessonId}?course=${courseId}`, data)
+    yield axiosApi.put(`/lessons/${contentId}?course=${courseId}`, data)
     yield put(editLessonSuccess())
-    yield put(fetchLessonRequest(lessonId))
+    yield put(fetchLessonRequest(contentId))
   } catch (e) {
     yield put(editLessonFailure(e))
   }

@@ -40,12 +40,12 @@ export function* createTest({ payload }) {
 }
 
 export function* editTest({ payload }) {
-  const { courseId, testId, data } = payload
+  const { courseId, contentId, data } = payload
 
   try {
-    yield axiosApi.put(`/tasks/${testId}?course=${courseId}`, data)
+    yield axiosApi.put(`/tasks/${contentId}?course=${courseId}`, data)
     yield put(editTestSuccess())
-    yield put(fetchTestRequest(testId))
+    yield put(fetchTestRequest(contentId))
   } catch (e) {
     yield put(editTestFailure(e))
   }
