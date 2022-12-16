@@ -9,6 +9,10 @@ import CourseSettings from './CourseSettings/CourseSettings'
 import CourseEdit from './CourseEdit/CourseEdit'
 import CourseBanner from '../../components/CourseBanner/CourseBanner'
 import './Course.scss'
+import WhatLearn from '../../components/WhatLearn/WhatLearn'
+import TeachersBlock from '../../components/TeachersBlock/TeachersBlock'
+import CourseProgram from '../../components/CourseProgram/CourseProgram'
+import { teachers } from '../../data/teachers'
 
 const Course = () => {
   const { id } = useParams()
@@ -29,7 +33,7 @@ const Course = () => {
   return (
     <>
       {course && (
-        <div className="course">
+        <>
           <Header2 />
           <CourseBanner course={course} user={user?._id} handleSave={handleSave} />
           {course && (
@@ -41,8 +45,17 @@ const Course = () => {
               </Switch>
             </div>
           )}
+          <div className="course container">
+            <WhatLearn />
+            <TeachersBlock
+              title="Преподователи"
+              subtitle='<button class="teachers-block__add-link">добавьте описание если необходимо</button>'
+              teachers={teachers}
+            />
+            <CourseProgram />
+          </div>
           <Footer />
-        </div>
+        </>
       )}
     </>
   )

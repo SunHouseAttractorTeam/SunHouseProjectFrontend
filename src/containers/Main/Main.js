@@ -9,6 +9,7 @@ import CoursesCatalog from '../../components/CoursesCatalog/CoursesCatalog'
 import Partners from '../../components/Partners/Partners'
 import './Main.scss'
 import ReviewsBlock from '../../components/ReviewsBlock/ReviewsBlock'
+import { teachers } from '../../data/teachers'
 
 const Main = () => (
   <div className="main">
@@ -17,7 +18,13 @@ const Main = () => (
     <Promo />
     <CoursesCatalog />
     <About />
-    <TeachersBlock />
+    <div className="container">
+      <TeachersBlock
+        title="Преподаватели — <span>практикующие эксперты</span>"
+        subtitle="Доверьте свое обучение специалистам"
+        teachers={teachers}
+      />
+    </div>
     <Partners />
     <ReviewsBlock />
     <Footer />

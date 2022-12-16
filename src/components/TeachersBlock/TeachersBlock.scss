@@ -1,19 +1,19 @@
 @import "../../scss/partials/colors";
 
 .teachers_block {
-  background: $greyColor;
   padding: 60px 0 200px ;
   margin: 0;
   overflow: hidden;
 
   &_headline {
+    display: flex;
+    flex-flow: row nowrap;
     margin-bottom: 30px;
-    background: url('../../assets/icons/Vector.svg') no-repeat;
   }
 
   &_text {
     width: 450px;
-    margin-left: 60px;
+    margin-left: 24px;
   }
 
   &_title {
@@ -21,11 +21,24 @@
     font-weight: 700;
     line-height: 45px;
     margin-bottom: 16px;
+
+    span {
+      white-space: nowrap;
+    }
   }
 
   &_subtitle {
     font-weight: 500;
     font-size: 16px;
     line-height: 19px;
+
+    button {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 24px;
+      border: none;
+      background: transparent;
+      color: #828282;
+    }
   }
 }

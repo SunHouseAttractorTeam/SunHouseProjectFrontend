@@ -3,10 +3,10 @@
     display: flex;
     align-items: center;
     margin-bottom: 54px;
-  }
 
-  svg {
-    margin-left: 24px;
+    svg {
+      min-width: 48px;
+    }
   }
 
   &__title {

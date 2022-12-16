@@ -22,13 +22,19 @@
     padding: 24px 25px;
   }
 
-  &__card-btn{
+  &__card-btn {
+    cursor: pointer;
     background: transparent;
     border: none;
+    margin-right: 20px;
     transition: all .5s ease;
 
-    svg{
-      margin-right: 20px;
+    &:hover svg circle {
+      fill: $greyColor;
+    }
+
+    svg circle {
+      transition: all .5s ease;
     }
   }
 
@@ -38,8 +44,15 @@
     font-size: 16px;
     line-height: 20px;
     padding: 12px 64px;
-    margin-top: 64px;
+    margin: 64px auto 0;
+    transition: all .5s ease;
+    border: 3px solid transparent;
 
+    &:hover{
+      background: transparent;
+      border-color: $lightGreenColor;
+      transition: all .5s ease;
+    }
 
   }
 }

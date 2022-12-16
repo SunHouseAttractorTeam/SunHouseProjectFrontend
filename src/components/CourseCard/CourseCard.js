@@ -19,7 +19,7 @@ const CourseCard = ({ isLast, title, date, list, price, onClick }) => (
           ))}
         </ul>
       )}
-      {isLast && <MainButton className="course-card__button" text="Подробнее" />}
+      {isLast && <MainButton className="course-card__button GreenButton" text="Подробнее" />}
     </div>
   </div>
 )
