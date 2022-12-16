@@ -9,6 +9,7 @@ import CourseSettings from './CourseSettings/CourseSettings'
 import CourseEdit from './CourseEdit/CourseEdit'
 import CourseBanner from '../../components/CourseBanner/CourseBanner'
 import './Course.scss'
+import CoursePassing from '../../components/CoursePassing/CoursePassing'
 
 const Course = () => {
   const { id } = useParams()
@@ -34,15 +35,24 @@ const Course = () => {
         <div className="course">
           <Header2 />
           <CourseBanner course={course} user={user?._id} handleSave={handleSave} accessCheck={accessCheck} />
-          {course && (
-            <div className="course__bottom">
-              <Switch>
-                <Route path="/course/:id" exact render={() => <CourseHomepage accessCheck={accessCheck} />} />
-                <Route path="/course/:id/settings" exact component={CourseSettings} />
-                <Route path="/course/:id/edit" component={CourseEdit} />
-              </Switch>
-            </div>
-          )}
+          <div className="course__bottom">
+            <Switch>
+              <Route
+                path="/course/:id"
+                exact
+                render={() =>
+                  !user?.myCourses.find(courseId => courseId._id === course._id) ? (
+                    <CoursePassing />
+                  ) : (
+                    <CourseHomepage accessCheck={accessCheck} />
+                  )
+                }
+              />
+              <Route path="/course/:id" exact render={() => <CourseHomepage accessCheck={accessCheck} />} />
+              <Route path="/course/:id/settings" exact component={CourseSettings} />
+              <Route path="/course/:id/edit" component={CourseEdit} />
+            </Switch>
+          </div>
           <Footer />
         </div>
       )}
