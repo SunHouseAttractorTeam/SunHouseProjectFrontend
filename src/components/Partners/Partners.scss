@@ -35,11 +35,11 @@
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
 
-    @media screen and (max-width: 996px){
+    @media screen and (max-width: 996px) {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @media screen and (max-width: 468px){
+    @media screen and (max-width: 468px) {
       grid-template-columns: 1fr;
     }
 

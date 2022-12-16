@@ -83,3 +83,19 @@
   }
 
 }
+
+@media (max-width: 550px) {
+  .promo {
+    &_column_left {
+      background: transparent;
+      width: 100%;
+      z-index: 2;
+    }
+
+    &_image {
+      filter: blur(5px);
+      width: 100%;
+    }
+  }
+
+}

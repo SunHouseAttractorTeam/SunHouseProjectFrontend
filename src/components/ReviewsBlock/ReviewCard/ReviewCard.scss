@@ -47,3 +47,21 @@
     font-weight: 400;
   }
 }
+
+@media (max-width: 600px) {
+  .review_card {
+    width: 100%;
+    height: fit-content;
+    padding-bottom: 40px;
+
+    &_content {
+      display: flex;
+    }
+
+    &_text {
+      &_description {
+        padding: 0;
+      }
+    }
+  }
+}

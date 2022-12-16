@@ -101,6 +101,7 @@
       width: 16px;
       height: 16px;
     }
+
     &_vk i {
       margin-left: 5px;
 
@@ -145,3 +146,16 @@
   }
 }
 
+@media(max-width: 768px) {
+  .footer {
+    &_top {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &_bottom_inner {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
