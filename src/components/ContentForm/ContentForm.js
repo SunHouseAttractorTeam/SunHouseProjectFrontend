@@ -66,7 +66,7 @@ const ContentForm = ({ contentData, contentId, handleSave }) => {
     const formData = new FormData()
     data.forEach(elem => {
       Object.keys(elem).forEach(key => {
-        if (key === 'audio' || key === 'file') {
+        if (key === 'audio') {
           formData.append(key, elem[key])
         }
       })

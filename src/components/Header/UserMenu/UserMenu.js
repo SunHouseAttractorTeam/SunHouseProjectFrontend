@@ -46,7 +46,7 @@ const UserMenu = ({ user }) => {
           <div className="user-menu__backdrop" onClick={clickHandler} />
           <div className="user-menu__list">
             <div className="user-menu__list-item">
-              <Link className="user-menu__list-item-child" to="/user/courses">
+              <Link className="user-menu__list-item-child" to="/user">
                 Profile
               </Link>
             </div>
