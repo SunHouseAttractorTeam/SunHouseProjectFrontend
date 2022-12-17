@@ -4,7 +4,7 @@ import MainButton from '../UI/MainButton/MainButton'
 import avatarStub from '../../assets/icons/avatarStub.svg'
 import './CourseTitle.scss'
 
-const CourseTitle = ({ courseId, title, avatar, description, user, courseCreator }) => {
+const CourseTitle = ({ courseId, title, avatar, description, accessCheck }) => {
   let avatarImage = avatarStub
 
   if (avatar) {
@@ -24,7 +24,7 @@ const CourseTitle = ({ courseId, title, avatar, description, user, courseCreator
               <p className="course-title__left-info-description">{description}</p>
             </div>
           </div>
-          {user === courseCreator && (
+          {accessCheck() && (
             <Link to={`/course/${courseId}/settings`} className="course-title__settings-button">
               <MainButton
                 className="WhiteButton"

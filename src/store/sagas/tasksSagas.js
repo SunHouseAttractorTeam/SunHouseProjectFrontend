@@ -40,12 +40,12 @@ export function* createTask({ payload }) {
 }
 
 export function* editTask({ payload }) {
-  const { courseId, taskId, data } = payload
+  const { courseId, contentId, data } = payload
 
   try {
-    yield axiosApi.put(`/tasks/${taskId}?course=${courseId}`, data)
+    yield axiosApi.put(`/tasks/${contentId}?course=${courseId}`, data)
     yield put(editTaskSuccess())
-    yield put(fetchTaskRequest(taskId))
+    yield put(fetchTaskRequest(contentId))
   } catch (e) {
     yield put(editTaskFailure(e))
   }
