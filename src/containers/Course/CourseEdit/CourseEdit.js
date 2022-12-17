@@ -11,6 +11,7 @@ import CourseModules from '../../../components/CourseModules/CourseModules'
 import LessonBlock from '../../../components/LessonBlock/LessonBlock'
 import TaskBlock from '../../../components/TaskBlock/TaskBlock'
 import TestBlock from '../../../components/TestBlock/TestBlock'
+import './CourseEdit.scss'
 
 const CourseEdit = () => {
   const { id } = useParams()
