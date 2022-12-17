@@ -10,7 +10,6 @@ const AllUsers = () => {
   useEffect(() => {
     dispatch(getAllUsersRequest())
   }, [dispatch])
-  console.log(users)
   return (
     <div className="users">
       <Title>Список пользователей</Title>
