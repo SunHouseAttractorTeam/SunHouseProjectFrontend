@@ -4,6 +4,13 @@
   background: $darkGreenColor;
   padding: 25px 0 !important;
   font-size: 14px;
+  position: sticky;
+  top: 0;
+  z-index: 100000;
+
+  &--scroll {
+    padding: 14px 0 !important;
+  }
 
   &__container {
     width: 100%;
@@ -14,11 +21,10 @@
 
   &_logo {
     font-size: 30px;
-    margin-right: 50px;
 
     img {
-      width: 219px;
-      height: 31px;
+      width: 294px;
+      height: 49px;
     }
   }
 

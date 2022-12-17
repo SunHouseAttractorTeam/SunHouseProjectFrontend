@@ -19,6 +19,18 @@
   background-color: $totalWhiteColor;
 }
 
+.inputModal {
+  width: 100%;
+  border: 2px solid #F2F2F7;
+  border-radius: 16px;
+  color: $blackDarkColor;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  padding: 20px 30px;
+  background-color: $totalWhiteColor;
+}
+
 .helper {
   color: red;
 }

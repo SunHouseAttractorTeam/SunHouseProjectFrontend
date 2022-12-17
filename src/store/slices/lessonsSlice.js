@@ -12,6 +12,18 @@ const lessonsSlice = createSlice({
   name,
   initialState,
   reducers: {
+    fetchLessonRequest(state) {
+      state.loading = true
+      state.error = null
+    },
+    fetchLessonSuccess(state, { payload: lesson }) {
+      state.loading = false
+      state.lesson = lesson
+    },
+    fetchLessonFailure(state, action) {
+      state.loading = false
+      state.error = action.payload
+    },
     createLessonRequest(state) {
       state.loading = true
       state.error = null
@@ -20,6 +32,28 @@ const lessonsSlice = createSlice({
       state.loading = false
     },
     createLessonFailure(state, action) {
+      state.loading = false
+      state.error = action.payload
+    },
+    editLessonRequest(state) {
+      state.loading = true
+      state.error = null
+    },
+    editLessonSuccess(state) {
+      state.loading = false
+    },
+    editLessonFailure(state, action) {
+      state.loading = false
+      state.error = action.payload
+    },
+    deleteLessonRequest(state) {
+      state.loading = true
+      state.error = null
+    },
+    deleteLessonSuccess(state) {
+      state.loading = false
+    },
+    deleteLessonFailure(state, action) {
       state.loading = false
       state.error = action.payload
     },

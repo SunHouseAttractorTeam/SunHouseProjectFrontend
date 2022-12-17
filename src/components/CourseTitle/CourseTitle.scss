@@ -1,0 +1,51 @@
+@import '../../scss/style';
+
+.course-title {
+  border-bottom: 2px solid $darkGreyColor;
+  padding-bottom: 21px;
+  margin-bottom: 20px;
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+
+    &-image {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 24px 0 7px;
+    }
+
+    &-info {
+      &-title {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 11px;
+      }
+
+      &-description {
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
+  }
+
+  &__settings-button {
+    text-decoration: none;
+
+    & button {
+      font-size: 16px;
+    }
+
+    &:hover button {
+      background: $lightGreenColor;
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Logo from '../UI/Logo/Logo'
 import MainButton from '../UI/MainButton/MainButton'
 import PromoImage from '../../assets/promo/Promo_image.png'
@@ -20,7 +21,9 @@ const Promo = () => {
             <h1 className="promo_title">{title}</h1>
             <Logo className="promo_logo" />
             <p className="promo_text">{text}</p>
-            <MainButton className="GreenButton promo_button" text="Зарегистрироваться" onClick={onPromoButtonClick} />
+            <Link to="/registration" className="form_loginLink_span">
+              <MainButton className="GreenButton promo_button" text="Зарегистрироваться" onClick={onPromoButtonClick} />
+            </Link>
           </div>
           <div className="promo_column_right">
             <div className="promo_image">

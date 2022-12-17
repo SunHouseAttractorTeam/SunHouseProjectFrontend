@@ -39,7 +39,7 @@ const CourseSettings = () => {
   }
 
   return (
-    <>
+    <div className="container">
       {course && (
         <div className="course-settings">
           <div className="course-settings__left">
@@ -74,7 +74,7 @@ const CourseSettings = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   )
 }
 

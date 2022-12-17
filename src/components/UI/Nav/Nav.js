@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import './Nav.scss'
 
-const Nav = () => {
+const Nav = ({ user }) => {
   const category = useSelector(state => state.categories.categories)
 
   return (
@@ -38,11 +38,13 @@ const Nav = () => {
             Отзывы
           </a>
         </li>
-        <li className="main-nav__item">
-          <NavLink to="/registration" className="main-nav__link">
-            Регистрация
-          </NavLink>
-        </li>
+        {!user && (
+          <li className="main-nav__item">
+            <NavLink to="/registration" className="main-nav__link">
+              Регистрация
+            </NavLink>
+          </li>
+        )}
       </ul>
     </nav>
   )
