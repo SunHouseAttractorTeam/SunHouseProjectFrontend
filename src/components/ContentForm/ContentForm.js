@@ -1,29 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import './ContentForm.scss'
 import FilesUploader from '../FilesUploader/FilesUploader'
-import SunEditorWYSIWYG from '../UI/SunEditorWYSIWYG/SunEditorWYSIWYG'
 import AddContentBlock from '../AddContentBlock/AddContentBlock'
+import SunEditorWYSIWYG from '../UI/SunEditorWYSIWYG/SunEditorWYSIWYG'
 
 const ContentForm = ({ contentData, contentId, handleSave }) => {
   const { courseId } = useParams()
-  const [data, setData] = useState([])
+  const [data, setData] = useState([{ title: contentData.title }, ...contentData.data])
   const [lastFile, setLastFile] = useState('')
-
-  useEffect(() => {
-    if (contentData) {
-      if (data.length === 0) {
-        setData([{ title: contentData.title }])
-      }
-    }
-  }, [contentData])
 
   const handleAddContent = type => {
     setData([...data, { [type]: '' }])
   }
 
   const inputChangeHandler = (e, index) => {
-    const value = JSON.stringify(e)
+    const value = e
     setData(prevState => {
       const contentCopy = {
         ...prevState[index],
@@ -106,7 +98,7 @@ const ContentForm = ({ contentData, contentId, handleSave }) => {
                 case 'text':
                   return (
                     <div key={`${index}textDW`} className="content-form__editor content-form__item">
-                      <SunEditorWYSIWYG value={content.description} onChange={e => inputChangeHandler(e, index)} />
+                      <SunEditorWYSIWYG setContents={content.text} onChange={e => inputChangeHandler(e, index)} />
                     </div>
                   )
                 case 'video':

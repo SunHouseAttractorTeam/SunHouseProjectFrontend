@@ -41,7 +41,7 @@ const Course = () => {
                 path="/course/:id"
                 exact
                 render={() =>
-                  !user?.myCourses.find(courseId => courseId._id === course._id) ? (
+                  user?.myCourses.find(courseId => courseId._id === course._id) ? (
                     <CoursePassing />
                   ) : (
                     <CourseHomepage accessCheck={accessCheck} />

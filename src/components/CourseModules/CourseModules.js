@@ -11,10 +11,10 @@ const CourseModules = ({ id, course, handleAddContent, handleAddModule }) => (
           <ul className="course-edit__left-card-module-list">
             {module.data.map(item => (
               <li
-                key={item.id}
+                key={item._id}
                 className={`course-edit__left-card-module-list-item course-edit__left-card-module-list-item--${item.type}`}
               >
-                <Link to={`/course/${id}/edit/${item.type}/${item.id}`}> {item.title}</Link>
+                <Link to={`/course/${id}/edit/${item.type}/${item._id}`}> {item.title}</Link>
               </li>
             ))}
           </ul>
