@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { forgotPasswordSaga } from '../../store/sagas/usersSagas'
-import { inputChangeHandler } from '../../components/UI/Form/Handlers/Handlers'
+import { inputChangeHandler, submitFormHandler } from '../../components/UI/Form/Handlers/Handlers'
+import { forgotPasswordRequest } from '../../store/actions/usersActions'
 
 const ForgotPasswordPage = () => {
   const dispatch = useDispatch()
@@ -10,18 +10,10 @@ const ForgotPasswordPage = () => {
     email: '',
   })
 
-  const formSubmitHandler = e => {
-    e.preventDefault()
-    dispatch(forgotPasswordSaga({ ...state }))
-    setState({
-      email: '',
-    })
-  }
-
   return (
     <>
-      <form onSubmit={formSubmitHandler}>
-        <input type="email" name="email" onChange={e => inputChangeHandler(e, setState)} value={state.email} />
+      <form onSubmit={e => submitFormHandler(e, dispatch(forgotPasswordRequest({ ...state })))}>
+        <input type="email" onChange={e => inputChangeHandler(e, setState)} />
         <button type="submit">Сбросить</button>
       </form>
     </>

@@ -26,4 +26,7 @@ export const {
   forgotPasswordRequest,
   forgotPasswordSuccess,
   forgotPasswordFailure,
+  resetPasswordRequest,
+  resetPasswordSuccess,
+  resetPasswordFailure,
 } = usersSlice.actions

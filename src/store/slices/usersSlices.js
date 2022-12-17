@@ -113,6 +113,18 @@ const usersSlice = createSlice({
       state.forgotPasswordLoading = false
       state.forgotPasswordError = action.payload
     },
+    resetPasswordRequest(state) {
+      state.resetPasswordLoading = true
+      state.resetPasswordError = null
+    },
+    resetPasswordSuccess(state, action) {
+      state.resetPasswordLoading = false
+      state.resetPasswordError = action.payload
+    },
+    resetPasswordFailure(state, action) {
+      state.resetPasswordLoading = false
+      state.resetPasswordError = action.payload
+    },
   },
 })
 

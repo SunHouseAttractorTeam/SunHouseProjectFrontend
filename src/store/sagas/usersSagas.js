@@ -12,6 +12,7 @@ import {
   facebookLoginSuccess,
   forgotPasswordFailure,
   forgotPasswordRequest,
+  forgotPasswordSuccess,
   googleLoginFailure,
   googleLoginRequest,
   googleLoginSuccess,
@@ -22,6 +23,9 @@ import {
   registrationFailure,
   registrationRequest,
   registrationSuccess,
+  resetPasswordFailure,
+  resetPasswordRequest,
+  resetPasswordSuccess,
   verifyUserFailure,
   verifyUserRequest,
   verifyUserSuccess,
@@ -34,7 +38,6 @@ export function* registrationUserSaga({ payload: userData }) {
   try {
     const response = yield axiosApi.post('/users', userData)
     yield put(registrationSuccess(response.data))
-    // yield put(historyPush('/'))
     yield toast.success('Подтвердите email', {
       position: 'top-right',
       autoClose: 3500,
@@ -129,12 +132,30 @@ export function* verifyUserSaga(confirmationCode) {
   }
 }
 
-export function* forgotPasswordSaga() {
+export function* forgotPasswordSaga({ payload: userData }) {
   try {
-    const response = yield axiosApi.post(`/users/forgot/`)
-    yield put(verifyUserSuccess(response.data))
+    const response = yield axiosApi.post('/users/forgot', userData)
+    yield put(forgotPasswordSuccess(response.data))
   } catch (e) {
     yield put(forgotPasswordFailure(e))
+    yield toast.error('error', {
+      position: 'top-right',
+      autoClose: 3500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
+  }
+}
+
+export function* resetPasswordSaga(hash) {
+  try {
+    const response = yield axiosApi.post(`/users/reset/${hash.payload}`)
+    yield put(resetPasswordSuccess(response.data))
+  } catch (e) {
+    yield put(resetPasswordFailure(e))
   }
 }
 
@@ -148,6 +169,7 @@ const userSagas = [
   takeEvery(vkLoginRequest, vkLoginSaga),
   takeEvery(verifyUserRequest, verifyUserSaga),
   takeEvery(forgotPasswordRequest, forgotPasswordSaga),
+  takeEvery(resetPasswordRequest, resetPasswordSaga),
 ]
 
 export default userSagas
