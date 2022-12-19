@@ -73,7 +73,6 @@
 
 .menu-button-container {
   display: none;
-  height: 100%;
   width: 30px;
   cursor: pointer;
   flex-direction: column;
@@ -113,6 +112,7 @@
     display: block;
     position: absolute;
     top: 50%;
+    right: 150px;
     z-index: 2;
   }
 
@@ -141,13 +141,17 @@
     color: $totalWhiteColor;
     background-color: $darkGreenColor;
   }
+
+  .main-nav__item {
+    justify-content: left;
+  }
 }
 
 @media (max-width: 576px) {
   .menu-button-container {
     display: block;
     position: absolute;
-    top: 30%;
+    top: 45%;
     left: 10px;
     z-index: 2;
   }

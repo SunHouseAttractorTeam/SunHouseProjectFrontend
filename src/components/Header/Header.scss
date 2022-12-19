@@ -36,8 +36,7 @@
 }
 
 @media (max-width: 576px) {
-  .header__container {
-    display: flex;
-    flex-direction: column;
+  .header_logo {
+    display: none;
   }
 }
