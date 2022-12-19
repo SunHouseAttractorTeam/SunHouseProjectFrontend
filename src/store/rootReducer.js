@@ -5,6 +5,7 @@ import categoriesSlice from './slices/categoriesSlice'
 import lessonsSlice from './slices/lessonsSlice'
 import tasksSlice from './slices/tasksSlice'
 import testsSlice from './slices/testsSlice'
+import descriptionsSlice from './slices/descriptionsSlice'
 
 const rootReducer = combineReducers({
   users: usersSlice.reducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   lessons: lessonsSlice.reducer,
   tasks: tasksSlice.reducer,
   tests: testsSlice.reducer,
+  description: descriptionsSlice.reducer,
 })
 
 export default rootReducer

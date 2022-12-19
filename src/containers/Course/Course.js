@@ -14,7 +14,7 @@ import TeachersBlock from '../../components/TeachersBlock/TeachersBlock'
 import CourseProgram from '../../components/CourseProgram/CourseProgram'
 import { teachers } from '../../data/teachers'
 
-const Course = () => {
+const Course = ({ match }) => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const user = useSelector(state => state.users.user)
@@ -46,7 +46,7 @@ const Course = () => {
             </div>
           )}
           <div className="course container">
-            <WhatLearn />
+            <WhatLearn match={match} />
             <TeachersBlock
               title="Преподователи"
               subtitle='<button class="teachers-block__add-link">добавьте описание если необходимо</button>'
