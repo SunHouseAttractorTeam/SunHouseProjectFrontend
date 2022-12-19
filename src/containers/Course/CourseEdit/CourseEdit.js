@@ -17,6 +17,7 @@ const CourseEdit = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const course = useSelector(state => state.courses.course)
+  const user = useSelector(state => state.users.user)
 
   const [open, setOpen] = useState(false)
   const [modalType, setModalType] = useState('')
@@ -60,6 +61,7 @@ const CourseEdit = () => {
               course={course}
               handleAddModule={handleAddModule}
               handleAddContent={handleAddContent}
+              user={user}
             />
           </div>
           <div className="course-edit__right">
