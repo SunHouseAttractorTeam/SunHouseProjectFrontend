@@ -4,6 +4,9 @@ const name = 'users'
 
 export const initialState = {
   user: null,
+  users: null,
+  getUsersLoading: false,
+  getUsersError: null,
   registerLoading: false,
   registerError: null,
   loginLoading: false,
@@ -14,6 +17,19 @@ const usersSlice = createSlice({
   name,
   initialState,
   reducers: {
+    getAllUsersRequest(state) {
+      state.getUsersLoading = true
+      state.getUsersError = null
+    },
+    getAllUsersSuccess(state, { payload: users }) {
+      state.getUsersLoading = false
+      state.getUsersError = null
+      state.users = users
+    },
+    getAllUsersFailure(state, action) {
+      state.getUsersLoading = false
+      state.getUsersError = action.payload
+    },
     registrationRequest(state) {
       state.registerLoading = true
       state.registerError = null

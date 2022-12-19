@@ -1,19 +1,16 @@
 import React from 'react'
-import Cookies from 'js-cookie'
 import { useSelector } from 'react-redux'
 import { Switch } from 'react-router-dom'
+import Cookies from 'js-cookie'
 import MyProfileTop from '../../components/UI/MyProfileTop/MyProfileTop'
-import MyProfileBottom from './MyProfileBottom/MyProfileBottom'
-import UserCourses from '../UserCourses/UserCourses'
-import TeacherMode from '../TeacherMode/TeacherMode'
-import Notifications from '../Notifications/Notifications'
-import Certificates from '../Certificates/Certificates'
-import Settings from '../Settings/Settings'
-import Footer from '../../components/Footer/Footer'
+import AdminPanelBottom from './AdminPanelBottom/AdminPanelBottom'
 import { ProtectedRoute } from '../../utils/utils'
-import './MyProfile.scss'
+import AllUsers from '../../components/AllUsers/AllUsers'
+import GetNotification from '../../components/GetNotification/GetNotification'
+import LendingReviews from '../../components/LendingReviews/LendingReviews'
+import LendingCourses from '../../components/LendingCourses/LendingCourses'
 
-const MyProfile = () => {
+const AdminPanel = () => {
   const user = useSelector(state => state.users.user)
   return (
     <div className="profile">
@@ -21,47 +18,40 @@ const MyProfile = () => {
         <div className="profile__inner">
           <div className="profile__sidebar">
             <MyProfileTop user={user} />
-            <MyProfileBottom />
+            <AdminPanelBottom />
           </div>
           <div className="profile__right">
             <Switch>
               <ProtectedRoute
                 isAllowed={Cookies.get('jwt')}
                 redirectTo="/login"
-                path="/user/teacher_mode"
-                component={TeacherMode}
+                path="/admin_panel/all_users"
+                component={AllUsers}
               />
               <ProtectedRoute
                 isAllowed={Cookies.get('jwt')}
                 redirectTo="/login"
-                path="/user/courses"
-                component={UserCourses}
+                path="/admin_panel/notifications"
+                component={GetNotification}
               />
               <ProtectedRoute
                 isAllowed={Cookies.get('jwt')}
                 redirectTo="/login"
-                path="/user/notifications"
-                component={Notifications}
+                path="/admin_panel/courses"
+                component={LendingCourses}
               />
               <ProtectedRoute
                 isAllowed={Cookies.get('jwt')}
                 redirectTo="/login"
-                path="/user/certificates"
-                component={Certificates}
-              />
-              <ProtectedRoute
-                isAllowed={Cookies.get('jwt')}
-                redirectTo="/login"
-                path="/user/settings"
-                component={Settings}
+                path="/admin_panel/reviews"
+                component={LendingReviews}
               />
             </Switch>
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   )
 }
 
-export default MyProfile
+export default AdminPanel

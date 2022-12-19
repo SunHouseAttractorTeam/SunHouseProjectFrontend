@@ -7,6 +7,9 @@ import {
   facebookLoginFailure,
   facebookLoginRequest,
   facebookLoginSuccess,
+  getAllUsersFailure,
+  getAllUsersRequest,
+  getAllUsersSuccess,
   googleLoginFailure,
   googleLoginRequest,
   googleLoginSuccess,
@@ -24,6 +27,15 @@ import {
   vkLoginRequest,
   vkLoginSuccess,
 } from '../actions/usersActions'
+
+export function* getAllUsersSaga() {
+  try {
+    const { data } = yield axiosApi('/users')
+    yield put(getAllUsersSuccess(data))
+  } catch (e) {
+    yield put(getAllUsersFailure(e.response.data))
+  }
+}
 
 export function* registrationUserSaga({ payload: userData }) {
   try {
@@ -114,6 +126,7 @@ export function* verifyUserSaga(confirmationCode) {
 }
 
 const userSagas = [
+  takeEvery(getAllUsersRequest, getAllUsersSaga),
   takeEvery(registrationRequest, registrationUserSaga),
   takeEvery(loginUserRequest, loginUserSaga),
   takeEvery(logoutUser, logoutUserSaga),
