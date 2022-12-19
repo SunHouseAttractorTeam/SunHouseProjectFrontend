@@ -68,7 +68,6 @@
 
 .main-nav__list > li {
   margin: 0 1rem;
-  overflow: hidden;
 }
 
 .menu-button-container {
@@ -112,7 +111,7 @@
     display: block;
     position: absolute;
     top: 50%;
-    right: 150px;
+    right: 200px;
     z-index: 2;
   }
 
@@ -123,9 +122,14 @@
     border: 0;
   }
 
+  #menu-toggle ~ .main-nav__list > li {
+    overflow: hidden;
+  }
+
   #menu-toggle:checked ~ .main-nav__list li {
     height: 3em;
     padding: 0.5em;
+    overflow: inherit;
 
     &:first-child {
       margin-top: 20px;
