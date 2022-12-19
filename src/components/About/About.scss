@@ -114,8 +114,12 @@
         z-index: 2;
         width: 80%;
 
-        &_title::before {
-          left: 18%;
+        &_title {
+          font-size: 27px;
+
+          &::before {
+            left: 10%;
+          }
         }
 
         &_sub-title {
