@@ -13,7 +13,6 @@ const LendingReviews = () => {
     e.preventDefault()
     console.log('test')
   }
-  console.log(state)
   return (
     <div className="reviews">
       <Title>Отзывы</Title>
@@ -21,6 +20,7 @@ const LendingReviews = () => {
         <div className="reviews__wrapper">
           <h4 className="reviews__subtitle">Добавить отзыв</h4>
           <FormInput
+            required
             type="text"
             name="name"
             value={state.name}
@@ -35,6 +35,7 @@ const LendingReviews = () => {
             onChange={e => inputChangeHandler(e, setState)}
           />
           <FormArea
+            required
             name="description"
             value={state.description}
             cols="50"
