@@ -55,6 +55,7 @@ const UserMenu = ({ user }) => {
                   Мой профиль
                 </Link>
               )}
+
             </div>
             <div className="user-menu__list-item">
               <button type="button" className="user-menu__list-item GreenButton" onClick={logoutHandler}>
