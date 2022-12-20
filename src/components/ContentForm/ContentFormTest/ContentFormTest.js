@@ -4,17 +4,13 @@ import '../ContentForm.scss'
 import FilesUploader from '../../FilesUploader/FilesUploader'
 import SunEditorWYSIWYG from '../../UI/SunEditorWYSIWYG/SunEditorWYSIWYG'
 import AddContentBlock from '../../AddContentBlock/AddContentBlock'
+import QuestionsBlock from '../../QuestionsBlock/QuestionsBlock'
 
 const ContentFormTest = ({ contentData, contentId, handleSave }) => {
   const { courseId } = useParams()
   const [data, setData] = useState([])
   const [lastFile, setLastFile] = useState('')
-
-  const [questionsState, setQuestionsState] = useState([
-    {
-      title: '',
-    },
-  ])
+  const [questionsState, setQuestionsState] = useState([{ title: '', answers: [{ title: '', status: false }] }])
 
   useEffect(() => {
     if (contentData) {
@@ -24,12 +20,12 @@ const ContentFormTest = ({ contentData, contentId, handleSave }) => {
     }
   }, [contentData])
 
-  const handleAddContent = type => {
-    setData([...data, { [type]: '' }])
+  const addQuestion = () => {
+    setQuestionsState(prev => [...prev, { title: '', answers: [{ title: '', status: false }] }])
   }
 
-  const addQuestions = () => {
-    setQuestionsState(prev => [...prev, { title: '' }])
+  const handleAddContent = type => {
+    setData([...data, { [type]: '' }])
   }
 
   const inputChangeHandler = (e, index) => {
@@ -88,10 +84,7 @@ const ContentFormTest = ({ contentData, contentId, handleSave }) => {
       formData.append('payload', JSON.stringify(data))
     }
 
-    handleSave({ courseId, contentId, data: formData })
-  }
-  const onSubmit = datas => {
-    console.log(datas)
+    handleSave({ courseId, contentId, data: formData, questions: questionsState })
   }
   return (
     <>
@@ -150,6 +143,14 @@ const ContentFormTest = ({ contentData, contentId, handleSave }) => {
               <FilesUploader type="file" onChange={lastFileChangeHandler} />
             </div>
           </div>
+          {questionsState.map((q, index) => (
+            <div key={index}>
+              <QuestionsBlock question={q} indexQuestion={index} setQuestion={setQuestionsState} />
+            </div>
+          ))}
+          <button type="button" onClick={addQuestion} className="question-block__add-button MainButton">
+            + Добавить вопрос
+          </button>
           <button className="MainButton GreenButton content-form-save" type="button" onClick={onClickSave}>
             Сохранить
           </button>
