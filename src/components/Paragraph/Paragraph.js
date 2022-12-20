@@ -37,16 +37,23 @@ const Paragraph = ({ title = 'Title', subtitle = 'Subtitle', match }) => {
       </svg>
       <div className="block__card-description">
         <h3 className="block__title">{title}</h3>
-        <button className="block__add-link" onClick={e => handlerClick(e)}>
+        <button type="button" className="block__add-link" onClick={e => handlerClick(e)}>
           {subtitle}
         </button>
         {open && (
           <Modal setOpen={setOpen}>
             <form onSubmit={updateDescription}>
-              <div>
-                <h3>Добавить описание:</h3>
-                <input name="description" value={description.value} onChange={inputChangeHandler} />
-                <button type="submit">Сохранить</button>
+              <div className="block__modal">
+                <h3 className="block__modal-title">Добавить описание:</h3>
+                <input
+                  className="block__add-description"
+                  name="description"
+                  value={description.value}
+                  onChange={inputChangeHandler}
+                />
+                <button className="block__modal-btn" type="submit">
+                  Сохранить
+                </button>
               </div>
             </form>
           </Modal>

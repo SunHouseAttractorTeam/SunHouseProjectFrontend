@@ -1,3 +1,5 @@
+@import '../../scss/style';
+
 .block {
   &__paragraph {
     display: flex;
@@ -30,5 +32,40 @@
     flex-direction: column;
     justify-content: center;
     margin-left: 24px;
+  }
+
+  &__modal{
+    padding: 30px 0;
+  }
+
+  &__modal-title{
+    margin-bottom: 32px;
+    font-size: 22px;
+  }
+
+  &__add-description {
+    width: 80%;
+    margin-bottom: 16px;
+    padding: 12px 19px 11px 19px;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    line-height: 17px;
+    border-radius: 16px;
+    border: $lightGreenColor 2px solid;
+  }
+
+  &__modal-btn{
+    border-radius: 16px;
+    height: 45px;
+    min-width: 50%;
+    font-weight: 500;
+    font-size: 19px;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: all .5s ease;
+
+      &:hover {
+        background: $lightGreenColor;
+    }
   }
 }
