@@ -30,9 +30,12 @@
 
   &_MainButton {
     font-size: 16px;
+    background-color: $lightGreenColor;
+  }
+}
 
-    &:hover {
-      background-color: $greyColor;
-    }
+@media (max-width: 576px) {
+  .header_logo {
+    display: none;
   }
 }

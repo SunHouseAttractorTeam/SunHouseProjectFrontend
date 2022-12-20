@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import ContentForm from '../ContentForm/ContentForm'
-import { fetchTaskRequest } from '../../store/actions/tasksActions'
+import { editTaskRequest, fetchTaskRequest } from '../../store/actions/tasksActions'
 
 const TaskBlock = () => {
   const { taskId } = useParams()
@@ -13,7 +13,11 @@ const TaskBlock = () => {
     dispatch(fetchTaskRequest(taskId))
   }, [dispatch, taskId])
 
-  return <> {task && <ContentForm contentData={task} contentId={taskId} />}</>
+  const handleSaveTask = data => {
+    dispatch(editTaskRequest(data))
+  }
+
+  return <> {task && <ContentForm contentData={task} contentId={taskId} handleSave={handleSaveTask} />}</>
 }
 
 export default TaskBlock

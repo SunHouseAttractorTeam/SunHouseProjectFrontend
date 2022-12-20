@@ -10,6 +10,9 @@ import {
   forgotPasswordFailure,
   forgotPasswordRequest,
   forgotPasswordSuccess,
+  getAllUsersFailure,
+  getAllUsersRequest,
+  getAllUsersSuccess,
   googleLoginFailure,
   googleLoginRequest,
   googleLoginSuccess,
@@ -30,6 +33,15 @@ import {
   vkLoginRequest,
   vkLoginSuccess,
 } from '../actions/usersActions'
+
+export function* getAllUsersSaga() {
+  try {
+    const { data } = yield axiosApi('/users')
+    yield put(getAllUsersSuccess(data))
+  } catch (e) {
+    yield put(getAllUsersFailure(e.response.data))
+  }
+}
 
 export function* registrationUserSaga({ payload: userData }) {
   try {
@@ -104,8 +116,8 @@ export function* vkLoginSaga({ payload: userData }) {
 export function* logoutUserSaga() {
   try {
     yield axiosApi.delete('users/sessions')
-    yield Cookies.remove('jwt')
     yield put(historyPush('/'))
+    yield Cookies.remove('jwt')
   } catch (e) {}
 }
 
@@ -146,6 +158,7 @@ export function* resetPasswordSaga({ payload: hash }) {
 }
 
 const userSagas = [
+  takeEvery(getAllUsersRequest, getAllUsersSaga),
   takeEvery(registrationRequest, registrationUserSaga),
   takeEvery(loginUserRequest, loginUserSaga),
   takeEvery(logoutUser, logoutUserSaga),

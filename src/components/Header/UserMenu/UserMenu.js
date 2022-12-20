@@ -46,13 +46,20 @@ const UserMenu = ({ user }) => {
           <div className="user-menu__backdrop" onClick={clickHandler} />
           <div className="user-menu__list">
             <div className="user-menu__list-item">
-              <Link className="user-menu__list-item-child" to="/user/courses">
-                Profile
-              </Link>
+              {user?.role === 'admin' ? (
+                <Link className="user-menu__list-item-child" to="/admin_panel/all_users">
+                  Панель админа
+                </Link>
+              ) : (
+                <Link className="user-menu__list-item-child" to="/user/courses">
+                  Мой профиль
+                </Link>
+              )}
+
             </div>
             <div className="user-menu__list-item">
               <button type="button" className="user-menu__list-item GreenButton" onClick={logoutHandler}>
-                <p className="user-menu__list-item-child"> Log out </p>
+                <p className="user-menu__list-item-child"> Выйти </p>
               </button>
             </div>
           </div>
