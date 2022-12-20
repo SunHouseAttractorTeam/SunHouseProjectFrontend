@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import './TestBlock.scss'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { editTestRequest, fetchTestRequest } from '../../store/actions/testsActions'
+import { editTestQuestionsRequest, editTestRequest, fetchTestRequest } from '../../store/actions/testsActions'
 import ContentFormTest from '../ContentForm/ContentFormTest/ContentFormTest'
 
 const Test = () => {
@@ -17,12 +17,20 @@ const Test = () => {
   const handleSaveTest = data => {
     dispatch(editTestRequest(data))
   }
+  const handleSaveQuestionsTest = data => {
+    dispatch(editTestQuestionsRequest(data))
+  }
 
   return (
     <>
       {test && (
         <>
-          <ContentFormTest contentData={test} contentId={testId} handleSave={handleSaveTest} />
+          <ContentFormTest
+            contentData={test}
+            contentId={testId}
+            handleSave={handleSaveTest}
+            handleQuestionsSave={handleSaveQuestionsTest}
+          />
         </>
       )}
     </>

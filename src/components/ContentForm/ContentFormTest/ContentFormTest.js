@@ -6,7 +6,7 @@ import SunEditorWYSIWYG from '../../UI/SunEditorWYSIWYG/SunEditorWYSIWYG'
 import AddContentBlock from '../../AddContentBlock/AddContentBlock'
 import QuestionsBlock from '../../QuestionsBlock/QuestionsBlock'
 
-const ContentFormTest = ({ contentData, contentId, handleSave }) => {
+const ContentFormTest = ({ contentData, contentId, handleSave, handleQuestionsSave }) => {
   const { courseId } = useParams()
   const [data, setData] = useState([])
   const [lastFile, setLastFile] = useState('')
@@ -84,7 +84,8 @@ const ContentFormTest = ({ contentData, contentId, handleSave }) => {
       formData.append('payload', JSON.stringify(data))
     }
 
-    handleSave({ courseId, contentId, data: formData, questions: questionsState })
+    handleSave({ courseId, contentId, data: formData })
+    handleQuestionsSave({ courseId, contentId, questions: questionsState })
   }
   return (
     <>
