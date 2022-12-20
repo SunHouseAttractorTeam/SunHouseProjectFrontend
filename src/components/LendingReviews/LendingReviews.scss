@@ -90,6 +90,10 @@
     height: 191px;
     position: relative;
 
+    &-wrapper {
+      position: relative;
+    }
+
     &-counter {
       font-size: 12px;
       color: $lightGrey;
@@ -114,7 +118,3 @@
   }
 }
 
-
-.test {
-  position: relative;
-}

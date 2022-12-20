@@ -56,7 +56,7 @@ const LendingReviews = () => {
               />
             </div>
           </div>
-          <div className="test">
+          <div className="reviews__textarea-wrapper">
             <FormArea
               required
               name="description"
