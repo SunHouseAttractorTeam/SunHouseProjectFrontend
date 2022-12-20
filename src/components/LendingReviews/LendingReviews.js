@@ -1,23 +1,39 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
+import { inputChangeHandler } from '../UI/Form/Handlers/Handlers'
 import Title from '../UI/Title/Title'
-import './LendingReviews.scss'
 import MainButton from '../UI/MainButton/MainButton'
 import FormInput from '../UI/Form/FormInput/FormInput'
-import { inputChangeHandler } from '../UI/Form/Handlers/Handlers'
 import FormArea from '../UI/Form/FormArea/FormArea'
+import './LendingReviews.scss'
 
 const LendingReviews = () => {
+  const dispatch = useDispatch()
   const [state, setState] = useState({ image: '', name: '', socialNetwork: '', description: '' })
-  const handlerClick = e => {
-    e.preventDefault()
-    console.log('test')
-  }
   const fileChangeHandler = e => {
     const { name } = e.target
     const file = e.target.files[0]
     setState(prev => ({ ...prev, [name]: file }))
   }
 
+  const submitFormHandler = e => {
+    e.preventDefault()
+    const formData = new FormData()
+    Object.keys(state).forEach(key => {
+      formData.append(key, state[key])
+    })
+    dispatch(formData)
+    toast.success('Done!', {
+      position: 'top-center',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
+  }
   return (
     <div className="reviews">
       <Title>Отзывы</Title>
@@ -80,7 +96,7 @@ const LendingReviews = () => {
       </div>
       <MainButton
         text="Добавить"
-        onClick={e => handlerClick(e)}
+        onClick={e => submitFormHandler(e)}
         type="submit"
         className="GreenButton reviews__button"
       />
