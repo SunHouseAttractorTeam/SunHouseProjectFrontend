@@ -45,7 +45,8 @@
 
 @media (max-width: 600px) {
   .teacher_card {
-    width: 100%;
+    width: inherit;
+    margin-inline: 20px;
     height: fit-content;
     padding-bottom: 40px;
 

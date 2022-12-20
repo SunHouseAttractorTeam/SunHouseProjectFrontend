@@ -11,6 +11,11 @@
   overflow: hidden;
   z-index: 1;
 
+  @media (max-width: 600px) {
+    width: initial;
+    margin-inline: 20px;
+  }
+
   img {
     display: inline-block;
     max-width: 100%;

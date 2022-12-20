@@ -2,6 +2,7 @@
 
 .courses-section {
   padding: 120px 0;
+  overflow: hidden;
 
   &__title {
     display: flex;
@@ -41,5 +42,22 @@
         transform: translateY(-8px);
       }
     }
+  }
+}
+
+.slider {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .slider {
+    display: block;
+
+    &__item {
+      margin-top: 50px;
+    }
+  }
+  .courses-section__cards {
+    display: none;
   }
 }

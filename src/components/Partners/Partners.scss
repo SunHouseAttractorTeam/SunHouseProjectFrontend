@@ -3,6 +3,7 @@
 .partners-section {
   background: $greyColor;
   padding-bottom: 80px;
+  overflow: hidden;
 
   &__title {
     display: flex;
@@ -50,5 +51,29 @@
         transform: translateY(-8px);
       }
     }
+  }
+}
+
+@media (max-width: 600px) {
+
+  .partners-section {
+    &__title {
+      font-size: 28px;
+      text-align: center;
+    }
+
+    &__cards {
+      display: none;
+    }
+  }
+  .slider {
+    display: block;
+
+    &__item {
+      margin-top: 50px;
+    }
+  }
+  .courses-section__cards {
+    display: none;
   }
 }
