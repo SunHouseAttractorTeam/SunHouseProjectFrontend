@@ -13,7 +13,7 @@ const ForgotPasswordPage = () => {
   return (
     <>
       <form onSubmit={e => submitFormHandler(e, dispatch(forgotPasswordRequest({ ...state })))}>
-        <input type="email" onChange={e => inputChangeHandler(e, setState)} />
+        <input name="email" type="email" onChange={e => inputChangeHandler(e, setState)} />
         <button type="submit">Сбросить</button>
       </form>
     </>

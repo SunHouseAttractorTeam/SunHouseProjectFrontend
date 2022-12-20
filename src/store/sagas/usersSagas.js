@@ -136,9 +136,9 @@ export function* forgotPasswordSaga({ payload: userData }) {
   }
 }
 
-export function* resetPasswordSaga(hash) {
+export function* resetPasswordSaga({ payload: hash }) {
   try {
-    const response = yield axiosApi.post(`/users/reset/${hash.payload}`)
+    const response = yield axiosApi.post(`/users/reset/`, { hash })
     yield put(resetPasswordSuccess(response.data))
   } catch (e) {
     yield put(resetPasswordFailure(e))

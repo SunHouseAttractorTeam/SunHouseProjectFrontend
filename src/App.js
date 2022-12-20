@@ -22,6 +22,8 @@ const App = () => (
       <ProtectedRoute isAllowed={Cookies.get('jwt')} redirectTo="/login" path="/user" component={MyProfile} />
       <ProtectedRoute isAllowed={Cookies.get('jwt')} redirectTo="/login" path="/course/:id" component={Course} />
       <Route path="/confirm/:confirmationCode" component={VerifyPage} />
+      <Route path="/forgot" component={ForgotPasswordPage} />
+      <Route path="/reset/:hash" component={ResetPasswordPage} />
     </Switch>
   </CookieProvider>
 )
