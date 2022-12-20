@@ -1,8 +1,9 @@
 import React from 'react'
 
-const FormArea = ({ name, value, onChange, placeholder, className, required, error, cols, rows }) => (
+const FormArea = ({ name, value, onChange, placeholder, className, required, error, cols, rows, max }) => (
   <>
     <textarea
+      max={max}
       cols={cols}
       rows={rows}
       name={name}
@@ -11,6 +12,7 @@ const FormArea = ({ name, value, onChange, placeholder, className, required, err
       placeholder={placeholder}
       className={`InputStyle ${className}`}
       required={required}
+      maxLength={max}
     />
     {error ? <span className="helper">{error}</span> : null}
   </>
