@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
 import './Paragraph.scss'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Modal from '../UI/Modal2/Modal'
 import { updateDescriptionRequest } from '../../store/actions/descriptionsActions'
 
-const Paragraph = ({ title = 'Title', subtitle = 'Subtitle', match }) => {
+const Paragraph = ({ title = 'Title', subtitle, section }) => {
+  const text = useSelector(state => state.description.descriptions[section])
   const dispatch = useDispatch()
 
   const [open, setOpen] = useState(false)
-  const [description, setDescription] = useState({
-    description: '',
-  })
+  const [description, setDescription] = useState('')
 
   const handlerClick = () => {
     setOpen(true)
@@ -18,13 +17,22 @@ const Paragraph = ({ title = 'Title', subtitle = 'Subtitle', match }) => {
 
   const updateDescription = (e, data) => {
     e.preventDefault()
-    dispatch(updateDescriptionRequest({ _id: match.params.id, ...data }))
+    if (!section) {
+      setOpen(false)
+      return
+    }
+    dispatch(
+      updateDescriptionRequest({
+        section,
+        text: description,
+      }),
+    )
     setOpen(false)
   }
 
   const inputChangeHandler = e => {
-    const { name, value } = e.target
-    setDescription(prev => ({ ...prev, [name]: value }))
+    const { value } = e.target
+    setDescription(value)
   }
 
   return (
@@ -36,10 +44,14 @@ const Paragraph = ({ title = 'Title', subtitle = 'Subtitle', match }) => {
         />
       </svg>
       <div className="block__card-description">
-        <h3 className="block__title">{title}</h3>
-        <button type="button" className="block__add-link" onClick={e => handlerClick(e)}>
-          {subtitle}
-        </button>
+        <h3 className="block__title" dangerouslySetInnerHTML={{ __html: title }} />
+        {!subtitle ? (
+          <button type="button" className="block__add-link" onClick={e => handlerClick(e)}>
+            {text || `добавьте описании если необходимо`}
+          </button>
+        ) : (
+          <p className="block__add-link" dangerouslySetInnerHTML={{ __html: subtitle }} />
+        )}
         {open && (
           <Modal setOpen={setOpen}>
             <form onSubmit={updateDescription}>

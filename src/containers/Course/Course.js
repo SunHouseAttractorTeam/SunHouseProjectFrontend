@@ -47,11 +47,7 @@ const Course = ({ match }) => {
           )}
           <div className="course container">
             <WhatLearn match={match} />
-            <TeachersBlock
-              title="Преподователи"
-              subtitle='<button class="teachers-block__add-link">добавьте описание если необходимо</button>'
-              teachers={teachers}
-            />
+            <TeachersBlock title="Преподователи" teachers={teachers} />
             <CourseProgram />
           </div>
           <Footer />

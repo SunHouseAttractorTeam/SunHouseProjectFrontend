@@ -5,7 +5,7 @@ import CardProgram from './CardProgram/CardProgram'
 
 const CourseProgram = () => (
   <div className="program-block">
-    <Paragraph title="Программа курса" subtitle="добавьте описании если необходимо" />
+    <Paragraph title="Программа курса" section="courseProgram" />
     <div className="program-block__cards">
       <CardProgram />
       <CardProgram />

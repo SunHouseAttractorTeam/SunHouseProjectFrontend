@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const name = 'events'
 
 export const initialState = {
-  text: [],
+  descriptions: {},
   updateEventLoading: false,
   updateEventError: null,
   fetchEventLoading: false,
@@ -14,13 +14,13 @@ const descriptionSlice = createSlice({
   name,
   initialState,
   reducers: {
-    updateDescriptionRequest(state) {
+    updateDescriptionRequest(state, action) {
       state.updateDescriptionLoading = true
       state.updateDescriptionError = null
     },
     updateDescriptionSuccess(state, { payload: updatedDescription }) {
       state.updateDescriptionLoading = false
-      state.text = updatedDescription
+      state.descriptions[updatedDescription.section] = updatedDescription.text
     },
     updateDescriptionFailure(state, action) {
       state.updateDescriptionLoading = false
@@ -33,7 +33,7 @@ const descriptionSlice = createSlice({
     },
     fetchDescriptionSuccess(state, action) {
       state.fetchDescriptionLoading = false
-      state.text = action.payload
+      state.descriptions = action.payload
     },
     fetchDescriptionFailure(state, action) {
       state.fetchDescriptionLoading = false

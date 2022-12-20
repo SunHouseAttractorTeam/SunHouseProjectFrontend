@@ -13,9 +13,8 @@ import {
 
 export function* updateDescriptionSaga({ payload: data }) {
   try {
-    const response = yield axiosApi.put(`/description/update/${data._id}`, { ...data })
-    yield put(updateDescriptionSuccess(response.data))
-    yield put(historyPush(`/`))
+    // const response = yield axiosApi.put(`/description/update/${data._id}`, { ...data })
+    yield put(updateDescriptionSuccess(data))
   } catch (e) {
     yield put(updateDescriptionFailure(e.response.data))
   }

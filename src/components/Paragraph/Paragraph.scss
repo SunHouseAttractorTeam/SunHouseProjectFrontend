@@ -16,6 +16,11 @@
     font-weight: 700;
     line-height: 45px;
     margin-bottom: 16px;
+
+    span{
+      display: block;
+      white-space: nowrap;
+    }
   }
 
   &__add-link {
@@ -24,7 +29,8 @@
     line-height: 24px;
     border: none;
     background: transparent;
-    color: #828282;;
+    color: #828282;
+    text-align: left;
   }
 
   &__card-description{
@@ -67,5 +73,6 @@
       &:hover {
         background: $lightGreenColor;
     }
+
   }
 }
