@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUserRequest } from '../../store/actions/usersActions'
 import { inputChangeHandler, submitFormHandler } from '../../components/UI/Form/Handlers/Handlers'
@@ -38,8 +37,8 @@ const Login = () => {
             error={error}
             endPoint="/registration"
             linkToPage="Зарегистрируйтесь"
+            forgotLink="Забыли пароль?"
           />
-          <Link to="/forgot">Забыли пароль?</Link>
           <div className="formBlock">
             <p className="formBlock_content">
               Авторизуйтесь, чтобы начать <span className="formBlock_word">учиться</span>

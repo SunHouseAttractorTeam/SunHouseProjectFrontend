@@ -19,6 +19,7 @@ const FormComponent = ({
   error,
   linkToPage,
   endPoint,
+  forgotLink,
 }) => {
   let form = null
 
@@ -42,6 +43,9 @@ const FormComponent = ({
       <form onSubmit={submit} className="form">
         <h4 className="form_title">{title}</h4>
         {form}
+        <Link to="/forgot" className="form_forgotPass">
+          {forgotLink}
+        </Link>
         <button type="submit" className="form_btn">
           {typeForm}
         </button>

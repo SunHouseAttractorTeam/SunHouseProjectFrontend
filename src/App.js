@@ -42,6 +42,8 @@ const App = () => {
           component={AdminPanel}
         />
         <Route path="/confirm/:confirmationCode" component={VerifyPage} />
+        <Route path="/forgot" component={ForgotPasswordPage} />
+        <Route path="/reset/:hash" component={ResetPasswordPage} />
       </Switch>
     </CookieProvider>
   )
