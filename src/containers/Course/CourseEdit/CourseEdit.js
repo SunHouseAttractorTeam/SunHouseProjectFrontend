@@ -51,6 +51,8 @@ const CourseEdit = () => {
     }
   }
 
+  const accessCheck = () => course.teachers.find(teacher => teacher === user?._id)
+
   return (
     <div className="container">
       {course && (
@@ -61,7 +63,7 @@ const CourseEdit = () => {
               course={course}
               handleAddModule={handleAddModule}
               handleAddContent={handleAddContent}
-              user={user}
+              accessCheck={accessCheck}
             />
           </div>
           <div className="course-edit__right">

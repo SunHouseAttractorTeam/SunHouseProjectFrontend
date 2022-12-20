@@ -54,8 +54,9 @@
           text-decoration: underline;
         }
 
-        svg {
-          flex-shrink: 0;
+        i{
+          max-width: 24px;
+          max-height: 24px;
           margin-right: 24px;
         }
       }
