@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Header2 from '../../components/Header2/Header2'
 import Footer from '../../components/Footer/Footer'
 import CourseHomepage from './CourseHomepage/CourseHomepage'
-import { fetchCourseRequest, updateCourseRequest } from '../../store/actions/coursesActions'
+import { clearCourse, fetchCourseRequest, updateCourseRequest } from '../../store/actions/coursesActions'
 import CourseSettings from './CourseSettings/CourseSettings'
 import CourseEdit from './CourseEdit/CourseEdit'
 import CourseBanner from '../../components/CourseBanner/CourseBanner'
@@ -20,6 +20,10 @@ const Course = () => {
   useEffect(() => {
     if (user) {
       dispatch(fetchCourseRequest(id))
+    }
+
+    return () => {
+      dispatch(clearCourse())
     }
   }, [dispatch, id, user])
 

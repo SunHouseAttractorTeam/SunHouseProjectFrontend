@@ -87,6 +87,9 @@ const coursesSlice = createSlice({
       state.loading = false
       state.error = action.payload
     },
+    clearCourse(state) {
+      state.course = null
+    },
   },
 })
 
