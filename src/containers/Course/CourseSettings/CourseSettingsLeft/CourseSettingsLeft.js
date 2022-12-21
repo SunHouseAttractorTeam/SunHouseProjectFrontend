@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import FormInput from '../../../../components/UI/Form/FormInput/FormInput'
 import { inputChangeHandler } from '../../../../components/UI/Form/Handlers/Handlers'
 import { deleteCourseRequest } from '../../../../store/actions/coursesActions'
 import Switcher from '../../../../components/UI/Switcher/Switcher'
-import './CourseSettingsLeft.scss'
 import Modal from '../../../../components/UI/Modal2/Modal'
 import Card from '../../../../components/UI/Cards/Card/Card'
+import './CourseSettingsLeft.scss'
+import { historyPush } from '../../../../store/actions/historyActions'
 
 const CourseSettingsLeft = ({ course, setCourse }) => {
   const dispatch = useDispatch()
+  const { id } = useParams()
   const [open, setOpen] = useState(false)
   const [state, setState] = useState({
     title: course?.title,
@@ -20,8 +23,10 @@ const CourseSettingsLeft = ({ course, setCourse }) => {
     inputChangeHandler(e, setState)
     inputChangeHandler(e, setCourse)
   }
+
   const handleDelete = () => {
-    dispatch(deleteCourseRequest(course._id))
+    dispatch(deleteCourseRequest(id))
+    dispatch(historyPush('/user/courses'))
   }
   return (
     <div className="block-form">
@@ -68,7 +73,7 @@ const CourseSettingsLeft = ({ course, setCourse }) => {
       {open ? (
         <Modal setOpen={setOpen}>
           <Card className="block-form_modal">
-            <span>Удалить курс?</span>
+            <span className="block-form_modal_title">Удалить курс?</span>
             <div className="block-form_modal_item">
               <button type="button" onClick={() => setOpen(false)} className="block-form_modal_item-btn">
                 Отмена
