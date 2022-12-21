@@ -1,7 +1,10 @@
 @import '../../scss/style';
 
 .content-form{
-  margin: 20px 20px 20px 20px;
+  &:not(:first-child) {
+    margin-top: 20px;
+  }
+
   &__title{
     font-weight: 700;
     font-size: 24px;

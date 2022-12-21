@@ -30,16 +30,18 @@ const Course = ({ match }) => {
     dispatch(updateCourseRequest({ courseData, id }))
   }
 
+  const accessCheck = () => course.teachers.find(teacher => teacher === user?._id)
+
   return (
     <>
       {course && (
         <>
           <Header2 />
-          <CourseBanner course={course} user={user?._id} handleSave={handleSave} />
+          <CourseBanner course={course} user={user?._id} handleSave={handleSave} accessCheck={accessCheck} />
           {course && (
             <div className="course__bottom">
               <Switch>
-                <Route path="/course/:id" exact component={CourseHomepage} />
+                <Route path="/course/:id" exact render={() => <CourseHomepage accessCheck={accessCheck} />} />
                 <Route path="/course/:id/settings" exact component={CourseSettings} />
                 <Route path="/course/:id/edit" component={CourseEdit} />
               </Switch>

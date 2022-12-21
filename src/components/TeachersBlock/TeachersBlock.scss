@@ -42,3 +42,11 @@
     }
   }
 }
+
+@media (max-width: 600px) {
+  .teachers_block {
+    &_text {
+      width: 80%;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const MyProfileSidebarLink = ({ children, to }) => (
+const ProfileSidebarLink = ({ children, to }) => (
   <li className="profile__sidebar-bottom-nav-list-item">
     <Link className="profile__sidebar-bottom-nav-list-item-link" to={to}>
       {children}
@@ -9,4 +9,4 @@ const MyProfileSidebarLink = ({ children, to }) => (
   </li>
 )
 
-export default MyProfileSidebarLink
+export default ProfileSidebarLink

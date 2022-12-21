@@ -1,6 +1,9 @@
 import usersSlice from '../slices/usersSlices'
 
 export const {
+  getAllUsersRequest,
+  getAllUsersSuccess,
+  getAllUsersFailure,
   registrationRequest,
   registrationSuccess,
   registrationFailure,
@@ -20,4 +23,10 @@ export const {
   verifyUserRequest,
   verifyUserSuccess,
   verifyUserFailure,
+  forgotPasswordRequest,
+  forgotPasswordSuccess,
+  forgotPasswordFailure,
+  resetPasswordRequest,
+  resetPasswordSuccess,
+  resetPasswordFailure,
 } = usersSlice.actions

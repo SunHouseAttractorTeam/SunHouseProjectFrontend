@@ -8,6 +8,9 @@ import {
   deleteTestRequest,
   deleteTestSuccess,
   editTestFailure,
+  editTestQuestionsFailure,
+  editTestQuestionsRequest,
+  editTestQuestionsSuccess,
   editTestRequest,
   editTestSuccess,
   fetchTestFailure,
@@ -40,14 +43,24 @@ export function* createTest({ payload }) {
 }
 
 export function* editTest({ payload }) {
-  const { courseId, testId, data } = payload
-
+  const { courseId, contentId, data } = payload
   try {
-    yield axiosApi.put(`/tasks/${testId}?course=${courseId}`, data)
+    yield axiosApi.put(`/tests/${contentId}?course=${courseId}`, data)
     yield put(editTestSuccess())
-    yield put(fetchTestRequest(testId))
+    yield put(fetchTestRequest(contentId))
   } catch (e) {
     yield put(editTestFailure(e))
+  }
+}
+
+export function* editTestQuestions({ payload }) {
+  const { courseId, contentId, questions } = payload
+  try {
+    yield axiosApi.put(`/tests/${contentId}/questions?course=${courseId}`, questions)
+    yield put(editTestQuestionsSuccess())
+    yield put(fetchTestRequest(contentId))
+  } catch (e) {
+    yield put(editTestQuestionsFailure(e))
   }
 }
 
@@ -55,7 +68,7 @@ export function* deleteTest({ payload }) {
   const { testId, courseId } = payload
 
   try {
-    yield axiosApi.delete(`/tasks/${testId}`)
+    yield axiosApi.delete(`/tests/${testId}`)
     yield put(deleteTestSuccess())
     yield put(fetchCourseRequest(courseId))
     yield put(historyPush(`/course/${courseId}/edit`))
@@ -68,6 +81,7 @@ const testsSagas = [
   takeEvery(createTestRequest, createTest),
   takeEvery(fetchTestRequest, fetchTest),
   takeEvery(editTestRequest, editTest),
+  takeEvery(editTestQuestionsRequest, editTestQuestions),
   takeEvery(deleteTestRequest, deleteTest),
 ]
 

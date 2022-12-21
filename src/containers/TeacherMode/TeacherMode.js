@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { fetchCoursesRequest } from '../../store/actions/coursesActions'
 import { fetchCategoriesRequest } from '../../store/actions/categoriesActions'
 import Card from '../../components/UI/Cards/Card/Card'
@@ -10,6 +11,7 @@ import addIcon from '../../assets/icons/addIcon.svg'
 import './TeacherMode.scss'
 
 const TeacherMode = () => {
+  const history = useHistory()
   const dispatch = useDispatch()
   const courses = useSelector(state => state.courses.courses)
   const [show, setShow] = useState(false)
@@ -21,7 +23,9 @@ const TeacherMode = () => {
 
   const OpenModal = () => setShow(true)
 
-  const goToEditCourse = () => {}
+  const goToEditCourse = id => {
+    history.push(`/course/${id}`)
+  }
 
   return (
     <div className="all-card">
@@ -30,7 +34,7 @@ const TeacherMode = () => {
           <Card key={item._id} className="WhiteCard all-card__teacher">
             <span className="course-card__profession">профессия</span>
             <Title>{item.title}</Title>
-            <MainButton className="GreenButton" text="Изменить курс" onClick={goToEditCourse} />
+            <MainButton className="GreenButton" text="Изменить курс" onClick={() => goToEditCourse(item._id)} />
           </Card>
         ))}
       <Card className="WhiteCard all-card__teacher">

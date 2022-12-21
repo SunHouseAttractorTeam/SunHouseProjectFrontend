@@ -15,7 +15,7 @@ const About = () => (
         </div>
       </div>
       <div className="about_con_right">
-        <h3 className="about_con_right_title">О школе</h3>
+        <h3 className="about_con_right_title">О платформе</h3>
         <p className="about_con_right_sub-title">Мы современная платформа для развития и профессионального роста</p>
         <p className="about_con_right_text">
           У нас вы можете увидеть сочетание новейших образовательных, информационных технологий и экспертных

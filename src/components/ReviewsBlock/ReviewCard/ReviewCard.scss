@@ -38,6 +38,8 @@
         padding-left: 20px;
         background: url("../../../assets/icons/instagram 1.svg") no-repeat 0 50%;
       }
+
+
     }
   }
 
@@ -45,5 +47,29 @@
     font-size: 14px;
     line-height: 21px;
     font-weight: 400;
+    
+    &-text {
+      width: 100%;
+      word-wrap: break-word;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .review_card {
+    width: inherit;
+    margin-inline: 20px;
+    height: fit-content;
+    padding-bottom: 40px;
+
+    &_content {
+      display: flex;
+    }
+
+    &_text {
+      &_description {
+        padding: 0;
+      }
+    }
   }
 }

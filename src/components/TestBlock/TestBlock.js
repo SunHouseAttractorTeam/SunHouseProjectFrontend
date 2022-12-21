@@ -2,9 +2,8 @@ import React, { useEffect } from 'react'
 import './TestBlock.scss'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import ContentForm from '../ContentForm/ContentForm'
-import { fetchTestRequest } from '../../store/actions/testsActions'
-import QuestionsBlock from '../QuestionsBlock/QuestionsBlock'
+import { editTestQuestionsRequest, editTestRequest, fetchTestRequest } from '../../store/actions/testsActions'
+import ContentFormTest from '../ContentForm/ContentFormTest/ContentFormTest'
 
 const Test = () => {
   const { testId } = useParams()
@@ -15,12 +14,23 @@ const Test = () => {
     dispatch(fetchTestRequest(testId))
   }, [dispatch, testId])
 
+  const handleSaveTest = data => {
+    dispatch(editTestRequest(data))
+  }
+  const handleSaveQuestionsTest = data => {
+    dispatch(editTestQuestionsRequest(data))
+  }
+
   return (
     <>
       {test && (
         <>
-          <ContentForm contentData={test} contentId={testId} />
-          <QuestionsBlock />
+          <ContentFormTest
+            contentData={test}
+            contentId={testId}
+            handleSave={handleSaveTest}
+            handleQuestionsSave={handleSaveQuestionsTest}
+          />
         </>
       )}
     </>

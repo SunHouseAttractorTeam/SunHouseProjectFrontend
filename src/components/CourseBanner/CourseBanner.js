@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import banner from '../../assets/images/banner.svg'
-import './CourseBanner.scss'
 import MainButton from '../UI/MainButton/MainButton'
+import './CourseBanner.scss'
 
-const CourseBanner = ({ course, user, handleSave }) => {
+const CourseBanner = ({ course, user, handleSave, accessCheck }) => {
   const location = useLocation()
 
   let image = banner
@@ -34,7 +34,11 @@ const CourseBanner = ({ course, user, handleSave }) => {
       <div className="container">
         <div className="course-banner__top">
           <Link
-            to={location.pathname === `/course/${course._id}` ? `/user/teacher_mode` : `/course/${course._id}`}
+            to={
+              location.pathname !== `/course/${course._id}`
+                ? `/course/${course._id}`
+                : `/user/${accessCheck() ? 'teacher_mode' : 'courses'}`
+            }
             className="course-banner__course-button"
           >
             <i>
@@ -51,7 +55,7 @@ const CourseBanner = ({ course, user, handleSave }) => {
       </div>
       <div className={`course-banner__image ${user === course.user && 'course-banner__image--edit'}`}>
         <img src={image} alt={course.title} />
-        {user === course.user && (
+        {accessCheck() && (
           <>
             <i className="course-banner__image-add-icon">
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">

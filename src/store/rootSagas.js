@@ -9,6 +9,8 @@ import tasksSagas from './sagas/tasksSagas'
 import lessonsSagas from './sagas/lessonsSagas'
 import testsSagas from './sagas/testsSagas'
 import descriptionsSagas from './sagas/descriptionsSagas'
+import notificationsSagas from './sagas/notificationSagas'
+import lendingReviewsSagas from './sagas/lendingReviewsSagas'
 
 export default function* rootSagas() {
   yield all([
@@ -19,6 +21,8 @@ export default function* rootSagas() {
     ...tasksSagas,
     ...lessonsSagas,
     ...testsSagas,
+    ...notificationsSagas,
+    ...lendingReviewsSagas,
     ...descriptionsSagas,
     ...historySagas(history),
   ])

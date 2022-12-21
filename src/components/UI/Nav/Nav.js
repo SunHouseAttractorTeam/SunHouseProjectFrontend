@@ -8,6 +8,11 @@ const Nav = ({ user }) => {
 
   return (
     <nav className="main-nav">
+      <input id="menu-toggle" type="checkbox" />
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+      <label className="menu-button-container" htmlFor="menu-toggle">
+        <div className="menu-button" />
+      </label>
       <ul className="main-nav__list">
         <li className="main-nav__item">
           <span className="main-nav__link">Каталог курсов</span>
