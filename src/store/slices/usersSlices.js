@@ -4,6 +4,9 @@ const name = 'users'
 
 export const initialState = {
   user: null,
+  users: null,
+  getUsersLoading: false,
+  getUsersError: null,
   registerLoading: false,
   registerError: null,
   loginLoading: false,
@@ -14,6 +17,19 @@ const usersSlice = createSlice({
   name,
   initialState,
   reducers: {
+    getAllUsersRequest(state) {
+      state.getUsersLoading = true
+      state.getUsersError = null
+    },
+    getAllUsersSuccess(state, { payload: users }) {
+      state.getUsersLoading = false
+      state.getUsersError = null
+      state.users = users
+    },
+    getAllUsersFailure(state, action) {
+      state.getUsersLoading = false
+      state.getUsersError = action.payload
+    },
     registrationRequest(state) {
       state.registerLoading = true
       state.registerError = null
@@ -88,6 +104,30 @@ const usersSlice = createSlice({
     verifyUserFailure(state, action) {
       state.verifyUserLoading = false
       state.verifyUserError = action.payload
+    },
+    forgotPasswordRequest(state) {
+      state.forgotPasswordLoading = true
+      state.forgotPasswordError = null
+    },
+    forgotPasswordSuccess(state, action) {
+      state.forgotPasswordLoading = false
+      state.forgotPasswordError = action.payload
+    },
+    forgotPasswordFailure(state, action) {
+      state.forgotPasswordLoading = false
+      state.forgotPasswordError = action.payload
+    },
+    resetPasswordRequest(state) {
+      state.resetPasswordLoading = true
+      state.resetPasswordError = null
+    },
+    resetPasswordSuccess(state, action) {
+      state.resetPasswordLoading = false
+      state.resetPasswordError = action.payload
+    },
+    resetPasswordFailure(state, action) {
+      state.resetPasswordLoading = false
+      state.resetPasswordError = action.payload
     },
   },
 })

@@ -26,8 +26,9 @@ function SamplePrevArrow(props) {
   )
 }
 
-const CustomSlider = ({ children }) => {
+const CustomSlider = ({ children, response }) => {
   const settings = {
+    responsive: response,
     infinite: false,
     slidesToShow: 2,
     slidesToScroll: 1,

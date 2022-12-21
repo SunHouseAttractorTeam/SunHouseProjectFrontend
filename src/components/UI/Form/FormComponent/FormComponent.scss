@@ -75,5 +75,14 @@
 
   &_forgotPass {
     text-align: right;
+    margin-bottom: 15px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: black;
+  }
+
+  &_forgotPass:hover {
+    color: #ADFA00;
+    transition: .2s;
   }
 }

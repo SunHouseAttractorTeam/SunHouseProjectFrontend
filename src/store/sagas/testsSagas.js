@@ -8,6 +8,9 @@ import {
   deleteTestRequest,
   deleteTestSuccess,
   editTestFailure,
+  editTestQuestionsFailure,
+  editTestQuestionsRequest,
+  editTestQuestionsSuccess,
   editTestRequest,
   editTestSuccess,
   fetchTestFailure,
@@ -41,13 +44,23 @@ export function* createTest({ payload }) {
 
 export function* editTest({ payload }) {
   const { courseId, contentId, data } = payload
-
   try {
     yield axiosApi.put(`/tests/${contentId}?course=${courseId}`, data)
     yield put(editTestSuccess())
     yield put(fetchTestRequest(contentId))
   } catch (e) {
     yield put(editTestFailure(e))
+  }
+}
+
+export function* editTestQuestions({ payload }) {
+  const { courseId, contentId, questions } = payload
+  try {
+    yield axiosApi.put(`/tests/${contentId}/questions?course=${courseId}`, questions)
+    yield put(editTestQuestionsSuccess())
+    yield put(fetchTestRequest(contentId))
+  } catch (e) {
+    yield put(editTestQuestionsFailure(e))
   }
 }
 
@@ -68,6 +81,7 @@ const testsSagas = [
   takeEvery(createTestRequest, createTest),
   takeEvery(fetchTestRequest, fetchTest),
   takeEvery(editTestRequest, editTest),
+  takeEvery(editTestQuestionsRequest, editTestQuestions),
   takeEvery(deleteTestRequest, deleteTest),
 ]
 

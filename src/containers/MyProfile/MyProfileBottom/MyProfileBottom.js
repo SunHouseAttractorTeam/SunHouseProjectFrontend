@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import MyProfileSidebarLink from '../MyProfileSidebarLink/MyProfileSidebarLink'
+import ProfileSidebarLink from '../../../components/UI/ProfileSidebarLink/ProfileSidebarLink'
 import { logoutUser } from '../../../store/actions/usersActions'
 
 const MyProfileBottom = () => {
@@ -12,7 +12,7 @@ const MyProfileBottom = () => {
     <div className="profile__sidebar-bottom">
       <nav className="profile__sidebar-bottom-nav">
         <ul className="profile__sidebar-bottom-nav-list">
-          <MyProfileSidebarLink to="/">
+          <ProfileSidebarLink to="/">
             <i className="profile__sidebar-bottom-nav-list-item-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -22,8 +22,8 @@ const MyProfileBottom = () => {
               </svg>
             </i>
             Главная
-          </MyProfileSidebarLink>
-          <MyProfileSidebarLink to="/user/teacher_mode">
+          </ProfileSidebarLink>
+          <ProfileSidebarLink to="/user/teacher_mode">
             <i className="profile__sidebar-bottom-nav-list-item-icon">
               <svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -33,8 +33,8 @@ const MyProfileBottom = () => {
               </svg>
             </i>
             Режим преподователя
-          </MyProfileSidebarLink>
-          <MyProfileSidebarLink to="/user/courses">
+          </ProfileSidebarLink>
+          <ProfileSidebarLink to="/user/courses">
             <i className="profile__sidebar-bottom-nav-list-item-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -48,8 +48,8 @@ const MyProfileBottom = () => {
               </svg>
             </i>
             Мои курсы
-          </MyProfileSidebarLink>
-          <MyProfileSidebarLink to="/user/notifications">
+          </ProfileSidebarLink>
+          <ProfileSidebarLink to="/user/notifications">
             <i className="profile__sidebar-bottom-nav-list-item-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -67,8 +67,8 @@ const MyProfileBottom = () => {
               </svg>
             </i>
             Уведомления
-          </MyProfileSidebarLink>
-          <MyProfileSidebarLink to="/user/certificates">
+          </ProfileSidebarLink>
+          <ProfileSidebarLink to="/user/certificates">
             <i className="profile__sidebar-bottom-nav-list-item-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_465_908)">
@@ -93,8 +93,8 @@ const MyProfileBottom = () => {
               </svg>
             </i>
             Мои сертификаты
-          </MyProfileSidebarLink>
-          <MyProfileSidebarLink to="/user/settings/personal_data">
+          </ProfileSidebarLink>
+          <ProfileSidebarLink to="/user/settings/personal_data">
             <i className="profile__sidebar-bottom-nav-list-item-icon">
               <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -104,8 +104,8 @@ const MyProfileBottom = () => {
               </svg>
             </i>
             Насройки профиля
-          </MyProfileSidebarLink>
-          <MyProfileSidebarLink to="/">
+          </ProfileSidebarLink>
+          <ProfileSidebarLink to="/">
             <i className="profile__sidebar-bottom-nav-list-item-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_465_916)">
@@ -126,7 +126,7 @@ const MyProfileBottom = () => {
               </svg>
             </i>
             <span onClick={() => logoutHandler()}> Выйти</span>
-          </MyProfileSidebarLink>
+          </ProfileSidebarLink>
         </ul>
       </nav>
     </div>

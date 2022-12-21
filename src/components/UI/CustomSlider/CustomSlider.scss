@@ -40,3 +40,14 @@
   margin: 0 -12px 0 -10px !important;
 }
 
+@media (max-width: 1000px) {
+  .button {
+    &_prev {
+      left: 35%;
+    }
+
+    &_next {
+      right: 35%;
+    }
+  }
+}

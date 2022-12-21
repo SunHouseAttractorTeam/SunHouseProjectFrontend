@@ -5,7 +5,6 @@ import MainButton from '../UI/MainButton/MainButton'
 import Logo from '../UI/Logo/Logo'
 import { historyPush } from '../../store/actions/historyActions'
 import UserMenu from './UserMenu/UserMenu'
-
 import './Header.scss'
 import { fetchCategoriesRequest } from '../../store/actions/categoriesActions'
 

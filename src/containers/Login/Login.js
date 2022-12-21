@@ -37,6 +37,7 @@ const Login = () => {
             error={error}
             endPoint="/registration"
             linkToPage="Зарегистрируйтесь"
+            forgotLink="Забыли пароль?"
           />
           <div className="formBlock">
             <p className="formBlock_content">
