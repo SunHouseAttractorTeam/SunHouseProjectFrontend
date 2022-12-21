@@ -11,7 +11,7 @@ const ReviewCard = ({ img, name, content, social }) => (
       </div>
     </div>
     <div className="review_card_content">
-      <p>{content}</p>
+      <p className="review_card_content-text">{content}</p>
     </div>
   </div>
 )
