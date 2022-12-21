@@ -2,6 +2,18 @@ import React from 'react'
 import './Partners.scss'
 import PartnerCard from '../PartnerCard/PartnerCard'
 import partnersData from './partnersData'
+import CustomSlider from '../UI/CustomSlider/CustomSlider'
+
+const sliderSettings = [
+  {
+    breakpoint: 600,
+    settings: {
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      rows: 2,
+    },
+  },
+]
 
 const Partners = () => (
   <section className="partners-section">
@@ -16,6 +28,15 @@ const Partners = () => (
         {partnersData.map(item => (
           <PartnerCard key={item.image} image={item} />
         ))}
+      </div>
+      <div className="slider">
+        <CustomSlider response={sliderSettings}>
+          {partnersData.map(item => (
+            <div className="slider__item" key={item.image}>
+              <PartnerCard image={item} />
+            </div>
+          ))}
+        </CustomSlider>
       </div>
     </div>
   </section>

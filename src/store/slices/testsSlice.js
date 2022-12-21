@@ -46,6 +46,17 @@ const testsSlice = createSlice({
       state.loading = false
       state.error = action.payload
     },
+    editTestQuestionsRequest(state) {
+      state.loading = true
+      state.error = null
+    },
+    editTestQuestionsSuccess(state) {
+      state.loading = false
+    },
+    editTestQuestionsFailure(state, action) {
+      state.loading = false
+      state.error = action.payload
+    },
     deleteTestRequest(state) {
       state.loading = true
       state.error = null

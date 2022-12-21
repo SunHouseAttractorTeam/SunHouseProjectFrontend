@@ -5,6 +5,7 @@
   height: 174px;
   background: $totalWhiteColor;
   border-radius: 16px;
+
   &_content {
     padding: 33px 0 0 33px;
     display: flex;
@@ -40,4 +41,23 @@
     }
   }
 
+}
+
+@media (max-width: 600px) {
+  .teacher_card {
+    width: inherit;
+    margin-inline: 20px;
+    height: fit-content;
+    padding-bottom: 40px;
+
+    &_content {
+      display: flex;
+    }
+
+    &_text {
+      &_description {
+        padding: 0;
+      }
+    }
+  }
 }

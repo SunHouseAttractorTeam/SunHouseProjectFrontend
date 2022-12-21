@@ -2,6 +2,7 @@
 
 .courses-section {
   padding: 120px 0;
+  overflow: hidden;
 
   &__title {
     display: flex;
@@ -26,11 +27,11 @@
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
 
-    @media screen and (max-width: 996px){
+    @media screen and (max-width: 996px) {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @media screen and (max-width: 468px){
+    @media screen and (max-width: 468px) {
       grid-template-columns: 1fr;
     }
 
@@ -41,5 +42,22 @@
         transform: translateY(-8px);
       }
     }
+  }
+}
+
+.slider {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .slider {
+    display: block;
+
+    &__item {
+      margin-top: 50px;
+    }
+  }
+  .courses-section__cards {
+    display: none;
   }
 }
