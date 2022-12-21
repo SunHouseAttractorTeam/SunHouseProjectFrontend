@@ -3,13 +3,17 @@ import { useDispatch } from 'react-redux'
 import FormInput from '../../../../components/UI/Form/FormInput/FormInput'
 import { inputChangeHandler } from '../../../../components/UI/Form/Handlers/Handlers'
 import { deleteCourseRequest } from '../../../../store/actions/coursesActions'
+import Switcher from '../../../../components/UI/Switcher/Switcher'
+import './CourseSettingsLeft.scss'
+import Modal from '../../../../components/UI/Modal2/Modal'
+import Card from '../../../../components/UI/Cards/Card/Card'
 
 const CourseSettingsLeft = ({ course, setCourse }) => {
   const dispatch = useDispatch()
+  const [open, setOpen] = useState(false)
   const [state, setState] = useState({
     title: course?.title,
     description: course?.description,
-    private: course?.private,
   })
 
   const changeInputState = e => {
@@ -19,24 +23,63 @@ const CourseSettingsLeft = ({ course, setCourse }) => {
   const handleDelete = () => {
     dispatch(deleteCourseRequest(course._id))
   }
-
   return (
-    <div>
+    <div className="block-form">
       <form className="course-settings__right-form">
         <div>
-          <FormInput onChange={changeInputState} name="title" placeholder="Название курса" value={state.title} />
-          <FormInput
-            onChange={changeInputState}
-            name="description"
-            placeholder="Описание курса"
-            value={state.description}
-          />
-          <button type="button" onClick={handleDelete}>
-            Удалить курс
-          </button>
+          <div className="block-form__input-block">
+            <span className="block-form__input-block_label">Название курса</span>
+            <FormInput
+              onChange={changeInputState}
+              name="title"
+              placeholder="Введите название"
+              value={state.title}
+              className="block-form__input-block_input"
+            />
+            <span className="block-form__input-block_label">Описание курса</span>
+            <FormInput
+              onChange={changeInputState}
+              name="description"
+              placeholder="Введите описание"
+              value={state.description}
+              className="block-form__input-block_input"
+            />
+          </div>
+          <div className="block-form__nav-block">
+            <div className="block-form__nav-block_item">
+              <span className="block-form__input-block_label">Статус курса</span>
+              <div className="block-form__nav-block_item-mini">
+                <span className="block-form__nav-block_item-mini_label">
+                  {course.private ? 'Открытый курс' : 'Закрытый курс'}
+                </span>
+                <Switcher onChange={changeInputState} value={course.private} />
+              </div>
+            </div>
+            <div className="block-form__nav-block_rem">
+              <span className="block-form__input-block_label">Удаление курса</span>
+              <button type="button" onClick={() => setOpen(true)} className="block-form__nav-block_btn">
+                Удалить курс
+              </button>
+            </div>
+          </div>
         </div>
         <button type="submit">Сохранить изменения</button>
       </form>
+      {open ? (
+        <Modal setOpen={setOpen}>
+          <Card className="block-form_modal">
+            <span>Удалить курс?</span>
+            <div className="block-form_modal_item">
+              <button type="button" onClick={() => setOpen(false)} className="block-form_modal_item-btn">
+                Отмена
+              </button>
+              <button type="button" onClick={handleDelete} className="block-form__nav-block_btn">
+                Удалить курс
+              </button>
+            </div>
+          </Card>
+        </Modal>
+      ) : null}
     </div>
   )
 }

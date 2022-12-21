@@ -25,6 +25,7 @@ const CourseSettings = () => {
     description: course?.description || '',
     category: course.category,
     price: course.price,
+    private: course?.private,
     image: course?.image,
   })
 

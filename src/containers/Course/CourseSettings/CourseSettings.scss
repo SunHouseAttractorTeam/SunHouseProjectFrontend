@@ -3,14 +3,14 @@
 .course-settings {
   display: flex;
   width: 100%;
-  flex-wrap: wrap;
+  gap: 50px;
 
   &__left {
-    width: 35%;
+    width: 30%;
   }
 
   &__right {
-    width: 70%;
+    width: 66%;
 
     &__buttons-block {
       display: flex;
@@ -18,15 +18,13 @@
       align-items: center;
       justify-content: center;
       padding: 10px;
-      flex-wrap: wrap;
       background-color: $totalWhiteColor;
-      gap: 10px;
       border-radius: 16px;
       margin-bottom: 20px;
 
       &_button {
         background-color: $totalWhiteColor;
-        padding: 15px 117px;
+        padding: 17px 100px;
         border: none;
         font-size: 20px;
         font-weight: 500;
