@@ -55,16 +55,6 @@ const CourseModules = ({ id, course, handleAddContent, handleAddModule, accessCh
                 </Link>
                 {accessCheck() && (
                   <div className="course-modules-block__item-actions">
-                    <button type="button" className="course-modules-block__item-edit">
-                      <i>
-                        <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M0.666667 8H11.3333C11.7 8 12 7.7 12 7.33333C12 6.96667 11.7 6.66667 11.3333 6.66667H0.666667C0.3 6.66667 0 6.96667 0 7.33333C0 7.7 0.3 8 0.666667 8ZM0.666667 4.66667H11.3333C11.7 4.66667 12 4.36667 12 4C12 3.63333 11.7 3.33333 11.3333 3.33333H0.666667C0.3 3.33333 0 3.63333 0 4C0 4.36667 0.3 4.66667 0.666667 4.66667ZM0 0.666667C0 1.03333 0.3 1.33333 0.666667 1.33333H11.3333C11.7 1.33333 12 1.03333 12 0.666667C12 0.3 11.7 0 11.3333 0H0.666667C0.3 0 0 0.3 0 0.666667Z"
-                            fill="#D1D1D6"
-                          />
-                        </svg>
-                      </i>
-                    </button>
                     <button type="button" className="course-modules-block__item-remove">
                       <i>
                         <svg width="12" height="16" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
