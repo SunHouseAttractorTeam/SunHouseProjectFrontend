@@ -1,29 +1,30 @@
 @import '../../scss/style';
 
-.icon-style{
+.icon-style {
   display: block;
   cursor: pointer;
   background-size: cover;
   background-position: center;
   border: none;
   background-color: transparent;
+
   & path {
     fill: #D1D1D6;
     transition: 0.3ms;
   }
 }
 
-.remove-button{
+.remove-button {
   width: 12px;
   height: 16px;
 }
 
-.stripes-button{
+.stripes-button {
   width: 16px;
   height: 11px;
 }
 
-.check-button{
+.check-button {
   width: 24px;
   height: 24px;
 }
@@ -34,36 +35,37 @@
   border-radius: 16px;
   padding: 24px 24px;
   color: $blackDarkColor;
+  margin: 20px;
 
-  &__buttons{
+  &__buttons {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 32px;
 
-    &-right{
+    &-right {
       display: flex;
       align-items: center;
     }
   }
 
-  &__stripes{
+  &__stripes {
     margin-left: 18px;
   }
 
-  &__title{
+  &__title {
     font-size: 16px;
     margin-bottom: 16px;
   }
 
   .border-style {
-    border: 2px solid  $greyColor;
+    border: 2px solid $greyColor;
     border-radius: 8px;
     height: 40px;
   }
 
-  &__input{
+  &__input {
     width: 100%;
     margin-bottom: 16px;
     padding: 12px 19px 11px 19px;
@@ -72,7 +74,7 @@
     line-height: 17px;
   }
 
-  &__add-description{
+  &__add-description {
     cursor: pointer;
     border: 0;
     background: transparent;
@@ -88,7 +90,7 @@
     flex-flow: row nowrap;
     align-items: center;
 
-    &:hover .question-block__answer-buttons {
+    .question-block__answer-buttons {
       opacity: 1;
       pointer-events: all;
     }
@@ -104,12 +106,12 @@
       text-overflow: ellipsis;
 
       &,
-      &::placeholder{
+      &::placeholder {
         font-size: 14px;
         line-height: 17px;
       }
 
-      &::placeholder{
+      &::placeholder {
         color: $whiteBorderColor;
       }
     }
@@ -124,25 +126,25 @@
       cursor: pointer;
       padding: 11px 0 11px 27px;
 
-      &:hover input[type=checkbox]:not(:checked) ~ p::before{
+      &:hover input[type=checkbox]:not(:checked) ~ p::before {
         background-color: lighten($lightGreenColor, 45%);
       }
 
-      input[type=checkbox]{
+      input[type=checkbox] {
         opacity: 0;
         width: 0;
         height: 0;
 
-        &:not(:checked) ~ p::before{
-        border: 2px solid $greyColor;
-      }
+        &:not(:checked) ~ p::before {
+          border: 2px solid $greyColor;
+        }
 
-        &:checked ~ p::before{
+        &:checked ~ p::before {
           background-image: url("../../assets/icons/green-check.svg");
         }
       }
 
-      p{
+      p {
         display: flex;
         align-items: center;
         font-size: 14px;
@@ -169,15 +171,16 @@
     }
 
     &-remove,
-    &-stripes{
+    &-stripes {
       margin-left: 18px;
     }
   }
 
-  &__add-button{
+  &__add-button {
     font-weight: 700;
     font-size: 16px !important;
     line-height: 20px;
     margin-top: 24px;
+    margin-left: 20px;
   }
 }
