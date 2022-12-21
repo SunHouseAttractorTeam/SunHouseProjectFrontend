@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { toast } from 'react-toastify'
 import { inputChangeHandler } from '../UI/Form/Handlers/Handlers'
 import Title from '../UI/Title/Title'
 import MainButton from '../UI/MainButton/MainButton'
 import FormInput from '../UI/Form/FormInput/FormInput'
 import FormArea from '../UI/Form/FormArea/FormArea'
 import './LendingReviews.scss'
+import { createReviewRequest } from '../../store/actions/lendingReviewsActions'
 
 const LendingReviews = () => {
   const dispatch = useDispatch()
@@ -23,16 +23,8 @@ const LendingReviews = () => {
     Object.keys(state).forEach(key => {
       formData.append(key, state[key])
     })
-    dispatch(formData)
-    toast.success('Done!', {
-      position: 'top-center',
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    })
+    dispatch(createReviewRequest(formData))
+    setState({ image: '', name: '', socialNetwork: '', description: '' })
   }
   return (
     <div className="reviews">

@@ -38,6 +38,8 @@
         padding-left: 20px;
         background: url("../../../assets/icons/instagram 1.svg") no-repeat 0 50%;
       }
+
+
     }
   }
 
@@ -45,6 +47,11 @@
     font-size: 14px;
     line-height: 21px;
     font-weight: 400;
+    
+    &-text {
+      width: 100%;
+      word-wrap: break-word;
+    }
   }
 }
 
