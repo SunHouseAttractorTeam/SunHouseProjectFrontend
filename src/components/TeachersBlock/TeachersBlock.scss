@@ -2,13 +2,12 @@
 
 .teachers_block {
   padding: 60px 0 200px ;
-  margin: 0;
+  margin: 0 0 -24px;
   overflow: hidden;
 
   &_headline {
     display: flex;
     flex-flow: row nowrap;
-    margin-bottom: 30px;
   }
 
   &_text {

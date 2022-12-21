@@ -1,5 +1,6 @@
 .learn-plan-block{
   margin-top: 120px;
+  margin-bottom: -68px;
 
   &__title{
     font-size: 36px;
@@ -18,7 +19,7 @@
   }
 
   &__cards{
-    margin-bottom: 120px;
+    margin-bottom: 129px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 20px;

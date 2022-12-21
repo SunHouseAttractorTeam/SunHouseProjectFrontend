@@ -5,6 +5,7 @@ import './TeachersBlock.scss'
 import teacher_1 from '../../assets/icons/teacher_1.svg'
 import teacher_2 from '../../assets/icons/teacher_2.svg'
 import teacher_3 from '../../assets/icons/teacher_3.svg'
+import Paragraph from '../Paragraph/Paragraph'
 
 const sliderSettings = [
   {
@@ -33,34 +34,29 @@ const sliderSettings = [
     },
   },
 ]
-const TeachersBlock = () => (
+const TeachersBlock = ({ title, subtitle }) => (
   <>
     <div className="teachers_block">
-      <div className="container">
-        <div className="teachers_block_headline">
-          <div className="teachers_block_text">
-            <h5 className="teachers_block_title">Преподаватели — практикующие эксперты</h5>
-            <span className="teachers_block_subtitle">Доверьте свое обучение специалистам</span>
-          </div>
-        </div>
-        <CustomSlider response={sliderSettings}>
-          <TeacherCard
-            image={teacher_1}
-            name="Александр Гаврилин"
-            description="Руководитель правовой практики в сфере ПО, технологий, сделок с брендом и данными ЯНДЕКС"
-          />
-          <TeacherCard
-            image={teacher_2}
-            name="Александр Гаврилин"
-            description="Руководитель правовой практики в сфере ПО, технологий, сделок с брендом и данными ЯНДЕКС"
-          />
-          <TeacherCard
-            image={teacher_3}
-            name="Александр Гаврилин"
-            description="Руководитель правовой практики в сфере ПО, технологий, сделок с брендом и данными ЯНДЕКС"
-          />
-        </CustomSlider>
+      <div className="teachers_block_headline">
+        <Paragraph title={title} subtitle={subtitle} section="teachersBlock" />
       </div>
+      <CustomSlider response={sliderSettings}>
+        <TeacherCard
+          image={teacher_1}
+          name="Александр Гаврилин"
+          description="Руководитель правовой практики в сфере ПО, технологий, сделок с брендом и данными ЯНДЕКС"
+        />
+        <TeacherCard
+          image={teacher_2}
+          name="Александр Гаврилин"
+          description="Руководитель правовой практики в сфере ПО, технологий, сделок с брендом и данными ЯНДЕКС"
+        />
+        <TeacherCard
+          image={teacher_3}
+          name="Александр Гаврилин"
+          description="Руководитель правовой практики в сфере ПО, технологий, сделок с брендом и данными ЯНДЕКС"
+        />
+      </CustomSlider>
     </div>
   </>
 )
