@@ -14,7 +14,7 @@ const CourseModules = ({ id, course, handleAddContent, handleAddModule }) => (
                 key={item._id}
                 className={`course-edit__left-card-module-list-item course-edit__left-card-module-list-item--${item.type}`}
               >
-                <Link to={`/course/${id}/edit/${item.type}/${item._id}`}> {item.title}</Link>
+                <Link to={`/course/${id}/edit/${item.type}/${item._id}`}>{item.title}</Link>
               </li>
             ))}
           </ul>

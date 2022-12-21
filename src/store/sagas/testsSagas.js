@@ -43,7 +43,7 @@ export function* editTest({ payload }) {
   const { courseId, contentId, data } = payload
 
   try {
-    yield axiosApi.put(`/tasks/${contentId}?course=${courseId}`, data)
+    yield axiosApi.put(`/tests/${contentId}?course=${courseId}`, data)
     yield put(editTestSuccess())
     yield put(fetchTestRequest(contentId))
   } catch (e) {
@@ -55,7 +55,7 @@ export function* deleteTest({ payload }) {
   const { testId, courseId } = payload
 
   try {
-    yield axiosApi.delete(`/tasks/${testId}`)
+    yield axiosApi.delete(`/tests/${testId}`)
     yield put(deleteTestSuccess())
     yield put(fetchCourseRequest(courseId))
     yield put(historyPush(`/course/${courseId}/edit`))

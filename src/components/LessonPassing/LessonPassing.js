@@ -19,7 +19,8 @@ const LessonPassing = () => {
         {lesson.data.map((content, index) => {
           switch (Object.keys(content)[0]) {
             case 'text':
-              return <p key={`${index}textDW`}>{content.description}</p>
+              // eslint-disable-next-line react/no-danger
+              return <div key={`${index}textDW`} dangerouslySetInnerHTML={{ __html: lesson.data[0].text }} />
             case 'video':
               return <p key={`${index}textDW`}>Тут будет ВИДЕО</p>
             case 'audio':

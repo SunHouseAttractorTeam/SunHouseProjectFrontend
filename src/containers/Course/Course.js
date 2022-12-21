@@ -39,16 +39,15 @@ const Course = () => {
             <Switch>
               <Route
                 path="/course/:id"
-                exact
+                exact={!user?.myCourses.find(userCourse => userCourse.course === course._id)}
                 render={() =>
-                  user?.myCourses.find(courseId => courseId._id === course._id) ? (
+                  user?.myCourses.find(userCourse => userCourse.course === course._id) ? (
                     <CoursePassing />
                   ) : (
                     <CourseHomepage accessCheck={accessCheck} />
                   )
                 }
               />
-              <Route path="/course/:id" exact render={() => <CourseHomepage accessCheck={accessCheck} />} />
               <Route path="/course/:id/settings" exact component={CourseSettings} />
               <Route path="/course/:id/edit" component={CourseEdit} />
             </Switch>
