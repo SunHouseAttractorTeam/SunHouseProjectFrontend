@@ -8,7 +8,7 @@ import { ProtectedRoute } from '../../utils/utils'
 import AllUsers from '../../components/AllUsers/AllUsers'
 import GetNotification from '../../components/GetNotification/GetNotification'
 import LendingReviews from '../../components/LendingReviews/LendingReviews'
-import LendingCourses from '../../components/LendingCourses/LendingCourses'
+import AdminCoursesControl from '../../components/AdminCoursesControl/AdminCoursesControl'
 
 const AdminPanel = () => {
   const user = useSelector(state => state.users.user)
@@ -38,7 +38,7 @@ const AdminPanel = () => {
                 isAllowed={Cookies.get('jwt')}
                 redirectTo="/login"
                 path="/admin_panel/courses"
-                component={LendingCourses}
+                component={AdminCoursesControl}
               />
               <ProtectedRoute
                 isAllowed={Cookies.get('jwt')}
