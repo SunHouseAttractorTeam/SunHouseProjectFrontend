@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import { fetchCoursesRequest, publishCourseRequest } from '../../store/actions/coursesActions'
 import Title from '../UI/Title/Title'
-import { fetchCoursesRequest } from '../../store/actions/coursesActions'
-import './AdminCourseControl.scss'
 import MainButton from '../UI/MainButton/MainButton'
+import './AdminCourseControl.scss'
 
 const AdminCoursesControl = () => {
   const history = useHistory()
@@ -13,16 +13,12 @@ const AdminCoursesControl = () => {
   useEffect(() => {
     dispatch(fetchCoursesRequest())
   }, [dispatch])
-
   const handleCourse = id => {
     history.push(`/course/${id}`)
   }
-
   const publishCourse = id => {
-    console.log(id)
+    dispatch(publishCourseRequest(id))
   }
-
-  console.log(courses)
   return (
     <>
       <Title>Курсы</Title>
