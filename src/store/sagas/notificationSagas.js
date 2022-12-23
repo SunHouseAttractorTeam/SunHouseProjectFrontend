@@ -18,9 +18,9 @@ import {
   fetchNotificationSuccess,
 } from '../actions/notificationsActions'
 
-export function* fetchNotifications() {
+export function* fetchNotifications({ payload: userId }) {
   try {
-    const response = yield axiosApi(`/notifications`)
+    const response = yield axiosApi(`/notifications?user=${userId}`)
     yield put(fetchNotificationsSuccess(response.data))
   } catch (e) {
     yield put(fetchNotificationsFailure(e))
