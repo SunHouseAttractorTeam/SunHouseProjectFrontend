@@ -2,6 +2,9 @@
 
 
 .course-control {
+  height: 800px;
+  overflow-y: scroll;
+
   &__table {
     text-align: center;
     background-color: $totalWhiteColor;

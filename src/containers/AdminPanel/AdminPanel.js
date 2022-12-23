@@ -9,6 +9,7 @@ import AllUsers from '../../components/AllUsers/AllUsers'
 import GetNotification from '../../components/GetNotification/GetNotification'
 import LendingReviews from '../../components/LendingReviews/LendingReviews'
 import AdminCoursesControl from '../../components/AdminCoursesControl/AdminCoursesControl'
+import Footer from '../../components/Footer/Footer'
 
 const AdminPanel = () => {
   const user = useSelector(state => state.users.user)
@@ -50,6 +51,7 @@ const AdminPanel = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

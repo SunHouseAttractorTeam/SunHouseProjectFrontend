@@ -7,19 +7,21 @@ import './GetNotification.scss'
 import Modal from '../UI/Modal2/Modal'
 import { inputChangeHandler } from '../UI/Form/Handlers/Handlers'
 import FormArea from '../UI/Form/FormArea/FormArea'
+import { createNotificationRequest } from '../../store/actions/notificationsActions'
 
 const GetNotification = () => {
-  const [notification, setNotification] = useState({ text: '', id: '', email: '' })
-  const [open, setOpen] = useState(false)
   const dispatch = useDispatch()
   const users = useSelector(state => state.users.users)
+  const [notification, setNotification] = useState({ description: '', user: '', email: '' })
+  const [open, setOpen] = useState(false)
   useEffect(() => {
     dispatch(getAllUsersRequest())
   }, [dispatch])
 
   const test = e => {
     e.preventDefault()
-    console.log(notification)
+    dispatch(createNotificationRequest(notification))
+    setOpen(false)
   }
 
   return (
@@ -34,7 +36,7 @@ const GetNotification = () => {
               <button
                 onClick={() => {
                   setOpen(true)
-                  setNotification({ text: '', id: user._id, email: user.email })
+                  setNotification({ description: '', user: user._id, email: user.email })
                 }}
                 className="admin-notification__inner-block-button"
               >
@@ -58,8 +60,8 @@ const GetNotification = () => {
             <FormArea
               required
               type="text"
-              name="text"
-              value={notification.text}
+              name="description"
+              value={notification.description}
               placeholder="Напишите ваше сообщение"
               className="admin-notification__form-area"
               onChange={e => inputChangeHandler(e, setNotification)}
