@@ -16,6 +16,9 @@ import {
   fetchUserCoursesFailure,
   fetchUserCoursesRequest,
   fetchUserCoursesSuccess,
+  publishCourseFailure,
+  publishCourseRequest,
+  publishCourseSuccess,
   updateCourseFailure,
   updateCourseRequest,
   updateCourseSuccess,
@@ -60,6 +63,16 @@ export function* createCourse({ payload: courseData }) {
   }
 }
 
+export function* publishCourse({ payload: id }) {
+  try {
+    yield axiosApi.post(`/courses/${id}/publish`)
+    yield put(publishCourseSuccess())
+    yield put(fetchCoursesRequest())
+  } catch (e) {
+    yield put(publishCourseFailure(e))
+  }
+}
+
 export function* updateCourse({ payload }) {
   const { courseData, id } = payload
 
@@ -85,6 +98,7 @@ export function* deleteCourse({ payload: id }) {
 
 const coursesSagas = [
   takeEvery(fetchCoursesRequest, fetchCourses),
+  takeEvery(publishCourseRequest, publishCourse),
   takeEvery(fetchCourseRequest, fetchCourse),
   takeEvery(fetchUserCoursesRequest, fetchUserCourses),
   takeEvery(createCourseRequest, createCourse),
