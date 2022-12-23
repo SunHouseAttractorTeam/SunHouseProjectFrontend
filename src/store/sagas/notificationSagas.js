@@ -37,11 +37,20 @@ export function* fetchNotification({ payload: id }) {
 }
 
 export function* createNotification({ payload: notificationData }) {
-  try {
-    yield axiosApi.post(`/notifications`, notificationData)
-    yield put(createNotificationSuccess())
-  } catch (e) {
-    yield put(createNotificationFailure(e))
+  if (notificationData.email) {
+    try {
+      yield axiosApi.post(`/notifications`, notificationData)
+      yield put(createNotificationSuccess())
+    } catch (e) {
+      yield put(createNotificationFailure(e))
+    }
+  } else {
+    try {
+      yield axiosApi.post(`/notifications?params=all`, notificationData)
+      yield put(createNotificationSuccess())
+    } catch (e) {
+      yield put(createNotificationFailure(e))
+    }
   }
 }
 
