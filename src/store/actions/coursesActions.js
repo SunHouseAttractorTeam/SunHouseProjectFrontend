@@ -22,4 +22,5 @@ export const {
   deleteCourseRequest,
   deleteCourseSuccess,
   deleteCourseFailure,
+  clearCourse,
 } = coursesSlice.actions

@@ -101,6 +101,8 @@ const coursesSlice = createSlice({
       state.publishLoading = false
       state.publishError = action.payload
     },
+    clearCourse(state) {
+      state.course = null
   },
 })
 
