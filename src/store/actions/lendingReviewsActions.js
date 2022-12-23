@@ -1,12 +1,9 @@
-import reviewsSlice from '../slices/reviewsSlice'
+import lendingReviewsSlice from '../slices/lendingReviewsSlice'
 
 export const {
   fetchReviewsRequest,
   fetchReviewsSuccess,
   fetchReviewsFailure,
-  fetchReviewRequest,
-  fetchReviewSuccess,
-  fetchReviewFailure,
   createReviewRequest,
   createReviewSuccess,
   createReviewFailure,
@@ -16,4 +13,4 @@ export const {
   deleteReviewRequest,
   deleteReviewSuccess,
   deleteReviewFailure,
-} = reviewsSlice.actions
+} = lendingReviewsSlice.actions

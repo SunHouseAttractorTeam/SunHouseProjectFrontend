@@ -11,11 +11,13 @@ import CourseModules from '../../../components/CourseModules/CourseModules'
 import LessonBlock from '../../../components/LessonBlock/LessonBlock'
 import TaskBlock from '../../../components/TaskBlock/TaskBlock'
 import TestBlock from '../../../components/TestBlock/TestBlock'
+import './CourseEdit.scss'
 
 const CourseEdit = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const course = useSelector(state => state.courses.course)
+  const user = useSelector(state => state.users.user)
 
   const [open, setOpen] = useState(false)
   const [modalType, setModalType] = useState('')
@@ -49,6 +51,8 @@ const CourseEdit = () => {
     }
   }
 
+  const accessCheck = () => course.teachers.find(teacher => teacher === user?._id)
+
   return (
     <div className="container">
       {course && (
@@ -59,6 +63,7 @@ const CourseEdit = () => {
               course={course}
               handleAddModule={handleAddModule}
               handleAddContent={handleAddContent}
+              accessCheck={accessCheck}
             />
           </div>
           <div className="course-edit__right">
