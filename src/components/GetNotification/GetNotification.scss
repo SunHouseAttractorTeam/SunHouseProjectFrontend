@@ -54,5 +54,17 @@
     border: none;
     background: none;
   }
+
+  &__message-from {
+    margin: 25px;
+    font-size: 20px;
+    text-decoration: underline;
+  }
+
+  &__form {
+    &-button {
+
+    }
+  }
 }
 

@@ -10,7 +10,7 @@ const FormArea = ({ name, value, onChange, placeholder, className, required, err
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-      className={`InputStyle ${className}`}
+      className={`InputStyle TextArea ${className}`}
       required={required}
       maxLength={max}
     />
