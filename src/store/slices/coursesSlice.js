@@ -76,6 +76,18 @@ const coursesSlice = createSlice({
       state.error = action.payload
     },
 
+    addUsersCourseRequest(state) {
+      state.loading = true
+      state.error = null
+    },
+    addUsersCourseSuccess(state) {
+      state.loading = false
+    },
+    addUsersCourseFailure(state, action) {
+      state.loading = false
+      state.error = action.payload
+    },
+
     deleteCourseRequest(state) {
       state.loading = true
       state.error = null

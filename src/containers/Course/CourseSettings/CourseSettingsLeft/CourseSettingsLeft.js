@@ -7,8 +7,8 @@ import { deleteCourseRequest } from '../../../../store/actions/coursesActions'
 import Switcher from '../../../../components/UI/Switcher/Switcher'
 import Modal from '../../../../components/UI/Modal2/Modal'
 import Card from '../../../../components/UI/Cards/Card/Card'
-import './CourseSettingsLeft.scss'
 import { historyPush } from '../../../../store/actions/historyActions'
+import './CourseSettingsLeft.scss'
 
 const CourseSettingsLeft = ({ course, setCourse }) => {
   const dispatch = useDispatch()
@@ -68,7 +68,6 @@ const CourseSettingsLeft = ({ course, setCourse }) => {
             </div>
           </div>
         </div>
-        <button type="submit">Сохранить изменения</button>
       </form>
       {open ? (
         <Modal setOpen={setOpen}>

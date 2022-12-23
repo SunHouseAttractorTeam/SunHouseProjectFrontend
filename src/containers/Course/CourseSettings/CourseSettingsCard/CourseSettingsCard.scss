@@ -6,6 +6,12 @@
   &__image-block {
     position: relative;
 
+    &_image {
+      width: 380px;
+      height: 176px;
+      border-radius: 16px 16px 0 0;
+    }
+
     &_input {
       z-index: 9;
       cursor: pointer;
@@ -19,8 +25,6 @@
     }
 
     &_icon-block {
-
-
       &_icon {
         z-index: 9;
         cursor: pointer;
@@ -52,7 +56,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 20px 0;
+      padding: 11px 0;
     }
 
     &_title {

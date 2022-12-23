@@ -5,6 +5,13 @@
   width: 100%;
   gap: 50px;
 
+  &__save-block {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 70px 0;
+  }
+
   &__left {
     width: 30%;
   }

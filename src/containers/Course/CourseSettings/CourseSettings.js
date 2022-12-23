@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { fetchCourseRequest, updateCourseRequest } from '../../../store/actions/coursesActions'
-import './CourseSettings.scss'
 import CourseSettingsLeft from './CourseSettingsLeft/CourseSettingsLeft'
 import CourseSettingsRight from './CourseSettingsRight/CourseSettingsRight'
 import CourseSettingsCard from './CourseSettingsCard/CourseSettingsCard'
+import MainButton from '../../../components/UI/MainButton/MainButton'
+import './CourseSettings.scss'
 
 const CourseSettings = () => {
   const { id } = useParams()
@@ -24,17 +25,19 @@ const CourseSettings = () => {
     title: course?.title || '',
     description: course?.description || '',
     category: course.category,
-    price: course.price,
     private: course?.private,
     image: course?.image,
   })
 
   const submitFormHandler = e => {
     e.preventDefault()
-
-    dispatch(updateCourseRequest({ courseData: state, id: course._id }))
+    const formData = new FormData()
+    Object.keys(state).forEach(key => {
+      formData.append(key, state[key])
+    })
+    dispatch(updateCourseRequest({ courseData: formData, id }))
   }
-  console.log(state)
+
   return (
     <div className="container">
       {course && (
@@ -68,13 +71,21 @@ const CourseSettings = () => {
               </button>
             </div>
             {active ? (
-              <CourseSettingsLeft course={course} setCourse={setState} />
+              <CourseSettingsLeft course={course} setCourse={setState} submit={submitFormHandler} />
             ) : (
-              <CourseSettingsRight course={course} />
+              <CourseSettingsRight course={course} setCourse={setState} submit={submitFormHandler} />
             )}
           </div>
         </div>
       )}
+      <div className="course-settings__save-block">
+        <MainButton
+          className="GreenButton course-settings__save-block_save"
+          type="submit"
+          text="Сохранить изменения"
+          onClick={submitFormHandler}
+        />
+      </div>
     </div>
   )
 }

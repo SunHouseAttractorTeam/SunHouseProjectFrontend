@@ -1,6 +1,7 @@
 import React from 'react'
 import { inputChangeHandler } from '../../../../components/UI/Form/Handlers/Handlers'
-import fon from '../../../../assets/images/fon.svg'
+import banner from '../../../../assets/images/banner.jpg'
+import { apiUrl } from '../../../../config'
 import './CourseSettingsCard.scss'
 
 const CourseSettingsCard = ({ course, setCourse }) => {
@@ -12,7 +13,11 @@ const CourseSettingsCard = ({ course, setCourse }) => {
     <div>
       <div className="left-card">
         <div className="left-card__image-block">
-          <img src={course.image ? course.image : fon} alt={course.title} className="left-card__image-block_image" />
+          <img
+            src={course.image ? `${apiUrl}/${course.image}` : banner}
+            alt={course.title}
+            className="left-card__image-block_image"
+          />
           <div className="left-card__image-block_icon-block">
             <i className="left-card__image-block_icon-block_icon">
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
