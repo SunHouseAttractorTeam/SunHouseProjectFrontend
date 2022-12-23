@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import './ContentForm.scss'
 import FilesUploader from '../FilesUploader/FilesUploader'
@@ -10,6 +10,18 @@ const ContentForm = ({ contentData, contentId, handleSave }) => {
   const { courseId } = useParams()
   const [data, setData] = useState([{ title: contentData.title }, ...contentData.data])
   const [lastFile, setLastFile] = useState('')
+
+  useEffect(() => {
+    if (data.length) {
+      const index = data.length - 1
+      const dataLastFile = data[index]
+
+      if (Object.keys(dataLastFile)[0] === 'file') {
+        const { file } = data.splice(index, 1)[0]
+        setLastFile(file)
+      }
+    }
+  }, [data])
 
   const handleAddContent = type => {
     setData([...data, { [type]: '' }])
@@ -59,13 +71,15 @@ const ContentForm = ({ contentData, contentId, handleSave }) => {
     const formData = new FormData()
     data.forEach(elem => {
       Object.keys(elem).forEach(key => {
-        if (key === 'audio') {
+        if (key === 'audio' && typeof elem[key] !== 'string') {
           formData.append(key, elem[key])
         }
       })
     })
     if (lastFile) {
-      formData.append('file', lastFile)
+      if (typeof lastFile !== 'string') {
+        formData.append('file', lastFile)
+      }
       formData.append('payload', JSON.stringify([...data, { file: lastFile }]))
     } else {
       formData.append('payload', JSON.stringify(data))
