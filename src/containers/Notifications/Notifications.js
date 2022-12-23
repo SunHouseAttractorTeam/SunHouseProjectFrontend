@@ -8,19 +8,15 @@ const Notifications = () => {
   const user = useSelector(state => state.users.user)
   const notifications = useSelector(state => state.notifications.notifications)
   const [active, setActive] = useState(true)
-  const [notificationState, setNotificationsState] = useState([])
+  const [viewStatus, setViewStatus] = useState(true)
 
-  const [readMore, setReadMore] = useState(true)
   useEffect(() => {
     if (user) dispatch(fetchNotificationsRequest(user._id))
   }, [dispatch, user])
 
   const onActiveBtn = () => {
     setActive(!active)
-  }
-
-  const onReadMoreBtn = () => {
-    setReadMore(!readMore)
+    setViewStatus(!viewStatus)
   }
 
   return (
@@ -48,15 +44,24 @@ const Notifications = () => {
           Непросмотренные
         </button>
       </div>
-      <div className="notifications-card__textBlock">
-        <p className={readMore ? 'notifications-card__textBlock__text hidden' : 'notifications-card__textBlock__text'}>
-          Разнообразный и богатый опыт сложившаяся структура организации обеспечивает широкому кругу (специалистов)
-          участие в формировании существенных финансовых и административных условий.kuggbhjjjjjjj
-        </p>
-        <button className="notifications-card__readBtn" onClick={onReadMoreBtn} id="myBtn">
-          Read more
-        </button>
-      </div>
+      {/* eslint-disable-next-line no-nested-ternary */}
+      {active && notifications
+        ? notifications.map(notific =>
+            notific.view ? (
+              <div className="notifications-card__textBlock">
+                <p className="notifications-card__textBlock__text">{notific.description}</p>
+              </div>
+            ) : null,
+          )
+        : notifications
+        ? notifications.map(notific =>
+            notific.view === false ? (
+              <div className="notifications-card__textBlock">
+                <p className="notifications-card__textBlock__text">{notific.description}</p>
+              </div>
+            ) : null,
+          )
+        : null}
     </div>
   )
 }
