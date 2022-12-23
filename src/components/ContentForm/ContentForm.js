@@ -4,6 +4,7 @@ import './ContentForm.scss'
 import FilesUploader from '../FilesUploader/FilesUploader'
 import AddContentBlock from '../AddContentBlock/AddContentBlock'
 import SunEditorWYSIWYG from '../UI/SunEditorWYSIWYG/SunEditorWYSIWYG'
+import AudioPlayer from '../UI/AudioPlayer/AudioPlayer'
 
 const ContentForm = ({ contentData, contentId, handleSave }) => {
   const { courseId } = useParams()
@@ -109,15 +110,18 @@ const ContentForm = ({ contentData, contentId, handleSave }) => {
                   )
                 case 'audio':
                   return (
-                    <>
-                      <FilesUploader
-                        type="audio"
-                        key={`${index}audioDWA`}
-                        className="content-form__item"
-                        onChange={fileChangeHandler}
-                        index={index}
-                      />
-                    </>
+                    <div key={`${index}audioDWA`}>
+                      {content.audio && typeof content.audio === 'string' ? (
+                        <AudioPlayer audio={content.audio} />
+                      ) : (
+                        <FilesUploader
+                          type="audio"
+                          className="content-form__item"
+                          onChange={fileChangeHandler}
+                          index={index}
+                        />
+                      )}
+                    </div>
                   )
                 default:
                   return null
