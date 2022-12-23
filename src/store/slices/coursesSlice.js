@@ -89,7 +89,6 @@ const coursesSlice = createSlice({
       state.loading = false
       state.error = action.payload
     },
-
     deleteCourseRequest(state) {
       state.loading = true
       state.error = null
@@ -115,6 +114,7 @@ const coursesSlice = createSlice({
     },
     clearCourse(state) {
       state.course = null
+    },
   },
 })
 
