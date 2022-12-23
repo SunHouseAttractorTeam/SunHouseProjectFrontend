@@ -18,10 +18,11 @@ const GetNotification = () => {
     dispatch(getAllUsersRequest())
   }, [dispatch])
 
-  const test = e => {
+  const submitMessage = e => {
     e.preventDefault()
     dispatch(createNotificationRequest(notification))
     setOpen(false)
+    setNotification({ description: '', user: '', email: '' })
   }
 
   return (
@@ -56,7 +57,9 @@ const GetNotification = () => {
         <Modal setOpen={setOpen}>
           <form>
             <h2>Отправить сообщение</h2>
-            <p className="admin-notification__message-from">Сообщение для {notification.email}</p>
+            <p className="admin-notification__message-from">
+              Сообщение для {!notification.email ? 'всех' : notification.email}
+            </p>
             <FormArea
               required
               type="text"
@@ -69,12 +72,12 @@ const GetNotification = () => {
             <MainButton
               text="Отправить сообщение"
               className="GreenButton admin-notification__form-button"
-              onClick={e => test(e)}
+              onClick={e => submitMessage(e)}
             />
           </form>
         </Modal>
       ) : null}
-      <MainButton text="Отправить всем" className="GreenButton" />
+      <MainButton text="Отправить всем" className="GreenButton" onClick={() => setOpen(true)} />
     </div>
   )
 }
