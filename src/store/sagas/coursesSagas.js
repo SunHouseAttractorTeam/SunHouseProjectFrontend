@@ -1,6 +1,9 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import axiosApi from '../../axiosApi'
 import {
+  addUsersCourseFailure,
+  addUsersCourseRequest,
+  addUsersCourseSuccess,
   createCourseFailure,
   createCourseRequest,
   createCourseSuccess,
@@ -87,6 +90,23 @@ export function* updateCourse({ payload }) {
   }
 }
 
+export function* addUsersCourse({ payload }) {
+  const { idCourse, idUser, role } = payload
+
+  try {
+    if (role === 'teachers') {
+      yield axiosApi.put(`/courses/add?course=${idCourse}&owner=${idUser}`)
+    }
+    if (role === 'users') {
+      yield axiosApi.put(`/courses/add?course=${idCourse}&user=${idUser}`)
+    }
+
+    yield put(addUsersCourseSuccess())
+  } catch (e) {
+    yield put(addUsersCourseFailure(e))
+  }
+}
+
 export function* deleteCourse({ payload: id }) {
   try {
     yield axiosApi.delete(`/courses/${id}`)
@@ -103,6 +123,7 @@ const coursesSagas = [
   takeEvery(fetchUserCoursesRequest, fetchUserCourses),
   takeEvery(createCourseRequest, createCourse),
   takeEvery(updateCourseRequest, updateCourse),
+  takeEvery(addUsersCourseRequest, addUsersCourse),
   takeEvery(deleteCourseRequest, deleteCourse),
 ]
 

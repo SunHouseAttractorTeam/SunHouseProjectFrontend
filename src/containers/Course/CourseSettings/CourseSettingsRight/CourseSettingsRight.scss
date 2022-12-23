@@ -1,0 +1,50 @@
+.block-right {
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 14px 12px;
+
+  &_top-block {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+
+    &_title {
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    &_btn {
+      font-weight: 700;
+      font-size: 16px;
+    }
+  }
+
+  &_name-block {
+    &_top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0 4px 0;
+      border-bottom: 2px solid #F2F2F7;
+
+      &_title {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        color: #828282;
+      }
+
+      &_name {
+        font-weight: 500;
+        font-size: 16px;
+      }
+
+      &_buttons {
+        display: flex;
+        gap: 20px
+      }
+    }
+  }
+}
+
