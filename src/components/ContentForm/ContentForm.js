@@ -4,6 +4,7 @@ import './ContentForm.scss'
 import FilesUploader from '../FilesUploader/FilesUploader'
 import SunEditorWYSIWYG from '../UI/SunEditorWYSIWYG/SunEditorWYSIWYG'
 import AddContentBlock from '../AddContentBlock/AddContentBlock'
+import FormInput from '../UI/Form/FormInput/FormInput'
 
 const ContentForm = ({ contentData, contentId, handleSave }) => {
   const { courseId } = useParams()
@@ -28,6 +29,24 @@ const ContentForm = ({ contentData, contentId, handleSave }) => {
       const contentCopy = {
         ...prevState[index],
         text: value,
+      }
+
+      return prevState.map((content, i) => {
+        if (index === i) {
+          return contentCopy
+        }
+        return content
+      })
+    })
+  }
+
+  const videoChangeHandler = (e, index) => {
+    const { value } = e.target
+
+    setData(prevState => {
+      const contentCopy = {
+        ...prevState[index],
+        video: value,
       }
 
       return prevState.map((content, i) => {
@@ -111,13 +130,18 @@ const ContentForm = ({ contentData, contentId, handleSave }) => {
                   )
                 case 'video':
                   return (
-                    <>
-                      <FilesUploader type="video" key={`${index}videoDW`} className="content-form__item" />
-                    </>
+                    <div key={index} className="video-input">
+                      <FormInput
+                        placeholder="Ссылка на видео"
+                        onChange={e => videoChangeHandler(e, index)}
+                        name="video"
+                      />
+                      {/* <FilesUploader type="video" key={`${index}videoDW`} className="content-form__item" /> */}
+                    </div>
                   )
                 case 'audio':
                   return (
-                    <>
+                    <div key={index}>
                       <FilesUploader
                         type="audio"
                         key={`${index}audioDWA`}
@@ -125,7 +149,7 @@ const ContentForm = ({ contentData, contentId, handleSave }) => {
                         onChange={fileChangeHandler}
                         index={index}
                       />
-                    </>
+                    </div>
                   )
                 default:
                   return null
