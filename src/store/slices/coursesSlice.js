@@ -7,6 +7,8 @@ export const initialState = {
   course: null,
   loading: false,
   error: null,
+  publishLoading: false,
+  publishError: null,
 }
 
 const coursesSlice = createSlice({
@@ -87,9 +89,20 @@ const coursesSlice = createSlice({
       state.loading = false
       state.error = action.payload
     },
+    publishCourseRequest(state) {
+      state.publishLoading = true
+      state.publishError = null
+    },
+    publishCourseSuccess(state) {
+      state.publishLoading = false
+      state.publishError = null
+    },
+    publishCourseFailure(state, action) {
+      state.publishLoading = false
+      state.publishError = action.payload
+    },
     clearCourse(state) {
       state.course = null
-    },
   },
 })
 
