@@ -64,28 +64,12 @@ const TeachersBlock = ({ title, subtitle, accessCheck, section }) => {
     setOpen(false)
   }
 
-  //
-  // const fileChangeHandler = (e, index) => {
-  //   const file = e.target.files[0]
-  //
-  //   setData(prevState => {
-  //     const contentCopy = {
-  //       ...prevState[index],
-  //       audio: file,
-  //     }
-  //
-  //     return prevState.map((content, i) => {
-  //       if (index === i) {
-  //         return contentCopy
-  //       }
-  //       return content
-  //     })
-  //   })
-  // }
-
   const inputChangeHandler = e => {
-    const { value } = e.target
-    setDescription(value)
+    const { name, value } = e.target
+    setDescription(prev => ({
+      ...prev,
+      [name]: value,
+    }))
   }
 
   return (
@@ -95,7 +79,7 @@ const TeachersBlock = ({ title, subtitle, accessCheck, section }) => {
       </div>
       {accessCheck && accessCheck() ? (
         <>
-          <button type="button" className="teachers_block__btn-plus" onClick={e => handlerClick(e)}>
+          <button type="button" className="teachers_block__btn-plus" onClick={handlerClick}>
             +
           </button>
           {open && (
