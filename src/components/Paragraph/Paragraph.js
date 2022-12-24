@@ -5,10 +5,9 @@ import Modal from '../UI/Modal2/Modal'
 import { updateDescriptionRequest } from '../../store/actions/descriptionsActions'
 import EyeButton from '../EyeButton/EyeButton'
 
-const Paragraph = ({ title = 'Title', subtitle, section }) => {
+const Paragraph = ({ title = 'Title', subtitle, section, accessCheck }) => {
   const text = useSelector(state => state.description.descriptions[section])
   const dispatch = useDispatch()
-
   const [open, setOpen] = useState(false)
   const [description, setDescription] = useState('')
 
@@ -16,7 +15,7 @@ const Paragraph = ({ title = 'Title', subtitle, section }) => {
     setOpen(true)
   }
 
-  const updateDescription = (e, data) => {
+  const updateDescription = e => {
     e.preventDefault()
     if (!section) {
       setOpen(false)
@@ -74,7 +73,7 @@ const Paragraph = ({ title = 'Title', subtitle, section }) => {
           </Modal>
         )}
       </div>
-      <EyeButton />
+      {accessCheck && accessCheck() && <EyeButton />}
     </div>
   )
 }

@@ -48,9 +48,9 @@ const Course = ({ match }) => {
             </div>
           )}
           <div className="course container">
-            <WhatLearn match={match} />
-            <TeachersBlock title="Преподователи" teachers={teachers} />
-            <CourseProgram />
+            <WhatLearn match={match} accessCheck={accessCheck} />
+            <TeachersBlock title="Преподователи" teachers={teachers} accessCheck={accessCheck} />
+            <CourseProgram accessCheck={accessCheck} />
           </div>
           <Footer />
         </>
