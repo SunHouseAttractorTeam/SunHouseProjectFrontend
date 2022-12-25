@@ -1,6 +1,7 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import Cookies from 'js-cookie'
 import { toast } from 'react-toastify'
+import Swal from 'sweetalert2'
 import axiosApi from '../../axiosApi'
 import { historyPush } from '../actions/historyActions'
 import {
@@ -47,18 +48,15 @@ export function* registrationUserSaga({ payload: userData }) {
   try {
     const response = yield axiosApi.post('/users', userData)
     yield put(registrationSuccess(response.data))
-    yield toast.success('Подтвердите email', {
-      position: 'top-right',
-      autoClose: 3500,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    })
+    yield Swal.fire({ icon: 'success', title: 'Подтвердите вашу почту', showConfirmButton: false })
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(registrationFailure(e.response.data))
+      yield Swal.fire({
+        icon: 'error',
+        title: 'Данный пользователь уже зарегистрирован',
+        showConfirmButton: false,
+      })
     }
   }
 }
@@ -73,6 +71,7 @@ export function* loginUserSaga({ payload: userData }) {
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(loginUserFailure(e.response.data))
+      yield Swal.fire({ icon: 'error', title: 'Подтвердите почту', showConfirmButton: false })
     }
   }
 }

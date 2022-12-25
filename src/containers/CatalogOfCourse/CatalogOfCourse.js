@@ -48,12 +48,12 @@ const CatalogOfCourse = () => {
               <div className="icons-item" onClick={() => setToggleFilter(toggleFil => !toggleFil)}>
                 <img src={burgerIcon} alt="burgerIcon" />
               </div>
-              {toggleFilter && <ModalOfCategory setOpen={setToggleFilter} />}
+              {toggleFilter && <ModalOfCategory />}
             </div>
           </div>
           <div className="courses-section__cards">
             {searchCourse?.slice(0, next)?.map(item => (
-              <CourseCard key={item.id} title={item.title} date={item.date} />
+              <CourseCard key={item.id} title={item.title} date={item.date} price={item.price} />
             ))}
           </div>
           {next < searchCourse?.length && (

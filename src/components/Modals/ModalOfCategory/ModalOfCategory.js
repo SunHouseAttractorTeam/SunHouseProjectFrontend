@@ -2,25 +2,20 @@ import React from 'react'
 import './ModalOfCategory.scss'
 
 const ModalOfCategory = () => {
-  const categories = [
-    { category: 'Платные курсы', id: 1 },
-    { category: 'Бесплатные курсы', id: 2 },
-    { category: 'Платные курсы', id: 3 },
-    { category: 'Бесплатные курсы', id: 4 },
-    { category: 'Платные курсы', id: 5 },
-    { category: 'Бесплатные курсы', id: 6 },
-  ]
+  const category = [{ category: 'Платные курсы' }, { category: 'Беслатные курсы' }]
 
   return (
-    <div className="modal-category">
-      <h4>Категории курсов</h4>
-      {categories.map(category => (
-        <div>
-          <input type="radio" name="category" id="categoryItem" />
-          <label htmlFor="categoryItem">{category.category}</label>
-        </div>
-      ))}
-    </div>
+    <ul className="modal-category">
+      <h4 className="modal-category__title">Категории:</h4>
+      <div className="modal-category__block">
+        {category &&
+          category.map(list => (
+            <li key={list._id} className="modal-category__list">
+              {list.category}
+            </li>
+          ))}
+      </div>
+    </ul>
   )
 }
 

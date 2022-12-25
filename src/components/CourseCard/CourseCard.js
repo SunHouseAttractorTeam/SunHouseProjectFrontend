@@ -9,7 +9,7 @@ const CourseCard = ({ isLast, title, date, list, price, onClick }) => (
     <div className="course-card__content">
       {!isLast && <span className="course-card__profession">профессия</span>}
       <h3 className="course-card__title">{title}</h3>
-      {price && <h6 className="course-card__price">{price}</h6>}
+      {price && <h6 className="course-card__price">{price} сом</h6>}
       {!isLast && date && <span className="course-card__date">{date}</span>}
       {isLast && list && (
         <ul className="course-card__list">
