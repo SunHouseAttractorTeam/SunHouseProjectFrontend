@@ -1,22 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import './Notifications.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchNotificationsRequest } from '../../store/actions/notificationsActions'
+import { fetchNotificationsRequest, viewNotificationsRequest } from '../../store/actions/notificationsActions'
 
 const Notifications = () => {
   const dispatch = useDispatch()
   const user = useSelector(state => state.users.user)
   const notifications = useSelector(state => state.notifications.notifications)
   const [active, setActive] = useState(true)
-  const [viewStatus, setViewStatus] = useState(true)
-
+  const unViewNotifications = []
   useEffect(() => {
     if (user) dispatch(fetchNotificationsRequest(user._id))
   }, [dispatch, user])
 
+  useEffect(() => {
+    // eslint-disable-next-line array-callback-return
+    notifications.map(not => {
+      if (not.view === false) {
+        unViewNotifications.push(not)
+      }
+    })
+  }, [active, notifications])
+
   const onActiveBtn = () => {
     setActive(!active)
-    setViewStatus(!viewStatus)
+    if (unViewNotifications.length !== 0) {
+      dispatch(viewNotificationsRequest(unViewNotifications))
+    }
   }
 
   return (
