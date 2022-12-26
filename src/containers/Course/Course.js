@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Header2 from '../../components/Header2/Header2'
 import Footer from '../../components/Footer/Footer'
 import CourseHomepage from './CourseHomepage/CourseHomepage'
-import { fetchCourseRequest, updateCourseRequest } from '../../store/actions/coursesActions'
+import { clearCourse, fetchCourseRequest, updateCourseRequest } from '../../store/actions/coursesActions'
 import CourseSettings from './CourseSettings/CourseSettings'
 import CourseEdit from './CourseEdit/CourseEdit'
 import CourseBanner from '../../components/CourseBanner/CourseBanner'
@@ -13,6 +13,7 @@ import WhatLearn from '../../components/WhatLearn/WhatLearn'
 import TeachersBlock from '../../components/TeachersBlock/TeachersBlock'
 import CourseProgram from '../../components/CourseProgram/CourseProgram'
 import { teachers } from '../../data/teachers'
+import CoursePassing from '../../components/CoursePassing/CoursePassing'
 
 const Course = ({ match }) => {
   const { id } = useParams()
@@ -23,6 +24,9 @@ const Course = ({ match }) => {
   useEffect(() => {
     if (user) {
       dispatch(fetchCourseRequest(id))
+    }
+    return () => {
+      dispatch(clearCourse())
     }
   }, [dispatch, id, user])
 
@@ -35,25 +39,28 @@ const Course = ({ match }) => {
   return (
     <>
       {course && (
-        <>
+        <div className="course">
           <Header2 />
           <CourseBanner course={course} user={user?._id} handleSave={handleSave} accessCheck={accessCheck} />
-          {course && (
-            <div className="course__bottom">
-              <Switch>
-                <Route path="/course/:id" exact render={() => <CourseHomepage accessCheck={accessCheck} />} />
-                <Route path="/course/:id/settings" exact component={CourseSettings} />
-                <Route path="/course/:id/edit" component={CourseEdit} />
-              </Switch>
-            </div>
-          )}
-          <div className="course container">
-            <WhatLearn match={match} accessCheck={accessCheck} />
-            <TeachersBlock title="Преподователи" teachers={teachers} accessCheck={accessCheck} />
-            <CourseProgram accessCheck={accessCheck} />
+          <div className="course__bottom">
+            <Switch>
+              <Route
+                path="/course/:id"
+                exact={!user?.myCourses.find(userCourse => userCourse.course === course._id)}
+                render={() =>
+                  user?.myCourses.find(userCourse => userCourse.course === course._id) ? (
+                    <CoursePassing />
+                  ) : (
+                    <CourseHomepage accessCheck={accessCheck} />
+                  )
+                }
+              />
+              <Route path="/course/:id/settings" exact component={CourseSettings} />
+              <Route path="/course/:id/edit" component={CourseEdit} />
+            </Switch>
           </div>
           <Footer />
-        </>
+        </div>
       )}
     </>
   )

@@ -1,6 +1,9 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import axiosApi from '../../axiosApi'
 import {
+  addUsersCourseFailure,
+  addUsersCourseRequest,
+  addUsersCourseSuccess,
   createCourseFailure,
   createCourseRequest,
   createCourseSuccess,
@@ -16,6 +19,9 @@ import {
   fetchUserCoursesFailure,
   fetchUserCoursesRequest,
   fetchUserCoursesSuccess,
+  publishCourseFailure,
+  publishCourseRequest,
+  publishCourseSuccess,
   updateCourseFailure,
   updateCourseRequest,
   updateCourseSuccess,
@@ -60,6 +66,16 @@ export function* createCourse({ payload: courseData }) {
   }
 }
 
+export function* publishCourse({ payload: id }) {
+  try {
+    yield axiosApi.post(`/courses/${id}/publish`)
+    yield put(publishCourseSuccess())
+    yield put(fetchCoursesRequest())
+  } catch (e) {
+    yield put(publishCourseFailure(e))
+  }
+}
+
 export function* updateCourse({ payload }) {
   const { courseData, id } = payload
 
@@ -74,6 +90,23 @@ export function* updateCourse({ payload }) {
   }
 }
 
+export function* addUsersCourse({ payload }) {
+  const { idCourse, idUser, role } = payload
+
+  try {
+    if (role === 'teachers') {
+      yield axiosApi.put(`/courses/add?course=${idCourse}&owner=${idUser}`)
+    }
+    if (role === 'users') {
+      yield axiosApi.put(`/courses/add?course=${idCourse}&user=${idUser}`)
+    }
+
+    yield put(addUsersCourseSuccess())
+  } catch (e) {
+    yield put(addUsersCourseFailure(e))
+  }
+}
+
 export function* deleteCourse({ payload: id }) {
   try {
     yield axiosApi.delete(`/courses/${id}`)
@@ -85,10 +118,12 @@ export function* deleteCourse({ payload: id }) {
 
 const coursesSagas = [
   takeEvery(fetchCoursesRequest, fetchCourses),
+  takeEvery(publishCourseRequest, publishCourse),
   takeEvery(fetchCourseRequest, fetchCourse),
   takeEvery(fetchUserCoursesRequest, fetchUserCourses),
   takeEvery(createCourseRequest, createCourse),
   takeEvery(updateCourseRequest, updateCourse),
+  takeEvery(addUsersCourseRequest, addUsersCourse),
   takeEvery(deleteCourseRequest, deleteCourse),
 ]
 

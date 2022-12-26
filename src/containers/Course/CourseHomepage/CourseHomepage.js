@@ -18,7 +18,7 @@ const CourseHomepage = ({ accessCheck }) => {
   return (
     <>
       {course && (
-        <div className="course-review">
+        <div className="course-homepage">
           <CourseTitle
             courseId={id}
             title={course.title}
@@ -27,7 +27,7 @@ const CourseHomepage = ({ accessCheck }) => {
             accessCheck={accessCheck}
           />
           <div className="container">
-            <div className="course-review__bottom" />
+            <div className="course-homepage__bottom" />
           </div>
         </div>
       )}

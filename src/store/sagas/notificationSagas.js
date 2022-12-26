@@ -16,11 +16,14 @@ import {
   fetchNotificationsRequest,
   fetchNotificationsSuccess,
   fetchNotificationSuccess,
+  viewNotificationsFailure,
+  viewNotificationsRequest,
+  viewNotificationsSuccess,
 } from '../actions/notificationsActions'
 
-export function* fetchNotifications() {
+export function* fetchNotifications({ payload: userId }) {
   try {
-    const response = yield axiosApi(`/notifications`)
+    const response = yield axiosApi(`/notifications?user=${userId}`)
     yield put(fetchNotificationsSuccess(response.data))
   } catch (e) {
     yield put(fetchNotificationsFailure(e))
@@ -37,11 +40,29 @@ export function* fetchNotification({ payload: id }) {
 }
 
 export function* createNotification({ payload: notificationData }) {
+  if (notificationData.email) {
+    try {
+      yield axiosApi.post(`/notifications`, notificationData)
+      yield put(createNotificationSuccess())
+    } catch (e) {
+      yield put(createNotificationFailure(e))
+    }
+  } else {
+    try {
+      yield axiosApi.post(`/notifications?params=all`, notificationData)
+      yield put(createNotificationSuccess())
+    } catch (e) {
+      yield put(createNotificationFailure(e))
+    }
+  }
+}
+
+export function* viewNotification({ payload }) {
   try {
-    yield axiosApi.post(`/notifications`, notificationData)
-    yield put(createNotificationSuccess())
+    yield axiosApi.put(`/notifications`, { data: payload })
+    yield put(viewNotificationsSuccess())
   } catch (e) {
-    yield put(createNotificationFailure(e))
+    yield put(viewNotificationsFailure(e))
   }
 }
 
@@ -71,6 +92,7 @@ const notificationSagas = [
   takeEvery(fetchNotificationsRequest, fetchNotifications),
   takeEvery(fetchNotificationRequest, fetchNotification),
   takeEvery(createNotificationRequest, createNotification),
+  takeEvery(viewNotificationsRequest, viewNotification),
   takeEvery(editNotificationRequest, editNotification),
   takeEvery(deleteNotificationRequest, deleteNotification),
 ]

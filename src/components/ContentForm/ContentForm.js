@@ -2,32 +2,56 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import './ContentForm.scss'
 import FilesUploader from '../FilesUploader/FilesUploader'
-import SunEditorWYSIWYG from '../UI/SunEditorWYSIWYG/SunEditorWYSIWYG'
 import AddContentBlock from '../AddContentBlock/AddContentBlock'
+import SunEditorWYSIWYG from '../UI/SunEditorWYSIWYG/SunEditorWYSIWYG'
+import AudioPlayer from '../UI/AudioPlayer/AudioPlayer'
+import FormInput from '../UI/Form/FormInput/FormInput'
 
 const ContentForm = ({ contentData, contentId, handleSave }) => {
   const { courseId } = useParams()
-  const [data, setData] = useState([])
+  const [data, setData] = useState([{ title: contentData.title }, ...contentData.data])
   const [lastFile, setLastFile] = useState('')
 
   useEffect(() => {
-    if (contentData) {
-      if (data.length === 0) {
-        setData([{ title: contentData.title }])
+    if (data.length) {
+      const index = data.length - 1
+      const dataLastFile = data[index]
+
+      if (Object.keys(dataLastFile)[0] === 'file') {
+        const { file } = data.splice(index, 1)[0]
+        setLastFile(file)
       }
     }
-  }, [contentData])
+  }, [data])
 
   const handleAddContent = type => {
     setData([...data, { [type]: '' }])
   }
 
   const inputChangeHandler = (e, index) => {
-    const value = JSON.stringify(e)
+    const value = e
     setData(prevState => {
       const contentCopy = {
         ...prevState[index],
         text: value,
+      }
+
+      return prevState.map((content, i) => {
+        if (index === i) {
+          return contentCopy
+        }
+        return content
+      })
+    })
+  }
+
+  const videoChangeHandler = (e, index) => {
+    const { value } = e.target
+
+    setData(prevState => {
+      const contentCopy = {
+        ...prevState[index],
+        video: value,
       }
 
       return prevState.map((content, i) => {
@@ -66,13 +90,15 @@ const ContentForm = ({ contentData, contentId, handleSave }) => {
     const formData = new FormData()
     data.forEach(elem => {
       Object.keys(elem).forEach(key => {
-        if (key === 'audio') {
+        if (key === 'audio' && typeof elem[key] !== 'string') {
           formData.append(key, elem[key])
         }
       })
     })
     if (lastFile) {
-      formData.append('file', lastFile)
+      if (typeof lastFile !== 'string') {
+        formData.append('file', lastFile)
+      }
       formData.append('payload', JSON.stringify([...data, { file: lastFile }]))
     } else {
       formData.append('payload', JSON.stringify(data))
@@ -106,26 +132,34 @@ const ContentForm = ({ contentData, contentId, handleSave }) => {
                 case 'text':
                   return (
                     <div key={`${index}textDW`} className="content-form__editor content-form__item">
-                      <SunEditorWYSIWYG value={content.description} onChange={e => inputChangeHandler(e, index)} />
+                      <SunEditorWYSIWYG setContents={content.text} onChange={e => inputChangeHandler(e, index)} />
                     </div>
                   )
                 case 'video':
                   return (
-                    <>
-                      <FilesUploader type="video" key={`${index}videoDW`} className="content-form__item" />
-                    </>
+                    <div key={index} className="video-input">
+                      <FormInput
+                        placeholder="Ссылка на видео"
+                        onChange={e => videoChangeHandler(e, index)}
+                        name="video"
+                      />
+                      {/* <FilesUploader type="video" key={`${index}videoDW`} className="content-form__item" /> */}
+                    </div>
                   )
                 case 'audio':
                   return (
-                    <>
-                      <FilesUploader
-                        type="audio"
-                        key={`${index}audioDWA`}
-                        className="content-form__item"
-                        onChange={fileChangeHandler}
-                        index={index}
-                      />
-                    </>
+                    <div key={`${index}audioDWA`}>
+                      {content.audio && typeof content.audio === 'string' ? (
+                        <AudioPlayer audio={content.audio} />
+                      ) : (
+                        <FilesUploader
+                          type="audio"
+                          className="content-form__item"
+                          onChange={fileChangeHandler}
+                          index={index}
+                        />
+                      )}
+                    </div>
                   )
                 default:
                   return null
