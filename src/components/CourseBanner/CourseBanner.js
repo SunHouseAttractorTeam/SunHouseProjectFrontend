@@ -37,7 +37,7 @@ const CourseBanner = ({ course, user, handleSave, accessCheck }) => {
             to={
               location.pathname !== `/course/${course._id}`
                 ? `/course/${course._id}`
-                : `/user/${accessCheck() ? 'teacher_mode' : 'courses'}`
+                : `/user/${accessCheck ? 'teacher_mode' : 'courses'}`
             }
             className="course-banner__course-button"
           >
@@ -55,7 +55,7 @@ const CourseBanner = ({ course, user, handleSave, accessCheck }) => {
       </div>
       <div className={`course-banner__image ${user === course.user && 'course-banner__image--edit'}`}>
         <img src={image} alt={course.title} />
-        {accessCheck() && (
+        {accessCheck && (
           <>
             <i className="course-banner__image-add-icon">
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">

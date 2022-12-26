@@ -4,12 +4,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchCourseRequest } from '../../store/actions/coursesActions'
 import CourseTitle from '../CourseTitle/CourseTitle'
 import LessonPassing from '../LessonPassing/LessonPassing'
+import CourseModules from '../CourseModules/CourseModules'
+import './CoursePassing.scss'
 
 const CoursePassing = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const history = useHistory()
   const course = useSelector(state => state.courses.course)
+  const user = useSelector(state => state.users.user)
 
   useEffect(() => {
     if (!course) {
@@ -26,6 +29,7 @@ const CoursePassing = () => {
       checkContentType()
     }
   }, [dispatch, course, id])
+  const accessCheck = course.teachers.find(teacher => teacher === user?._id)
 
   return (
     <>
@@ -34,17 +38,8 @@ const CoursePassing = () => {
           <CourseTitle courseId={id} title={course.title} description={course.description} image={course.image} />
           <div className="container">
             <div className="course-passing__bottom">
-              <div className="course-passing__left">
-                {course.modules.map(module => (
-                  <div key={module._id}>
-                    <p>{module.title}</p>
-                    <ul>
-                      {module.data.map(item => (
-                        <li key={item._id}>{item.title}</li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+              <div className="course-edit__left">
+                <CourseModules id={id} course={course} accessCheck={accessCheck} />
               </div>
               <div className="course-passing__right">
                 <Switch>
