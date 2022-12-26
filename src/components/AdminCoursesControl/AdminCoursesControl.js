@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { fetchCoursesRequest, publishCourseRequest } from '../../store/actions/coursesActions'
 import Title from '../UI/Title/Title'
-import MainButton from '../UI/MainButton/MainButton'
 import './AdminCourseControl.scss'
+import MainButton from '../UI/MainButton/MainButton'
 
 const AdminCoursesControl = () => {
   const history = useHistory()
@@ -23,40 +23,33 @@ const AdminCoursesControl = () => {
     <>
       <Title>Курсы</Title>
       <div className="course-control">
-        <table className="course-control__table">
-          <thead>
-            <tr className="course-control__table-tr">
-              <td>Название</td>
-              <td>Цена</td>
-              <td>Описание</td>
-              <td>Опубликовано</td>
-            </tr>
-          </thead>
-          {courses.map(course => (
-            <tbody key={course._id}>
-              <tr>
-                <td>{course.title}</td>
-                <td>{course.price}</td>
-                <td>
-                  <p className="course-control__table-text">{course.description}</p>
-                </td>
-                <td>{course.publish ? 'Да' : 'Нет'}</td>
-              </tr>
-              <tr>
-                <td>
-                  <MainButton text="Посмотреть курс" onClick={() => handleCourse(course._id)} className="GreenButton" />
-                </td>
-                <td>
-                  <MainButton
-                    text="Publish/Unpublish"
-                    onClick={() => publishCourse(course._id)}
-                    className={!course.publish ? 'GreenButton' : 'course-control__table-button'}
-                  />
-                </td>
-              </tr>
-            </tbody>
-          ))}
-        </table>
+        {courses.map(course => (
+          <div className="course-control__wrapper" key={course._id}>
+            <div className="course-control__wrapper-info-block">
+              <p className="course-control__wrapper-title">
+                <span>{course.title}</span>
+              </p>
+              <hr />
+              {course.description ? (
+                <p className="course-control__wrapper-title">
+                  Описание курса: <span className="course-control__wrapper-description">{course.description}</span>
+                </p>
+              ) : null}
+            </div>
+            <div>
+              <MainButton
+                text="Просмотр курса"
+                onClick={() => handleCourse(course._id)}
+                className="GreenButton course-control__wrapper-open-course"
+              />
+              <MainButton
+                text={!course.publish ? 'Опубликовать' : 'Снять с публикации'}
+                onClick={() => publishCourse(course._id)}
+                className={!course.publish ? 'GreenButton' : 'course-control__wrapper-button'}
+              />
+            </div>
+          </div>
+        ))}
       </div>
     </>
   )
