@@ -14,7 +14,6 @@ const Header = () => {
 
   useEffect(() => {
     dispatch(fetchCategoriesRequest())
-    // dispatch(fetchNotificationsRequest(user._id))
   }, [dispatch])
 
   const onHeaderButton = () => {

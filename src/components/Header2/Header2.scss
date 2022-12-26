@@ -2,7 +2,8 @@
 
 .header-2 {
   padding: 21px 0;
-  border-bottom: 2px solid $darkGreyColor;
+  border-bottom: 2px solid $darkGreenColor;
+  background: $darkGreenColor;
 
   &__inner {
     display: flex;
