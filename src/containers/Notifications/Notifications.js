@@ -58,7 +58,7 @@ const Notifications = () => {
       {active && notifications
         ? notifications.map(notific =>
             notific.view ? (
-              <div className="notifications-card__textBlock">
+              <div className="notifications-card__textBlock" key={notific._id}>
                 <p className="notifications-card__textBlock__text">{notific.description}</p>
               </div>
             ) : null,
@@ -66,7 +66,7 @@ const Notifications = () => {
         : notifications
         ? notifications.map(notific =>
             notific.view === false ? (
-              <div className="notifications-card__textBlock">
+              <div className="notifications-card__textBlock" key={notific._id}>
                 <p className="notifications-card__textBlock__text">{notific.description}</p>
               </div>
             ) : null,
