@@ -5,7 +5,7 @@ import FilesUploader from '../FilesUploader/FilesUploader'
 import AddContentBlock from '../AddContentBlock/AddContentBlock'
 import SunEditorWYSIWYG from '../UI/SunEditorWYSIWYG/SunEditorWYSIWYG'
 import AudioPlayer from '../UI/AudioPlayer/AudioPlayer'
-import FormInput from '../UI/Form/FormInput/FormInput'
+import VideoInput from '../VideoInput/VideoInput'
 
 const ContentForm = ({ contentData, contentId, handleSave }) => {
   const { courseId } = useParams()
@@ -138,10 +138,32 @@ const ContentForm = ({ contentData, contentId, handleSave }) => {
                 case 'video':
                   return (
                     <div key={index} className="video-input">
-                      <FormInput
-                        placeholder="Ссылка на видео"
-                        onChange={e => videoChangeHandler(e, index)}
-                        name="video"
+                      {/* <FormInput */}
+                      {/*  placeholder="Ссылка на видео" */}
+                      {/*  onChange={e => videoChangeHandler(e, index)} */}
+                      {/*  name="video" */}
+                      {/* /> */}
+                      {content.video ? (
+                        <iframe
+                          width="560"
+                          height="315"
+                          src={content.video}
+                          title="YouTube video player"
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        />
+                      ) : (
+                        <VideoInput onChange={e => videoChangeHandler(e, index)} />
+                      )}
+                      <iframe
+                        width="560"
+                        height="315"
+                        src="https://www.youtube.com/embed/jfKfPfyJRdk"
+                        title="YouTube video player"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
                       />
                       {/* <FilesUploader type="video" key={`${index}videoDW`} className="content-form__item" /> */}
                     </div>
