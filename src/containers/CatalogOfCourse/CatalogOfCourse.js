@@ -16,12 +16,17 @@ const CatalogOfCourse = () => {
   const [toggle, setToggle] = useState(false)
   const [toggleFilter, setToggleFilter] = useState(false)
   const [search, setSearch] = useState('')
-
+  const [array, setArray] = useState(catalogOfCourseData)
+  const [category, setCategory] = useState('all')
   const handleMoreImage = () => {
     setNext(next + coursePerPage)
   }
 
-  const searchCourse = catalogOfCourseData.filter(course => course.title.toLowerCase().includes(search.toLowerCase()))
+  catalogOfCourseData.filter(course => course.title.toLowerCase().includes(search.toLowerCase()))
+
+  const selectedCategory = valueCategory => {
+    setCategory(valueCategory)
+  }
 
   return (
     <>
@@ -48,15 +53,19 @@ const CatalogOfCourse = () => {
               <div className="icons-item" onClick={() => setToggleFilter(toggleFil => !toggleFil)}>
                 <img src={burgerIcon} alt="burgerIcon" />
               </div>
-              {toggleFilter && <ModalOfCategory />}
+              {toggleFilter && <ModalOfCategory selectedCategory={selectedCategory} />}
             </div>
           </div>
           <div className="courses-section__cards">
-            {searchCourse?.slice(0, next)?.map(item => (
-              <CourseCard key={item.id} title={item.title} date={item.date} price={item.price} />
-            ))}
+            {category === 'all'
+              ? array
+                  ?.slice(0, next)
+                  ?.map(item => <CourseCard key={item.id} title={item.title} date={item.date} price={item.price} />)
+              : array
+                  .filter(el => el.category === category)
+                  .map(item => <CourseCard key={item.id} title={item.title} date={item.date} price={item.price} />)}
           </div>
-          {next < searchCourse?.length && (
+          {next < array?.length && (
             <button type="button" className="course-btn" onClick={handleMoreImage}>
               Посмотреть все курсы
             </button>

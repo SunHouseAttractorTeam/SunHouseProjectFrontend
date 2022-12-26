@@ -1,17 +1,21 @@
 import React from 'react'
 import './ModalOfCategory.scss'
 
-const ModalOfCategory = () => {
-  const category = [{ category: 'Платные курсы' }, { category: 'Беслатные курсы' }]
+const ModalOfCategory = ({ selectedCategory }) => {
+  const categoryArray = [
+    { key: 'all', name: 'Все' },
+    { key: 'Платный курс', name: 'Платные курсы', id: 1 },
+    { key: 'Бесплатный курс', name: 'Бесплатный курс', id: 2 },
+  ]
 
   return (
     <ul className="modal-category">
       <h4 className="modal-category__title">Категории:</h4>
       <div className="modal-category__block">
-        {category &&
-          category.map(list => (
-            <li key={list._id} className="modal-category__list">
-              {list.category}
+        {categoryArray &&
+          categoryArray.map(list => (
+            <li key={list.id} className="modal-category__list" onClick={() => selectedCategory(list.key)}>
+              {list.name}
             </li>
           ))}
       </div>
