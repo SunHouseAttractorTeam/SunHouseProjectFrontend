@@ -30,5 +30,38 @@
     max-width: 752px;
     border: 1px solid #F2F2F7;
   }
+
+  &__modal {
+    padding: 20px;
+
+    &-info {
+      text-align: left;
+      padding-bottom: 15px;
+      font-size: 20px;
+    }
+
+    &-control {
+      display: flex;
+      justify-content: space-evenly;
+
+      &-red {
+        background-color: red;
+      }
+
+      &-yellow {
+        background-color: yellow;
+      }
+    }
+
+    &-inner-title {
+      padding-bottom: 25px;
+    }
+
+    &-email {
+      user-select: none;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
 }
 

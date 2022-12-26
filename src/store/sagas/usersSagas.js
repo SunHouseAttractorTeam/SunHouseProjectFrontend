@@ -121,6 +121,15 @@ export function* logoutUserSaga() {
   } catch (e) {}
 }
 
+export function* deleteUserSaga(id) {
+  try {
+    yield axiosApi.delete('users/delete_forever', id)
+    yield put()
+  } catch (e) {
+    yield put()
+  }
+}
+
 export function* verifyUserSaga(confirmationCode) {
   try {
     const response = yield axiosApi.get(`/users/confirm/${confirmationCode.payload}`)
@@ -158,6 +167,7 @@ export function* resetPasswordSaga({ payload: hash }) {
 }
 
 const userSagas = [
+    takeEvery()
   takeEvery(getAllUsersRequest, getAllUsersSaga),
   takeEvery(registrationRequest, registrationUserSaga),
   takeEvery(loginUserRequest, loginUserSaga),
