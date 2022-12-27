@@ -22,8 +22,8 @@ const AllUsers = () => {
   useEffect(() => {
     dispatch(getAllUsersRequest())
   }, [dispatch])
-  const deleteHandler = () => {
-    dispatch(deleteUserRequest(userInfo._id))
+  const deleteHandler = id => {
+    dispatch(deleteUserRequest(id))
     setCheckDelete(false)
   }
   return (
@@ -77,7 +77,7 @@ const AllUsers = () => {
               text="Удалить"
               className={!a ? 'GreenButton users__modal-control-red' : 'GreenButton users__modal-control-gray'}
               disabled={a}
-              onClick={() => deleteHandler()}
+              onClick={() => deleteHandler(userInfo._id)}
             />
           </div>
         </Modal>

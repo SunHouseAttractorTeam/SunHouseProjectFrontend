@@ -62,9 +62,17 @@
   }
 
   &__form {
-    &-button {
+    &-disabled {
+      background-color: $greyColor;
+      cursor: not-allowed;
 
     }
+
+    &-area {
+      margin-bottom: 15px;
+    }
+
+
   }
 }
 

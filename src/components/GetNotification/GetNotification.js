@@ -71,13 +71,21 @@ const GetNotification = () => {
             />
             <MainButton
               text="Отправить сообщение"
-              className="GreenButton admin-notification__form-button"
+              className={notification.description ? 'GreenButton' : 'GreenButton admin-notification__form-disabled'}
               onClick={e => submitMessage(e)}
+              disabled={!notification.description}
             />
           </form>
         </Modal>
       ) : null}
-      <MainButton text="Отправить всем" className="GreenButton" onClick={() => setOpen(true)} />
+      <MainButton
+        text="Отправить всем"
+        className="GreenButton"
+        onClick={() => {
+          setOpen(true)
+          setNotification({ description: '', user: '', email: '' })
+        }}
+      />
     </div>
   )
 }

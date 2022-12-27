@@ -125,9 +125,9 @@ export function* logoutUserSaga() {
 
 export function* deleteUserSaga(id) {
   try {
-    yield axiosApi.delete('users/delete_forever', id)
-    yield put(deleteUserSuccess)
-    yield put(getAllUsersRequest)
+    yield axiosApi.delete(`users/delete_forever/${id.payload}`)
+    yield put(deleteUserSuccess())
+    yield put(getAllUsersRequest())
   } catch (e) {
     yield put(deleteUserFailure(e))
   }
