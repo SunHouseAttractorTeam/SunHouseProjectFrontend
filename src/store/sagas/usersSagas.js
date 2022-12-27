@@ -4,6 +4,8 @@ import { toast } from 'react-toastify'
 import axiosApi from '../../axiosApi'
 import { historyPush } from '../actions/historyActions'
 import {
+  deleteUserFailure,
+  deleteUserSuccess,
   facebookLoginFailure,
   facebookLoginRequest,
   facebookLoginSuccess,
@@ -124,9 +126,10 @@ export function* logoutUserSaga() {
 export function* deleteUserSaga(id) {
   try {
     yield axiosApi.delete('users/delete_forever', id)
-    yield put()
+    yield put(deleteUserSuccess)
+    yield put(getAllUsersRequest)
   } catch (e) {
-    yield put()
+    yield put(deleteUserFailure(e))
   }
 }
 
@@ -167,7 +170,7 @@ export function* resetPasswordSaga({ payload: hash }) {
 }
 
 const userSagas = [
-    takeEvery()
+  takeEvery(getAllUsersRequest, deleteUserSaga),
   takeEvery(getAllUsersRequest, getAllUsersSaga),
   takeEvery(registrationRequest, registrationUserSaga),
   takeEvery(loginUserRequest, loginUserSaga),

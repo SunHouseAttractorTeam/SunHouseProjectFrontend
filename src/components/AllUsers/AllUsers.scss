@@ -14,6 +14,7 @@
     height: auto;
     background-color: $totalWhiteColor;
     border-radius: 16px;
+    overflow-y: scroll;
   }
 
   &__names {
@@ -34,6 +35,11 @@
   &__modal {
     padding: 20px;
 
+    &-crutch {
+      margin: 15px 0 15px 280px;
+    }
+
+
     &-info {
       text-align: left;
       padding-bottom: 15px;
@@ -44,8 +50,14 @@
       display: flex;
       justify-content: space-evenly;
 
+
       &-red {
         background-color: red;
+      }
+
+      &-gray {
+        background-color: $greyColor;
+        cursor: not-allowed;
       }
 
       &-yellow {
@@ -64,4 +76,5 @@
     }
   }
 }
+
 

@@ -11,6 +11,8 @@ export const initialState = {
   registerError: null,
   loginLoading: false,
   loginError: null,
+  deleteLoading: false,
+  deleteError: null,
 }
 
 const usersSlice = createSlice({
@@ -92,6 +94,16 @@ const usersSlice = createSlice({
     },
     logoutUser(state) {
       state.user = null
+    },
+    deleteUserRequest(state) {
+      state.deleteLoading = true
+    },
+    deleteUserSuccess(state) {
+      state.deleteLoading = false
+    },
+    deleteUserFailure(state, action) {
+      state.deleteLoading = false
+      state.deleteError = action.payload
     },
     verifyUserRequest(state) {
       state.verifyUserLoading = true

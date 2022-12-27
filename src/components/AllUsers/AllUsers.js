@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './AllUsers.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import Title from '../UI/Title/Title'
-import { getAllUsersRequest } from '../../store/actions/usersActions'
+import { deleteUserRequest, getAllUsersRequest } from '../../store/actions/usersActions'
 import Modal from '../UI/Modal2/Modal'
 import MainButton from '../UI/MainButton/MainButton'
 import FormInput from '../UI/Form/FormInput/FormInput'
@@ -22,8 +22,9 @@ const AllUsers = () => {
   useEffect(() => {
     dispatch(getAllUsersRequest())
   }, [dispatch])
-  const test = () => {
-    dispatch(deleteUser(userInfo.id))
+  const deleteHandler = () => {
+    dispatch(deleteUserRequest(userInfo._id))
+    setCheckDelete(false)
   }
   return (
     <div className="users">
@@ -71,12 +72,14 @@ const AllUsers = () => {
             Введите <span className="users__modal-email">{userInfo.email}</span> пользователя которого хотите удалить
           </h4>
           <FormInput type="text" name="password" onChange={e => inputChangeHandler(e, setCheckPassword)} />
-          <MainButton
-            text="Удалить"
-            className="GreenButton users__modal-control-red"
-            disabled={a}
-            onClick={() => test()}
-          />
+          <div className="users__modal-crutch">
+            <MainButton
+              text="Удалить"
+              className={!a ? 'GreenButton users__modal-control-red' : 'GreenButton users__modal-control-gray'}
+              disabled={a}
+              onClick={() => deleteHandler()}
+            />
+          </div>
         </Modal>
       ) : null}
     </div>
