@@ -2,4 +2,22 @@
 
 .course{
   background-color: $silverColor;
+
+  &__save-btn{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 12px 64px;
+    margin: 64px auto 193px;
+    transition: all .5s ease;
+    border: 3px solid transparent;
+
+    &:hover{
+      background: transparent;
+      border-color: $lightGreenColor;
+      transition: all .5s ease;
+    }
+
+  }
 }

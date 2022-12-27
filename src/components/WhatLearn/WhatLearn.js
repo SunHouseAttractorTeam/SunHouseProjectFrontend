@@ -6,7 +6,7 @@ import Paragraph from '../Paragraph/Paragraph'
 import Modal from '../UI/Modal2/Modal'
 import { updateDescriptionRequest } from '../../store/actions/descriptionsActions'
 
-const WhatLearn = ({ match, accessCheck, section }) => {
+const WhatLearn = ({ match, teacherCheck, section }) => {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
   const [description, setDescription] = useState({
@@ -54,8 +54,8 @@ const WhatLearn = ({ match, accessCheck, section }) => {
 
   return (
     <div className="learn-plan-block">
-      <Paragraph title="Чему вы научитесь" match={match} section="whatLearn" accessCheck={accessCheck} />
-      {accessCheck && accessCheck() ? (
+      <Paragraph title="Чему вы научитесь" match={match} section="whatLearn" teacherCheck={teacherCheck} />
+      {teacherCheck && teacherCheck() ? (
         <>
           <button type="button" className="learn-plan-block__btn-plus" onClick={e => handlerClick(e)}>
             +

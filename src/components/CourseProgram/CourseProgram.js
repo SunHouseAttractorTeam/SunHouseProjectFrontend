@@ -5,7 +5,7 @@ import './CourseProgram.scss'
 import CardProgram from './CardProgram/CardProgram'
 import { fetchModulesRequest } from '../../store/actions/modulesActions'
 
-const CourseProgram = ({ accessCheck }) => {
+const CourseProgram = ({ teacherCheck }) => {
   const modules = useSelector(state => state.modules.modules)
   const dispatch = useDispatch()
 
@@ -15,12 +15,9 @@ const CourseProgram = ({ accessCheck }) => {
 
   return (
     <div className="program-block">
-      <Paragraph title="Программа курса" section="courseProgram" accessCheck={accessCheck} />
+      <Paragraph title="Программа курса" section="courseProgram" teacherCheck={teacherCheck} />
       <div className="program-block__cards">
-        {modules && modules.map(item => <CardProgram key={item._id} title={item.title} />)}
-        <button type="button" className="program-block__btn MainButton GreenButton">
-          {accessCheck && accessCheck() ? <>Сохранить изменения</> : <>Записаться на курс</>}
-        </button>
+        {modules && modules.map(item => <CardProgram key={item._id} title={item.title} content={item.data} />)}
       </div>
     </div>
   )

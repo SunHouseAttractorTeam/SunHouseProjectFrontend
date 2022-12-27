@@ -5,7 +5,7 @@ import Modal from '../UI/Modal2/Modal'
 import { updateDescriptionRequest } from '../../store/actions/descriptionsActions'
 import EyeButton from '../EyeButton/EyeButton'
 
-const Paragraph = ({ title = 'Title', subtitle, section, accessCheck }) => {
+const Paragraph = ({ title = 'Title', subtitle, section, teacherCheck }) => {
   const text = useSelector(state => state.description.descriptions[section])
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
@@ -73,7 +73,7 @@ const Paragraph = ({ title = 'Title', subtitle, section, accessCheck }) => {
           </Modal>
         )}
       </div>
-      {accessCheck && accessCheck() && <EyeButton />}
+      {teacherCheck && teacherCheck() && <EyeButton />}
     </div>
   )
 }

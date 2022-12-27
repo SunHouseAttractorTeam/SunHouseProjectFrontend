@@ -37,7 +37,7 @@ const sliderSettings = [
     },
   },
 ]
-const TeachersBlock = ({ title, subtitle, accessCheck, section }) => {
+const TeachersBlock = ({ title, subtitle, teacherCheck, section }) => {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
   const [description, setDescription] = useState({
@@ -75,9 +75,9 @@ const TeachersBlock = ({ title, subtitle, accessCheck, section }) => {
   return (
     <div className="teachers_block">
       <div className="teachers_block_headline">
-        <Paragraph title={title} subtitle={subtitle} section="teachersBlock" accessCheck={accessCheck} />
+        <Paragraph title={title} subtitle={subtitle} section="teachersBlock" teacherCheck={teacherCheck} />
       </div>
-      {accessCheck && accessCheck() ? (
+      {teacherCheck && teacherCheck() ? (
         <>
           <button type="button" className="teachers_block__btn-plus" onClick={handlerClick}>
             +
