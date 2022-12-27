@@ -8,6 +8,7 @@ import filterIcon from '../../assets/icons/FilterIcon.png'
 import searchIcon from '../../assets/icons/SearchIcon.png'
 import './CatalogOfCourse.scss'
 import ModalOfCategory from '../../components/Modals/ModalOfCategory/ModalOfCategory'
+import ModalSortCourse from '../../components/Modals/ModalSortCourse/ModalSortCourse'
 
 const coursePerPage = 5
 
@@ -15,9 +16,11 @@ const CatalogOfCourse = () => {
   const [next, setNext] = useState(coursePerPage)
   const [toggle, setToggle] = useState(false)
   const [toggleFilter, setToggleFilter] = useState(false)
+  const [toggleSort, setToggleSort] = useState(false)
   const [search, setSearch] = useState('')
   const [array, setArray] = useState(catalogOfCourseData)
   const [category, setCategory] = useState('all')
+  const [sort, setSort] = useState('сбросить')
   const handleMoreImage = () => {
     setNext(next + coursePerPage)
   }
@@ -28,6 +31,10 @@ const CatalogOfCourse = () => {
     setCategory(valueCategory)
   }
 
+  const sortCourse = valueSort => {
+    setSort(valueSort)
+  }
+
   return (
     <>
       <Header />
@@ -36,20 +43,21 @@ const CatalogOfCourse = () => {
           <div className="courses-section__block">
             <h2 className="courses-section__title">Каталог курсов</h2>
             <div className="icons-block">
-              {toggle ? (
+              {toggle && (
                 <input
                   type="text"
                   placeholder="Поиск..."
                   className="icon-value"
                   onChange={e => setSearch(e.target.value)}
                 />
-              ) : null}
+              )}
               <div className="icons-item" onClick={() => setToggle(toggleInput => !toggleInput)}>
                 <img src={searchIcon} alt="searchIcon" />
               </div>
-              <div className="icons-item filter-icon-item">
+              <div className="icons-item filter-icon-item" onClick={() => setToggleSort(toggleSor => !toggleSor)}>
                 <img src={filterIcon} alt="filterIcon" />
               </div>
+              {toggleSort && <ModalSortCourse sortCourse={sortCourse} />}
               <div className="icons-item" onClick={() => setToggleFilter(toggleFil => !toggleFil)}>
                 <img src={burgerIcon} alt="burgerIcon" />
               </div>
@@ -57,12 +65,12 @@ const CatalogOfCourse = () => {
             </div>
           </div>
           <div className="courses-section__cards">
-            {category === 'all'
+            {category === 'all' && sort === 'сбросить'
               ? array
                   ?.slice(0, next)
                   ?.map(item => <CourseCard key={item.id} title={item.title} date={item.date} price={item.price} />)
               : array
-                  .filter(el => el.category === category)
+                  .filter(el => el.category === category || el.filter === sort)
                   .map(item => <CourseCard key={item.id} title={item.title} date={item.date} price={item.price} />)}
           </div>
           {next < array?.length && (

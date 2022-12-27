@@ -48,7 +48,10 @@ export function* registrationUserSaga({ payload: userData }) {
   try {
     const response = yield axiosApi.post('/users', userData)
     yield put(registrationSuccess(response.data))
-    yield Swal.fire({ icon: 'success', title: 'Подтвердите вашу почту', showConfirmButton: false })
+    yield Swal.fire({
+      icon: 'success',
+      title: 'Signed in successfully',
+    })
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(registrationFailure(e.response.data))

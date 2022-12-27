@@ -3,7 +3,7 @@ import './ModalOfCategory.scss'
 
 const ModalOfCategory = ({ selectedCategory }) => {
   const categoryArray = [
-    { key: 'all', name: 'Все' },
+    { key: 'all', name: 'Все', id: 3 },
     { key: 'Платный курс', name: 'Платные курсы', id: 1 },
     { key: 'Бесплатный курс', name: 'Бесплатный курс', id: 2 },
   ]

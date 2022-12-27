@@ -5,6 +5,7 @@ export default [
     price: '5500',
     date: '24 месяца',
     category: 'Бесплатный курс',
+    filter: 'новые',
   },
   {
     id: 2,
@@ -12,6 +13,7 @@ export default [
     price: '5500',
     date: '24 месяца',
     category: 'Бесплатный курс',
+    filter: 'новые',
   },
   {
     id: 3,
@@ -19,6 +21,7 @@ export default [
     price: '5500',
     date: '24 месяца',
     category: 'Платный курс',
+    filter: 'старые',
   },
   {
     id: 4,
@@ -26,6 +29,7 @@ export default [
     price: '5500',
     date: '24 месяца',
     category: 'Платный курс',
+    filter: 'старые',
   },
   {
     id: 5,
@@ -33,6 +37,7 @@ export default [
     price: '5500',
     date: '24 месяца',
     category: 'Бесплатный курс',
+    filter: 'новые',
   },
   {
     id: 6,
@@ -40,6 +45,7 @@ export default [
     price: '5500',
     date: '24 месяца',
     category: 'Бесплатный курс',
+    filter: 'новые',
   },
   {
     id: 7,
@@ -47,6 +53,7 @@ export default [
     price: '5500',
     date: '24 месяца',
     category: 'Платный курс',
+    filter: 'старые',
   },
   {
     id: 8,
@@ -54,6 +61,7 @@ export default [
     price: '5500',
     date: '24 месяца',
     category: 'Платный курс',
+    filter: 'старые',
   },
   {
     id: 9,
@@ -61,5 +69,6 @@ export default [
     price: '5500',
     date: '24 месяца',
     category: 'Бесплатный курс',
+    filter: 'новые',
   },
 ]
