@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import './ContentForm.scss'
+import ReactPlayer from 'react-player/youtube'
 import FilesUploader from '../FilesUploader/FilesUploader'
 import AddContentBlock from '../AddContentBlock/AddContentBlock'
 import SunEditorWYSIWYG from '../UI/SunEditorWYSIWYG/SunEditorWYSIWYG'
 import AudioPlayer from '../UI/AudioPlayer/AudioPlayer'
 import VideoInput from '../VideoInput/VideoInput'
+import MainButton from '../UI/MainButton/MainButton'
+import './ContentForm.scss'
 
 const ContentForm = ({ contentData, contentId, handleSave }) => {
   const { courseId } = useParams()
   const [data, setData] = useState([{ title: contentData.title }, ...contentData.data])
   const [lastFile, setLastFile] = useState('')
+  const [preview, setPreview] = useState(false)
 
   useEffect(() => {
     if (data.length) {
@@ -106,6 +109,11 @@ const ContentForm = ({ contentData, contentId, handleSave }) => {
 
     handleSave({ courseId, contentId, data: formData })
   }
+
+  const handlePreview = () => {
+    setPreview(!preview)
+  }
+
   return (
     <>
       {contentData && (
@@ -131,50 +139,41 @@ const ContentForm = ({ contentData, contentId, handleSave }) => {
               switch (Object.keys(content)[0]) {
                 case 'text':
                   return (
-                    <div key={`${index}textDW`} className="content-form__editor content-form__item">
-                      <SunEditorWYSIWYG setContents={content.text} onChange={e => inputChangeHandler(e, index)} />
-                    </div>
-                  )
-                case 'video':
-                  return (
-                    <div key={index} className="video-input">
-                      {/* <FormInput */}
-                      {/*  placeholder="Ссылка на видео" */}
-                      {/*  onChange={e => videoChangeHandler(e, index)} */}
-                      {/*  name="video" */}
-                      {/* /> */}
-                      {content.video ? (
-                        <iframe
-                          width="560"
-                          height="315"
-                          src={content.video}
-                          title="YouTube video player"
-                          frameBorder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
+                    <>
+                      {preview ? (
+                        <div
+                          key={`${index}textDW`}
+                          className="content-form__text"
+                          /* eslint-disable-next-line react/no-danger */
+                          dangerouslySetInnerHTML={{ __html: content.text }}
                         />
                       ) : (
-                        <VideoInput onChange={e => videoChangeHandler(e, index)} />
+                        <div key={`${index}textDW`} className="content-form__editor content-form__item">
+                          <SunEditorWYSIWYG setContents={content.text} onChange={e => inputChangeHandler(e, index)} />
+                        </div>
                       )}
-                      <iframe
-                        width="560"
-                        height="315"
-                        src="https://www.youtube.com/embed/jfKfPfyJRdk"
-                        title="YouTube video player"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      />
-                      {/* <FilesUploader type="video" key={`${index}videoDW`} className="content-form__item" /> */}
+                    </>
+                  )
+                case 'video':
+                  return preview ? (
+                    <div key={`${index}videoDWA`} className="video-input">
+                      <ReactPlayer url={content.video} controls config={{ origin: 'http://localhost:3000' }} />
                     </div>
+                  ) : (
+                    <VideoInput
+                      key={`${index}videoDwa`}
+                      value={content.video}
+                      onChange={e => videoChangeHandler(e, index)}
+                    />
                   )
                 case 'audio':
                   return (
                     <div key={`${index}audioDWA`}>
-                      {content.audio && typeof content.audio === 'string' ? (
+                      {preview ? (
                         <AudioPlayer audio={content.audio} />
                       ) : (
                         <FilesUploader
+                          title={content.audio}
                           type="audio"
                           className="content-form__item"
                           onChange={fileChangeHandler}
@@ -193,9 +192,20 @@ const ContentForm = ({ contentData, contentId, handleSave }) => {
               <FilesUploader type="file" onChange={lastFileChangeHandler} />
             </div>
           </div>
-          <button className="MainButton GreenButton content-form-save" type="button" onClick={onClickSave}>
-            Сохранить
-          </button>
+          <div className="content-form__buttons">
+            <MainButton
+              className="GreenButton content-form__button"
+              type="button"
+              onClick={onClickSave}
+              text="Сохранить"
+            />
+            <MainButton
+              className="GreenButton content-form__button"
+              type="button"
+              onClick={handlePreview}
+              text={!preview ? 'Предосмотр' : 'Скрыть'}
+            />
+          </div>
         </>
       )}
     </>
