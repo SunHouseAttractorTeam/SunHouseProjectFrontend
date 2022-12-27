@@ -10,7 +10,7 @@ export const submitFormHandler = (e, fetch) => {
 
 export const getFieldError = (error, fieldName) => {
   try {
-    return error.errors[fieldName].message
+    return error.errors ? error.errors[fieldName].message : error.message
   } catch {
     return undefined
   }

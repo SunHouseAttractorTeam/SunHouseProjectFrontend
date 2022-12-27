@@ -28,7 +28,6 @@ const FormComponent = ({
       <FormInput
         key={name[index]}
         type={inputType[index]}
-        required
         placeholder={placeholderName[index]}
         name={name}
         value={value[name]}
