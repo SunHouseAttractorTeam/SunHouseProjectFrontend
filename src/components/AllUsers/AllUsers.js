@@ -31,18 +31,22 @@ const AllUsers = () => {
       <Title>Список пользователей</Title>
       <div className="users__inner-block">
         <h5 className="users__subtitle">Имя пользователя</h5>
-        {users?.map(user => (
-          <div
-            key={user._id}
-            onClick={() => {
-              setOpen(true)
-              setUserInfo(user)
-            }}
-          >
-            <p className="users__names">{user.username}</p>
-            <hr className="users__underline" />
-          </div>
-        ))}
+        {users?.map(user => {
+          if (user?.role !== 'admin') {
+            return (
+              <div
+                key={user._id}
+                onClick={() => {
+                  setOpen(true)
+                  setUserInfo(user)
+                }}
+              >
+                <p className="users__names">{user.username}</p>
+                <hr className="users__underline" />
+              </div>
+            )
+          }
+        })}
       </div>
       {open ? (
         <Modal setOpen={setOpen}>
@@ -50,9 +54,13 @@ const AllUsers = () => {
             <div className="users__modal-info">
               <p>Email: {userInfo.email}</p>
               <p>Username: {userInfo.username}</p>
+              {userInfo.role === 'ban' ? <p style={{ color: 'red' }}>Заблокирован</p> : null}
             </div>
             <div className="users__modal-control">
-              <MainButton text="Заблокировать" className="GreenButton users__modal-control-yellow" />
+              <MainButton
+                text={userInfo.role === 'ban' ? ' Разблокировать' : 'Заблокировать'}
+                className={userInfo.role === 'ban' ? 'GreenButton' : 'GreenButton  users__modal-control-yellow'}
+              />
               <MainButton
                 text="Удалить пользователя"
                 className="GreenButton users__modal-control-red"
