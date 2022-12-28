@@ -19,6 +19,7 @@ const CreateCourseModal = ({ setOpen }) => {
 
   const handlerClick = e => {
     submitFormHandler(e, dispatch(createCourseRequest({ ...course })))
+    setOpen(false)
   }
 
   return (

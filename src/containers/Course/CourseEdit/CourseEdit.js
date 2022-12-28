@@ -86,10 +86,10 @@ const CourseEdit = () => {
               handleClick={handleClickNext}
             />
           )}
-          {modalType === 'module' && <ModalCreateModal id={id} setOpen={!error ? setOpen : true} error={error} />}
+          {modalType === 'module' && <ModalCreateModal id={id} setOpen={setOpen} error={error} />}
           {modalType === 'task' && (
             <ModalTaskSetting
-              setOpen={!error ? setOpen : true}
+              setOpen={setOpen}
               courseId={id}
               moduleId={moduleId}
               setModalType={setModalType}
@@ -98,7 +98,7 @@ const CourseEdit = () => {
           )}
           {modalType === 'lesson' && (
             <CreateLessonModal
-              setOpen={!error ? setOpen : true}
+              setOpen={setOpen}
               courseId={id}
               moduleId={moduleId}
               setModalType={setModalType}
@@ -107,7 +107,7 @@ const CourseEdit = () => {
           )}
           {modalType === 'test' && (
             <CreateTestModal
-              setOpen={!error ? setOpen : true}
+              setOpen={setOpen}
               courseId={id}
               moduleId={moduleId}
               setModalType={setModalType}
