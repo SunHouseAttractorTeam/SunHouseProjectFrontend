@@ -22,6 +22,11 @@
     }
   }
 
+  &__block {
+    display: flex;
+    justify-content: space-between;
+  }
+
   &__cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
