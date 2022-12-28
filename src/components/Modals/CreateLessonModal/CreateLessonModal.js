@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { inputChangeHandler, submitFormHandler } from '../../UI/Form/Handlers/Handlers'
+import { getFieldError, inputChangeHandler, submitFormHandler } from '../../UI/Form/Handlers/Handlers'
 import { createLessonRequest } from '../../../store/actions/lessonsActions'
 import Modal from '../../UI/Modal2/Modal'
 import FormInput from '../../UI/Form/FormInput/FormInput'
@@ -8,7 +8,7 @@ import MainButton from '../../UI/MainButton/MainButton'
 import lesson from '../../../assets/icons/lesson.svg'
 import './CreateLessonModal.scss'
 
-const CreateLessonModal = ({ setOpen, courseId, moduleId, setModalType }) => {
+const CreateLessonModal = ({ setOpen, courseId, moduleId, setModalType, error }) => {
   const dispatch = useDispatch()
   const [lessonData, setLessonData] = useState({ title: '' })
 
@@ -32,6 +32,7 @@ const CreateLessonModal = ({ setOpen, courseId, moduleId, setModalType }) => {
               name="title"
               placeholder="Название"
               className="inputModal"
+              error={getFieldError(error, 'title')}
             />
             <div className="content__test__button-block">
               <MainButton

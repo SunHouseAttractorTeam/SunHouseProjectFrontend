@@ -17,6 +17,7 @@ const CourseEdit = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const course = useSelector(state => state.courses.course)
+  const error = useSelector(state => state.courses.error)
   const user = useSelector(state => state.users.user)
 
   const [open, setOpen] = useState(false)
@@ -85,15 +86,33 @@ const CourseEdit = () => {
               handleClick={handleClickNext}
             />
           )}
-          {modalType === 'module' && <ModalCreateModal id={id} setOpen={setOpen} />}
+          {modalType === 'module' && <ModalCreateModal id={id} setOpen={!error ? setOpen : true} error={error} />}
           {modalType === 'task' && (
-            <ModalTaskSetting setOpen={setOpen} courseId={id} moduleId={moduleId} setModalType={setModalType} />
+            <ModalTaskSetting
+              setOpen={!error ? setOpen : true}
+              courseId={id}
+              moduleId={moduleId}
+              setModalType={setModalType}
+              error={error}
+            />
           )}
           {modalType === 'lesson' && (
-            <CreateLessonModal setOpen={setOpen} courseId={id} moduleId={moduleId} setModalType={setModalType} />
+            <CreateLessonModal
+              setOpen={!error ? setOpen : true}
+              courseId={id}
+              moduleId={moduleId}
+              setModalType={setModalType}
+              error={error}
+            />
           )}
           {modalType === 'test' && (
-            <CreateTestModal setOpen={setOpen} courseId={id} moduleId={moduleId} setModalType={setModalType} />
+            <CreateTestModal
+              setOpen={!error ? setOpen : true}
+              courseId={id}
+              moduleId={moduleId}
+              setModalType={setModalType}
+              error={error}
+            />
           )}
         </>
       )}

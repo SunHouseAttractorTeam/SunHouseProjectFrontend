@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import './ContentForm.scss'
+import { getFieldError } from '../UI/Form/Handlers/Handlers'
 import FilesUploader from '../FilesUploader/FilesUploader'
 import AddContentBlock from '../AddContentBlock/AddContentBlock'
 import SunEditorWYSIWYG from '../UI/SunEditorWYSIWYG/SunEditorWYSIWYG'
 import AudioPlayer from '../UI/AudioPlayer/AudioPlayer'
 import FormInput from '../UI/Form/FormInput/FormInput'
+import './ContentForm.scss'
 
-const ContentForm = ({ contentData, contentId, handleSave }) => {
+const ContentForm = ({ contentData, contentId, handleSave, error }) => {
   const { courseId } = useParams()
   const [data, setData] = useState([{ title: contentData.title }, ...contentData.data])
   const [lastFile, setLastFile] = useState('')
@@ -142,6 +143,7 @@ const ContentForm = ({ contentData, contentId, handleSave }) => {
                         placeholder="Ссылка на видео"
                         onChange={e => videoChangeHandler(e, index)}
                         name="video"
+                        error={getFieldError(error, 'video')}
                       />
                       {/* <FilesUploader type="video" key={`${index}videoDW`} className="content-form__item" /> */}
                     </div>

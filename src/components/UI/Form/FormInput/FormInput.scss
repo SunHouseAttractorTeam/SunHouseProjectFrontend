@@ -8,17 +8,6 @@
   line-height: 19px;
   padding: 15px 30px;
   width: 100%;
-
-  &_error {
-    width: 100%;
-    border-radius: 90px;
-    color: $blackDarkColor;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    padding: 15px 30px;
-    border: 2px solid red;
-  }
 }
 
 .TextArea {
@@ -59,4 +48,9 @@
   padding: 10px;
   display: flex;
   justify-content: left;
+}
+
+
+.error {
+  border: 2px solid red;
 }

@@ -10,7 +10,7 @@ const FormInput = ({ type, name, value, onChange, placeholder, className, error 
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-      className={!error ? `InputStyle ${className}` : 'InputStyle_error'}
+      className={!error ? `InputStyle ${className}` : 'InputStyle error'}
     />
     <div className="helper">{error ? <span>{error}</span> : null}</div>
   </>

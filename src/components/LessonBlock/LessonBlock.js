@@ -8,7 +8,7 @@ const LessonBlock = () => {
   const { lessonId } = useParams()
   const dispatch = useDispatch()
   const lesson = useSelector(state => state.lessons.lesson)
-
+  const error = useSelector(state => state.lessons.error)
   useEffect(() => {
     dispatch(fetchLessonRequest(lessonId))
   }, [dispatch, lessonId])
@@ -17,7 +17,12 @@ const LessonBlock = () => {
     dispatch(editLessonRequest(data))
   }
 
-  return <> {lesson && <ContentForm contentData={lesson} contentId={lessonId} handleSave={handleSaveLesson} />}</>
+  return (
+    <>
+      {' '}
+      {lesson && <ContentForm contentData={lesson} contentId={lessonId} handleSave={handleSaveLesson} error={error} />}
+    </>
+  )
 }
 
 export default LessonBlock
