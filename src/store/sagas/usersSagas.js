@@ -5,6 +5,8 @@ import Swal from 'sweetalert2'
 import axiosApi from '../../axiosApi'
 import { historyPush } from '../actions/historyActions'
 import {
+  deleteUserFailure,
+  deleteUserSuccess,
   facebookLoginFailure,
   facebookLoginRequest,
   facebookLoginSuccess,
@@ -123,6 +125,16 @@ export function* logoutUserSaga() {
   } catch (e) {}
 }
 
+export function* deleteUserSaga(id) {
+  try {
+    yield axiosApi.delete(`users/delete_forever/${id.payload}`)
+    yield put(deleteUserSuccess())
+    yield put(getAllUsersRequest())
+  } catch (e) {
+    yield put(deleteUserFailure(e))
+  }
+}
+
 export function* verifyUserSaga(confirmationCode) {
   try {
     const response = yield axiosApi.get(`/users/confirm/${confirmationCode.payload}`)
@@ -160,6 +172,7 @@ export function* resetPasswordSaga({ payload: hash }) {
 }
 
 const userSagas = [
+  takeEvery(getAllUsersRequest, deleteUserSaga),
   takeEvery(getAllUsersRequest, getAllUsersSaga),
   takeEvery(registrationRequest, registrationUserSaga),
   takeEvery(loginUserRequest, loginUserSaga),
