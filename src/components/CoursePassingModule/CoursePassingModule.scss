@@ -1,0 +1,115 @@
+@import '../../scss/style';
+
+.course-modules {
+  &-block {
+    padding: 24px;
+    background: white;
+    border-radius: 16px;
+    margin-bottom: 32px;
+
+    &__structure {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 30px;
+      margin-bottom: 32px;
+    }
+
+    &__title {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 24px;
+    }
+
+    &__items {
+      padding: 0;
+      margin: 35px 0 0;
+      list-style-type: none;
+    }
+
+    &__item {
+      display: flex;
+      align-items: flex-start;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+
+      &:not(:last-of-type) {
+        margin-bottom: 20px;
+      }
+
+      &-title {
+        flex-grow: 1;
+        display: flex;
+        flex-flow: row nowrap;
+        font-size: 16px;
+        line-height: 19px;
+        font-weight: 500;
+        color: #000000;
+        text-decoration: none;
+        transition: all .3s ease;
+
+        &:hover {
+          text-decoration: underline;
+        }
+
+        i {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 24px;
+          height: 24px;
+          margin-right: 24px;
+        }
+      }
+
+      &-actions {
+        flex-shrink: 0;
+        margin-left: 20px;
+        display: flex;
+        align-items: center;
+      }
+
+      &-remove {
+        padding: 0;
+        cursor: pointer;
+        width: 12px;
+        height: 16px;
+        background-size: cover;
+        background-position: center;
+        border: none;
+        background-color: transparent;
+
+        &:hover path {
+          fill: red;
+        }
+
+        path {
+          fill: #D1D1D6;
+          transition: all .3s ease;
+        }
+      }
+    }
+
+    &__add-item {
+      margin-top: 50px;
+      width: 100%;
+      transition: all .5s ease;
+
+      &:hover {
+        background-color: #ADFA00;
+      }
+    }
+  }
+
+  &__add-module {
+    width: calc(100% - 50px);
+    margin: 32px auto 0;
+    background-color: #ADFA00;
+    border: 2px solid transparent;
+    transition: all .5s ease;
+
+    &:hover {
+      background: transparent;
+      border-color: #ADFA00;
+    }
+  }
+}
