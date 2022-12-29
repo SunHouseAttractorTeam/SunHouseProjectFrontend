@@ -62,7 +62,9 @@ export function* createCourse({ payload: courseData }) {
 
     yield historyPush(`/course/${response.data._id}`)
   } catch (e) {
-    yield put(createCourseFailure(e))
+    if (e.response && e.response.data) {
+      yield put(createCourseFailure(e.response.data))
+    }
   }
 }
 
