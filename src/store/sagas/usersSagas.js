@@ -4,7 +4,11 @@ import { toast } from 'react-toastify'
 import axiosApi from '../../axiosApi'
 import { historyPush } from '../actions/historyActions'
 import {
+  banUnbanFailure,
+  banUnbanRequest,
+  banUnbanSuccess,
   deleteUserFailure,
+  deleteUserRequest,
   deleteUserSuccess,
   facebookLoginFailure,
   facebookLoginRequest,
@@ -123,9 +127,9 @@ export function* logoutUserSaga() {
   } catch (e) {}
 }
 
-export function* deleteUserSaga(id) {
+export function* deleteUserSaga({ payload: id }) {
   try {
-    yield axiosApi.delete(`users/delete_forever/${id.payload}`)
+    yield axiosApi.delete(`users/${id}`)
     yield put(deleteUserSuccess())
     yield put(getAllUsersRequest())
   } catch (e) {
@@ -139,6 +143,18 @@ export function* verifyUserSaga(confirmationCode) {
     yield put(verifyUserSuccess(response.data))
   } catch (e) {
     yield put(verifyUserFailure(e))
+  }
+}
+
+export function* banUnbanSaga({ payload }) {
+  const { id, newRole } = payload
+  console.log(id, newRole)
+  try {
+    yield axiosApi.patch(`users/${id}/ban?=${newRole}`)
+    yield put(banUnbanSuccess())
+    yield put(getAllUsersRequest())
+  } catch (e) {
+    yield put(banUnbanFailure(e))
   }
 }
 
@@ -170,7 +186,8 @@ export function* resetPasswordSaga({ payload: hash }) {
 }
 
 const userSagas = [
-  takeEvery(getAllUsersRequest, deleteUserSaga),
+  takeEvery(banUnbanRequest, banUnbanSaga),
+  takeEvery(deleteUserRequest, deleteUserSaga),
   takeEvery(getAllUsersRequest, getAllUsersSaga),
   takeEvery(registrationRequest, registrationUserSaga),
   takeEvery(loginUserRequest, loginUserSaga),

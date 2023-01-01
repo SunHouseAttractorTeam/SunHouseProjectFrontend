@@ -24,7 +24,6 @@ const GetNotification = () => {
     setOpen(false)
     setNotification({ description: '', user: '', email: '' })
   }
-
   return (
     <div className="admin-notification">
       <Title>Отправить объявление</Title>
