@@ -23,7 +23,12 @@ const App = () => {
         <Route path="/" exact component={Main} />
         <Route path="/registration" component={Registration} />
         <Route path="/login" component={Login} />
-        <ProtectedRoute isAllowed={Cookies.get('jwt')} redirectTo="/login" path="/user" component={MyProfile} />
+        <ProtectedRoute
+          isAllowed={Cookies.get('jwt') || user?.token}
+          redirectTo="/login"
+          path="/user"
+          component={MyProfile}
+        />
         <ProtectedRoute
           isAllowed={Cookies.get('jwt') || user?.token}
           redirectTo="/login"
@@ -31,7 +36,7 @@ const App = () => {
           component={Course}
         />
         <ProtectedRoute
-          isAllowed={Cookies.get('jwt') || user?.token}
+          isAllowed={(Cookies.get('jwt') || user?.token) && user?.role === 'admin'}
           redirectTo="/login"
           path="/admin_panel"
           component={AdminPanel}
