@@ -148,9 +148,8 @@ export function* verifyUserSaga(confirmationCode) {
 
 export function* banUnbanSaga({ payload }) {
   const { id, newRole } = payload
-  console.log(id, newRole)
   try {
-    yield axiosApi.patch(`users/${id}/ban?=${newRole}`)
+    yield axiosApi.patch(`users/${id}/ban?role=${newRole}`)
     yield put(banUnbanSuccess())
     yield put(getAllUsersRequest())
   } catch (e) {

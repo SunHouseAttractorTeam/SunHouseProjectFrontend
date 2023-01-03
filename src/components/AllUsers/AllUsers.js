@@ -28,30 +28,31 @@ const AllUsers = () => {
     setCheckPassword({ password: '' })
   }
   const blockUnblock = ({ id, newRole }) => {
-    dispatch(banUnbanRequest({ id, newRole: newRole === 'user' ? 'ban' : 'user' }))
+    if (newRole === 'user') {
+      dispatch(banUnbanRequest({ id, newRole: 'ban' }))
+    }
+    if (newRole === 'ban') {
+      dispatch(banUnbanRequest({ id, newRole: 'user' }))
+    }
+    setOpen(false)
   }
   return (
     <div className="users">
       <Title>Список пользователей</Title>
       <div className="users__inner-block">
         <h5 className="users__subtitle">Имя пользователя</h5>
-        {/* eslint-disable-next-line array-callback-return */}
-        {users?.map(user => {
-          if (user?.role !== 'admin') {
-            return (
-              <div
-                key={user._id}
-                onClick={() => {
-                  setOpen(true)
-                  setUserInfo(user)
-                }}
-              >
-                <p className="users__names">{user.username}</p>
-                <hr className="users__underline" />
-              </div>
-            )
-          }
-        })}
+        {users?.map(user => (
+          <div
+            key={user._id}
+            onClick={() => {
+              setOpen(true)
+              setUserInfo(user)
+            }}
+          >
+            <p className={user.role === 'ban' ? 'users__names-ban' : 'users__names'}>{user.username}</p>
+            <hr className="users__underline" />
+          </div>
+        ))}
       </div>
       {open ? (
         <Modal setOpen={setOpen}>
