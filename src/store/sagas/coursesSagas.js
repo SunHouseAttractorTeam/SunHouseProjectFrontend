@@ -1,4 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects'
+import { hideLoading, showLoading } from 'react-redux-loading-bar'
 import axiosApi from '../../axiosApi'
 import {
   addUsersCourseFailure,
@@ -30,8 +31,10 @@ import { historyPush } from '../actions/historyActions'
 
 export function* fetchCourses() {
   try {
+    yield put(showLoading())
     const response = yield axiosApi('/courses')
     yield put(fetchCoursesSuccess(response.data))
+    yield put(hideLoading())
   } catch (e) {
     yield put(fetchCoursesFailure(e))
   }
@@ -39,8 +42,11 @@ export function* fetchCourses() {
 
 export function* fetchCourse({ payload: id }) {
   try {
+    yield put(showLoading())
+
     const response = yield axiosApi(`/courses/${id}`)
     yield put(fetchCourseSuccess(response.data))
+    yield put(hideLoading())
   } catch (e) {
     yield put(fetchCourseFailure(e))
   }
@@ -48,8 +54,11 @@ export function* fetchCourse({ payload: id }) {
 
 export function* fetchUserCourses({ payload: userId }) {
   try {
+    yield put(showLoading())
+
     const response = yield axiosApi(`/courses?user=${userId}`)
     yield put(fetchUserCoursesSuccess(response.data))
+    yield put(hideLoading())
   } catch (e) {
     yield put(fetchUserCoursesFailure(e))
   }
@@ -57,9 +66,12 @@ export function* fetchUserCourses({ payload: userId }) {
 
 export function* createCourse({ payload: courseData }) {
   try {
+    yield put(showLoading())
+
     const response = yield axiosApi.post('/courses', courseData)
     yield put(createCourseSuccess())
 
+    yield put(hideLoading())
     yield historyPush(`/course/${response.data._id}`)
   } catch (e) {
     if (e.response && e.response.data) {
@@ -70,8 +82,11 @@ export function* createCourse({ payload: courseData }) {
 
 export function* publishCourse({ payload: id }) {
   try {
+    yield put(showLoading())
+
     yield axiosApi.post(`/courses/${id}/publish`)
     yield put(publishCourseSuccess())
+    yield put(hideLoading())
     yield put(fetchCoursesRequest())
   } catch (e) {
     yield put(publishCourseFailure(e))
@@ -82,9 +97,12 @@ export function* updateCourse({ payload }) {
   const { courseData, id } = payload
 
   try {
+    yield put(showLoading())
+
     yield axiosApi.put(`/courses/${id}`, courseData)
     yield put(updateCourseSuccess())
     yield put(fetchCourseRequest(id))
+    yield put(hideLoading())
 
     yield put(historyPush(`/course/${id}`))
   } catch (e) {
@@ -94,6 +112,7 @@ export function* updateCourse({ payload }) {
 
 export function* addUsersCourse({ payload }) {
   const { idCourse, idUser, role } = payload
+  yield put(showLoading())
 
   try {
     if (role === 'teachers') {
@@ -103,6 +122,7 @@ export function* addUsersCourse({ payload }) {
       yield axiosApi.put(`/courses/add?course=${idCourse}&user=${idUser}`)
     }
 
+    yield put(hideLoading())
     yield put(addUsersCourseSuccess())
   } catch (e) {
     yield put(addUsersCourseFailure(e))
@@ -111,8 +131,11 @@ export function* addUsersCourse({ payload }) {
 
 export function* deleteCourse({ payload: id }) {
   try {
+    yield put(showLoading())
+
     yield axiosApi.delete(`/courses/${id}`)
     yield put(deleteCourseSuccess())
+    yield put(hideLoading())
   } catch (e) {
     yield put(deleteCourseFailure(e))
   }
