@@ -10,36 +10,26 @@ import {
   editReviewFailure,
   editReviewRequest,
   editReviewSuccess,
-  fetchReviewFailure,
-  fetchReviewRequest,
   fetchReviewsFailure,
   fetchReviewsRequest,
   fetchReviewsSuccess,
-  fetchReviewSuccess,
-} from '../actions/reviewsActions'
+} from '../actions/lendingReviewsActions'
+import { historyPush } from '../actions/historyActions'
 
 export function* fetchReviews() {
   try {
-    const response = yield axiosApi(`/reviews`)
+    const response = yield axiosApi(`/lending_reviews`)
     yield put(fetchReviewsSuccess(response.data))
   } catch (e) {
     yield put(fetchReviewsFailure(e))
   }
 }
 
-export function* fetchReview({ payload: reviewId }) {
-  try {
-    const response = yield axiosApi(`/reviews/${reviewId}`)
-    yield put(fetchReviewSuccess(response.data))
-  } catch (e) {
-    yield put(fetchReviewFailure(e))
-  }
-}
-
 export function* createReview({ payload: reviewData }) {
   try {
-    yield axiosApi.post(`/reviews`, reviewData)
+    yield axiosApi.post(`/lending_reviews`, reviewData)
     yield put(createReviewSuccess())
+    yield put(historyPush('/'))
   } catch (e) {
     yield put(createReviewFailure(e))
   }
@@ -49,7 +39,7 @@ export function* editReview({ payload }) {
   const { reviewId, reviewData } = payload
 
   try {
-    yield axiosApi.put(`/reviews/${reviewId}`, reviewData)
+    yield axiosApi.put(`/lending_reviews/${reviewId}`, reviewData)
     yield put(editReviewSuccess())
   } catch (e) {
     yield put(editReviewFailure(e))
@@ -60,19 +50,18 @@ export function* deleteReview({ payload }) {
   const { reviewId } = payload
 
   try {
-    yield axiosApi.delete(`/reviews/${reviewId}`)
+    yield axiosApi.delete(`/lending_reviews/${reviewId}`)
     yield put(deleteReviewSuccess())
   } catch (e) {
     yield put(deleteReviewFailure(e))
   }
 }
 
-const reviewsSagas = [
+const lendingReviewsSagas = [
   takeEvery(fetchReviewsRequest, fetchReviews),
-  takeEvery(fetchReviewRequest, fetchReview),
   takeEvery(createReviewRequest, createReview),
   takeEvery(editReviewRequest, editReview),
   takeEvery(deleteReviewRequest, deleteReview),
 ]
 
-export default reviewsSagas
+export default lendingReviewsSagas

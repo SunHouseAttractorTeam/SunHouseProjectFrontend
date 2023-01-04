@@ -1,31 +1,30 @@
-.content-form{
+.content-form {
   width: 100%;
   padding: 24px 24px 32px;
-  margin: 0 auto;
   background: white;
   border-radius: 16px;
   position: relative;
 
-  &__item{
-    &:not(:last-child){
+  &__item {
+    &:not(:last-child) {
       margin-bottom: 32px;
     }
   }
 
-  &__files-title{
+  &__files-title {
     font-weight: 500;
     font-size: 20px;
     line-height: 24px;
     margin-bottom: 24px;
   }
 
-  &__title{
+  &__title {
     margin-bottom: 48px;
     font-weight: 700;
     font-size: 24px;
   }
 
-  &__editor-title{
+  &__editor-title {
     font-weight: 500;
     font-size: 20px;
     line-height: 24px;
@@ -43,6 +42,7 @@
     right: 27px;
     border: none;
     background-color: transparent;
+
     & path {
       fill: #D1D1D6;
       transition: 0.3ms;
@@ -54,4 +54,11 @@
   width: 280px;
   font-size: 16px;
   margin-top: 54px;
+}
+
+.video-input {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+
 }

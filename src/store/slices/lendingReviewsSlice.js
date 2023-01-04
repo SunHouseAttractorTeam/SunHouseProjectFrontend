@@ -4,12 +4,11 @@ const name = 'reviews'
 
 export const initialState = {
   reviews: [],
-  review: null,
   loading: false,
   error: null,
 }
 
-const reviewsSlice = createSlice({
+const lendingReviewsSlice = createSlice({
   name,
   initialState,
   reducers: {
@@ -19,22 +18,10 @@ const reviewsSlice = createSlice({
     },
     fetchReviewsSuccess(state, action) {
       state.loading = false
-      state.notifications = action.payload
+      state.reviews = action.payload
     },
     fetchReviewsFailure(state, action) {
       state.loading = false
-      state.error = action.payload
-    },
-    fetchReviewRequest(state) {
-      state.loading = true
-      state.error = null
-    },
-    fetchReviewSuccess(state, action) {
-      state.loading = true
-      state.notification = action.payload
-    },
-    fetchReviewFailure(state, action) {
-      state.loading = true
       state.error = action.payload
     },
     createReviewRequest(state) {
@@ -73,4 +60,4 @@ const reviewsSlice = createSlice({
   },
 })
 
-export default reviewsSlice
+export default lendingReviewsSlice

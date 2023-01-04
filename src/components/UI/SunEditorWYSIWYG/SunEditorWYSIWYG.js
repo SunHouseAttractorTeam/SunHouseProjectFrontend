@@ -5,8 +5,8 @@ import './SunEditorWYSIWYG.scss'
 
 const SunEditorWYSIWYG = props => (
   <SunEditor
+    setContents={props.setContents}
     onChange={props.onChange}
-    value={props.value}
     name={props.name}
     setOptions={{
       minHeight: 220,

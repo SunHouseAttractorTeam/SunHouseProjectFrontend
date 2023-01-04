@@ -9,6 +9,15 @@
   padding: 15px 30px;
 }
 
+.TextArea {
+  border: 2px solid $greyColor;
+  border-radius: 16px;
+  resize: none;
+  width: 600px;
+  height: 191px;
+  position: relative;
+}
+
 .InputGrey {
   border: 1px solid $whiteBorderColor;
   background-color: $greyColor;
