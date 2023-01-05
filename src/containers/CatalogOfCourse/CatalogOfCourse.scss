@@ -3,6 +3,10 @@
   align-items: center;
 }
 
+.active-icon {
+  display: none;
+}
+
 .icons-item {
   position: relative;
   padding: 12px;
@@ -45,6 +49,12 @@
 
 .icon-value {
   border: 2px solid #D1D1D6;
-  padding: 10px 15px;
+  padding: 1.5vh 38vh 1.5vh 3vh;
   border-radius: 24px;
+  background: transparent;
+}
+
+.icon-value::placeholder {
+  color: black;
+  font-size: 16px;
 }

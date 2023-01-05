@@ -17,6 +17,7 @@ const CatalogOfCourse = () => {
   const [toggle, setToggle] = useState(false)
   const [toggleFilter, setToggleFilter] = useState(false)
   const [toggleSort, setToggleSort] = useState(false)
+
   const [search, setSearch] = useState('')
   const [array, setArray] = useState(catalogOfCourseData)
   const [category, setCategory] = useState('all')
@@ -43,7 +44,7 @@ const CatalogOfCourse = () => {
           <div className="courses-section__block">
             <h2 className="courses-section__title">Каталог курсов</h2>
             <div className="icons-block">
-              {toggle && (
+              {toggle === true && (
                 <input
                   type="text"
                   placeholder="Поиск..."
@@ -51,7 +52,10 @@ const CatalogOfCourse = () => {
                   onChange={e => setSearch(e.target.value)}
                 />
               )}
-              <div className="icons-item" onClick={() => setToggle(toggleInput => !toggleInput)}>
+              <div
+                className={toggle === false ? 'icons-item' : 'icons-item active-icon'}
+                onClick={() => setToggle(true)}
+              >
                 <img src={searchIcon} alt="searchIcon" />
               </div>
               <div className="icons-item filter-icon-item" onClick={() => setToggleSort(toggleSor => !toggleSor)}>

@@ -56,7 +56,7 @@ export function* registrationUserSaga({ payload: userData }) {
     yield put(registrationSuccess(response.data))
     yield Swal.fire({
       icon: 'success',
-      title: 'Signed in successfully',
+      title: `На почту ${response.data.email} отправлено подтверждение`,
     })
   } catch (e) {
     if (e.response && e.response.data) {
@@ -77,10 +77,22 @@ export function* loginUserSaga({ payload: userData }) {
     if (userData) {
       yield put(historyPush('/'))
     }
+    yield Swal.fire({
+      toast: true,
+      icon: 'success',
+      title: 'Вы успешно вошли в свой аккаунт',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+    })
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(loginUserFailure(e.response.data))
-      yield Swal.fire({ icon: 'error', title: 'Подтвердите почту', showConfirmButton: false })
+      yield Swal.fire({
+        icon: 'error',
+        title: 'Введены неверные данные',
+        showConfirmButton: false,
+      })
     }
   }
 }
@@ -126,6 +138,14 @@ export function* logoutUserSaga() {
     yield axiosApi.delete('users/sessions')
     yield put(historyPush('/'))
     yield Cookies.remove('jwt')
+    yield Swal.fire({
+      timer: 3000,
+      toast: true,
+      icon: 'info',
+      title: 'Вы вышли из своего аккаунта',
+      showConfirmButton: false,
+      timerProgressBar: true,
+    })
   } catch (e) {}
 }
 
