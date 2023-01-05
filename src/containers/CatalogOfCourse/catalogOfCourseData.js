@@ -4,7 +4,6 @@ export default [
     title: 'Web-дизайнер',
     price: '5500',
     date: '24 месяца',
-    category: 'Бесплатный курс',
     filter: 'новые',
   },
   {
@@ -12,15 +11,13 @@ export default [
     title: 'UX-UI дизайнер',
     price: '5500',
     date: '24 месяца',
-    category: 'Бесплатный курс',
     filter: 'новые',
   },
   {
     id: 3,
-    title: 'Frontend-разработчик',
+    title: 'Front-end разработчик',
     price: '5500',
     date: '24 месяца',
-    category: 'Платный курс',
     filter: 'старые',
   },
   {
@@ -28,7 +25,6 @@ export default [
     title: 'Backend-разработчик',
     price: '5500',
     date: '24 месяца',
-    category: 'Платный курс',
     filter: 'старые',
   },
   {
@@ -36,7 +32,6 @@ export default [
     title: 'Web-дизайнер',
     price: '5500',
     date: '24 месяца',
-    category: 'Бесплатный курс',
     filter: 'новые',
   },
   {
@@ -44,15 +39,13 @@ export default [
     title: 'UX-UI дизайнер',
     price: '5500',
     date: '24 месяца',
-    category: 'Бесплатный курс',
-    filter: 'новые',
+    filter: 'старые',
   },
   {
     id: 7,
-    title: 'Frontend-разработчик',
+    title: 'Front-end разработчик',
     price: '5500',
     date: '24 месяца',
-    category: 'Платный курс',
     filter: 'старые',
   },
   {
@@ -60,7 +53,6 @@ export default [
     title: 'Backend-разработчик',
     price: '5500',
     date: '24 месяца',
-    category: 'Платный курс',
     filter: 'старые',
   },
   {
@@ -68,7 +60,6 @@ export default [
     title: 'Web-дизайнер',
     price: '5500',
     date: '24 месяца',
-    category: 'Бесплатный курс',
     filter: 'новые',
   },
 ]
