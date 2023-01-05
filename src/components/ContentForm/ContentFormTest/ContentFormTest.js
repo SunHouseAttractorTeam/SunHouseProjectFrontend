@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import '../ContentForm.scss'
+import { useDispatch } from 'react-redux'
 import FilesUploader from '../../FilesUploader/FilesUploader'
 import SunEditorWYSIWYG from '../../UI/SunEditorWYSIWYG/SunEditorWYSIWYG'
 import AddContentBlock from '../../AddContentBlock/AddContentBlock'
 import QuestionsBlock from '../../QuestionsBlock/QuestionsBlock'
+import { deleteTestRequest } from '../../../store/actions/testsActions'
 
 const ContentFormTest = ({ contentData, contentId, handleSave, handleQuestionsSave }) => {
+  const dispatch = useDispatch()
   const { courseId } = useParams()
   const [data, setData] = useState([])
   const [lastFile, setLastFile] = useState('')
@@ -87,13 +90,18 @@ const ContentFormTest = ({ contentData, contentId, handleSave, handleQuestionsSa
     handleSave({ courseId, contentId, data: formData })
     handleQuestionsSave({ courseId, contentId, questions: questionsState })
   }
+
+  const handleClickDelete = () => {
+    dispatch(deleteTestRequest({ testId: contentData._id, courseId }))
+  }
+
   return (
     <>
       {contentData && (
         <>
           <div className="content-form">
             <h1 className="content-form__title">{contentData?.title}</h1>
-            <button type="button" className="content-form__remove">
+            <button type="button" className="content-form__remove" onClick={handleClickDelete}>
               <i>
                 <svg width="12" height="16" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path

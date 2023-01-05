@@ -5,6 +5,7 @@ import './AudioPlayer.scss'
 
 const AudioPlayer = ({ audio }) => (
   <div className="audio-player">
+    <div />
     <ReactAudioPlayer src={`${apiUrl}/uploads/${audio}`} controls style={{ marginBottom: '20px' }} />
   </div>
 )

@@ -19,18 +19,6 @@ const FilesUploader = ({ ...props }) => {
     inputRef.current.click()
   }
 
-  // if (props.type === 'video') {
-  //   return (
-  //     <div className={`video-card uploader-block${props.className ? ` ${props.className}` : ''}`}>
-  //       <input type="file" onChange={onFileChange} ref={inputRef} />
-  //       <p className="uploader-block__label">{props.title || 'Перетащите видеофайл или нажмите для загрузки'}</p>
-  //       <button className="MainButton GreenButton uploader-block__button" onClick={activateInput} type="button">
-  //         Выбрать файл
-  //       </button>
-  //     </div>
-  //   )
-  // }
-
   if (props.type === 'audio') {
     return (
       <div className={`audio-card uploader-block${props.className ? ` ${props.className}` : ''}`}>

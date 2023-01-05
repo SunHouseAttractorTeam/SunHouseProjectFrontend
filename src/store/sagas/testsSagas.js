@@ -68,7 +68,7 @@ export function* deleteTest({ payload }) {
   const { testId, courseId } = payload
 
   try {
-    yield axiosApi.delete(`/tests/${testId}`)
+    yield axiosApi.delete(`/tests/${testId}?course=${courseId}`)
     yield put(deleteTestSuccess())
     yield put(fetchCourseRequest(courseId))
     yield put(historyPush(`/course/${courseId}/edit`))
