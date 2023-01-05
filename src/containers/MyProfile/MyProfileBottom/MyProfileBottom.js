@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import ProfileSidebarLink from '../../../components/UI/ProfileSidebarLink/ProfileSidebarLink'
 import { logoutUser } from '../../../store/actions/usersActions'
 import { fetchNotificationsRequest } from '../../../store/actions/notificationsActions'
 
 const MyProfileBottom = () => {
-  const user = useSelector(state => state.users.user)
   const dispatch = useDispatch()
   const user = useSelector(state => state.users.user)
   const notifications = useSelector(state => state.notifications.notifications)
