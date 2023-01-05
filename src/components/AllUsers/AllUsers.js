@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './AllUsers.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import Title from '../UI/Title/Title'
-import { deleteUserRequest, getAllUsersRequest } from '../../store/actions/usersActions'
+import { banUnbanRequest, deleteUserRequest, getAllUsersRequest } from '../../store/actions/usersActions'
 import Modal from '../UI/Modal2/Modal'
 import MainButton from '../UI/MainButton/MainButton'
 import FormInput from '../UI/Form/FormInput/FormInput'
@@ -25,28 +25,34 @@ const AllUsers = () => {
   const deleteHandler = id => {
     dispatch(deleteUserRequest(id))
     setCheckDelete(false)
+    setCheckPassword({ password: '' })
+  }
+  const blockUnblock = ({ id, newRole }) => {
+    if (newRole === 'user') {
+      dispatch(banUnbanRequest({ id, newRole: 'ban' }))
+    }
+    if (newRole === 'ban') {
+      dispatch(banUnbanRequest({ id, newRole: 'user' }))
+    }
+    setOpen(false)
   }
   return (
     <div className="users">
       <Title>Список пользователей</Title>
       <div className="users__inner-block">
         <h5 className="users__subtitle">Имя пользователя</h5>
-        {users?.map(user => {
-          if (user?.role !== 'admin') {
-            return (
-              <div
-                key={user._id}
-                onClick={() => {
-                  setOpen(true)
-                  setUserInfo(user)
-                }}
-              >
-                <p className="users__names">{user.username}</p>
-                <hr className="users__underline" />
-              </div>
-            )
-          }
-        })}
+        {users?.map(user => (
+          <div
+            key={user._id}
+            onClick={() => {
+              setOpen(true)
+              setUserInfo(user)
+            }}
+          >
+            <p className={user.role === 'ban' ? 'users__names-ban' : 'users__names'}>{user.username}</p>
+            <hr className="users__underline" />
+          </div>
+        ))}
       </div>
       {open ? (
         <Modal setOpen={setOpen}>
@@ -60,6 +66,7 @@ const AllUsers = () => {
               <MainButton
                 text={userInfo.role === 'ban' ? ' Разблокировать' : 'Заблокировать'}
                 className={userInfo.role === 'ban' ? 'GreenButton' : 'GreenButton  users__modal-control-yellow'}
+                onClick={() => blockUnblock({ id: userInfo?._id, newRole: userInfo?.role })}
               />
               <MainButton
                 text="Удалить пользователя"
