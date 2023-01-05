@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { loadingBarReducer } from 'react-redux-loading-bar'
 import usersSlice from './slices/usersSlices'
 import coursesSlice from './slices/coursesSlice'
 import categoriesSlice from './slices/categoriesSlice'
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   tests: testsSlice.reducer,
   notifications: notificationsSlice.reducer,
   reviews: lendingReviewsSlice.reducer,
+  loadingBar: loadingBarReducer,
 })
 
 export default rootReducer
