@@ -37,11 +37,10 @@ const ContentForm = ({ contentData, contentId, handleSave }) => {
   }
 
   const inputChangeHandler = (e, index) => {
-    const value = e
     setData(prevState => {
       const contentCopy = {
         ...prevState[index],
-        text: value,
+        text: e,
       }
 
       return prevState.map((content, i) => {

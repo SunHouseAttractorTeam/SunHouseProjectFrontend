@@ -183,9 +183,8 @@ const QuestionsBlock = ({ question, indexQuestion, setQuestion }) => {
               {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
               <label className="question-block__answer-checkbox border-style">
                 <input
-                  // id="answer-checkbox-1"
                   type="checkbox"
-                  value={ans.status}
+                  checked={ans.status}
                   onChange={e => inputChangeAnswerStatusHandler(e, ind)}
                   name="status"
                 />
