@@ -48,6 +48,17 @@ const notificationsSlice = createSlice({
       state.loading = true
       state.error = action.payload
     },
+    viewNotificationsRequest(state) {
+      state.loading = true
+      state.error = false
+    },
+    viewNotificationsSuccess(state) {
+      state.loading = true
+    },
+    viewNotificationsFailure(state, action) {
+      state.loading = true
+      state.error = action.payload
+    },
     editNotificationRequest(state) {
       state.loading = true
       state.error = false

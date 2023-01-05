@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { inputChangeHandler, submitFormHandler } from '../../UI/Form/Handlers/Handlers'
+import { getFieldError, inputChangeHandler, submitFormHandler } from '../../UI/Form/Handlers/Handlers'
 import { createTestRequest } from '../../../store/actions/testsActions'
 import Modal from '../../UI/Modal2/Modal'
 import FormInput from '../../UI/Form/FormInput/FormInput'
@@ -8,7 +8,7 @@ import MainButton from '../../UI/MainButton/MainButton'
 import test from '../../../assets/icons/test.svg'
 import './CreateTestModal.scss'
 
-const CreateTestModal = ({ setOpen, courseId, moduleId, setModalType }) => {
+const CreateTestModal = ({ setOpen, courseId, moduleId, setModalType, error }) => {
   const dispatch = useDispatch()
   const [testData, setTestData] = useState({
     title: '',
@@ -44,6 +44,7 @@ const CreateTestModal = ({ setOpen, courseId, moduleId, setModalType }) => {
               name="title"
               placeholder="Название"
               className="inputModal"
+              error={getFieldError(error, 'title')}
             />
             <span className="content__test__label">Процент правильных ответов для выполнения</span>
             <FormInput
@@ -53,6 +54,7 @@ const CreateTestModal = ({ setOpen, courseId, moduleId, setModalType }) => {
               name="correct"
               placeholder="0"
               className="inputModal"
+              error={getFieldError(error, 'correct')}
             />
             <div className="content__test__checkbox">
               <FormInput onChange={handleOnChangeChecked} type="checkbox" name="random" />
@@ -68,6 +70,7 @@ const CreateTestModal = ({ setOpen, courseId, moduleId, setModalType }) => {
                 name="count"
                 placeholder="0"
                 className="inputModal content__test__input"
+                error={getFieldError(error, 'count')}
               />
             </div>
             <span className="content__test__subtitle">Добавьте описание</span>

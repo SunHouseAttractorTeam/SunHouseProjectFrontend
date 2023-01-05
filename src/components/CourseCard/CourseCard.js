@@ -1,6 +1,7 @@
 import React from 'react'
 
 import './CourseCard.scss'
+import { Link } from 'react-router-dom'
 import MainButton from '../UI/MainButton/MainButton'
 
 const CourseCard = ({ isLast, title, date, list, price, onClick }) => (
@@ -8,7 +9,7 @@ const CourseCard = ({ isLast, title, date, list, price, onClick }) => (
     <div className="course-card__content">
       {!isLast && <span className="course-card__profession">профессия</span>}
       <h3 className="course-card__title">{title}</h3>
-      {price && <h6 className="course-card__price">{price}</h6>}
+      {price && <h6 className="course-card__price">{price} сом</h6>}
       {!isLast && date && <span className="course-card__date">{date}</span>}
       {isLast && list && (
         <ul className="course-card__list">
@@ -19,7 +20,11 @@ const CourseCard = ({ isLast, title, date, list, price, onClick }) => (
           ))}
         </ul>
       )}
-      {isLast && <MainButton className="course-card__button" text="Подробнее" />}
+      {isLast && (
+        <Link to="/course-catalog" className="course-card__link">
+          <MainButton className="course-card__button" text="Подробнее" />
+        </Link>
+      )}
     </div>
   </div>
 )

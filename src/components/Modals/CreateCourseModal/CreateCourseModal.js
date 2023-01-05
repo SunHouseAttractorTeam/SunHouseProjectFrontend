@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createCourseRequest } from '../../../store/actions/coursesActions'
-import { inputChangeHandler, submitFormHandler } from '../../UI/Form/Handlers/Handlers'
+import { getFieldError, inputChangeHandler, submitFormHandler } from '../../UI/Form/Handlers/Handlers'
 import Modal from '../../UI/Modal2/Modal'
 import FormInput from '../../UI/Form/FormInput/FormInput'
 import FormSelect from '../../UI/Form/FormSelect/FormSelect'
@@ -11,6 +11,7 @@ import './CreateCourseModal.scss'
 const CreateCourseModal = ({ setOpen }) => {
   const dispatch = useDispatch()
   const categories = useSelector(state => state.categories.categories)
+  const error = useSelector(state => state.courses.error)
   const [course, setCourse] = useState({
     title: '',
     category: '',
@@ -34,12 +35,14 @@ const CreateCourseModal = ({ setOpen }) => {
               name="title"
               placeholder="Название курса"
               className="inputModal"
+              error={getFieldError(error, 'title')}
             />
             <span className="content__modal__label">Выберите категорию курса</span>
             <FormSelect
               onChange={e => inputChangeHandler(e, setCourse)}
               items={categories && categories}
               className="content__modal__select"
+              error={getFieldError(error, 'category')}
             />
             <MainButton
               className="GreenButton content__modal__button"

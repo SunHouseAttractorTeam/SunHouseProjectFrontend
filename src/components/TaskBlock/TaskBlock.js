@@ -8,6 +8,7 @@ const TaskBlock = () => {
   const { taskId } = useParams()
   const dispatch = useDispatch()
   const task = useSelector(state => state.tasks.task)
+  const error = useSelector(state => state.tasks.error)
 
   useEffect(() => {
     dispatch(fetchTaskRequest(taskId))
@@ -17,7 +18,7 @@ const TaskBlock = () => {
     dispatch(editTaskRequest(data))
   }
 
-  return <> {task && <ContentForm contentData={task} contentId={taskId} handleSave={handleSaveTask} />}</>
+  return <> {task && <ContentForm contentData={task} contentId={taskId} handleSave={handleSaveTask} error={error} />}</>
 }
 
 export default TaskBlock
