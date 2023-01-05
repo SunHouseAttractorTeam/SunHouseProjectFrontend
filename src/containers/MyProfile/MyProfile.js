@@ -26,14 +26,14 @@ const MyProfile = () => {
           <div className="profile__right">
             <Switch>
               <ProtectedRoute
-                isAllowed={Cookies.get('jwt')}
-                redirectTo="/login"
+                isAllowed={Cookies.get('jwt') && user?.role !== 'ban'}
+                redirectTo={user?.role === 'ban' ? '/user/notifications' : '/login'}
                 path="/user/teacher_mode"
                 component={TeacherMode}
               />
               <ProtectedRoute
-                isAllowed={Cookies.get('jwt')}
-                redirectTo="/login"
+                isAllowed={Cookies.get('jwt') && user?.role !== 'ban'}
+                redirectTo={user?.role === 'ban' ? '/user/notifications' : '/login'}
                 path="/user/courses"
                 component={UserCourses}
               />
@@ -44,14 +44,14 @@ const MyProfile = () => {
                 component={Notifications}
               />
               <ProtectedRoute
-                isAllowed={Cookies.get('jwt')}
-                redirectTo="/login"
+                isAllowed={Cookies.get('jwt') && user?.role !== 'ban'}
+                redirectTo={user?.role === 'ban' ? '/user/notifications' : '/login'}
                 path="/user/certificates"
                 component={Certificates}
               />
               <ProtectedRoute
-                isAllowed={Cookies.get('jwt')}
-                redirectTo="/login"
+                isAllowed={Cookies.get('jwt') && user?.role !== 'ban'}
+                redirectTo={user?.role === 'ban' ? '/user/notifications' : '/login'}
                 path="/user/settings"
                 component={Settings}
               />
