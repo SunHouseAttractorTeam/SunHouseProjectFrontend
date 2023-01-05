@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchCoursesRequest } from '../../store/actions/coursesActions'
 import Header from '../../components/Header/Header'
-import catalogOfCourseData from './catalogOfCourseData'
 import CourseCard from '../../components/CourseCard/CourseCard'
 import Footer from '../../components/Footer/Footer'
 import burgerIcon from '../../assets/icons/BurgerIcon.png'
@@ -13,23 +14,27 @@ import ModalSortCourse from '../../components/Modals/ModalSortCourse/ModalSortCo
 const coursePerPage = 5
 
 const CatalogOfCourse = () => {
+  const dispatch = useDispatch()
   const [next, setNext] = useState(coursePerPage)
+  const courses = useSelector(state => state.courses.courses)
   const [toggle, setToggle] = useState(false)
   const [toggleFilter, setToggleFilter] = useState(false)
   const [toggleSort, setToggleSort] = useState(false)
 
   const [search, setSearch] = useState('')
-  const [array, setArray] = useState(catalogOfCourseData)
-  const [category, setCategory] = useState('all')
+  const [title, setTitle] = useState('all')
   const [sort, setSort] = useState('сбросить')
+
+  useEffect(() => {
+    dispatch(fetchCoursesRequest('/courses'))
+  }, [])
+
   const handleMoreImage = () => {
     setNext(next + coursePerPage)
   }
 
-  catalogOfCourseData.filter(course => course.title.toLowerCase().includes(search.toLowerCase()))
-
   const selectedCategory = valueCategory => {
-    setCategory(valueCategory)
+    setTitle(valueCategory)
   }
 
   const sortCourse = valueSort => {
@@ -69,15 +74,30 @@ const CatalogOfCourse = () => {
             </div>
           </div>
           <div className="courses-section__cards">
-            {category === 'all' && sort === 'сбросить'
-              ? array
+            {title === 'all' && sort === 'сбросить'
+              ? courses
                   ?.slice(0, next)
-                  ?.map(item => <CourseCard key={item.id} title={item.title} date={item.date} price={item.price} />)
-              : array
-                  .filter(el => el.category === category || el.filter === sort)
-                  .map(item => <CourseCard key={item.id} title={item.title} date={item.date} price={item.price} />)}
+                  ?.filter(course => course.category.title.toLowerCase().includes(search.toLowerCase()))
+                  ?.map(item => (
+                    <CourseCard
+                      key={item.category._id}
+                      title={item.category.title}
+                      date={item.dateTime}
+                      price={item.price}
+                    />
+                  ))
+              : courses
+                  .filter(el => el.category.title === title)
+                  .map(item => (
+                    <CourseCard
+                      key={item.category._id}
+                      title={item.category.title}
+                      date={item.dateTime}
+                      price={item.price}
+                    />
+                  ))}
           </div>
-          {next < array?.length && (
+          {next < courses?.length && (
             <button type="button" className="course-btn" onClick={handleMoreImage}>
               Посмотреть все курсы
             </button>
