@@ -31,6 +31,7 @@ const AllUsers = () => {
       <Title>Список пользователей</Title>
       <div className="users__inner-block">
         <h5 className="users__subtitle">Имя пользователя</h5>
+        {/* eslint-disable-next-line array-callback-return,consistent-return */}
         {users?.map(user => {
           if (user?.role !== 'admin') {
             return (

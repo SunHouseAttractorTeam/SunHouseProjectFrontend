@@ -6,7 +6,11 @@ import axiosApi from '../../axiosApi'
 import { historyPush } from '../actions/historyActions'
 import {
   deleteUserFailure,
+  deleteUserRequest,
   deleteUserSuccess,
+  editFailure,
+  editRequest,
+  editSuccess,
   facebookLoginFailure,
   facebookLoginRequest,
   facebookLoginSuccess,
@@ -171,8 +175,17 @@ export function* resetPasswordSaga({ payload: hash }) {
   }
 }
 
+export function* editUserProfileSaga({ payload: userData }) {
+  try {
+    const response = yield axiosApi.put('/users/edit', userData)
+    yield put(editSuccess(response.data))
+  } catch (e) {
+    yield put(editFailure(e))
+  }
+}
+
 const userSagas = [
-  takeEvery(getAllUsersRequest, deleteUserSaga),
+  takeEvery(deleteUserRequest, deleteUserSaga),
   takeEvery(getAllUsersRequest, getAllUsersSaga),
   takeEvery(registrationRequest, registrationUserSaga),
   takeEvery(loginUserRequest, loginUserSaga),
@@ -183,6 +196,7 @@ const userSagas = [
   takeEvery(verifyUserRequest, verifyUserSaga),
   takeEvery(forgotPasswordRequest, forgotPasswordSaga),
   takeEvery(resetPasswordRequest, resetPasswordSaga),
+  takeEvery(editRequest, editUserProfileSaga),
 ]
 
 export default userSagas

@@ -3,7 +3,7 @@ import FormInput from '../../../UI/Form/FormInput/FormInput'
 import ProfileDescription from '../ProfileDescription/ProfileDescription'
 import './PersonalForm.scss'
 
-const PersonalForm = ({ onChangeData, username, email, phone }) => (
+const PersonalForm = ({ onChangeData, username, email, phone, name }) => (
   <div className="personal-block">
     <ProfileDescription title="Заполните личные данные" text="Разнообразный и богатый опыт сложившаяся структура" />
 
@@ -12,9 +12,9 @@ const PersonalForm = ({ onChangeData, username, email, phone }) => (
         <FormInput
           className="personal-block__form-input"
           onChange={onChangeData}
-          name="username"
+          name="name"
           placeholder="ФИО"
-          value={username}
+          value={name}
           required
         />
       </div>
@@ -22,9 +22,9 @@ const PersonalForm = ({ onChangeData, username, email, phone }) => (
         <FormInput
           className="personal-block__form-input"
           onChange={onChangeData}
-          name="unknown"
-          placeholder="Отобра"
-          value=""
+          name="username"
+          placeholder="Отображаемое имя"
+          value={username}
         />
       </div>
       <div>
