@@ -3,7 +3,7 @@
 .course-modules {
   &-block {
     padding: 24px;
-    background: white;
+    background: $totalWhiteColor;
     border-radius: 16px;
     margin-bottom: 32px;
 
@@ -43,7 +43,7 @@
         font-size: 16px;
         line-height: 19px;
         font-weight: 500;
-        color: #000000;
+        color: $totalBlackColor;
         text-decoration: none;
         transition: all .3s ease;
 
@@ -60,56 +60,6 @@
           margin-right: 24px;
         }
       }
-
-      &-actions {
-        flex-shrink: 0;
-        margin-left: 20px;
-        display: flex;
-        align-items: center;
-      }
-
-      &-remove {
-        padding: 0;
-        cursor: pointer;
-        width: 12px;
-        height: 16px;
-        background-size: cover;
-        background-position: center;
-        border: none;
-        background-color: transparent;
-
-        &:hover path {
-          fill: red;
-        }
-
-        path {
-          fill: #D1D1D6;
-          transition: all .3s ease;
-        }
-      }
-    }
-
-    &__add-item {
-      margin-top: 50px;
-      width: 100%;
-      transition: all .5s ease;
-
-      &:hover {
-        background-color: #ADFA00;
-      }
-    }
-  }
-
-  &__add-module {
-    width: calc(100% - 50px);
-    margin: 32px auto 0;
-    background-color: #ADFA00;
-    border: 2px solid transparent;
-    transition: all .5s ease;
-
-    &:hover {
-      background: transparent;
-      border-color: #ADFA00;
     }
   }
 }

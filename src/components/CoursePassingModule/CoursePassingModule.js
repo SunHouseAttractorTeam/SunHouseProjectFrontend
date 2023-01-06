@@ -7,7 +7,7 @@ const CoursePassingModules = ({ id, course }) => (
     {course.modules.length > 0 &&
       course.modules.map((module, idx) => (
         <div key={module._id} className="course-modules-block">
-          {idx === 0 && <h3 className="course-modules-block__structure">Структура курса</h3>}
+          {idx === 0 && <h3 className="course-modules-block__structure">Программа курса</h3>}
           <p className="course-modules-block__title">{module.title}</p>
           {module.data.map(item => (
             <ul key={item._id} className="course-modules-block__items">
