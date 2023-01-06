@@ -30,7 +30,7 @@ const Login = () => {
             <FormComponent
               title="Войдите в свой профиль"
               typeForm="Войти"
-              submit={e => submitFormHandler(e, dispatch(loginUserRequest({ path: 'sessions', userData: user })))}
+              submit={e => submitFormHandler(e, dispatch(loginUserRequest({ path: 'login', userData: user })))}
               onChange={e => inputChangeHandler(e, setUser)}
               inputName={['email', 'password']}
               placeholderName={['Электронная почта', 'Пароль']}

@@ -70,7 +70,7 @@ export function* loginUserSaga({ payload }) {
   const { path, userData } = payload
   try {
     yield put(showLoading())
-    const response = yield axiosApi.post(`/users/${path}`, userData)
+    const response = yield axiosApi.post(`/users/sessions?path=${path}`, userData)
     yield put(loginUserSuccess(response.data))
     yield put(hideLoading())
     if (userData) {
