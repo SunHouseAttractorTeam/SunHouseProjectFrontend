@@ -1,5 +1,6 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import { hideLoading, showLoading } from 'react-redux-loading-bar'
+import Swal from 'sweetalert2'
 import axiosApi from '../../axiosApi'
 import {
   addUsersCourseFailure,
@@ -72,7 +73,17 @@ export function* createCourse({ payload: courseData }) {
     yield put(createCourseSuccess())
 
     yield put(hideLoading())
+    yield put(fetchCoursesRequest())
     yield historyPush(`/course/${response.data._id}`)
+
+    yield Swal.fire({
+      toast: true,
+      icon: 'success',
+      title: 'Вы успешно создали курс',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+    })
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(createCourseFailure(e.response.data))
@@ -88,6 +99,15 @@ export function* publishCourse({ payload: id }) {
     yield put(publishCourseSuccess())
     yield put(hideLoading())
     yield put(fetchCoursesRequest())
+
+    yield Swal.fire({
+      toast: true,
+      icon: 'success',
+      title: 'Курс успешно опубликован',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+    })
   } catch (e) {
     yield put(publishCourseFailure(e))
   }
@@ -105,6 +125,15 @@ export function* updateCourse({ payload }) {
     yield put(hideLoading())
 
     yield put(historyPush(`/course/${id}`))
+
+    yield Swal.fire({
+      toast: true,
+      icon: 'success',
+      title: 'Курс успешно изменён',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+    })
   } catch (e) {
     yield put(updateCourseFailure(e))
   }
@@ -136,6 +165,15 @@ export function* deleteCourse({ payload: id }) {
     yield axiosApi.delete(`/courses/${id}`)
     yield put(deleteCourseSuccess())
     yield put(hideLoading())
+
+    yield Swal.fire({
+      toast: true,
+      icon: 'success',
+      title: 'Курс успешно удалён',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+    })
   } catch (e) {
     yield put(deleteCourseFailure(e))
   }
