@@ -11,22 +11,22 @@ const Nav = ({ user }) => (
     </label>
     <ul className="main-nav__list">
       <li className="main-nav__item">
-        <NavLink to="/course-catalog" className="main-nav__link" activeClassName="main-nav__link__active">
+        <NavLink to="/course-catalog" className="main-nav__link" activeClassName="main-nav__link_active">
           Каталог курсов
         </NavLink>
       </li>
       <li className="main-nav__item">
-        <NavLink to="/page-teachers" className="main-nav__link" activeClassName="main-nav__link__active">
-          Преподавателям
-        </NavLink>
-      </li>
-      <li className="main-nav__item">
-        <NavLink to="/" className="main-nav__link" activeClassName="main-nav__link__active">
+        <NavLink to="/about" className="main-nav__link" activeClassName="main-nav__link_active">
           О школе
         </NavLink>
       </li>
       <li className="main-nav__item">
-        <NavLink to="/" className="main-nav__link" activeClassName="main-nav__link__active">
+        <NavLink to="/page-teachers" className="main-nav__link" activeClassName="main-nav__link_active">
+          Преподавателям
+        </NavLink>
+      </li>
+      <li className="main-nav__item">
+        <NavLink to="/reviews" className="main-nav__link" activeClassName="main-nav__link_active">
           Отзывы
         </NavLink>
       </li>

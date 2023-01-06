@@ -4,6 +4,7 @@ import ReviewCard from './ReviewCard/ReviewCard'
 import CustomSlider from '../UI/CustomSlider/CustomSlider'
 import { fetchReviewsRequest } from '../../store/actions/lendingReviewsActions'
 import noPhoto from '../../assets/icons/cosmosChel.png'
+import Header from '../Header/Header'
 import './ReviewsBlock.scss'
 
 const sliderSettings = [
@@ -45,24 +46,27 @@ const ReviewsBlock = () => {
   }
 
   return (
-    <div className="review_block">
-      <div className="container">
-        <div className="review_block_headline">
-          <h5 className="review_block_headline_title">отзывы</h5>
-          <CustomSlider response={sliderSettings}>
-            {lendingReview.map(review => (
-              <ReviewCard
-                key={review._id}
-                img={cardIcon}
-                name={review.name}
-                social={review.socialNetwork}
-                content={review.description}
-              />
-            ))}
-          </CustomSlider>
+    <>
+      <Header />
+      <div className="review_block">
+        <div className="container">
+          <div className="review_block_headline">
+            <h5 className="review_block_headline_title">отзывы</h5>
+            <CustomSlider response={sliderSettings}>
+              {lendingReview.map(review => (
+                <ReviewCard
+                  key={review._id}
+                  img={cardIcon}
+                  name={review.name}
+                  social={review.socialNetwork}
+                  content={review.description}
+                />
+              ))}
+            </CustomSlider>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
