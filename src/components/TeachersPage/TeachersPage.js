@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { inputChangeHandler } from '../UI/Form/Handlers/Handlers'
+import { getFieldError, inputChangeHandler, submitFormHandler } from '../UI/Form/Handlers/Handlers'
 import Header from '../Header/Header'
 import Card from '../UI/Cards/Card/Card'
 import MainButton from '../UI/MainButton/MainButton'
@@ -19,6 +19,11 @@ const TeachersPage = () => {
 
   const openToModalWindow = () => {
     setShow(true)
+  }
+  const sendDataHandler = e => {
+    // submitFormHandler(e, dispatch('сюда Request'({ ...data })))
+    console.log(data)
+    setShow(false)
   }
 
   return (
@@ -55,21 +60,25 @@ const TeachersPage = () => {
         <Modal setOpen={() => setShow(false)}>
           <Card>
             <span className="title teachers-page_title">Преподавателям</span>
-            <form>
+            <form className="content__modal__form" onSubmit={sendDataHandler}>
               <FormInput
-                onChange={e => dispatch(inputChangeHandler(e, setData))}
+                onChange={e => inputChangeHandler(e, setData)}
                 name="title"
                 placeholder="Введите название"
                 value={data.title}
+                className="inputModal"
+                // error={getFieldError(error, 'title')}
               />
               <FormArea
-                onChange={e => dispatch(inputChangeHandler(e, setData))}
+                onChange={e => inputChangeHandler(e, setData)}
                 name="description"
                 placeholder="Введите описание"
                 value={data.description}
                 cols={10}
-                rows={20}
+                rows={5}
+                // error={getFieldError(error, 'description')}
               />
+              <MainButton className="GreenButton" type="submit" text="оправить" />
             </form>
           </Card>
         </Modal>
