@@ -1,6 +1,8 @@
 @import '../../scss/style';
 
 .users {
+
+
   &__subtitle {
     font-weight: 500;
     font-size: 14px;
@@ -12,23 +14,79 @@
   &__inner-block {
     max-width: 800px;
     height: auto;
+    max-height: 800px;
     background-color: $totalWhiteColor;
     border-radius: 16px;
+    overflow-y: auto;
   }
 
   &__names {
     cursor: pointer;
     padding: 16px 0px 16px 24px;
-    font-style: normal;
     font-weight: 500;
     font-size: 16px;
     line-height: 19px;
     color: $totalBlackColor;
+
+    &-ban {
+      cursor: pointer;
+      padding: 16px 0px 16px 24px;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 19px;
+      color: red;
+    }
   }
 
   &__underline {
     max-width: 752px;
     border: 1px solid #F2F2F7;
   }
+
+  &__modal {
+    padding: 20px;
+
+    &-crutch {
+      display: inline-block;
+      padding: 15px;
+    }
+
+
+    &-info {
+      text-align: left;
+      padding-bottom: 15px;
+      font-size: 20px;
+    }
+
+    &-control {
+      display: flex;
+      justify-content: space-evenly;
+
+
+      &-red {
+        background-color: red;
+      }
+
+      &-gray {
+        background-color: $greyColor;
+        cursor: not-allowed;
+      }
+
+      &-yellow {
+        background-color: yellow;
+      }
+    }
+
+    &-inner-title {
+      padding-bottom: 25px;
+    }
+
+    &-email {
+      user-select: none;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
 }
+
 

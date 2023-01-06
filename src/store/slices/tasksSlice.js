@@ -57,6 +57,9 @@ const tasksSlice = createSlice({
       state.loading = false
       state.error = action.payload
     },
+    clearTask(state) {
+      state.task = null
+    },
   },
 })
 

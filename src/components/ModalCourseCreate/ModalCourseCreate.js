@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Modal from '../UI/ModalWin/Modal/Modal'
+import Modal from '../UI/Modal2/Modal'
 import { inputChangeHandler, submitFormHandler } from '../UI/Form/Handlers/Handlers'
 import { createCourseRequest } from '../../store/actions/coursesActions'
 import Card from '../UI/Cards/Card/Card'

@@ -15,7 +15,9 @@
     "react": "^18.2.0",
     "react-audio-player": "^0.17.0",
     "react-dom": "^18.2.0",
+    "react-player": "^2.11.0",
     "react-redux": "^8.0.4",
+    "react-redux-loading-bar": "^5.0.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "5.0.1",
     "react-search-autocomplete": "^8.2.1",
@@ -29,6 +31,7 @@
     "slick-carousel": "^1.8.1",
     "suneditor": "^2.44.3",
     "suneditor-react": "^3.4.1",
+    "sweetalert2": "^11.6.16",
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {

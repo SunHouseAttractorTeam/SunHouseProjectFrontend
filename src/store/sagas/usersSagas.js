@@ -1,9 +1,17 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import Cookies from 'js-cookie'
 import { toast } from 'react-toastify'
+import Swal from 'sweetalert2'
+import { hideLoading, showLoading } from 'react-redux-loading-bar'
 import axiosApi from '../../axiosApi'
 import { historyPush } from '../actions/historyActions'
 import {
+  banUnbanFailure,
+  banUnbanRequest,
+  banUnbanSuccess,
+  deleteUserFailure,
+  deleteUserRequest,
+  deleteUserSuccess,
   facebookLoginFailure,
   facebookLoginRequest,
   facebookLoginSuccess,
@@ -36,8 +44,10 @@ import {
 
 export function* getAllUsersSaga() {
   try {
+    yield put(showLoading())
     const { data } = yield axiosApi('/users')
     yield put(getAllUsersSuccess(data))
+    yield put(hideLoading())
   } catch (e) {
     yield put(getAllUsersFailure(e.response.data))
   }
@@ -45,42 +55,62 @@ export function* getAllUsersSaga() {
 
 export function* registrationUserSaga({ payload: userData }) {
   try {
+    yield put(showLoading())
     const response = yield axiosApi.post('/users', userData)
     yield put(registrationSuccess(response.data))
-    yield toast.success('Подтвердите email', {
-      position: 'top-right',
-      autoClose: 3500,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
+    yield Swal.fire({
+      icon: 'success',
+      title: `На почту ${response.data.email} отправлено подтверждение`,
     })
+    yield put(hideLoading())
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(registrationFailure(e.response.data))
+      yield Swal.fire({
+        icon: 'error',
+        title: 'Данный пользователь уже зарегистрирован',
+        showConfirmButton: false,
+      })
     }
   }
 }
 
 export function* loginUserSaga({ payload: userData }) {
   try {
+    yield put(showLoading())
     const response = yield axiosApi.post('/users/sessions', userData)
     yield put(loginUserSuccess(response.data))
+    yield put(hideLoading())
     if (userData) {
       yield put(historyPush('/'))
     }
+    yield Swal.fire({
+      toast: true,
+      icon: 'success',
+      title: 'Вы успешно вошли в свой аккаунт',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+    })
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(loginUserFailure(e.response.data))
+      yield Swal.fire({
+        icon: 'error',
+        title: 'Введены неверные данные',
+        showConfirmButton: false,
+      })
     }
   }
 }
 
 export function* facebookLoginSaga({ payload: userData }) {
   try {
+    yield put(showLoading())
+
     const response = yield axiosApi.post('/users/facebookLogin/', userData)
     yield put(facebookLoginSuccess(response.data))
+    yield put(hideLoading())
     yield put(historyPush('/'))
   } catch (e) {
     if (e.response && e.response.data) {
@@ -91,8 +121,11 @@ export function* facebookLoginSaga({ payload: userData }) {
 
 export function* googleLoginSaga({ payload: userData }) {
   try {
+    yield put(showLoading())
+
     const response = yield axiosApi.post('/users/googleLogin/', userData)
     yield put(googleLoginSuccess(response.data))
+    yield put(hideLoading())
     yield put(historyPush('/'))
   } catch (e) {
     if (e.response && e.response.data) {
@@ -103,8 +136,12 @@ export function* googleLoginSaga({ payload: userData }) {
 
 export function* vkLoginSaga({ payload: userData }) {
   try {
+    yield put(showLoading())
+
     const response = yield axiosApi.post('/users/vkLogin/', userData)
     yield put(vkLoginSuccess(response.data))
+    yield put(hideLoading())
+
     yield put(historyPush('/'))
   } catch (e) {
     if (e.response && e.response.data) {
@@ -115,25 +152,69 @@ export function* vkLoginSaga({ payload: userData }) {
 
 export function* logoutUserSaga() {
   try {
+    yield put(showLoading())
+
     yield axiosApi.delete('users/sessions')
+    yield put(hideLoading())
+
     yield put(historyPush('/'))
     yield Cookies.remove('jwt')
+    yield Swal.fire({
+      timer: 3000,
+      toast: true,
+      icon: 'info',
+      title: 'Вы вышли из своего аккаунта',
+      showConfirmButton: false,
+      timerProgressBar: true,
+    })
   } catch (e) {}
+}
+
+export function* deleteUserSaga({ payload: id }) {
+  try {
+    yield put(showLoading())
+
+    yield axiosApi.delete(`users/${id}`)
+    yield put(deleteUserSuccess())
+    yield put(hideLoading())
+
+    yield put(getAllUsersRequest())
+    yield put(hideLoading())
+  } catch (e) {
+    yield put(deleteUserFailure(e))
+  }
 }
 
 export function* verifyUserSaga(confirmationCode) {
   try {
+    yield put(showLoading())
+
     const response = yield axiosApi.get(`/users/confirm/${confirmationCode.payload}`)
     yield put(verifyUserSuccess(response.data))
+    yield put(hideLoading())
   } catch (e) {
     yield put(verifyUserFailure(e))
   }
 }
 
+export function* banUnbanSaga({ payload }) {
+  const { id, newRole } = payload
+  try {
+    yield axiosApi.patch(`users/${id}/ban?role=${newRole}`)
+    yield put(banUnbanSuccess())
+    yield put(getAllUsersRequest())
+  } catch (e) {
+    yield put(banUnbanFailure(e))
+  }
+}
+
 export function* forgotPasswordSaga({ payload: userData }) {
   try {
+    yield put(showLoading())
+
     const response = yield axiosApi.post('/users/forgot', userData)
     yield put(forgotPasswordSuccess(response.data))
+    yield put(hideLoading())
   } catch (e) {
     yield put(forgotPasswordFailure(e))
     yield toast.error('error', {
@@ -150,14 +231,19 @@ export function* forgotPasswordSaga({ payload: userData }) {
 
 export function* resetPasswordSaga({ payload: hash }) {
   try {
+    yield put(showLoading())
+
     const response = yield axiosApi.post(`/users/reset/`, { hash })
     yield put(resetPasswordSuccess(response.data))
+    yield put(hideLoading())
   } catch (e) {
     yield put(resetPasswordFailure(e))
   }
 }
 
 const userSagas = [
+  takeEvery(banUnbanRequest, banUnbanSaga),
+  takeEvery(deleteUserRequest, deleteUserSaga),
   takeEvery(getAllUsersRequest, getAllUsersSaga),
   takeEvery(registrationRequest, registrationUserSaga),
   takeEvery(loginUserRequest, loginUserSaga),
