@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import ContentForm from '../ContentForm/ContentForm'
-import { editLessonRequest, fetchLessonRequest } from '../../store/actions/lessonsActions'
+import { clearLesson, editLessonRequest, fetchLessonRequest } from '../../store/actions/lessonsActions'
 
 const LessonBlock = () => {
   const { lessonId } = useParams()
@@ -11,6 +11,10 @@ const LessonBlock = () => {
   const error = useSelector(state => state.lessons.error)
   useEffect(() => {
     dispatch(fetchLessonRequest(lessonId))
+
+    return () => {
+      dispatch(clearLesson())
+    }
   }, [dispatch, lessonId])
 
   const handleSaveLesson = data => {

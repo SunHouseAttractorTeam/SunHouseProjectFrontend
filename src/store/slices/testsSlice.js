@@ -68,6 +68,9 @@ const testsSlice = createSlice({
       state.loading = false
       state.error = action.payload
     },
+    clearTest(state) {
+      state.test = null
+    },
   },
 })
 

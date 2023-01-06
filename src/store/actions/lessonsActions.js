@@ -13,4 +13,5 @@ export const {
   deleteLessonRequest,
   deleteLessonSuccess,
   deleteLessonFailure,
+  clearLesson,
 } = lessonsSlice.actions

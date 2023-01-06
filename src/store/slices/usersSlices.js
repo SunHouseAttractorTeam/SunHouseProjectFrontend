@@ -13,6 +13,8 @@ export const initialState = {
   loginError: null,
   deleteLoading: false,
   deleteError: null,
+  banLoading: false,
+  banError: null,
   editLoading: false,
   editError: null,
 }
@@ -102,6 +104,16 @@ const usersSlice = createSlice({
     },
     deleteUserSuccess(state) {
       state.deleteLoading = false
+    },
+    banUnbanRequest(state) {
+      state.banLoading = true
+    },
+    banUnbanSuccess(state) {
+      state.banLoading = false
+    },
+    banUnbanFailure(state, action) {
+      state.banLoading = false
+      state.banError = action.payload
     },
     deleteUserFailure(state, action) {
       state.deleteLoading = false

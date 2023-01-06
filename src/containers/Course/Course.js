@@ -38,7 +38,7 @@ const Course = () => {
       {course && (
         <div className="course">
           <Header2 />
-          <CourseBanner course={course} user={user?._id} handleSave={handleSave} accessCheck={accessCheck} />
+          <CourseBanner course={course} handleSave={handleSave} accessCheck={accessCheck} />
           <div className="course__bottom">
             <Switch>
               <Route

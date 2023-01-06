@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getFieldError } from '../UI/Form/Handlers/Handlers'
+import ReactPlayer from 'react-player/youtube'
+import { useDispatch } from 'react-redux'
+import Swal from 'sweetalert2'
 import FilesUploader from '../FilesUploader/FilesUploader'
 import AddContentBlock from '../AddContentBlock/AddContentBlock'
 import SunEditorWYSIWYG from '../UI/SunEditorWYSIWYG/SunEditorWYSIWYG'
+import VideoInput from '../VideoInput/VideoInput'
+import MainButton from '../UI/MainButton/MainButton'
+import { apiUrl } from '../../config'
 import AudioPlayer from '../UI/AudioPlayer/AudioPlayer'
-import FormInput from '../UI/Form/FormInput/FormInput'
+import { deleteLessonRequest } from '../../store/actions/lessonsActions'
+import { deleteTaskRequest } from '../../store/actions/tasksActions'
 import './ContentForm.scss'
 
 const ContentForm = ({ contentData, contentId, handleSave, error }) => {
   const { courseId } = useParams()
+  const dispatch = useDispatch()
   const [data, setData] = useState([{ title: contentData.title }, ...contentData.data])
   const [lastFile, setLastFile] = useState('')
+  const [preview, setPreview] = useState(false)
 
   useEffect(() => {
     if (data.length) {
@@ -30,11 +38,10 @@ const ContentForm = ({ contentData, contentId, handleSave, error }) => {
   }
 
   const inputChangeHandler = (e, index) => {
-    const value = e
     setData(prevState => {
       const contentCopy = {
         ...prevState[index],
-        text: value,
+        text: e,
       }
 
       return prevState.map((content, i) => {
@@ -83,8 +90,22 @@ const ContentForm = ({ contentData, contentId, handleSave, error }) => {
   }
 
   const lastFileChangeHandler = e => {
+    const maxSize = 2147483648
+    const fileSize = e.target.files[0].size
+
+    if (fileSize > maxSize) {
+      return Swal.fire({
+        toast: true,
+        icon: 'error',
+        title: 'Выберите файл не более 2 гигабайт',
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+      })
+    }
+
     const file = e.target.files[0]
-    setLastFile(file)
+    return setLastFile(file)
   }
 
   const onClickSave = () => {
@@ -107,13 +128,31 @@ const ContentForm = ({ contentData, contentId, handleSave, error }) => {
 
     handleSave({ courseId, contentId, data: formData })
   }
+
+  const handlePreview = () => {
+    setPreview(!preview)
+  }
+
+  const handleClickDelete = () => {
+    switch (contentData.type) {
+      case 'lesson':
+        dispatch(deleteLessonRequest({ lessonId: contentData._id, courseId }))
+        break
+      case 'task':
+        dispatch(deleteTaskRequest({ taskId: contentData._id, courseId }))
+        break
+      default:
+        break
+    }
+  }
+
   return (
     <>
       {contentData && (
         <>
           <div className="content-form">
             <h1 className="content-form__title">{contentData?.title}</h1>
-            <button type="button" className="content-form__remove">
+            <button type="button" className="content-form__remove" onClick={handleClickDelete}>
               <i>
                 <svg width="12" height="16" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -132,29 +171,40 @@ const ContentForm = ({ contentData, contentId, handleSave, error }) => {
               switch (Object.keys(content)[0]) {
                 case 'text':
                   return (
-                    <div key={`${index}textDW`} className="content-form__editor content-form__item">
-                      <SunEditorWYSIWYG setContents={content.text} onChange={e => inputChangeHandler(e, index)} />
+                    <div key={`${index}textDW`}>
+                      {preview ? (
+                        <div
+                          className="content-form__text"
+                          /* eslint-disable-next-line react/no-danger */
+                          dangerouslySetInnerHTML={{ __html: content.text }}
+                        />
+                      ) : (
+                        <div className="content-form__editor content-form__item">
+                          <SunEditorWYSIWYG setContents={content.text} onChange={e => inputChangeHandler(e, index)} />
+                        </div>
+                      )}
                     </div>
                   )
                 case 'video':
-                  return (
-                    <div key={index} className="video-input">
-                      <FormInput
-                        placeholder="Ссылка на видео"
-                        onChange={e => videoChangeHandler(e, index)}
-                        name="video"
-                        error={getFieldError(error, 'video')}
-                      />
-                      {/* <FilesUploader type="video" key={`${index}videoDW`} className="content-form__item" /> */}
+                  return preview ? (
+                    <div key={`${index}videoDWA`} className="video-input">
+                      <ReactPlayer url={content.video} controls config={{ origin: 'http://localhost:3000' }} />
                     </div>
+                  ) : (
+                    <VideoInput
+                      key={`${index}videoDwa`}
+                      value={content.video}
+                      onChange={e => videoChangeHandler(e, index)}
+                    />
                   )
                 case 'audio':
                   return (
                     <div key={`${index}audioDWA`}>
-                      {content.audio && typeof content.audio === 'string' ? (
+                      {preview ? (
                         <AudioPlayer audio={content.audio} />
                       ) : (
                         <FilesUploader
+                          title={typeof content.audio === 'string' && content.audio}
                           type="audio"
                           className="content-form__item"
                           onChange={fileChangeHandler}
@@ -167,15 +217,36 @@ const ContentForm = ({ contentData, contentId, handleSave, error }) => {
                   return null
               }
             })}
-            <AddContentBlock addContent={handleAddContent} className="content-form__item" />
-            <div className="content-form__files ">
-              <p className="content-form__files-title ">Прикреплённые файлы</p>
-              <FilesUploader type="file" onChange={lastFileChangeHandler} />
-            </div>
+            {!preview && <AddContentBlock addContent={handleAddContent} className="content-form__item" />}
+            {(!preview || contentData.file) && (
+              <div className="content-form__files ">
+                <p className="content-form__files-title ">Прикреплённые файлы</p>
+                {contentData.file && (
+                  <p className="content-form__files-file">
+                    Файл:{' '}
+                    <a href={`${apiUrl}/uploads/${contentData.file}`} target="_blank" download rel="noreferrer">
+                      {contentData.file}
+                    </a>
+                  </p>
+                )}
+                {!preview && <FilesUploader type="file" onChange={lastFileChangeHandler} />}
+              </div>
+            )}
           </div>
-          <button className="MainButton GreenButton content-form-save" type="button" onClick={onClickSave}>
-            Сохранить
-          </button>
+          <div className="content-form__buttons">
+            <MainButton
+              className="GreenButton content-form__button"
+              type="button"
+              onClick={onClickSave}
+              text="Сохранить"
+            />
+            <MainButton
+              className="GreenButton content-form__button"
+              type="button"
+              onClick={handlePreview}
+              text={!preview ? 'Предосмотр' : 'Редактирование'}
+            />
+          </div>
         </>
       )}
     </>

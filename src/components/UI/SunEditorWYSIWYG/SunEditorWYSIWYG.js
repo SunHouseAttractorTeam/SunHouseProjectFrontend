@@ -17,6 +17,7 @@ const SunEditorWYSIWYG = props => (
       charCounterLabel: 'Количество символов:',
       font: ['Gilroy', 'Arial', 'Comic Sans MS', 'Courier New', 'Impact', 'Georgia', 'Trebuchet MS', 'Verdana'],
     }}
+    setDefaultStyle="font-family: Gilroy; font-size: 14px;"
   />
 )
 

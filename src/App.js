@@ -2,6 +2,7 @@ import React from 'react'
 import Cookies from 'js-cookie'
 import { Route, Switch } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { LoadingBar } from 'react-redux-loading-bar'
 import Main from './containers/Main/Main'
 import Registration from './containers/Registration/Registration'
 import Login from './containers/Login/Login'
@@ -18,8 +19,10 @@ import CatalogOfCourse from './containers/CatalogOfCourse/CatalogOfCourse'
 
 const App = () => {
   const user = useSelector(state => state.users.user)
+  const loading = useSelector(state => state.loadingBar.default)
   return (
     <CookieProvider>
+      <LoadingBar loading={loading} style={{ zIndex: 10000000, background: '#ADFA00' }} />
       <Switch>
         <Route path="/" exact component={Main} />
         <Route path="/registration" component={Registration} />
@@ -37,7 +40,7 @@ const App = () => {
           component={Course}
         />
         <ProtectedRoute
-          isAllowed={Cookies.get('jwt') || user?.token}
+          isAllowed={(Cookies.get('jwt') || user?.token) && user?.role === 'admin'}
           redirectTo="/login"
           path="/admin_panel"
           component={AdminPanel}

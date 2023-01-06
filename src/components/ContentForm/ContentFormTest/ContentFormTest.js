@@ -1,22 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import '../ContentForm.scss'
+import { useDispatch } from 'react-redux'
+import ReactPlayer from 'react-player/youtube'
 import FilesUploader from '../../FilesUploader/FilesUploader'
 import SunEditorWYSIWYG from '../../UI/SunEditorWYSIWYG/SunEditorWYSIWYG'
 import AddContentBlock from '../../AddContentBlock/AddContentBlock'
 import QuestionsBlock from '../../QuestionsBlock/QuestionsBlock'
+import { deleteTestRequest } from '../../../store/actions/testsActions'
+import VideoInput from '../../VideoInput/VideoInput'
+import AudioPlayer from '../../UI/AudioPlayer/AudioPlayer'
+import { apiUrl } from '../../../config'
+import MainButton from '../../UI/MainButton/MainButton'
 
 const ContentFormTest = ({ contentData, contentId, handleSave, handleQuestionsSave }) => {
+  const dispatch = useDispatch()
   const { courseId } = useParams()
-  const [data, setData] = useState([])
+  const [data, setData] = useState([{ title: contentData.title }, ...contentData.data])
   const [lastFile, setLastFile] = useState('')
-  const [questionsState, setQuestionsState] = useState([{ title: '', answers: [{ title: '', status: false }] }])
+  const [questionsState, setQuestionsState] = useState([...contentData.questions])
+  const [preview, setPreview] = useState(false)
 
   useEffect(() => {
-    if (contentData) {
-      if (data.length === 0) {
-        setData([{ title: contentData.title }])
-      }
+    if (contentData && !questionsState.length) {
+      setQuestionsState([
+        {
+          title: '',
+          answers: [{ title: '', status: false }],
+        },
+      ])
     }
   }, [contentData])
 
@@ -29,11 +41,28 @@ const ContentFormTest = ({ contentData, contentId, handleSave, handleQuestionsSa
   }
 
   const inputChangeHandler = (e, index) => {
-    const value = JSON.stringify(e)
     setData(prevState => {
       const contentCopy = {
         ...prevState[index],
-        text: value,
+        text: e,
+      }
+
+      return prevState.map((content, i) => {
+        if (index === i) {
+          return contentCopy
+        }
+        return content
+      })
+    })
+  }
+
+  const videoChangeHandler = (e, index) => {
+    const { value } = e.target
+
+    setData(prevState => {
+      const contentCopy = {
+        ...prevState[index],
+        video: value,
       }
 
       return prevState.map((content, i) => {
@@ -87,13 +116,22 @@ const ContentFormTest = ({ contentData, contentId, handleSave, handleQuestionsSa
     handleSave({ courseId, contentId, data: formData })
     handleQuestionsSave({ courseId, contentId, questions: questionsState })
   }
+
+  const handleClickDelete = () => {
+    dispatch(deleteTestRequest({ testId: contentData._id, courseId }))
+  }
+
+  const handlePreview = () => {
+    setPreview(!preview)
+  }
+
   return (
     <>
       {contentData && (
         <>
           <div className="content-form">
             <h1 className="content-form__title">{contentData?.title}</h1>
-            <button type="button" className="content-form__remove">
+            <button type="button" className="content-form__remove" onClick={handleClickDelete}>
               <i>
                 <svg width="12" height="16" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -112,37 +150,67 @@ const ContentFormTest = ({ contentData, contentId, handleSave, handleQuestionsSa
               switch (Object.keys(content)[0]) {
                 case 'text':
                   return (
-                    <div key={`${index}textDW`} className="content-form__editor content-form__item">
-                      <SunEditorWYSIWYG value={content.description} onChange={e => inputChangeHandler(e, index)} />
+                    <div key={`${index}textDW`}>
+                      {preview ? (
+                        <div
+                          className="content-form__text"
+                          /* eslint-disable-next-line react/no-danger */
+                          dangerouslySetInnerHTML={{ __html: content.text }}
+                        />
+                      ) : (
+                        <div className="content-form__editor content-form__item">
+                          <SunEditorWYSIWYG setContents={content.text} onChange={e => inputChangeHandler(e, index)} />
+                        </div>
+                      )}
                     </div>
                   )
                 case 'video':
-                  return (
-                    <>
-                      <FilesUploader type="video" key={`${index}videoDW`} className="content-form__item" />
-                    </>
+                  return preview ? (
+                    <div key={`${index}videoDWA`} className="video-input">
+                      <ReactPlayer url={content.video} controls config={{ origin: 'http://localhost:3000' }} />
+                    </div>
+                  ) : (
+                    <VideoInput
+                      key={`${index}videoDwa`}
+                      value={content.video}
+                      onChange={e => videoChangeHandler(e, index)}
+                    />
                   )
                 case 'audio':
                   return (
-                    <>
-                      <FilesUploader
-                        type="audio"
-                        key={`${index}audioDWA`}
-                        className="content-form__item"
-                        onChange={fileChangeHandler}
-                        index={index}
-                      />
-                    </>
+                    <div key={`${index}audioDWA`}>
+                      {preview ? (
+                        <AudioPlayer audio={content.audio} />
+                      ) : (
+                        <FilesUploader
+                          title={typeof content.audio === 'string' && content.audio}
+                          type="audio"
+                          className="content-form__item"
+                          onChange={fileChangeHandler}
+                          index={index}
+                        />
+                      )}
+                    </div>
                   )
                 default:
                   return null
               }
             })}
-            <AddContentBlock addContent={handleAddContent} className="content-form__item" />
-            <div className="content-form__files ">
-              <p className="content-form__files-title ">Прикреплённые файлы</p>
-              <FilesUploader type="file" onChange={lastFileChangeHandler} />
-            </div>
+            {!preview && <AddContentBlock addContent={handleAddContent} className="content-form__item" />}
+            {(!preview || contentData.file) && (
+              <div className="content-form__files ">
+                <p className="content-form__files-title ">Прикреплённые файлы</p>
+                {contentData.file && (
+                  <p className="content-form__files-file">
+                    Файл:{' '}
+                    <a href={`${apiUrl}/uploads/${contentData.file}`} target="_blank" download rel="noreferrer">
+                      {contentData.file}
+                    </a>
+                  </p>
+                )}
+                {!preview && <FilesUploader type="file" onChange={lastFileChangeHandler} />}
+              </div>
+            )}
           </div>
           {questionsState.map((q, index) => (
             <div key={index}>
@@ -152,9 +220,20 @@ const ContentFormTest = ({ contentData, contentId, handleSave, handleQuestionsSa
           <button type="button" onClick={addQuestion} className="question-block__add-button MainButton">
             + Добавить вопрос
           </button>
-          <button className="MainButton GreenButton content-form-save" type="button" onClick={onClickSave}>
-            Сохранить
-          </button>
+          <div className="content-form__buttons">
+            <MainButton
+              className="GreenButton content-form__button"
+              type="button"
+              onClick={onClickSave}
+              text="Сохранить"
+            />
+            <MainButton
+              className="GreenButton content-form__button"
+              type="button"
+              onClick={handlePreview}
+              text={!preview ? 'Предосмотр' : 'Редактирование'}
+            />
+          </div>
         </>
       )}
     </>

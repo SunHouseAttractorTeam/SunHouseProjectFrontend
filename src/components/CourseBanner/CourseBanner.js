@@ -1,11 +1,13 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import banner from '../../assets/images/banner.svg'
 import MainButton from '../UI/MainButton/MainButton'
 import './CourseBanner.scss'
 
-const CourseBanner = ({ course, user, handleSave, accessCheck }) => {
+const CourseBanner = ({ course, handleSave, accessCheck }) => {
   const location = useLocation()
+  const user = useSelector(state => state.users.user)
 
   let image = banner
 
@@ -37,7 +39,7 @@ const CourseBanner = ({ course, user, handleSave, accessCheck }) => {
             to={
               location.pathname !== `/course/${course._id}`
                 ? `/course/${course._id}`
-                : `/user/${accessCheck() ? 'teacher_mode' : 'courses'}`
+                : `${user.role === 'admin' ? '/admin_panel' : `/user/${accessCheck() ? 'teacher_mode' : 'courses'}`}`
             }
             className="course-banner__course-button"
           >
@@ -53,7 +55,7 @@ const CourseBanner = ({ course, user, handleSave, accessCheck }) => {
           </Link>
         </div>
       </div>
-      <div className={`course-banner__image ${user === course.user && 'course-banner__image--edit'}`}>
+      <div className={`course-banner__image ${user?._id === course.user && 'course-banner__image--edit'}`}>
         <img src={image} alt={course.title} />
         {accessCheck() && (
           <>
