@@ -5,7 +5,7 @@ import banner from '../../assets/images/banner.svg'
 import MainButton from '../UI/MainButton/MainButton'
 import './CourseBanner.scss'
 
-const CourseBanner = ({ course, user, handleSave, teacherCheck }) => {
+const CourseBanner = ({ course, handleSave, teacherCheck }) => {
   const location = useLocation()
   const user = useSelector(state => state.users.user)
 

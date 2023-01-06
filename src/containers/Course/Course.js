@@ -48,7 +48,7 @@ const Course = () => {
                   user?.myCourses.find(userCourse => userCourse.course === course._id) ? (
                     <CoursePassing />
                   ) : (
-                    <CourseHomepage accessCheck={accessCheck} />
+                    <CourseHomepage teacherCheck={teacherCheck} />
                   )
                 }
               />
