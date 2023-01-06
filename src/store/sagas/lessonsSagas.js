@@ -63,7 +63,7 @@ export function* deleteLesson({ payload }) {
 
   try {
     yield put(showLoading())
-    yield axiosApi.delete(`/lessons/${lessonId}`)
+    yield axiosApi.delete(`/lessons/${lessonId}?course=${courseId}`)
     yield put(deleteLessonSuccess())
     yield put(fetchCourseRequest(courseId))
     yield put(hideLoading())
