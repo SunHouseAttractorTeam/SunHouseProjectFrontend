@@ -12,7 +12,7 @@ const FormInput = ({ type, name, value, onChange, placeholder, className, error 
       placeholder={placeholder}
       className={!error ? `InputStyle ${className}` : 'InputStyle error'}
     />
-    <div className="helper">{error ? <span>{error}</span> : null}</div>
+    {error && <div className="helper">{error ? <span>{error}</span> : null}</div>}
   </>
 )
 

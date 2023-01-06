@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getFieldError } from '../UI/Form/Handlers/Handlers'
 import ReactPlayer from 'react-player/youtube'
 import { useDispatch } from 'react-redux'
+import Swal from 'sweetalert2'
 import FilesUploader from '../FilesUploader/FilesUploader'
 import AddContentBlock from '../AddContentBlock/AddContentBlock'
 import SunEditorWYSIWYG from '../UI/SunEditorWYSIWYG/SunEditorWYSIWYG'
 import VideoInput from '../VideoInput/VideoInput'
 import MainButton from '../UI/MainButton/MainButton'
-import './ContentForm.scss'
 import { apiUrl } from '../../config'
 import AudioPlayer from '../UI/AudioPlayer/AudioPlayer'
-import FormInput from '../UI/Form/FormInput/FormInput'
-import './ContentForm.scss'
 import { deleteLessonRequest } from '../../store/actions/lessonsActions'
 import { deleteTaskRequest } from '../../store/actions/tasksActions'
+import './ContentForm.scss'
 
 const ContentForm = ({ contentData, contentId, handleSave, error }) => {
   const { courseId } = useParams()
@@ -96,8 +94,14 @@ const ContentForm = ({ contentData, contentId, handleSave, error }) => {
     const fileSize = e.target.files[0].size
 
     if (fileSize > maxSize) {
-      // eslint-disable-next-line no-alert
-      return alert('Любые файлы размером не более 2 гигабайт')
+      return Swal.fire({
+        toast: true,
+        icon: 'error',
+        title: 'Выберите файл не более 2 гигабайт',
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+      })
     }
 
     const file = e.target.files[0]
