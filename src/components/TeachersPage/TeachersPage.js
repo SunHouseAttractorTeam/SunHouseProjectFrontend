@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { getFieldError, inputChangeHandler, submitFormHandler } from '../UI/Form/Handlers/Handlers'
 import Header from '../Header/Header'
+import Footer from '../Footer/Footer'
 import Card from '../UI/Cards/Card/Card'
 import MainButton from '../UI/MainButton/MainButton'
 import Modal from '../UI/Modal2/Modal'
@@ -74,7 +75,7 @@ const TeachersPage = () => {
                 name="description"
                 placeholder="Введите описание"
                 value={data.description}
-                cols={10}
+                cols={5}
                 rows={5}
                 // error={getFieldError(error, 'description')}
               />
@@ -83,6 +84,7 @@ const TeachersPage = () => {
           </Card>
         </Modal>
       ) : null}
+      <Footer />
     </div>
   )
 }
