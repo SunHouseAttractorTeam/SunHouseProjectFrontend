@@ -1,9 +1,13 @@
 import React from 'react'
 import './EyeButton.js.scss'
 
-const EyeButton = () => (
+const EyeButton = ({ isVisibility, handleVisible }) => (
   <>
-    <button className="eye-button eye-button--active" type="submit">
+    <button
+      className={`eye-button eye-button${isVisibility ? '--is-publish' : ''}`}
+      type="submit"
+      onClick={() => handleVisible(!isVisibility)}
+    >
       <i>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path

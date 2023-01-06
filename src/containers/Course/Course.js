@@ -9,18 +9,13 @@ import CourseSettings from './CourseSettings/CourseSettings'
 import CourseEdit from './CourseEdit/CourseEdit'
 import CourseBanner from '../../components/CourseBanner/CourseBanner'
 import './Course.scss'
-import WhatLearn from '../../components/WhatLearn/WhatLearn'
-import TeachersBlock from '../../components/TeachersBlock/TeachersBlock'
-import CourseProgram from '../../components/CourseProgram/CourseProgram'
-import { teachers } from '../../data/teachers'
 import CoursePassing from '../../components/CoursePassing/CoursePassing'
 
-const Course = ({ match }) => {
+const Course = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const user = useSelector(state => state.users.user)
   const course = useSelector(state => state.courses.course)
-  const modules = useSelector(state => state.modules.module)
 
   useEffect(() => {
     if (user) {
@@ -36,8 +31,6 @@ const Course = ({ match }) => {
   }
 
   const teacherCheck = () => course.teachers.find(teacher => teacher === user?._id)
-
-  const courseCheck = () => course.users.find(userId => userId === user._id)
 
   return (
     <>
@@ -62,24 +55,7 @@ const Course = ({ match }) => {
               <Route path="/course/:id/edit" component={CourseEdit} />
             </Switch>
           </div>
-          <div className="course container">
-            <WhatLearn match={match} accessCheck={teacherCheck} />
-            <TeachersBlock title="Преподователи" teachers={teachers} teacherCheck={teacherCheck} />
-            <CourseProgram teacherCheck={teacherCheck} modules={modules} />
-            {teacherCheck() ? (
-              <button type="button" className="course__save-btn MainButton GreenButton">
-                Сохранить изменения
-              </button>
-            ) : (
-              <>
-                {courseCheck() ? (
-                  <button type="button" className="course__save-btn MainButton GreenButton">
-                    Записаться на курс
-                  </button>
-                ) : null}
-              </>
-            )}
-          </div>
+          <div className="course container" />
           <Footer />
         </div>
       )}

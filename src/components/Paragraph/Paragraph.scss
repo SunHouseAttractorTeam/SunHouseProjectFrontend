@@ -94,16 +94,12 @@
   border: none;
   background-color: transparent;
 
-  &:hover path {
-    fill: $lightGreenColor;
-  }
-
   path {
     fill: #D1D1D6;
     transition: all .3s ease;
   }
 
-  &--active path{
+  &--is-publish path{
     fill: $lightGreenColor;
   }
 

@@ -11,6 +11,12 @@ const Paragraph = ({ title = 'Title', subtitle, section, teacherCheck }) => {
   const [open, setOpen] = useState(false)
   const [description, setDescription] = useState('')
 
+  const [isVisibility, setIsVisibility] = useState(false)
+
+  const handleVisible = value => {
+    setIsVisibility(value)
+  }
+
   const handlerClick = () => {
     setOpen(true)
   }
@@ -73,7 +79,7 @@ const Paragraph = ({ title = 'Title', subtitle, section, teacherCheck }) => {
           </Modal>
         )}
       </div>
-      {teacherCheck && teacherCheck() && <EyeButton />}
+      {teacherCheck && teacherCheck() && <EyeButton handleVisible={handleVisible} isVisibility={isVisibility} />}
     </div>
   )
 }
