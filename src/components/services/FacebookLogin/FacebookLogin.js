@@ -1,15 +1,15 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { LoginSocialFacebook } from 'reactjs-social-login'
-import { facebookLoginRequest } from '../../../store/actions/usersActions'
+import { FacebookAppId } from '../../../config'
+import { loginUserRequest } from '../../../store/actions/usersActions'
 import fbIcon from '../../../assets/icons/facebookicon.svg'
 import './FacebookLogin.scss'
-import { FacebookAppId } from '../../../config'
 
 const FacebookLogin = () => {
   const dispatch = useDispatch()
 
-  const facebookResponse = response => dispatch(facebookLoginRequest(response))
+  const facebookResponse = response => dispatch(loginUserRequest({ path: 'facebookLogin', userData: response }))
 
   return (
     <LoginSocialFacebook
