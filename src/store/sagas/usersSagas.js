@@ -139,7 +139,7 @@ export function* logoutUserSaga() {
     yield put(historyPush('/'))
     yield Cookies.remove('jwt')
     yield Swal.fire({
-      // timer: 3000,
+      timer: 3000,
       toast: true,
       icon: 'info',
       title: 'Вы вышли из своего аккаунта',
