@@ -15,6 +15,10 @@ export const initialState = {
   deleteError: null,
   banLoading: false,
   banError: null,
+  editLoading: false,
+  editError: null,
+  passwordLoading: false,
+  passwordError: null,
 }
 
 const usersSlice = createSlice({
@@ -116,6 +120,29 @@ const usersSlice = createSlice({
     resetPasswordFailure(state, action) {
       state.resetPasswordLoading = false
       state.resetPasswordError = action.payload
+    },
+    editRequest(state) {
+      state.editLoading = true
+      state.editError = null
+    },
+    editSuccess(state, action) {
+      state.editLoading = false
+      state.user = action.payload
+    },
+    editFailure(state, action) {
+      state.editLoading = false
+      state.editError = action.payload
+    },
+    passwordRequest(state) {
+      state.passwordLoading = true
+      state.passwordError = null
+    },
+    passwordSuccess(state) {
+      state.passwordLoading = false
+    },
+    passwordFailure(state, action) {
+      state.passwordLoading = false
+      state.passwordError = action.payload
     },
   },
 })
