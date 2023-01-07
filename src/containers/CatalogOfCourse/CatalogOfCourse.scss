@@ -1,10 +1,7 @@
 .icons-block {
   display: flex;
   align-items: center;
-}
-
-.active-icon {
-  display: none;
+  position: relative;
 }
 
 .icons-item {
@@ -13,6 +10,16 @@
   background-color: #FFFFFF;
   border-radius: 50%;
   cursor: pointer;
+
+  &--active {
+    display: none;
+  }
+
+  &--active-icon {
+    background: #ADFA00;
+    padding: 12px;
+    border-radius: 50%;
+  }
 }
 
 .icons-item:hover {
