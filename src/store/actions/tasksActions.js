@@ -13,4 +13,5 @@ export const {
   deleteTaskRequest,
   deleteTaskSuccess,
   deleteTaskFailure,
+  clearTask,
 } = tasksSlice.actions

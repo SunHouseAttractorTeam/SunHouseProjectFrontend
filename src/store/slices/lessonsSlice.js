@@ -57,6 +57,9 @@ const lessonsSlice = createSlice({
       state.loading = false
       state.error = action.payload
     },
+    clearLesson(state) {
+      state.lesson = null
+    },
   },
 })
 

@@ -1,5 +1,6 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import { hideLoading, showLoading } from 'react-redux-loading-bar'
+import Swal from 'sweetalert2'
 import axiosApi from '../../axiosApi'
 import {
   createTaskFailure,
@@ -39,6 +40,15 @@ export function* createTask({ payload }) {
     yield put(fetchCourseRequest(courseId))
     yield put(hideLoading())
     yield put(historyPush(`/course/${courseId}/edit/task/${response.data._id}`))
+
+    yield Swal.fire({
+      toast: true,
+      icon: 'success',
+      title: 'Задание успешно создано',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+    })
   } catch (e) {
     yield put(createTaskFailure(e))
   }
@@ -53,6 +63,15 @@ export function* editTask({ payload }) {
     yield put(editTaskSuccess())
     yield put(hideLoading())
     yield put(fetchTaskRequest(contentId))
+
+    yield Swal.fire({
+      toast: true,
+      icon: 'success',
+      title: 'Задание успешно изменено',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+    })
   } catch (e) {
     yield put(editTaskFailure(e))
   }
@@ -63,11 +82,20 @@ export function* deleteTask({ payload }) {
 
   try {
     yield put(showLoading())
-    yield axiosApi.delete(`/tasks/${taskId}`)
+    yield axiosApi.delete(`/tasks/${taskId}?course=${courseId}`)
     yield put(deleteTaskSuccess())
     yield put(fetchCourseRequest(courseId))
     yield put(hideLoading())
     yield put(historyPush(`/course/${courseId}/edit`))
+
+    yield Swal.fire({
+      toast: true,
+      icon: 'success',
+      title: 'Задание успешно удалено',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+    })
   } catch (e) {
     yield put(deleteTaskFailure(e))
   }

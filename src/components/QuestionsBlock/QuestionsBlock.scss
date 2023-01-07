@@ -15,8 +15,25 @@
 }
 
 .remove-button {
-  width: 12px;
-  height: 16px;
+  cursor: pointer;
+  position: absolute;
+  width: 19px;
+  height: 24px;
+  background-size: cover;
+  background-position: center;
+  top: 24px;
+  right: 27px;
+  border: none;
+  background-color: transparent;
+
+  &:hover path {
+    fill: $totalRedColor;
+    transition: 0.3ms;
+  }
+
+  & path {
+    transition: all .3s ease;
+  }
 }
 
 .stripes-button {
@@ -35,7 +52,8 @@
   border-radius: 16px;
   padding: 24px 24px;
   color: $blackDarkColor;
-  margin: 20px;
+  margin-bottom: 20px;
+  position: relative;
 
   &__buttons {
     display: flex;
@@ -43,11 +61,6 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 32px;
-
-    &-right {
-      display: flex;
-      align-items: center;
-    }
   }
 
   &__stripes {
@@ -170,9 +183,17 @@
       align-items: center;
     }
 
-    &-remove,
-    &-stripes {
+    &-remove {
       margin-left: 18px;
+
+      &:hover path {
+        fill: $totalRedColor;
+        transition: 0.3ms;
+      }
+
+      & path {
+        transition: all .3s ease;
+      }
     }
   }
 
@@ -180,7 +201,6 @@
     font-weight: 700;
     font-size: 16px !important;
     line-height: 20px;
-    margin-top: 24px;
-    margin-left: 20px;
+    margin-bottom: 20px;
   }
 }

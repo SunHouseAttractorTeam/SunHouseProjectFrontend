@@ -4,7 +4,7 @@
   &::before {
     width: 64px;
     height: 64px;
-    background:url("../../assets/icons/video.svg")  no-repeat;
+    background: url("../../assets/icons/video.svg") no-repeat;
   }
 }
 
@@ -27,6 +27,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin-bottom: 32px;
 
   &::before {
     content: "";
@@ -53,7 +54,7 @@
   }
 }
 
-.file-card{
+.file-card {
   display: flex;
   align-items: center;
 
@@ -73,7 +74,7 @@
     }
   }
 
-  &__placeholder{
+  &__placeholder {
     font-size: 12px;
     line-height: 14px;
     color: $lightGrey;

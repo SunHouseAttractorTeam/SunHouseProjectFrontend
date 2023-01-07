@@ -1,5 +1,6 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import { hideLoading, showLoading } from 'react-redux-loading-bar'
+import Swal from 'sweetalert2'
 import axiosApi from '../../axiosApi'
 import {
   createTestFailure,
@@ -42,6 +43,15 @@ export function* createTest({ payload }) {
     yield put(fetchCourseRequest(courseId))
     yield put(hideLoading())
     yield put(historyPush(`/course/${courseId}/edit/test/${response.data._id}`))
+
+    yield Swal.fire({
+      toast: true,
+      icon: 'success',
+      title: 'Тест успешно создан',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+    })
   } catch (e) {
     yield put(createTestFailure(e))
   }
@@ -55,6 +65,15 @@ export function* editTest({ payload }) {
     yield put(editTestSuccess())
     yield put(fetchTestRequest(contentId))
     yield put(hideLoading())
+
+    yield Swal.fire({
+      toast: true,
+      icon: 'success',
+      title: 'Тест успешно изменен',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+    })
   } catch (e) {
     yield put(editTestFailure(e))
   }
@@ -78,11 +97,20 @@ export function* deleteTest({ payload }) {
 
   try {
     yield put(showLoading())
-    yield axiosApi.delete(`/tests/${testId}`)
+    yield axiosApi.delete(`/tests/${testId}?course=${courseId}`)
     yield put(deleteTestSuccess())
     yield put(fetchCourseRequest(courseId))
     yield put(hideLoading())
     yield put(historyPush(`/course/${courseId}/edit`))
+
+    yield Swal.fire({
+      toast: true,
+      icon: 'success',
+      title: 'Тест успешно удален',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+    })
   } catch (e) {
     yield put(deleteTestFailure(e))
   }
