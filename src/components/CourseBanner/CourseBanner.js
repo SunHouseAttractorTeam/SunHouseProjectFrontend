@@ -1,18 +1,21 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import banner from '../../assets/images/banner.svg'
 import MainButton from '../UI/MainButton/MainButton'
 import './CourseBanner.scss'
+import { editCourseHeaderImageRequest } from '../../store/actions/coursesActions'
+import { apiUrl } from '../../config'
 
-const CourseBanner = ({ course, handleSave, accessCheck }) => {
+const CourseBanner = ({ course, accessCheck }) => {
   const location = useLocation()
+  const dispatch = useDispatch()
   const user = useSelector(state => state.users.user)
 
   let image = banner
 
   if (course.headerImage) {
-    image = course.headerImage
+    image = `${apiUrl}/uploads/${course.headerImage}`
   }
 
   const handleChangeHeaderImage = e => {
@@ -20,15 +23,9 @@ const CourseBanner = ({ course, handleSave, accessCheck }) => {
 
     const formData = new FormData()
 
-    Object.keys(course).forEach(key => {
-      if (key === 'headerImage') {
-        formData.append(key, file)
-      }
+    formData.append('headerImage', file)
 
-      formData.append(key, course[key])
-    })
-
-    handleSave(formData)
+    dispatch(editCourseHeaderImageRequest({ courseId: course._id, image: formData }))
   }
 
   return (

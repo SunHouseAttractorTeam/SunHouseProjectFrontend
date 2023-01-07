@@ -1,6 +1,6 @@
 @import '../../../scss/style';
 
-.MainButton{
+.MainButton {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -15,6 +15,7 @@
   font-size: 20px;
   line-height: 20px;
   cursor: pointer;
+  transition: all .3s ease;
 }
 
 .GreenButton {
