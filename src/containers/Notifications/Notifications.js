@@ -29,10 +29,11 @@ const Notifications = () => {
   }, [notifications])
 
   const onActiveBtn = () => {
-    setActive(!active)
     if (unViewNotifications.length !== 0) {
       dispatch(viewNotificationsRequest(unViewNotifications))
+      if (user) dispatch(fetchNotificationsRequest(user._id))
     }
+    setActive(!active)
   }
 
   if (unview.length !== 0) {
