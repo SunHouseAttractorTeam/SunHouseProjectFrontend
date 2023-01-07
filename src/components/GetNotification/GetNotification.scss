@@ -64,6 +64,8 @@
   }
 
   &__form {
+
+
     &-disabled {
       background-color: $greyColor;
       cursor: not-allowed;
@@ -71,6 +73,8 @@
     }
 
     &-area {
+      max-width: 600px;
+      height: 191px;
       margin-bottom: 15px;
     }
 
