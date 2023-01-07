@@ -15,18 +15,12 @@ import {
   editFailure,
   editRequest,
   editSuccess,
-  facebookLoginFailure,
-  facebookLoginRequest,
-  facebookLoginSuccess,
   forgotPasswordFailure,
   forgotPasswordRequest,
   forgotPasswordSuccess,
   getAllUsersFailure,
   getAllUsersRequest,
   getAllUsersSuccess,
-  googleLoginFailure,
-  googleLoginRequest,
-  googleLoginSuccess,
   loginUserFailure,
   loginUserRequest,
   loginUserSuccess,
@@ -43,9 +37,6 @@ import {
   verifyUserFailure,
   verifyUserRequest,
   verifyUserSuccess,
-  vkLoginFailure,
-  vkLoginRequest,
-  vkLoginSuccess,
 } from '../actions/usersActions'
 
 export function* getAllUsersSaga() {
@@ -81,10 +72,11 @@ export function* registrationUserSaga({ payload: userData }) {
   }
 }
 
-export function* loginUserSaga({ payload: userData }) {
+export function* loginUserSaga({ payload }) {
+  const { path, userData } = payload
   try {
     yield put(showLoading())
-    const response = yield axiosApi.post('/users/sessions', userData)
+    const response = yield axiosApi.post(`/users/sessions?path=${path}`, userData)
     yield put(loginUserSuccess(response.data))
     yield put(hideLoading())
     if (userData) {
@@ -106,52 +98,6 @@ export function* loginUserSaga({ payload: userData }) {
         title: 'Введены неверные данные',
         showConfirmButton: false,
       })
-    }
-  }
-}
-
-export function* facebookLoginSaga({ payload: userData }) {
-  try {
-    yield put(showLoading())
-
-    const response = yield axiosApi.post('/users/facebookLogin/', userData)
-    yield put(facebookLoginSuccess(response.data))
-    yield put(hideLoading())
-    yield put(historyPush('/'))
-  } catch (e) {
-    if (e.response && e.response.data) {
-      yield put(facebookLoginFailure(e.response.data))
-    }
-  }
-}
-
-export function* googleLoginSaga({ payload: userData }) {
-  try {
-    yield put(showLoading())
-
-    const response = yield axiosApi.post('/users/googleLogin/', userData)
-    yield put(googleLoginSuccess(response.data))
-    yield put(hideLoading())
-    yield put(historyPush('/'))
-  } catch (e) {
-    if (e.response && e.response.data) {
-      yield put(googleLoginFailure(e.response.data))
-    }
-  }
-}
-
-export function* vkLoginSaga({ payload: userData }) {
-  try {
-    yield put(showLoading())
-
-    const response = yield axiosApi.post('/users/vkLogin/', userData)
-    yield put(vkLoginSuccess(response.data))
-    yield put(hideLoading())
-
-    yield put(historyPush('/'))
-  } catch (e) {
-    if (e.response && e.response.data) {
-      yield put(vkLoginFailure(e.response.data))
     }
   }
 }
@@ -308,9 +254,6 @@ const userSagas = [
   takeEvery(registrationRequest, registrationUserSaga),
   takeEvery(loginUserRequest, loginUserSaga),
   takeEvery(logoutUser, logoutUserSaga),
-  takeEvery(facebookLoginRequest, facebookLoginSaga),
-  takeEvery(googleLoginRequest, googleLoginSaga),
-  takeEvery(vkLoginRequest, vkLoginSaga),
   takeEvery(verifyUserRequest, verifyUserSaga),
   takeEvery(forgotPasswordRequest, forgotPasswordSaga),
   takeEvery(resetPasswordRequest, resetPasswordSaga),
