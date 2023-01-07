@@ -6,14 +6,27 @@
   &__list {
     list-style: none;
     display: flex;
-    flex-wrap: wrap;
     padding: 0;
-    justify-content: space-between;
     transition: all 0.5s;
+    flex-wrap: wrap;
+  }
+
+  &__link {
+    text-decoration: none;
+    text-transform: capitalize;
+    color: #fff;
+    cursor: pointer;
+
+    &_active {
+      color: $lightGreenColor;
+    }
+    &:hover {
+      color: $lightGreenColor;
+    }
   }
 
   &__item {
-    padding: 0 50px 10px 7px;
+    padding: 0 10px 10px 7px;
     transition: all 0.5s;
     position: relative;
 
@@ -34,6 +47,10 @@
         padding: 10px;
         text-decoration: none;
 
+        &_active {
+          color: $lightGreenColor;
+        }
+
         &:hover {
           color: $lightGreenColor;
         }
@@ -42,17 +59,6 @@
 
     &:hover &__menu {
       display: inline-block;
-      color: $lightGreenColor;
-    }
-  }
-
-  &__link {
-    text-decoration: none;
-    text-transform: capitalize;
-    color: #fff;
-    cursor: pointer;
-
-    &:hover {
       color: $lightGreenColor;
     }
   }
