@@ -14,8 +14,11 @@
       align-items: center;
 
       img {
-        width: 90px;
-        height: 90px;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        vertical-align: middle;
+        object-fit: cover;
       }
     }
 

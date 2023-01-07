@@ -3,18 +3,23 @@ import ProfileDescription from '../ProfileDescription/ProfileDescription'
 import MainButton from '../../../UI/MainButton/MainButton'
 import './ImageForm.scss'
 import notImage from '../../../../assets/images/notImage.png'
+import { apiUrl } from '../../../../config'
 
 const ImageForm = ({ onChangeAvatar, avatar }) => {
   const inputRef = useRef()
   let avatarImg = notImage
 
   if (avatar) {
-    avatarImg = avatar
+    if (avatar.match(/http/) || avatar.match(/https/)) {
+      avatarImg = avatar
+    } else {
+      avatarImg = `${apiUrl}/${avatar}`
+    }
   }
 
   const onFileChange = e => {
     if (e.target.files[0]) {
-      onChangeAvatar(e.target.files[0].name)
+      onChangeAvatar(e.target.files[0])
     } else {
       onChangeAvatar('')
     }

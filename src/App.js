@@ -14,8 +14,11 @@ import VerifyPage from './containers/VerifyPage/VerifyPage'
 import ForgotPasswordPage from './containers/ForgotPasswordPage/ForgotPasswordPage'
 import ResetPasswordPage from './containers/ResetPasswordPage/ResetPasswordPage'
 import AdminPanel from './containers/AdminPanel/AdminPanel'
-import './scss/style.scss'
 import CatalogOfCourse from './containers/CatalogOfCourse/CatalogOfCourse'
+import TeachersPage from './components/TeachersPage/TeachersPage'
+import ReviewsBlock from './components/ReviewsBlock/ReviewsBlock'
+import About from './components/About/About'
+import './scss/style.scss'
 
 const App = () => {
   const user = useSelector(state => state.users.user)
@@ -46,6 +49,9 @@ const App = () => {
           component={AdminPanel}
         />
         <Route path="/course-catalog" component={CatalogOfCourse} />
+        <Route path="/page-teachers" component={TeachersPage} />
+        <Route path="/about" component={About} />
+        <Route path="/reviews" component={ReviewsBlock} />
         <Route path="/confirm/:confirmationCode" component={VerifyPage} />
         <Route path="/forgot" component={ForgotPasswordPage} />
         <Route path="/reset/:hash" component={ResetPasswordPage} />

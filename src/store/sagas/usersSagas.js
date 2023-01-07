@@ -12,22 +12,22 @@ import {
   deleteUserFailure,
   deleteUserRequest,
   deleteUserSuccess,
-  facebookLoginFailure,
-  facebookLoginRequest,
-  facebookLoginSuccess,
+  editFailure,
+  editRequest,
+  editSuccess,
   forgotPasswordFailure,
   forgotPasswordRequest,
   forgotPasswordSuccess,
   getAllUsersFailure,
   getAllUsersRequest,
   getAllUsersSuccess,
-  googleLoginFailure,
-  googleLoginRequest,
-  googleLoginSuccess,
   loginUserFailure,
   loginUserRequest,
   loginUserSuccess,
   logoutUser,
+  passwordFailure,
+  passwordRequest,
+  passwordSuccess,
   registrationFailure,
   registrationRequest,
   registrationSuccess,
@@ -37,9 +37,6 @@ import {
   verifyUserFailure,
   verifyUserRequest,
   verifyUserSuccess,
-  vkLoginFailure,
-  vkLoginRequest,
-  vkLoginSuccess,
 } from '../actions/usersActions'
 
 export function* getAllUsersSaga() {
@@ -75,13 +72,13 @@ export function* registrationUserSaga({ payload: userData }) {
   }
 }
 
-export function* loginUserSaga({ payload: userData }) {
+export function* loginUserSaga({ payload }) {
   try {
     yield put(showLoading())
-    const response = yield axiosApi.post('/users/sessions', userData)
+    const response = yield axiosApi.post(`/users/sessions?path=${payload.path}`, payload.userData)
     yield put(loginUserSuccess(response.data))
     yield put(hideLoading())
-    if (userData) {
+    if (payload.userData) {
       yield put(historyPush('/'))
     }
     yield Swal.fire({
@@ -100,52 +97,6 @@ export function* loginUserSaga({ payload: userData }) {
         title: 'Введены неверные данные',
         showConfirmButton: false,
       })
-    }
-  }
-}
-
-export function* facebookLoginSaga({ payload: userData }) {
-  try {
-    yield put(showLoading())
-
-    const response = yield axiosApi.post('/users/facebookLogin/', userData)
-    yield put(facebookLoginSuccess(response.data))
-    yield put(hideLoading())
-    yield put(historyPush('/'))
-  } catch (e) {
-    if (e.response && e.response.data) {
-      yield put(facebookLoginFailure(e.response.data))
-    }
-  }
-}
-
-export function* googleLoginSaga({ payload: userData }) {
-  try {
-    yield put(showLoading())
-
-    const response = yield axiosApi.post('/users/googleLogin/', userData)
-    yield put(googleLoginSuccess(response.data))
-    yield put(hideLoading())
-    yield put(historyPush('/'))
-  } catch (e) {
-    if (e.response && e.response.data) {
-      yield put(googleLoginFailure(e.response.data))
-    }
-  }
-}
-
-export function* vkLoginSaga({ payload: userData }) {
-  try {
-    yield put(showLoading())
-
-    const response = yield axiosApi.post('/users/vkLogin/', userData)
-    yield put(vkLoginSuccess(response.data))
-    yield put(hideLoading())
-
-    yield put(historyPush('/'))
-  } catch (e) {
-    if (e.response && e.response.data) {
-      yield put(vkLoginFailure(e.response.data))
     }
   }
 }
@@ -241,19 +192,72 @@ export function* resetPasswordSaga({ payload: hash }) {
   }
 }
 
+export function* editUserProfileSaga({ payload: userData }) {
+  try {
+    yield put(showLoading())
+
+    const response = yield axiosApi.put('/users/edit', userData)
+    yield put(editSuccess(response.data))
+    yield put(hideLoading())
+    yield Swal.fire({
+      toast: true,
+      icon: 'success',
+      title: 'Данные успешно сохранены!',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+    })
+  } catch (e) {
+    if (e.response && e.response.data) {
+      yield put(editFailure(e.response.data))
+      yield Swal.fire({
+        icon: 'error',
+        title: e.response.data.error,
+        showConfirmButton: false,
+      })
+    }
+  }
+}
+
+export function* editUserPasswordSaga({ payload: passwords }) {
+  try {
+    yield put(showLoading())
+
+    yield axiosApi.put('/users/edit_password', { password: passwords.password, newPassword: passwords.newPassword })
+    yield put(passwordSuccess())
+    yield put(hideLoading())
+    yield Swal.fire({
+      toast: true,
+      icon: 'success',
+      title: 'Пароль успешно сменен!',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+    })
+  } catch (e) {
+    if (e.response && e.response.data) {
+      yield put(passwordFailure(e.response.data))
+      yield Swal.fire({
+        icon: 'error',
+        title: e.response.data.error,
+        showConfirmButton: false,
+      })
+    }
+  }
+}
+
 const userSagas = [
+  takeEvery(loginUserRequest, loginUserSaga),
   takeEvery(banUnbanRequest, banUnbanSaga),
   takeEvery(deleteUserRequest, deleteUserSaga),
   takeEvery(getAllUsersRequest, getAllUsersSaga),
   takeEvery(registrationRequest, registrationUserSaga),
-  takeEvery(loginUserRequest, loginUserSaga),
   takeEvery(logoutUser, logoutUserSaga),
-  takeEvery(facebookLoginRequest, facebookLoginSaga),
-  takeEvery(googleLoginRequest, googleLoginSaga),
-  takeEvery(vkLoginRequest, vkLoginSaga),
   takeEvery(verifyUserRequest, verifyUserSaga),
   takeEvery(forgotPasswordRequest, forgotPasswordSaga),
   takeEvery(resetPasswordRequest, resetPasswordSaga),
+  takeEvery(editRequest, editUserProfileSaga),
+  takeEvery(passwordRequest, editUserPasswordSaga),
 ]
 
 export default userSagas

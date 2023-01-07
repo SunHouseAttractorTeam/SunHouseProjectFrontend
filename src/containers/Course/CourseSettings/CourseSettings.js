@@ -52,7 +52,7 @@ const CourseSettings = () => {
                 onClick={() => setActive(true)}
                 className={
                   active
-                    ? 'course-settings__right__buttons-block_button active'
+                    ? 'course-settings__right__buttons-block_button activeClass'
                     : 'course-settings__right__buttons-block_button'
                 }
               >
@@ -64,7 +64,7 @@ const CourseSettings = () => {
                 className={
                   active
                     ? 'course-settings__right__buttons-block_button'
-                    : 'course-settings__right__buttons-block_button active'
+                    : 'course-settings__right__buttons-block_button activeClass'
                 }
               >
                 Настройки курса

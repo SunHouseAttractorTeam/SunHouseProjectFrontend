@@ -10,7 +10,7 @@ const OPTIONS = [
   { value: 'kz', label: 'Казахстан' },
 ]
 
-const LocationForm = ({ onChangeData, onChangeCountry, city }) => (
+const LocationForm = ({ onChangeData, onChangeCountry, city, country }) => (
   <div className="location-block">
     <ProfileDescription title="Укажите местоположение" text="Разнообразный и богатый опыт сложившаяся структура" />
     <div className="location-block__form">
@@ -35,7 +35,7 @@ const LocationForm = ({ onChangeData, onChangeCountry, city }) => (
               primary25: 'grey',
             },
           })}
-          defaultValue={{ value: '', label: 'Выберите страну' }}
+          value={country ? { value: 'user', label: country } : { value: 'df', label: 'Выберите страну' }}
           options={OPTIONS}
           onChange={onChangeCountry}
         />
