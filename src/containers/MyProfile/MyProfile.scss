@@ -40,7 +40,6 @@
         &-username {
           font-size: 20px;
           font-weight: 700;
-          margin-bottom: 9px;
 
           &-ban {
             display: inline-block;
@@ -76,7 +75,7 @@
 
               & path {
                 fill: $lightGreenColor;
-                transition: 0.3ms;
+                transition: all 0.3ms;
               }
             }
 

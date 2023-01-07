@@ -65,11 +65,19 @@
       bottom: 0;
     }
 
+    &-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
     &-edit-button {
       z-index: 11;
       position: absolute;
       top: 23px;
-      right: 18.5%;
+      right: 10px;
       display: flex;
       align-items: center;
       text-decoration: none;

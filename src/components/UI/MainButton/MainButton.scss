@@ -26,6 +26,14 @@
   background-color: $totalWhiteColor;
 }
 
+.GreyButton {
+  background-color: $greyColor;
+}
+
+.DarkGreyButton {
+  background-color: $whiteBorderColor;
+}
+
 .TransparentButton {
   background-color: transparent;
   border: 2px solid $whiteBorderColor;
