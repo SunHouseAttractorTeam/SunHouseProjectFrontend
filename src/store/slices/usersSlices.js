@@ -17,6 +17,8 @@ export const initialState = {
   banError: null,
   editLoading: false,
   editError: null,
+  passwordLoading: false,
+  passwordError: null,
 }
 
 const usersSlice = createSlice({
@@ -166,6 +168,17 @@ const usersSlice = createSlice({
     editFailure(state, action) {
       state.editLoading = false
       state.editError = action.payload
+    },
+    passwordRequest(state) {
+      state.passwordLoading = true
+      state.passwordError = null
+    },
+    passwordSuccess(state) {
+      state.passwordLoading = false
+    },
+    passwordFailure(state, action) {
+      state.passwordLoading = false
+      state.passwordError = action.payload
     },
   },
 })

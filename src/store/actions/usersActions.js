@@ -38,4 +38,7 @@ export const {
   editRequest,
   editSuccess,
   editFailure,
+  passwordRequest,
+  passwordSuccess,
+  passwordFailure,
 } = usersSlice.actions

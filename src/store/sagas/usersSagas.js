@@ -31,6 +31,9 @@ import {
   loginUserRequest,
   loginUserSuccess,
   logoutUser,
+  passwordFailure,
+  passwordRequest,
+  passwordSuccess,
   registrationFailure,
   registrationRequest,
   registrationSuccess,
@@ -246,10 +249,55 @@ export function* resetPasswordSaga({ payload: hash }) {
 
 export function* editUserProfileSaga({ payload: userData }) {
   try {
+    yield put(showLoading())
+
     const response = yield axiosApi.put('/users/edit', userData)
     yield put(editSuccess(response.data))
+    yield put(hideLoading())
+    yield Swal.fire({
+      toast: true,
+      icon: 'success',
+      title: 'Данные успешно сохранены!',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+    })
   } catch (e) {
-    yield put(editFailure(e))
+    if (e.response && e.response.data) {
+      yield put(editFailure(e.response.data))
+      yield Swal.fire({
+        icon: 'error',
+        title: e.response.data.error,
+        showConfirmButton: false,
+      })
+    }
+  }
+}
+
+export function* editUserPasswordSaga({ payload: passwords }) {
+  try {
+    yield put(showLoading())
+
+    yield axiosApi.put('/users/edit_password', { password: passwords.password, newPassword: passwords.newPassword })
+    yield put(passwordSuccess())
+    yield put(hideLoading())
+    yield Swal.fire({
+      toast: true,
+      icon: 'success',
+      title: 'Пароль успешно сменен!',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+    })
+  } catch (e) {
+    if (e.response && e.response.data) {
+      yield put(passwordFailure(e.response.data))
+      yield Swal.fire({
+        icon: 'error',
+        title: e.response.data.error,
+        showConfirmButton: false,
+      })
+    }
   }
 }
 
@@ -267,6 +315,7 @@ const userSagas = [
   takeEvery(forgotPasswordRequest, forgotPasswordSaga),
   takeEvery(resetPasswordRequest, resetPasswordSaga),
   takeEvery(editRequest, editUserProfileSaga),
+  takeEvery(passwordRequest, editUserPasswordSaga),
 ]
 
 export default userSagas

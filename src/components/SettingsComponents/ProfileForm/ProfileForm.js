@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import Swal from 'sweetalert2'
 import PersonalForm from './PersonalForm/PersonalForm'
 import LocationForm from './LocationForm/LocationForm'
 import ImageForm from './ImageForm/ImageForm'
@@ -62,7 +63,18 @@ const ProfileForm = () => {
   const onClickSave = e => {
     e.preventDefault()
 
-    if (state.username === '' || state.email === '') return
+    if (state.username === '' || state.email === '') {
+      Swal.fire({
+        toast: true,
+        icon: 'error',
+        title: 'username или email не может быть пустыми!',
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+      })
+
+      return
+    }
 
     const formData = new FormData()
 
