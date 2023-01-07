@@ -67,13 +67,12 @@ export function* registrationUserSaga({ payload: userData }) {
 }
 
 export function* loginUserSaga({ payload }) {
-  const { path, userData } = payload
   try {
     yield put(showLoading())
-    const response = yield axiosApi.post(`/users/sessions?path=${path}`, userData)
+    const response = yield axiosApi.post(`/users/sessions?path=${payload.path}`, payload.userData)
     yield put(loginUserSuccess(response.data))
     yield put(hideLoading())
-    if (userData) {
+    if (payload.userData) {
       yield put(historyPush('/'))
     }
     yield Swal.fire({
@@ -188,11 +187,11 @@ export function* resetPasswordSaga({ payload: hash }) {
 }
 
 const userSagas = [
+  takeEvery(loginUserRequest, loginUserSaga),
   takeEvery(banUnbanRequest, banUnbanSaga),
   takeEvery(deleteUserRequest, deleteUserSaga),
   takeEvery(getAllUsersRequest, getAllUsersSaga),
   takeEvery(registrationRequest, registrationUserSaga),
-  takeEvery(loginUserRequest, loginUserSaga),
   takeEvery(logoutUser, logoutUserSaga),
   takeEvery(verifyUserRequest, verifyUserSaga),
   takeEvery(forgotPasswordRequest, forgotPasswordSaga),
