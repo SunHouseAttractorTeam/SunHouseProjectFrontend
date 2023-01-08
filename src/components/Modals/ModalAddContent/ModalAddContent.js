@@ -59,7 +59,7 @@ const ModalAddContent = ({ setOpen, handleClick, setContentType }) => {
             оценить значение
           </p>
           <div className="content__buttons-block">
-            <MainButton className="WhiteButton content__btn" text="Отмена" onClick={() => setOpen(false)} type="text" />
+            <MainButton className="GreyButton content__btn" text="Отмена" onClick={() => setOpen(false)} type="text" />
             <MainButton className="GreenButton content__btn-two" text="Далее" onClick={handleClick} type="button" />
           </div>
         </div>
