@@ -15,7 +15,7 @@ const CourseBanner = ({ course, accessCheck }) => {
   let image = banner
 
   if (course.headerImage) {
-    image = `${apiUrl}/uploads/${course.headerImage}`
+    image = `${apiUrl}/${course.headerImage}`
   }
 
   const handleChangeHeaderImage = e => {
