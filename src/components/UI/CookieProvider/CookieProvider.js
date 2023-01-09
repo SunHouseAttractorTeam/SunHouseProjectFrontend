@@ -8,7 +8,7 @@ const CookieProvider = ({ children }) => {
 
   useEffect(() => {
     if (Cookies.get('jwt')) {
-      dispatch(loginUserRequest())
+      dispatch(loginUserRequest({ userData: {} }))
     }
   }, [dispatch])
 
