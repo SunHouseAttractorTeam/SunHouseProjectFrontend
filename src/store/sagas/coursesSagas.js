@@ -12,6 +12,9 @@ import {
   deleteCourseFailure,
   deleteCourseRequest,
   deleteCourseSuccess,
+  editCourseHeaderImageFailure,
+  editCourseHeaderImageRequest,
+  editCourseHeaderImageSuccess,
   fetchCourseFailure,
   fetchCourseRequest,
   fetchCoursesFailure,
@@ -38,6 +41,7 @@ export function* fetchCourses() {
     yield put(hideLoading())
   } catch (e) {
     yield put(fetchCoursesFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -50,6 +54,7 @@ export function* fetchCourse({ payload: id }) {
     yield put(hideLoading())
   } catch (e) {
     yield put(fetchCourseFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -62,6 +67,7 @@ export function* fetchUserCourses({ payload: userId }) {
     yield put(hideLoading())
   } catch (e) {
     yield put(fetchUserCoursesFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -85,9 +91,8 @@ export function* createCourse({ payload: courseData }) {
       showConfirmButton: false,
     })
   } catch (e) {
-    if (e.response && e.response.data) {
-      yield put(createCourseFailure(e.response.data))
-    }
+    yield put(createCourseFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -110,6 +115,7 @@ export function* publishCourse({ payload: id }) {
     })
   } catch (e) {
     yield put(publishCourseFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -124,8 +130,6 @@ export function* updateCourse({ payload }) {
     yield put(fetchCourseRequest(id))
     yield put(hideLoading())
 
-    yield put(historyPush(`/course/${id}`))
-
     yield Swal.fire({
       toast: true,
       icon: 'success',
@@ -136,6 +140,31 @@ export function* updateCourse({ payload }) {
     })
   } catch (e) {
     yield put(updateCourseFailure(e))
+    yield put(hideLoading())
+  }
+}
+
+export function* editCourseHeaderImageSaga({ payload }) {
+  const { courseId, image } = payload
+
+  try {
+    yield put(showLoading())
+    yield axiosApi.patch(`/courses/edit_image?course=${courseId}`, image)
+    yield put(editCourseHeaderImageSuccess())
+    yield put(hideLoading())
+    yield put(fetchCourseRequest(courseId))
+
+    yield Swal.fire({
+      toast: true,
+      icon: 'success',
+      title: 'Шапка курса успешно изменена',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+    })
+  } catch (e) {
+    yield put(editCourseHeaderImageFailure())
+    yield put(hideLoading())
   }
 }
 
@@ -155,6 +184,7 @@ export function* addUsersCourse({ payload }) {
     yield put(addUsersCourseSuccess())
   } catch (e) {
     yield put(addUsersCourseFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -176,6 +206,7 @@ export function* deleteCourse({ payload: id }) {
     })
   } catch (e) {
     yield put(deleteCourseFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -186,6 +217,7 @@ const coursesSagas = [
   takeEvery(fetchUserCoursesRequest, fetchUserCourses),
   takeEvery(createCourseRequest, createCourse),
   takeEvery(updateCourseRequest, updateCourse),
+  takeEvery(editCourseHeaderImageRequest, editCourseHeaderImageSaga),
   takeEvery(addUsersCourseRequest, addUsersCourse),
   takeEvery(deleteCourseRequest, deleteCourse),
 ]

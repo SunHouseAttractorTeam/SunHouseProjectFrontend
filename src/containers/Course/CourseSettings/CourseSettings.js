@@ -26,7 +26,7 @@ const CourseSettings = () => {
     description: course?.description || '',
     category: course.category,
     private: course?.private,
-    image: course?.image,
+    image: course?.image || '',
   })
 
   const submitFormHandler = e => {
@@ -52,7 +52,7 @@ const CourseSettings = () => {
                 onClick={() => setActive(true)}
                 className={
                   active
-                    ? 'course-settings__right__buttons-block_button active'
+                    ? 'course-settings__right__buttons-block_button activeClass'
                     : 'course-settings__right__buttons-block_button'
                 }
               >
@@ -64,7 +64,7 @@ const CourseSettings = () => {
                 className={
                   active
                     ? 'course-settings__right__buttons-block_button'
-                    : 'course-settings__right__buttons-block_button active'
+                    : 'course-settings__right__buttons-block_button activeClass'
                 }
               >
                 Настройки курса
@@ -75,17 +75,15 @@ const CourseSettings = () => {
             ) : (
               <CourseSettingsRight course={course} setCourse={setState} submit={submitFormHandler} />
             )}
+            <MainButton
+              className="GreenButton course-settings__save-button"
+              type="submit"
+              text="Сохранить изменения"
+              onClick={submitFormHandler}
+            />
           </div>
         </div>
       )}
-      <div className="course-settings__save-block">
-        <MainButton
-          className="GreenButton course-settings__save-block_save"
-          type="submit"
-          text="Сохранить изменения"
-          onClick={submitFormHandler}
-        />
-      </div>
     </div>
   )
 }

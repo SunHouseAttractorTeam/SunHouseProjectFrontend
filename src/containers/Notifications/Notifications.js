@@ -29,10 +29,11 @@ const Notifications = () => {
   }, [notifications])
 
   const onActiveBtn = () => {
-    setActive(!active)
     if (unViewNotifications.length !== 0) {
       dispatch(viewNotificationsRequest(unViewNotifications))
+      if (user) dispatch(fetchNotificationsRequest(user._id))
     }
+    setActive(!active)
   }
 
   if (unview.length !== 0) {
@@ -54,7 +55,7 @@ const Notifications = () => {
           type="button"
           onClick={onActiveBtn}
           className={
-            active ? 'notifications-card__view-status__view active' : 'notifications-card__view-status__unview'
+            active ? 'notifications-card__view-status__view activeClass' : 'notifications-card__view-status__unview'
           }
         >
           Просмотренные
@@ -65,7 +66,7 @@ const Notifications = () => {
           className={
             active
               ? 'notifications-card__view-status__unview  new-notifications'
-              : 'notifications-card__view-status__unview active new-notifications'
+              : 'notifications-card__view-status__unview activeClass new-notifications'
           }
         >
           <i className="notifications-card__view-status__icon "> {icon}</i>

@@ -42,12 +42,7 @@
 
       &--active {
         border-radius: 10px;
-        background: rgb(173, 250, 0);
-        //color: $totalWhiteColor;
-
-        & path {
-          fill: $totalWhiteColor
-        }
+        background: $greyColor;
       }
 
       &-title {
@@ -109,7 +104,7 @@
       transition: all .5s ease;
 
       &:hover {
-        background-color: #ADFA00;
+        background-color: $lightGreenColor;
       }
     }
   }
@@ -117,13 +112,10 @@
   &__add-module {
     width: calc(100% - 50px);
     margin: 32px auto 0;
-    background-color: #ADFA00;
-    border: 2px solid transparent;
     transition: all .5s ease;
 
     &:hover {
-      background: transparent;
-      border-color: #ADFA00;
+      background: $whiteBorderColor;
     }
   }
 }

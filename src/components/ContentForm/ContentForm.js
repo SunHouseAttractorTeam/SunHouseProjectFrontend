@@ -235,16 +235,16 @@ const ContentForm = ({ contentData, contentId, handleSave, error }) => {
           </div>
           <div className="content-form__buttons">
             <MainButton
-              className="GreenButton content-form__button"
+              className="WhiteButton content-form__button"
               type="button"
-              onClick={onClickSave}
-              text="Сохранить"
+              onClick={handlePreview}
+              text={!preview ? 'Предосмотр' : 'Редактирование'}
             />
             <MainButton
               className="GreenButton content-form__button"
               type="button"
-              onClick={handlePreview}
-              text={!preview ? 'Предосмотр' : 'Редактирование'}
+              onClick={onClickSave}
+              text="Сохранить"
             />
           </div>
         </>

@@ -11,24 +11,24 @@ const Nav = ({ user }) => (
     </label>
     <ul className="main-nav__list">
       <li className="main-nav__item">
-        <NavLink to="/course-catalog" className="main-nav__link">
-          <span className="main-nav__link">Каталог курсов</span>
+        <NavLink to="/course-catalog" className="main-nav__link" activeClassName="main-nav__link_active">
+          Каталог курсов
         </NavLink>
       </li>
       <li className="main-nav__item">
-        <a href="#" className="main-nav__link">
-          Бесплатные курсы
-        </a>
-      </li>
-      <li className="main-nav__item">
-        <a href="#" className="main-nav__link">
+        <NavLink to="/about" className="main-nav__link" activeClassName="main-nav__link_active">
           О школе
-        </a>
+        </NavLink>
       </li>
       <li className="main-nav__item">
-        <a href="#" className="main-nav__link">
+        <NavLink to="/page-teachers" className="main-nav__link" activeClassName="main-nav__link_active">
+          Преподавателям
+        </NavLink>
+      </li>
+      <li className="main-nav__item">
+        <NavLink to="/reviews" className="main-nav__link" activeClassName="main-nav__link_active">
           Отзывы
-        </a>
+        </NavLink>
       </li>
       {!user && (
         <li className="main-nav__item">

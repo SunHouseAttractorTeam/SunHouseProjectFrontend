@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import Swal from 'sweetalert2'
 import FormInput from '../../UI/Form/FormInput/FormInput'
 import SettingsButton from '../SettingsButton/SettingsButton'
 import { inputChangeHandler, submitFormHandler } from '../../UI/Form/Handlers/Handlers'
+import { passwordRequest } from '../../../store/actions/usersActions'
 import './PasswordForm.scss'
 
 const PasswordForm = () => {
+  const dispatch = useDispatch()
   const [passwords, setPasswords] = useState({
     oldPassword: '',
     newPassword: '',
@@ -14,15 +18,37 @@ const PasswordForm = () => {
   const onSubmit = e => {
     e.preventDefault()
 
-    if (passwords.newPassword !== passwords.reNewPassword) {
-      // тут вывести ошибку
+    if (!passwords.newPassword || !passwords.oldPassword) {
+      Swal.fire({
+        toast: true,
+        icon: 'error',
+        title: 'Введите верные данные!',
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+      })
+      return
     }
 
-    submitFormHandler(e)
+    if (passwords.newPassword !== passwords.reNewPassword) {
+      Swal.fire({
+        toast: true,
+        icon: 'error',
+        title: 'Повторный пароль не совподает!',
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+      })
+      return
+    }
+
+    dispatch(
+      submitFormHandler(e, passwordRequest({ password: passwords.oldPassword, newPassword: passwords.newPassword })),
+    )
   }
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={e => onSubmit(e)}>
       <div className="password-block">
         <h3 className="password-block__title">Заполните данные, чтобы изменить пароль</h3>
         <div className="password-block__form">

@@ -1,7 +1,7 @@
 import React from 'react'
-import './About.scss'
 import BigLogo from '../../assets/images/BigLogo.png'
 import Vector from '../../assets/images/Vector.png'
+import './About.scss'
 
 const About = () => (
   <div className="about">

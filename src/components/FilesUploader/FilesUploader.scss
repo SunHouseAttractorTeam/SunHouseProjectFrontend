@@ -72,6 +72,10 @@
       height: 24px;
       background: url("../../assets/icons/chain.svg") no-repeat;
     }
+
+    &:hover {
+      background: $darkGreyColor;
+    }
   }
 
   &__placeholder {
