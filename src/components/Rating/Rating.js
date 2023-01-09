@@ -5,6 +5,7 @@ import Modal from '../UI/Modal2/Modal'
 import FormArea from '../UI/Form/FormArea/FormArea'
 import './Rating.scss'
 import { inputChangeHandler } from '../UI/Form/Handlers/Handlers'
+import { createRatingRequest } from '../../store/actions/ratingActions'
 
 const RatingBlock = () => {
   const dispatch = useDispatch()
@@ -24,11 +25,7 @@ const RatingBlock = () => {
 
   const submitFormHandler = e => {
     e.preventDefault()
-    const formData = new FormData()
-    Object.keys(reviewData).forEach(key => {
-      formData.append(key, reviewData[key])
-    })
-    // dispatch(createReviewRequest(formData))
+    dispatch(createRatingRequest())
     setReviewData({ rating: null, instagram: '', review: '' })
   }
 
@@ -39,7 +36,13 @@ const RatingBlock = () => {
       </button>
       {open && (
         <Modal setOpen={setOpen}>
-          <button className="rating-block__modal-close" type="button">
+          <button
+            className="rating-block__modal-close"
+            type="button"
+            onClick={() => {
+              setOpen(false)
+            }}
+          >
             <i>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
