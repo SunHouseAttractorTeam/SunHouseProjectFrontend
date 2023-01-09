@@ -9,7 +9,11 @@ import './VkontakteLogin.scss'
 const VkontakteLogin = () => {
   const dispatch = useDispatch()
 
-  const responseVk = response => dispatch(loginUserRequest({ path: 'vkLogin', userData: response }))
+  const responseVk = response => {
+    if (response.session) {
+      dispatch(loginUserRequest({ path: 'vkLogin', userData: response }))
+    }
+  }
 
   return (
     <VkLogin
