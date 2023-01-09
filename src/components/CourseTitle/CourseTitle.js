@@ -5,7 +5,7 @@ import avatarStub from '../../assets/icons/avatarStub.svg'
 import { apiUrl } from '../../config'
 import './CourseTitle.scss'
 
-const CourseTitle = ({ courseId, title, avatar, description, teacherCheck, image }) => {
+const CourseTitle = ({ courseId, title, description, teacherCheck, image }) => {
   let avatarImage = avatarStub
 
   if (image && image !== 'undefined') {
