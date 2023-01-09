@@ -10,6 +10,7 @@ import lessonsSagas from './sagas/lessonsSagas'
 import testsSagas from './sagas/testsSagas'
 import notificationsSagas from './sagas/notificationSagas'
 import lendingReviewsSagas from './sagas/lendingReviewsSagas'
+import ratingSagas from './sagas/ratingSagas'
 
 export default function* rootSagas() {
   yield all([
@@ -23,5 +24,6 @@ export default function* rootSagas() {
     ...notificationsSagas,
     ...lendingReviewsSagas,
     ...historySagas(history),
+    ...ratingSagas,
   ])
 }
