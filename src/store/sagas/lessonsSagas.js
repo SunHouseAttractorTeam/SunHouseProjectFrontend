@@ -19,6 +19,14 @@ import {
 import { fetchCourseRequest } from '../actions/coursesActions'
 import { historyPush } from '../actions/historyActions'
 
+const Toast = Swal.mixin({
+  toast: true,
+  icon: 'success',
+  timer: 3000,
+  timerProgressBar: true,
+  showConfirmButton: false,
+})
+
 export function* fetchLesson({ payload: id }) {
   try {
     yield put(showLoading())
@@ -41,13 +49,8 @@ export function* createLesson({ payload }) {
     yield put(hideLoading())
     yield put(historyPush(`/course/${courseId}/edit/lesson/${response.data._id}`))
 
-    yield Swal.fire({
-      toast: true,
-      icon: 'success',
+    yield Toast.fire({
       title: 'Занятие успешно создано',
-      timer: 3000,
-      timerProgressBar: true,
-      showConfirmButton: false,
     })
   } catch (e) {
     yield put(createLessonFailure(e))
@@ -65,12 +68,7 @@ export function* editLesson({ payload }) {
     yield put(fetchLessonRequest(contentId))
 
     yield Swal.fire({
-      toast: true,
-      icon: 'success',
       title: 'Занятие успешно изменено',
-      timer: 3000,
-      timerProgressBar: true,
-      showConfirmButton: false,
     })
   } catch (e) {
     yield put(editLessonFailure(e))
@@ -89,12 +87,7 @@ export function* deleteLesson({ payload }) {
     yield put(historyPush(`/course/${courseId}/edit`))
 
     yield Swal.fire({
-      toast: true,
-      icon: 'success',
       title: 'Занятие успешно удалено',
-      timer: 3000,
-      timerProgressBar: true,
-      showConfirmButton: false,
     })
   } catch (e) {
     yield put(deleteLessonFailure(e))

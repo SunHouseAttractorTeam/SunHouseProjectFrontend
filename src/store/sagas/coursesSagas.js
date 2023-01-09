@@ -33,6 +33,14 @@ import {
 } from '../actions/coursesActions'
 import { historyPush } from '../actions/historyActions'
 
+const Toast = Swal.mixin({
+  toast: true,
+  icon: 'success',
+  timer: 3000,
+  timerProgressBar: true,
+  showConfirmButton: false,
+})
+
 export function* fetchCourses() {
   try {
     yield put(showLoading())
@@ -82,13 +90,8 @@ export function* createCourse({ payload: courseData }) {
     yield put(fetchCoursesRequest())
     yield historyPush(`/course/${response.data._id}`)
 
-    yield Swal.fire({
-      toast: true,
-      icon: 'success',
+    yield Toast.fire({
       title: 'Вы успешно создали курс',
-      timer: 3000,
-      timerProgressBar: true,
-      showConfirmButton: false,
     })
   } catch (e) {
     yield put(createCourseFailure(e))
@@ -105,13 +108,8 @@ export function* publishCourse({ payload: id }) {
     yield put(hideLoading())
     yield put(fetchCoursesRequest())
 
-    yield Swal.fire({
-      toast: true,
-      icon: 'success',
+    yield Toast.fire({
       title: 'Курс успешно опубликован',
-      timer: 3000,
-      timerProgressBar: true,
-      showConfirmButton: false,
     })
   } catch (e) {
     yield put(publishCourseFailure(e))
@@ -130,13 +128,8 @@ export function* updateCourse({ payload }) {
     yield put(fetchCourseRequest(id))
     yield put(hideLoading())
 
-    yield Swal.fire({
-      toast: true,
-      icon: 'success',
+    yield Toast.fire({
       title: 'Курс успешно изменён',
-      timer: 3000,
-      timerProgressBar: true,
-      showConfirmButton: false,
     })
   } catch (e) {
     yield put(updateCourseFailure(e))
@@ -154,13 +147,8 @@ export function* editCourseHeaderImageSaga({ payload }) {
     yield put(hideLoading())
     yield put(fetchCourseRequest(courseId))
 
-    yield Swal.fire({
-      toast: true,
-      icon: 'success',
+    yield Toast.fire({
       title: 'Шапка курса успешно изменена',
-      timer: 3000,
-      timerProgressBar: true,
-      showConfirmButton: false,
     })
   } catch (e) {
     yield put(editCourseHeaderImageFailure())
@@ -196,13 +184,8 @@ export function* deleteCourse({ payload: id }) {
     yield put(deleteCourseSuccess())
     yield put(hideLoading())
 
-    yield Swal.fire({
-      toast: true,
-      icon: 'success',
+    yield Toast.fire({
       title: 'Курс успешно удалён',
-      timer: 3000,
-      timerProgressBar: true,
-      showConfirmButton: false,
     })
   } catch (e) {
     yield put(deleteCourseFailure(e))
