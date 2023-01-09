@@ -8,6 +8,7 @@ import Modal from '../../../../components/UI/Modal2/Modal'
 import MainButton from '../../../../components/UI/MainButton/MainButton'
 import Card from '../../../../components/UI/Cards/Card/Card'
 import './CourseSettingsRight.scss'
+import CourseUserModal from '../../../../components/Modals/CourseUserModal/CourseUserModal'
 
 const CourseSettingsRight = ({ course }) => {
   const dispatch = useDispatch()
@@ -15,9 +16,11 @@ const CourseSettingsRight = ({ course }) => {
   const users = useSelector(state => state.users.users)
   const items = []
   const [open, setOpen] = useState(false)
+  const [userOpen, setUserOpen] = useState(false)
   const [role, setRole] = useState('users')
   const [isChecked, setIsChecked] = useState(false)
   const [participant, setParticipant] = useState(null)
+  const [email, setEmail] = useState(null)
 
   useEffect(() => {
     dispatch(getAllUsersRequest())
@@ -64,7 +67,15 @@ const CourseSettingsRight = ({ course }) => {
               <span className="block-right_name-block_top_title">Одобрение задания</span>
             </div>
             {course.users.map(user => (
-              <div key={user._id} className="block-right_name-block_top">
+              <div
+                key={user._id}
+                className="block-right_name-block_top"
+                onClick={async () => {
+                  // await dispatch(getUserRequest(user.email))
+                  await setEmail(user.email)
+                  setUserOpen(true)
+                }}
+              >
                 <span className="block-right_name-block_top_name">{user.username}</span>
                 <span>Task</span>
                 <div className="block-right_name-block_top_buttons">
@@ -97,6 +108,7 @@ const CourseSettingsRight = ({ course }) => {
           </div>
         </div>
       </div>
+      {userOpen ? <CourseUserModal setOpen={setUserOpen} email={email} /> : null}
       {open ? (
         <Modal setOpen={setOpen}>
           <Card>
