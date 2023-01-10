@@ -1,16 +1,21 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import banner from '../../assets/images/banner.svg'
 import MainButton from '../UI/MainButton/MainButton'
 import './CourseBanner.scss'
+import { editCourseHeaderImageRequest } from '../../store/actions/coursesActions'
+import { apiUrl } from '../../config'
 
-const CourseBanner = ({ course, user, handleSave, accessCheck }) => {
+const CourseBanner = ({ course, accessCheck }) => {
   const location = useLocation()
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.users.user)
 
   let image = banner
 
   if (course.headerImage) {
-    image = course.headerImage
+    image = `${apiUrl}/${course.headerImage}`
   }
 
   const handleChangeHeaderImage = e => {
@@ -18,15 +23,9 @@ const CourseBanner = ({ course, user, handleSave, accessCheck }) => {
 
     const formData = new FormData()
 
-    Object.keys(course).forEach(key => {
-      if (key === 'headerImage') {
-        formData.append(key, file)
-      }
+    formData.append('headerImage', file)
 
-      formData.append(key, course[key])
-    })
-
-    handleSave(formData)
+    dispatch(editCourseHeaderImageRequest({ courseId: course._id, image: formData }))
   }
 
   return (
@@ -37,7 +36,7 @@ const CourseBanner = ({ course, user, handleSave, accessCheck }) => {
             to={
               location.pathname !== `/course/${course._id}`
                 ? `/course/${course._id}`
-                : `/user/${accessCheck ? 'teacher_mode' : 'courses'}`
+                : `${user.role === 'admin' ? '/admin_panel' : `/user/${accessCheck() ? 'teacher_mode' : 'courses'}`}`
             }
             className="course-banner__course-button"
           >
@@ -53,7 +52,7 @@ const CourseBanner = ({ course, user, handleSave, accessCheck }) => {
           </Link>
         </div>
       </div>
-      <div className={`course-banner__image ${user === course.user && 'course-banner__image--edit'}`}>
+      <div className={`course-banner__image ${user?._id === course.user && 'course-banner__image--edit'}`}>
         <img src={image} alt={course.title} />
         {accessCheck && (
           <>
@@ -72,24 +71,32 @@ const CourseBanner = ({ course, user, handleSave, accessCheck }) => {
             <input className="course-banner__image-input-file" type="file" onChange={handleChangeHeaderImage} />
             {(location.pathname === `/course/${course._id}` ||
               location.pathname === `/course/${course._id}/settings`) && (
-              <Link to={`/course/${course._id}/edit`} className="course-banner__image-edit-button">
-                <MainButton
-                  className="WhiteButton"
-                  text={
-                    <>
-                      <i>
-                        <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M0 15.4601V18.5001C0 18.7801 0.22 19.0001 0.5 19.0001H3.54C3.67 19.0001 3.8 18.9501 3.89 18.8501L14.81 7.94006L11.06 4.19006L0.15 15.1001C0.0500001 15.2001 0 15.3201 0 15.4601ZM17.71 5.04006C18.1 4.65006 18.1 4.02006 17.71 3.63006L15.37 1.29006C14.98 0.900059 14.35 0.900059 13.96 1.29006L12.13 3.12006L15.88 6.87006L17.71 5.04006V5.04006Z"
-                            fill="#2C2C2E"
-                          />
-                        </svg>
-                      </i>
-                      Редактор курса
-                    </>
-                  }
-                />
-              </Link>
+              <div className="container course-banner__image-container">
+                <Link to={`/course/${course._id}/edit`} className="course-banner__image-edit-button">
+                  <MainButton
+                    className="WhiteButton"
+                    text={
+                      <>
+                        <i>
+                          <svg
+                            width="19"
+                            height="19"
+                            viewBox="0 0 19 19"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M0 15.4601V18.5001C0 18.7801 0.22 19.0001 0.5 19.0001H3.54C3.67 19.0001 3.8 18.9501 3.89 18.8501L14.81 7.94006L11.06 4.19006L0.15 15.1001C0.0500001 15.2001 0 15.3201 0 15.4601ZM17.71 5.04006C18.1 4.65006 18.1 4.02006 17.71 3.63006L15.37 1.29006C14.98 0.900059 14.35 0.900059 13.96 1.29006L12.13 3.12006L15.88 6.87006L17.71 5.04006V5.04006Z"
+                              fill="#2C2C2E"
+                            />
+                          </svg>
+                        </i>
+                        Редактор курса
+                      </>
+                    }
+                  />
+                </Link>
+              </div>
             )}
           </>
         )}

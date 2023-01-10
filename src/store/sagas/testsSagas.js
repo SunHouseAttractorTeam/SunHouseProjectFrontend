@@ -1,4 +1,6 @@
 import { put, takeEvery } from 'redux-saga/effects'
+import { hideLoading, showLoading } from 'react-redux-loading-bar'
+import Swal from 'sweetalert2'
 import axiosApi from '../../axiosApi'
 import {
   createTestFailure,
@@ -20,10 +22,20 @@ import {
 import { fetchCourseRequest } from '../actions/coursesActions'
 import { historyPush } from '../actions/historyActions'
 
+const Toast = Swal.mixin({
+  toast: true,
+  icon: 'success',
+  timer: 3000,
+  timerProgressBar: true,
+  showConfirmButton: false,
+})
+
 export function* fetchTest({ payload: id }) {
   try {
+    yield put(showLoading())
     const response = yield axiosApi(`/tests/${id}`)
     yield put(fetchTestSuccess(response.data))
+    yield put(hideLoading())
   } catch (e) {
     yield put(fetchTestFailure(e))
   }
@@ -33,10 +45,16 @@ export function* createTest({ payload }) {
   const { courseId, moduleId, testData } = payload
 
   try {
+    yield put(showLoading())
     const response = yield axiosApi.post(`/tests?module=${moduleId}`, testData)
     yield put(createTestSuccess())
     yield put(fetchCourseRequest(courseId))
+    yield put(hideLoading())
     yield put(historyPush(`/course/${courseId}/edit/test/${response.data._id}`))
+
+    yield Toast.fire({
+      title: 'Тест успешно создан',
+    })
   } catch (e) {
     yield put(createTestFailure(e))
   }
@@ -45,9 +63,15 @@ export function* createTest({ payload }) {
 export function* editTest({ payload }) {
   const { courseId, contentId, data } = payload
   try {
+    yield put(showLoading())
     yield axiosApi.put(`/tests/${contentId}?course=${courseId}`, data)
     yield put(editTestSuccess())
     yield put(fetchTestRequest(contentId))
+    yield put(hideLoading())
+
+    yield Toast.fire({
+      title: 'Тест успешно изменен',
+    })
   } catch (e) {
     yield put(editTestFailure(e))
   }
@@ -56,9 +80,11 @@ export function* editTest({ payload }) {
 export function* editTestQuestions({ payload }) {
   const { courseId, contentId, questions } = payload
   try {
+    yield put(showLoading())
     yield axiosApi.put(`/tests/${contentId}/questions?course=${courseId}`, questions)
     yield put(editTestQuestionsSuccess())
     yield put(fetchTestRequest(contentId))
+    yield put(hideLoading())
   } catch (e) {
     yield put(editTestQuestionsFailure(e))
   }
@@ -68,10 +94,16 @@ export function* deleteTest({ payload }) {
   const { testId, courseId } = payload
 
   try {
-    yield axiosApi.delete(`/tests/${testId}`)
+    yield put(showLoading())
+    yield axiosApi.delete(`/tests/${testId}?course=${courseId}`)
     yield put(deleteTestSuccess())
     yield put(fetchCourseRequest(courseId))
+    yield put(hideLoading())
     yield put(historyPush(`/course/${courseId}/edit`))
+
+    yield Swal.fire({
+      title: 'Тест успешно удален',
+    })
   } catch (e) {
     yield put(deleteTestFailure(e))
   }

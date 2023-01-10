@@ -1,4 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects'
+import { hideLoading, showLoading } from 'react-redux-loading-bar'
 import axiosApi from '../../axiosApi'
 import {
   createReviewFailure,
@@ -18,8 +19,10 @@ import { historyPush } from '../actions/historyActions'
 
 export function* fetchReviews() {
   try {
+    yield put(showLoading())
     const response = yield axiosApi(`/lending_reviews`)
     yield put(fetchReviewsSuccess(response.data))
+    yield put(hideLoading())
   } catch (e) {
     yield put(fetchReviewsFailure(e))
   }
@@ -27,8 +30,10 @@ export function* fetchReviews() {
 
 export function* createReview({ payload: reviewData }) {
   try {
+    yield put(showLoading())
     yield axiosApi.post(`/lending_reviews`, reviewData)
     yield put(createReviewSuccess())
+    yield put(hideLoading())
     yield put(historyPush('/'))
   } catch (e) {
     yield put(createReviewFailure(e))
@@ -39,8 +44,10 @@ export function* editReview({ payload }) {
   const { reviewId, reviewData } = payload
 
   try {
+    yield put(showLoading())
     yield axiosApi.put(`/lending_reviews/${reviewId}`, reviewData)
     yield put(editReviewSuccess())
+    yield put(hideLoading())
   } catch (e) {
     yield put(editReviewFailure(e))
   }
@@ -50,8 +57,10 @@ export function* deleteReview({ payload }) {
   const { reviewId } = payload
 
   try {
+    yield put(showLoading())
     yield axiosApi.delete(`/lending_reviews/${reviewId}`)
     yield put(deleteReviewSuccess())
+    yield put(hideLoading())
   } catch (e) {
     yield put(deleteReviewFailure(e))
   }

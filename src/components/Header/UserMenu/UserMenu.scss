@@ -11,8 +11,9 @@
     width: 100vw;
     height: 100vh;
     position: fixed;
-    z-index: 1000;
-    top: 50%;
+    z-index: 10;
+
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: rgba(0, 0, 0, 0);
@@ -30,7 +31,7 @@
   &__list {
     position: absolute;
     top: 110%;
-    z-index: 100000;
+    z-index: 10;
     margin: auto;
     color: $darkGreenColor;
     text-decoration: none;

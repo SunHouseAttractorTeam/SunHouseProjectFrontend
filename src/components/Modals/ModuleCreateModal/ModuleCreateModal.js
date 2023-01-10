@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { inputChangeHandler, submitFormHandler } from '../../UI/Form/Handlers/Handlers'
+import { getFieldError, inputChangeHandler, submitFormHandler } from '../../UI/Form/Handlers/Handlers'
 import { createModuleRequest } from '../../../store/actions/modulesActions'
 import Modal from '../../UI/Modal2/Modal'
 import FormInput from '../../UI/Form/FormInput/FormInput'
 import MainButton from '../../UI/MainButton/MainButton'
 import './ModuleCreateModal.scss'
 
-const ModuleCreateModal = ({ setOpen, id }) => {
+const ModuleCreateModal = ({ setOpen, id, error }) => {
   const dispatch = useDispatch()
   const [moduleData, setModuleData] = useState({ title: '' })
 
@@ -30,15 +30,14 @@ const ModuleCreateModal = ({ setOpen, id }) => {
               name="title"
               placeholder="Название"
               className="inputModal"
+              error={getFieldError(error, 'title')}
             />
-            <div className="content__test__button-block">
-              <MainButton
-                className="GreenButton content__module__button"
-                text="Создать модуль"
-                onClick={e => handlerClick(e)}
-                type="submit"
-              />
-            </div>
+            <MainButton
+              className="GreenButton content__module__button"
+              text="Создать модуль"
+              onClick={e => handlerClick(e)}
+              type="submit"
+            />
           </form>
         </div>
       </div>

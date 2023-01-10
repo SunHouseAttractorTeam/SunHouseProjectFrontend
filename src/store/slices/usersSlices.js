@@ -11,6 +11,14 @@ export const initialState = {
   registerError: null,
   loginLoading: false,
   loginError: null,
+  deleteLoading: false,
+  deleteError: null,
+  banLoading: false,
+  banError: null,
+  editLoading: false,
+  editError: null,
+  passwordLoading: false,
+  passwordError: null,
 }
 
 const usersSlice = createSlice({
@@ -54,44 +62,28 @@ const usersSlice = createSlice({
       state.loginLoading = false
       state.loginError = action.payload
     },
-    facebookLoginRequest(state) {
-      state.loginLoading = true
-      state.loginError = null
-    },
-    facebookLoginSuccess(state, action) {
-      state.loginLoading = false
-      state.user = action.payload
-    },
-    facebookLoginFailure(state, action) {
-      state.loginLoading = false
-      state.loginError = action.payload
-    },
-    googleLoginRequest(state) {
-      state.loginLoading = true
-      state.loginError = null
-    },
-    googleLoginSuccess(state, action) {
-      state.loginLoading = false
-      state.user = action.payload
-    },
-    googleLoginFailure(state, action) {
-      state.loginLoading = false
-      state.loginError = action.payload
-    },
-    vkLoginRequest(state) {
-      state.loginLoading = true
-      state.loginError = null
-    },
-    vkLoginSuccess(state, action) {
-      state.loginLoading = false
-      state.user = action.payload
-    },
-    vkLoginFailure(state, action) {
-      state.loginLoading = false
-      state.loginError = action.payload
-    },
     logoutUser(state) {
       state.user = null
+    },
+    deleteUserRequest(state) {
+      state.deleteLoading = true
+    },
+    deleteUserSuccess(state) {
+      state.deleteLoading = false
+    },
+    banUnbanRequest(state) {
+      state.banLoading = true
+    },
+    banUnbanSuccess(state) {
+      state.banLoading = false
+    },
+    banUnbanFailure(state, action) {
+      state.banLoading = false
+      state.banError = action.payload
+    },
+    deleteUserFailure(state, action) {
+      state.deleteLoading = false
+      state.deleteError = action.payload
     },
     verifyUserRequest(state) {
       state.verifyUserLoading = true
@@ -128,6 +120,29 @@ const usersSlice = createSlice({
     resetPasswordFailure(state, action) {
       state.resetPasswordLoading = false
       state.resetPasswordError = action.payload
+    },
+    editRequest(state) {
+      state.editLoading = true
+      state.editError = null
+    },
+    editSuccess(state, action) {
+      state.editLoading = false
+      state.user = action.payload
+    },
+    editFailure(state, action) {
+      state.editLoading = false
+      state.editError = action.payload
+    },
+    passwordRequest(state) {
+      state.passwordLoading = true
+      state.passwordError = null
+    },
+    passwordSuccess(state) {
+      state.passwordLoading = false
+    },
+    passwordFailure(state, action) {
+      state.passwordLoading = false
+      state.passwordError = action.payload
     },
   },
 })

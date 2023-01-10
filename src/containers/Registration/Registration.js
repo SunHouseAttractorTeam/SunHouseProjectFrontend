@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 import FormComponent from '../../components/UI/Form/FormComponent/FormComponent'
 import { inputChangeHandler, submitFormHandler } from '../../components/UI/Form/Handlers/Handlers'
 import { registrationRequest } from '../../store/actions/usersActions'
@@ -21,8 +19,6 @@ const Registration = () => {
 
   return (
     <>
-      <ToastContainer />
-
       <div className="main">
         <header className="header">
           <div className="container header__container">

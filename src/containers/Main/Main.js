@@ -1,5 +1,4 @@
 import React from 'react'
-import { ToastContainer } from 'react-toastify'
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 import About from '../../components/About/About'
@@ -12,7 +11,6 @@ import ReviewsBlock from '../../components/ReviewsBlock/ReviewsBlock'
 
 const Main = () => (
   <div className="main">
-    <ToastContainer />
     <Header />
     <Promo />
     <CoursesCatalog />

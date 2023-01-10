@@ -1,21 +1,29 @@
+@import '../../scss/style';
+
 .content-form {
   width: 100%;
   padding: 24px 24px 32px;
   background: white;
   border-radius: 16px;
   position: relative;
+  margin-bottom: 30px;
 
   &__item {
-    &:not(:last-child) {
-      margin-bottom: 32px;
-    }
+    margin-bottom: 32px;
   }
 
-  &__files-title {
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 24px;
-    margin-bottom: 24px;
+  &__files {
+    &-title {
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 24px;
+      margin-bottom: 24px;
+    }
+
+    &-file {
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
   }
 
   &__title {
@@ -43,22 +51,40 @@
     border: none;
     background-color: transparent;
 
-    & path {
-      fill: #D1D1D6;
+    &:hover path {
+      fill: $totalRedColor;
       transition: 0.3ms;
     }
-  }
-}
 
-.content-form-save {
-  width: 280px;
-  font-size: 16px;
-  margin-top: 54px;
+    & path {
+      transition: all .3s ease;
+    }
+  }
+
+  &__text {
+    margin-bottom: 30px;
+
+    & span {
+      white-space: normal;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    margin-bottom: 30px;
+  }
+
+  &__button {
+    margin-right: 20px;
+
+    &:hover {
+      background-color: $whiteBorderColor;
+    }
+  }
 }
 
 .video-input {
   display: flex;
   justify-content: center;
   margin-bottom: 30px;
-
 }

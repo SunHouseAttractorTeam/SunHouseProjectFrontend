@@ -77,7 +77,13 @@ const coursesSlice = createSlice({
       state.loading = false
       state.error = action.payload
     },
-
+    editCourseHeaderImageRequest(state) {
+      state.error = null
+    },
+    editCourseHeaderImageSuccess() {},
+    editCourseHeaderImageFailure(state, action) {
+      state.loading = action.payload
+    },
     addUsersCourseRequest(state) {
       state.loading = true
       state.error = null

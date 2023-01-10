@@ -3,7 +3,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 999;
+  z-index: 10;
   width: 38%;
 
   &__inner {
@@ -39,7 +39,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
   height: 100vh;
-  z-index: 0;
+  z-index: 9;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

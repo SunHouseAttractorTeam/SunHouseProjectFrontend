@@ -2,7 +2,6 @@
 
 .courses-section {
   padding: 120px 0;
-  overflow: hidden;
 
   &__title {
     display: flex;
@@ -20,6 +19,11 @@
       margin-right: 15px;
       background: url('../../assets/icons/greenSpot.svg') 0 no-repeat;
     }
+  }
+
+  &__block {
+    display: flex;
+    justify-content: space-between;
   }
 
   &__cards {
