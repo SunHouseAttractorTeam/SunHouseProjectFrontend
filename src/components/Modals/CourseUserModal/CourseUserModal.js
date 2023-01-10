@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import './CourseUserModal.scss'
 import { useDispatch, useSelector } from 'react-redux'
+import { buildStyles, CircularProgressbar } from 'react-circular-progressbar'
 import Modal from '../../UI/Modal2/Modal'
-import Avatar from '../../UI/Avatar/Avatar'
 import { getUserRequest } from '../../../store/actions/coursesActions'
 import avatarStub from '../../../assets/icons/avatarStub.svg'
 import { apiUrl } from '../../../config'
@@ -13,6 +13,7 @@ const CourseUserModal = ({ setOpen, email }) => {
   const course = useSelector(state => state.courses.course)
   let avatarImage = avatarStub
   const [showMore, setShowMore] = useState(false)
+  const percentage = 66
 
   useEffect(() => {
     dispatch(getUserRequest(email))
@@ -26,7 +27,6 @@ const CourseUserModal = ({ setOpen, email }) => {
   }
 
   if (course.image && course.image !== 'undefined') {
-    console.log(course.image)
     avatarImage = `${apiUrl}/${course.image}`
   }
   return (
@@ -34,7 +34,11 @@ const CourseUserModal = ({ setOpen, email }) => {
       <div className="course-user-modal__backdrop" onClick={handlerClick} />
       <Modal setOpen={setOpen}>
         <div className="course-user-modal__header">
-          <Avatar className="course-user-modal__header__avatar" user={null} />
+          {/* <div> */}
+          <div className="course-user-modal__header__avatar">
+            <img src={avatarImage} alt={course.title} />
+          </div>
+          {/* </div> */}
           <h2 className="course-user-modal__header__title">email</h2>
           <p className="course-user-modal__header__text">{email}</p>
         </div>
@@ -50,8 +54,23 @@ const CourseUserModal = ({ setOpen, email }) => {
                 <h2 className="course-user-modal__title__left-info-title">{course.title}</h2>
               </div>
             </div>
+            <div className="course-user-modal__progress">
+              <div className="course-user-modal__progress__circle">
+                <CircularProgressbar
+                  value={percentage}
+                  strokeWidth={50}
+                  styles={buildStyles({
+                    textColor: '#1C1C1E',
+                    strokeLinecap: 'butt',
+                    pathColor: '#ADFA00',
+                    trailColor: '#F2F2F7',
+                  })}
+                />
+              </div>
+              <h4 className="course-user-modal__progress__text">{percentage}%</h4>
+            </div>
             <MainButton
-              className="WhiteButton"
+              className=" course-user-modal__title__button WhiteButton"
               type="button"
               onClick={onShowMoreBtn}
               text={
@@ -71,7 +90,7 @@ const CourseUserModal = ({ setOpen, email }) => {
         </div>
         {showMore && (
           <div className="course-user-modal__tests">
-            <h2 className="course-user-modal__test__title">Программа курса</h2>
+            <h2 className="course-user-modal__test__title">Прогресс студента</h2>
           </div>
         )}
       </Modal>
