@@ -67,7 +67,7 @@ export function* editLesson({ payload }) {
     yield put(hideLoading())
     yield put(fetchLessonRequest(contentId))
 
-    yield Swal.fire({
+    yield Toast.fire({
       title: 'Занятие успешно изменено',
     })
   } catch (e) {
@@ -86,7 +86,7 @@ export function* deleteLesson({ payload }) {
     yield put(hideLoading())
     yield put(historyPush(`/course/${courseId}/edit`))
 
-    yield Swal.fire({
+    yield Toast.fire({
       title: 'Занятие успешно удалено',
     })
   } catch (e) {
