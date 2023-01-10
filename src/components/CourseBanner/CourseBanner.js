@@ -36,7 +36,7 @@ const CourseBanner = ({ course, accessCheck }) => {
             to={
               location.pathname !== `/course/${course._id}`
                 ? `/course/${course._id}`
-                : `${user.role === 'admin' ? '/admin_panel' : `/user/${accessCheck() ? 'teacher_mode' : 'courses'}`}`
+                : `${user.role === 'admin' ? '/admin_panel' : `/user/${accessCheck ? 'teacher_mode' : 'courses'}`}`
             }
             className="course-banner__course-button"
           >
