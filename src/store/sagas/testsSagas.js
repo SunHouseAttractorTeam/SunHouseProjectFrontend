@@ -22,6 +22,14 @@ import {
 import { fetchCourseRequest } from '../actions/coursesActions'
 import { historyPush } from '../actions/historyActions'
 
+const Toast = Swal.mixin({
+  toast: true,
+  icon: 'success',
+  timer: 3000,
+  timerProgressBar: true,
+  showConfirmButton: false,
+})
+
 export function* fetchTest({ payload: id }) {
   try {
     yield put(showLoading())
@@ -44,13 +52,8 @@ export function* createTest({ payload }) {
     yield put(hideLoading())
     yield put(historyPush(`/course/${courseId}/edit/test/${response.data._id}`))
 
-    yield Swal.fire({
-      toast: true,
-      icon: 'success',
+    yield Toast.fire({
       title: 'Тест успешно создан',
-      timer: 3000,
-      timerProgressBar: true,
-      showConfirmButton: false,
     })
   } catch (e) {
     yield put(createTestFailure(e))
@@ -66,13 +69,8 @@ export function* editTest({ payload }) {
     yield put(fetchTestRequest(contentId))
     yield put(hideLoading())
 
-    yield Swal.fire({
-      toast: true,
-      icon: 'success',
+    yield Toast.fire({
       title: 'Тест успешно изменен',
-      timer: 3000,
-      timerProgressBar: true,
-      showConfirmButton: false,
     })
   } catch (e) {
     yield put(editTestFailure(e))
@@ -104,12 +102,7 @@ export function* deleteTest({ payload }) {
     yield put(historyPush(`/course/${courseId}/edit`))
 
     yield Swal.fire({
-      toast: true,
-      icon: 'success',
       title: 'Тест успешно удален',
-      timer: 3000,
-      timerProgressBar: true,
-      showConfirmButton: false,
     })
   } catch (e) {
     yield put(deleteTestFailure(e))
