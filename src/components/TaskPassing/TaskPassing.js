@@ -1,36 +1,39 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchTaskRequest } from '../../store/actions/tasksActions'
+import './TaskPassing.scss'
+import PassingBlock from '../PassingBlock/PassingBlock'
+import FilesUploader from '../FilesUploader/FilesUploader'
 
 const TaskPassing = () => {
   const dispatch = useDispatch()
-  const { lessonId } = useParams()
+  const { taskId } = useParams()
   const task = useSelector(state => state.tasks.task)
-
+  const [lastFile, setLastFile] = useState('')
   useEffect(() => {
-    dispatch(fetchTaskRequest(lessonId))
-  }, [dispatch, lessonId])
+    dispatch(fetchTaskRequest(taskId))
+  }, [dispatch, taskId])
 
+  const lastFileChangeHandler = e => {
+    const file = e.target.files[0]
+    setLastFile(file)
+  }
+  const sendHomework = () => {
+    console.log(lastFile)
+  }
   return (
     task && (
-      <div>
-        <h3>{task.title}</h3>
-        {task.data.map((content, index) => {
-          switch (Object.keys(content)[0]) {
-            case 'text':
-              // eslint-disable-next-line react/no-danger
-              return <div key={`${index}textDW`} dangerouslySetInnerHTML={{ __html: task.data[0].text }} />
-            case 'video':
-              return <p key={`${index}textDW`}>Тут будет ВИДЕО</p>
-            case 'audio':
-              return <p key={`${index}textDW`}>Тут будет АУДИО</p>
-            default:
-              return null
-          }
-        })}
-        {task.file && <p>Тут будет файл</p>}
-      </div>
+      <>
+        <PassingBlock event={task} />
+        <div className="homework">
+          <p className="homework_title">Загрузите задание</p>
+          <FilesUploader type="file" onChange={lastFileChangeHandler} />
+          <button className="download" style={{ marginTop: '30px' }} onClick={sendHomework}>
+            Отправить задание
+          </button>
+        </div>
+      </>
     )
   )
 }

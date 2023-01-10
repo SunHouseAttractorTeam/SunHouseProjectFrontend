@@ -95,8 +95,8 @@ const CoursePassing = () => {
               <div className="course-passing__right">
                 <Switch>
                   <Route path="/course/:courseId/lesson/:lessonId" component={LessonPassing} />
-                  <Route path="/course/:courseId/task/:lessonId" component={TaskPassing} />
-                  <Route path="/course/:courseId/test/:lessonId" component={TestPassing} />
+                  <Route path="/course/:courseId/task/:taskId" component={TaskPassing} />
+                  <Route path="/course/:courseId/test/:testId" component={TestPassing} />
                 </Switch>
                 <div className="course-passing__controls">
                   <button disabled={disabledWord === 'previous'} onClick={previousEvent} type="button">

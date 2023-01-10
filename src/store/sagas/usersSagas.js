@@ -65,7 +65,7 @@ export function* registrationUserSaga({ payload: userData }) {
 
 export function* loginUserSaga({ payload: userData }) {
   try {
-    const response = yield axiosApi.post('/users/sessions', userData)
+    const response = yield axiosApi.post('/users/sessions?path=login', userData)
     yield put(loginUserSuccess(response.data))
     if (userData) {
       yield put(historyPush('/'))
