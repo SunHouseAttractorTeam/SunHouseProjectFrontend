@@ -78,9 +78,9 @@ export function* loginUserSaga({ payload }) {
     const response = yield axiosApi.post(`/users/sessions?path=${payload.path}`, payload.userData)
     yield put(loginUserSuccess(response.data))
     yield put(hideLoading())
-    if (payload.userData) {
-      yield put(historyPush('/'))
-    }
+    // if (payload.userData) {
+    //   yield put(historyPush('/'))
+    // }
     yield Swal.fire({
       toast: true,
       icon: 'success',
