@@ -28,7 +28,7 @@ const CourseTitle = ({ courseId, title, image, description, accessCheck }) => {
               <p className="course-title__left-info-description">{description}</p>
             </div>
           </div>
-          {accessCheck && accessCheck() && (
+          {accessCheck && (
             <Link to={`/course/${courseId}/settings`} className="course-title__settings-button">
               <MainButton
                 className="WhiteButton"
