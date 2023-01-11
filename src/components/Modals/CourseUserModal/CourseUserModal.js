@@ -14,16 +14,49 @@ const CourseUserModal = ({ setOpen, user }) => {
   const dispatch = useDispatch()
   const course = useSelector(state => state.courses.course)
   const userGeneral = useSelector(state => state.courses.user)
+  const [showMore, setShowMore] = useState(false)
+  const [counts, setCounts] = useState({
+    testCounts: 0,
+    userPassed: 0,
+  })
   let avatarImage = avatarStub
   let userAvatar = avatarStub
-  const [showMore, setShowMore] = useState(false)
-  const percentage = 66
 
   useEffect(() => {
     dispatch(getUserRequest({ courseId: course._id, userId: user._id }))
   }, [user, dispatch])
 
-  const handlerClick = e => {
+  useEffect(() => {
+    // eslint-disable-next-line no-unused-expressions
+    course &&
+      course.modules &&
+      course.modules.length !== 0 &&
+      course.modules.forEach(module => {
+        if (module.data.length !== 0) {
+          module.data.forEach(content => {
+            if (content.type === 'test') {
+              setCounts(prev => ({
+                ...prev,
+                testCounts: counts.testCounts + 1,
+              }))
+            }
+          })
+        }
+      })
+  }, [course])
+
+  useEffect(() => {
+    // eslint-disable-next-line no-unused-expressions
+    user &&
+      user.tests &&
+      user.tests.length !== 0 &&
+      setCounts(prev => ({
+        ...prev,
+        userPassed: counts.userPassed + 1,
+      }))
+  }, [user])
+
+  const handlerClick = () => {
     setOpen(false)
   }
   const onShowMoreBtn = () => {
@@ -93,7 +126,7 @@ const CourseUserModal = ({ setOpen, user }) => {
                     })}
                   />
                 </div>
-                <h4 className="course-user-modal__progress__text">{userGeneral.coursePercent}%</h4>
+                <h4 className="course-user-modal__progress__text">{`${counts.userPassed}/${counts.testCounts}`}</h4>
               </div>
               <MainButton
                 className=" course-user-modal__title__button WhiteButton"
