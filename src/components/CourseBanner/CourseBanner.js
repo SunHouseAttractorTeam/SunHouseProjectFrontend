@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import banner from '../../assets/images/banner.svg'
 import MainButton from '../UI/MainButton/MainButton'
 import './CourseBanner.scss'
 import { editCourseHeaderImageRequest } from '../../store/actions/coursesActions'
 import { apiUrl } from '../../config'
 
-const CourseBanner = ({ course, handleSave, teacherCheck }) => {
+const CourseBanner = ({ course, teacherCheck }) => {
   const location = useLocation()
   const dispatch = useDispatch()
   const user = useSelector(state => state.users.user)
