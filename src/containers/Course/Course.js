@@ -28,7 +28,7 @@ const Course = () => {
   }, [dispatch, id, user])
 
   const accessCheck = course?.teachers.includes(user._id)
-  
+
   return (
     <>
       {course && (
