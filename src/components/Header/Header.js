@@ -27,7 +27,7 @@ const Header = () => {
         <Nav user={user} />
 
         {!user ? (
-          <MainButton className="header_MainButton" onClick={onHeaderButton} text="Войти" />
+          <MainButton className="header_MainButton GreenButton" onClick={onHeaderButton} text="Войти" />
         ) : (
           <UserMenu user={user} />
         )}

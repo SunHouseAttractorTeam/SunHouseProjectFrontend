@@ -8,8 +8,11 @@ import modulesSagas from './sagas/modulesSagas'
 import tasksSagas from './sagas/tasksSagas'
 import lessonsSagas from './sagas/lessonsSagas'
 import testsSagas from './sagas/testsSagas'
+import descriptionsSagas from './sagas/descriptionsSagas'
 import notificationsSagas from './sagas/notificationSagas'
 import lendingReviewsSagas from './sagas/lendingReviewsSagas'
+import visibilitySlice from './slices/visibilitySlice'
+import visibilitySagas from './sagas/visibilitySagas'
 
 export default function* rootSagas() {
   yield all([
@@ -22,6 +25,8 @@ export default function* rootSagas() {
     ...testsSagas,
     ...notificationsSagas,
     ...lendingReviewsSagas,
+    ...descriptionsSagas,
+    ...visibilitySagas,
     ...historySagas(history),
   ])
 }

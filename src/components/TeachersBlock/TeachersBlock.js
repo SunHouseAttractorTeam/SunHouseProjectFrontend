@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import TeacherCard from './TeacherCard/TeacherCard'
 import CustomSlider from '../UI/CustomSlider/CustomSlider'
 import './TeachersBlock.scss'
 import teacher_1 from '../../assets/icons/teacher_1.svg'
 import teacher_2 from '../../assets/icons/teacher_2.svg'
 import teacher_3 from '../../assets/icons/teacher_3.svg'
+import Paragraph from '../Paragraph/Paragraph'
+import Modal from '../UI/Modal2/Modal'
+import { updateDescriptionRequest } from '../../store/actions/descriptionsActions'
 
 const sliderSettings = [
   {
@@ -33,16 +37,78 @@ const sliderSettings = [
     },
   },
 ]
-const TeachersBlock = () => (
-  <>
+const TeachersBlock = ({ title, subtitle, teacherCheck, section }) => {
+  const dispatch = useDispatch()
+  const [open, setOpen] = useState(false)
+  const [description, setDescription] = useState({
+    gmail: '',
+    name: '',
+  })
+
+  const handlerClick = () => {
+    setOpen(true)
+  }
+
+  const updateDescription = e => {
+    e.preventDefault()
+    if (!section) {
+      setOpen(false)
+      return
+    }
+    dispatch(
+      updateDescriptionRequest({
+        section,
+        text: description,
+      }),
+    )
+    setOpen(false)
+  }
+
+  const inputChangeHandler = e => {
+    const { name, value } = e.target
+    setDescription(prev => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
+
+  return (
     <div className="teachers_block">
-      <div className="container">
-        <div className="teachers_block_headline">
-          <div className="teachers_block_text">
-            <h5 className="teachers_block_title">Преподаватели — практикующие эксперты</h5>
-            <span className="teachers_block_subtitle">Доверьте свое обучение специалистам</span>
-          </div>
-        </div>
+      <div className="teachers_block_headline">
+        <Paragraph title={title} subtitle={subtitle} section="teachersBlock" teacherCheck={teacherCheck} />
+      </div>
+      {teacherCheck && teacherCheck() ? (
+        <>
+          <button type="button" className="teachers_block__btn-plus" onClick={handlerClick}>
+            +
+          </button>
+          {open && (
+            <Modal setOpen={setOpen}>
+              <form onSubmit={updateDescription}>
+                <div className="block__modal">
+                  <input
+                    className="block__add-description"
+                    name="gmail"
+                    value={description.gmail}
+                    onChange={inputChangeHandler}
+                    placeholder="Введите почту..."
+                  />
+                  <input
+                    className="block__add-description"
+                    name="name"
+                    value={description.name}
+                    onChange={inputChangeHandler}
+                    placeholder="Введите описание..."
+                  />
+                  <button className="block__modal-btn" type="submit">
+                    Сохранить
+                  </button>
+                </div>
+              </form>
+            </Modal>
+          )}
+        </>
+      ) : (
         <CustomSlider response={sliderSettings}>
           <TeacherCard
             image={teacher_1}
@@ -60,9 +126,9 @@ const TeachersBlock = () => (
             description="Руководитель правовой практики в сфере ПО, технологий, сделок с брендом и данными ЯНДЕКС"
           />
         </CustomSlider>
-      </div>
+      )}
     </div>
-  </>
-)
+  )
+}
 
 export default TeachersBlock
