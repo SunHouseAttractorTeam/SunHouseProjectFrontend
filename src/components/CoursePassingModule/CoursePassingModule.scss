@@ -2,7 +2,7 @@
 
 .course-modules {
   &-block {
-    padding: 24px;
+    padding: 24px 24px 0 24px;
     background: $totalWhiteColor;
     border-radius: 16px;
     margin-bottom: 32px;
@@ -17,6 +17,7 @@
     &__header {
       display: flex;
       align-items: center;
+      cursor: pointer;
       margin-inline: -24px;
       padding: 0 0 25px 24px;
       border-bottom: 2px solid $greyColor;
@@ -27,6 +28,7 @@
       font-weight: 700;
       line-height: 30px;
       margin-left: 20px;
+      padding-right: 30%;
     }
 
     &__items {

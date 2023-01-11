@@ -36,7 +36,7 @@ const PassingBlock = ({ event }) => {
               )
             case 'video':
               // eslint-disable-next-line no-case-declarations
-              const link = content.video.replace('watch?v=', 'embed/')
+              const link = content.video.replace('.com/watch?v=', '-nocookie.com/embed/')
               return (
                 <iframe
                   key={index}
