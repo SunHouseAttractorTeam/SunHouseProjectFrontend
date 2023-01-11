@@ -1,0 +1,74 @@
+@import '../../scss/style';
+
+.course-modules {
+  &-block {
+    padding: 24px;
+    background: $totalWhiteColor;
+    border-radius: 16px;
+    margin-bottom: 32px;
+
+    &__structure {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 30px;
+      margin-bottom: 32px;
+    }
+
+    &__header {
+      display: flex;
+      align-items: center;
+      margin-inline: -24px;
+      padding: 0 0 25px 24px;
+      border-bottom: 2px solid $greyColor;
+    }
+
+    &__title {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 30px;
+      margin-left: 20px;
+    }
+
+    &__items {
+      padding: 0;
+      margin: 35px 0 0;
+      list-style-type: none;
+    }
+
+    &__item {
+      display: flex;
+      align-items: flex-start;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+
+      &:not(:last-of-type) {
+        margin-bottom: 20px;
+      }
+
+      &-title {
+        flex-grow: 1;
+        display: flex;
+        flex-flow: row nowrap;
+        font-size: 16px;
+        line-height: 19px;
+        font-weight: 500;
+        color: $totalBlackColor;
+        text-decoration: none;
+        transition: all .3s ease;
+
+        &:hover {
+          text-decoration: underline;
+        }
+
+        i {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 24px;
+          height: 24px;
+          margin-right: 24px;
+        }
+      }
+    }
+  }
+}

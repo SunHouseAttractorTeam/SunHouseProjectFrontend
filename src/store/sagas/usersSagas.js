@@ -1,6 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import Cookies from 'js-cookie'
-import { toast } from 'react-toastify'
 import Swal from 'sweetalert2'
 import { hideLoading, showLoading } from 'react-redux-loading-bar'
 import axiosApi from '../../axiosApi'
@@ -39,6 +38,13 @@ import {
   verifyUserSuccess,
 } from '../actions/usersActions'
 
+const Toast = Swal.mixin({
+  toast: true,
+  timer: 3000,
+  timerProgressBar: true,
+  showConfirmButton: false,
+})
+
 export function* getAllUsersSaga() {
   try {
     yield put(showLoading())
@@ -56,6 +62,7 @@ export function* registrationUserSaga({ payload: userData }) {
     const response = yield axiosApi.post('/users', userData)
     yield put(registrationSuccess(response.data))
     yield Swal.fire({
+      toast: false,
       icon: 'success',
       title: `На почту ${response.data.email} отправлено подтверждение`,
     })
@@ -63,10 +70,9 @@ export function* registrationUserSaga({ payload: userData }) {
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(registrationFailure(e.response.data))
-      yield Swal.fire({
+      yield Toast.fire({
         icon: 'error',
         title: 'Данный пользователь уже зарегистрирован',
-        showConfirmButton: false,
       })
     }
   }
@@ -75,27 +81,28 @@ export function* registrationUserSaga({ payload: userData }) {
 export function* loginUserSaga({ payload }) {
   try {
     yield put(showLoading())
-    const response = yield axiosApi.post(`/users/sessions?path=${payload.path}`, payload.userData)
+    let response
+    if (!payload) {
+      response = yield axiosApi.post(`/users/sessions`)
+    }
+    if (payload) {
+      response = yield axiosApi.post(`/users/sessions?path=${payload.path}`, payload.userData)
+    }
     yield put(loginUserSuccess(response.data))
     yield put(hideLoading())
     if (payload.userData) {
       yield put(historyPush('/'))
     }
-    yield Swal.fire({
-      toast: true,
+    yield Toast.fire({
       icon: 'success',
       title: 'Вы успешно вошли в свой аккаунт',
-      timer: 3000,
-      timerProgressBar: true,
-      showConfirmButton: false,
     })
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(loginUserFailure(e.response.data))
-      yield Swal.fire({
+      yield Toast.fire({
         icon: 'error',
         title: 'Введены неверные данные',
-        showConfirmButton: false,
       })
     }
   }
@@ -110,13 +117,9 @@ export function* logoutUserSaga() {
 
     yield put(historyPush('/'))
     yield Cookies.remove('jwt')
-    yield Swal.fire({
-      timer: 3000,
-      toast: true,
+    yield Toast.fire({
       icon: 'info',
       title: 'Вы вышли из своего аккаунта',
-      showConfirmButton: false,
-      timerProgressBar: true,
     })
   } catch (e) {}
 }
@@ -166,17 +169,12 @@ export function* forgotPasswordSaga({ payload: userData }) {
     const response = yield axiosApi.post('/users/forgot', userData)
     yield put(forgotPasswordSuccess(response.data))
     yield put(hideLoading())
+    yield Toast.fire({
+      icon: 'info',
+      title: response.data.message,
+    })
   } catch (e) {
     yield put(forgotPasswordFailure(e))
-    yield toast.error('error', {
-      position: 'top-right',
-      autoClose: 3500,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    })
   }
 }
 
@@ -199,21 +197,16 @@ export function* editUserProfileSaga({ payload: userData }) {
     const response = yield axiosApi.put('/users/edit', userData)
     yield put(editSuccess(response.data))
     yield put(hideLoading())
-    yield Swal.fire({
-      toast: true,
+    yield Toast.fire({
       icon: 'success',
-      title: 'Данные успешно сохранены!',
-      timer: 3000,
-      timerProgressBar: true,
-      showConfirmButton: false,
+      title: 'Данные успешно сохранены',
     })
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(editFailure(e.response.data))
-      yield Swal.fire({
+      yield Toast.fire({
         icon: 'error',
         title: e.response.data.error,
-        showConfirmButton: false,
       })
     }
   }
@@ -226,21 +219,16 @@ export function* editUserPasswordSaga({ payload: passwords }) {
     yield axiosApi.put('/users/edit_password', { password: passwords.password, newPassword: passwords.newPassword })
     yield put(passwordSuccess())
     yield put(hideLoading())
-    yield Swal.fire({
-      toast: true,
+    yield Toast.fire({
       icon: 'success',
-      title: 'Пароль успешно сменен!',
-      timer: 3000,
-      timerProgressBar: true,
-      showConfirmButton: false,
+      title: 'Пароль успешно изменен',
     })
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(passwordFailure(e.response.data))
-      yield Swal.fire({
+      yield Toast.fire({
         icon: 'error',
         title: e.response.data.error,
-        showConfirmButton: false,
       })
     }
   }

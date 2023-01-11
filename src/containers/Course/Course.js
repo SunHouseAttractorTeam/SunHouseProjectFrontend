@@ -31,7 +31,7 @@ const Course = () => {
     dispatch(updateCourseRequest({ courseData, id }))
   }
 
-  const teacherCheck = () => course.teachers.find(teacher => teacher === user?._id)
+  const teacherCheck = course?.teachers.includes(user._id)
 
   return (
     <>
@@ -43,9 +43,9 @@ const Course = () => {
             <Switch>
               <Route
                 path="/course/:id"
-                exact={!user?.myCourses.find(userCourse => userCourse.course === course._id)}
+                exact={!course.users.find(userId => userId === user._id)}
                 render={() =>
-                  user?.myCourses.find(userCourse => userCourse.course === course._id) ? (
+                    course.users.find(userId => userId === user._id) ? (
                     <CoursePassing />
                   ) : (
                     <CourseHomepage teacherCheck={teacherCheck} />
@@ -56,7 +56,6 @@ const Course = () => {
               <Route path="/course/:id/edit" component={CourseEdit} />
             </Switch>
           </div>
-          <div className="course container" />
           <Footer />
         </div>
       )}

@@ -36,7 +36,7 @@ const CourseBanner = ({ course, teacherCheck }) => {
             to={
               location.pathname !== `/course/${course._id}`
                 ? `/course/${course._id}`
-                : `${user.role === 'admin' ? '/admin_panel' : `/user/${teacherCheck() ? 'teacher_mode' : 'courses'}`}`
+                : `${user.role === 'admin' ? '/admin_panel' : `/user/${teacherCheck ? 'teacher_mode' : 'courses'}`}`
             }
             className="course-banner__course-button"
           >
@@ -54,7 +54,7 @@ const CourseBanner = ({ course, teacherCheck }) => {
       </div>
       <div className={`course-banner__image ${user?._id === course.user && 'course-banner__image--edit'}`}>
         <img src={image} alt={course.title} />
-        {teacherCheck() && (
+        {teacherCheck && (
           <>
             <i className="course-banner__image-add-icon">
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">

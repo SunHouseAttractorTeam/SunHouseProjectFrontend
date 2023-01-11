@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import ReactPlayer from 'react-player/youtube'
 import { useDispatch } from 'react-redux'
 import Swal from 'sweetalert2'
+import { Interweave } from 'interweave'
 import FilesUploader from '../FilesUploader/FilesUploader'
 import AddContentBlock from '../AddContentBlock/AddContentBlock'
 import SunEditorWYSIWYG from '../UI/SunEditorWYSIWYG/SunEditorWYSIWYG'
@@ -113,8 +114,10 @@ const ContentForm = ({ contentData, contentId, handleSave, error }) => {
     data.forEach(elem => {
       Object.keys(elem).forEach(key => {
         if (key === 'audio' && typeof elem[key] !== 'string') {
-          formData.append(key, elem[key])
+          return formData.append(key, elem[key])
         }
+
+        return null
       })
     })
     if (lastFile) {
@@ -173,11 +176,9 @@ const ContentForm = ({ contentData, contentId, handleSave, error }) => {
                   return (
                     <div key={`${index}textDW`}>
                       {preview ? (
-                        <div
-                          className="content-form__text"
-                          /* eslint-disable-next-line react/no-danger */
-                          dangerouslySetInnerHTML={{ __html: content.text }}
-                        />
+                        <div className="content-form__text">
+                          <Interweave content={content.text} />
+                        </div>
                       ) : (
                         <div className="content-form__editor content-form__item">
                           <SunEditorWYSIWYG setContents={content.text} onChange={e => inputChangeHandler(e, index)} />
