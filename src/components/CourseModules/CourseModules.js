@@ -89,7 +89,7 @@ const CourseModules = ({ id, course, handleAddContent, handleAddModule, accessCh
                     ) : null}
                     {item.title}
                   </Link>
-                  {accessCheck() && (
+                  {accessCheck && (
                     <div className="course-modules-block__item-actions">
                       <button
                         type="button"
