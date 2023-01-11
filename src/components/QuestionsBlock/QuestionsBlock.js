@@ -3,131 +3,69 @@ import './QuestionsBlock.scss'
 import FormInput from '../UI/Form/FormInput/FormInput'
 
 const QuestionsBlock = ({ question, indexQuestion, setQuestion }) => {
-  const inputChangeHandler = e => {
-    const { name, value } = e.target
+  const setState = (prev, name, value) => {
+    const copy = {
+      ...prev[indexQuestion],
+      [name]: value,
+    }
 
-    setQuestion(prev => {
-      const qCopy = {
-        ...prev[indexQuestion],
-        [name]: value,
+    return prev.map((q, i) => {
+      if (indexQuestion === i) {
+        return copy
       }
-
-      return prev.map((q, i) => {
-        if (indexQuestion === i) {
-          return qCopy
-        }
-
-        return q
-      })
+      return q
     })
   }
 
-  // const getFieldError = fieldName => {
-  //   try {
-  //     return error.errors[fieldName].message
-  //   } catch {
-  //     return undefined
-  //   }
-  // }
+  const setAnswersState = (prev, name, value, ind) => {
+    const copy = {
+      ...prev[indexQuestion].answers[ind],
+      [name]: value,
+    }
+
+    return prev[indexQuestion].answers.map((a, i) => {
+      if (ind === i) {
+        return copy
+      }
+      return a
+    })
+  }
+
+  const inputChangeHandler = e => {
+    const { name, value } = e.target
+    setQuestion(prev => setState(prev, [name], value))
+  }
 
   const removeQuestion = () => {
     setQuestion(prev => prev.filter(q => q !== question))
   }
 
   const addAnswer = () => {
-    setQuestion(prev => {
-      const qCopy = {
-        ...prev[indexQuestion],
-        answers: [...prev[indexQuestion].answers, { title: '', status: false }],
-      }
-
-      return prev.map((q, i) => {
-        if (indexQuestion === i) {
-          return qCopy
-        }
-
-        return q
-      })
-    })
+    setQuestion(prev => setState(prev, 'answers', [...prev[indexQuestion].answers, { title: '', status: false }]))
   }
 
   const inputChangeAnswerHandler = (e, ind) => {
     const { name, value } = e.target
 
     setQuestion(prev => {
-      const ansCopy = {
-        ...prev[indexQuestion].answers[ind],
-        [name]: value,
-      }
-
-      const answersCopy = prev[indexQuestion].answers.map((a, i) => {
-        if (ind === i) {
-          return ansCopy
-        }
-
-        return a
-      })
-
-      const qCopy = {
-        ...prev[indexQuestion],
-        answers: answersCopy,
-      }
-
-      return prev.map((q, i) => {
-        if (indexQuestion === i) {
-          return qCopy
-        }
-
-        return q
-      })
+      const answersCopy = setAnswersState(prev, [name], value, ind)
+      return setState(prev, 'answers', answersCopy)
     })
   }
 
   const inputChangeAnswerStatusHandler = (e, ind) => {
     setQuestion(prev => {
-      const ansCopy = {
-        ...prev[indexQuestion].answers[ind],
-        status: !prev[indexQuestion].answers[ind].status,
-      }
-
-      const answersCopy = prev[indexQuestion].answers.map((a, i) => {
-        if (ind === i) {
-          return ansCopy
-        }
-
-        return a
-      })
-
-      const qCopy = {
-        ...prev[indexQuestion],
-        answers: answersCopy,
-      }
-
-      return prev.map((q, i) => {
-        if (indexQuestion === i) {
-          return qCopy
-        }
-
-        return q
-      })
+      const answersCopy = setAnswersState(prev, 'status', !prev[indexQuestion].answers[ind].status, ind)
+      return setState(prev, 'answers', answersCopy)
     })
   }
 
   const inputRemoveAnswersHandler = ind => {
-    setQuestion(prev => {
-      const qCopy = {
-        ...prev[indexQuestion],
-        answers: [...prev[indexQuestion].answers.filter(ans => ans !== prev[indexQuestion].answers[ind])],
-      }
-
-      return prev.map((q, i) => {
-        if (indexQuestion === i) {
-          return qCopy
-        }
-
-        return q
-      })
-    })
+    setQuestion(prev =>
+      setState(prev, 'answers', [
+        ...prev[indexQuestion].answers.filter(ans => ans !== prev[indexQuestion].answers[ind]),
+      ]),
+    )
   }
 
   return (
@@ -165,9 +103,6 @@ const QuestionsBlock = ({ question, indexQuestion, setQuestion }) => {
           // error={getFieldError('title')}
           className="question-block__input border-style"
         />
-        <button type="button" className="question-block__add-description">
-          + добавить описание
-        </button>
         <p className="question-block__title">Добавьте варианты ответов:</p>
         <div className="question-block__answers">
           {question.answers.map((ans, ind) => (

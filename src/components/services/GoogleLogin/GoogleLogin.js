@@ -1,15 +1,15 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { LoginSocialGoogle } from 'reactjs-social-login'
-import { googleLoginRequest } from '../../../store/actions/usersActions'
+import { loginUserRequest } from '../../../store/actions/usersActions'
 import googleicon from '../../../assets/icons/google.svg'
-import './GoogleLogin.scss'
 import { GoogleAppId } from '../../../config'
+import './GoogleLogin.scss'
 
 const GoogleLogin = () => {
   const dispatch = useDispatch()
 
-  const googleResponse = response => dispatch(googleLoginRequest(response))
+  const googleResponse = response => dispatch(loginUserRequest({ path: 'googleLogin', userData: response }))
 
   return (
     <LoginSocialGoogle

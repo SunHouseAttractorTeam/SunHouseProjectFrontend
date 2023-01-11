@@ -2,25 +2,20 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import FormInput from '../../../../components/UI/Form/FormInput/FormInput'
-import { inputChangeHandler } from '../../../../components/UI/Form/Handlers/Handlers'
 import { deleteCourseRequest } from '../../../../store/actions/coursesActions'
 import Switcher from '../../../../components/UI/Switcher/Switcher'
 import Modal from '../../../../components/UI/Modal2/Modal'
 import Card from '../../../../components/UI/Cards/Card/Card'
 import { historyPush } from '../../../../store/actions/historyActions'
 import './CourseSettingsLeft.scss'
+import { inputChangeHandler } from '../../../../components/UI/Form/Handlers/Handlers'
 
 const CourseSettingsLeft = ({ course, setCourse }) => {
   const dispatch = useDispatch()
   const { id } = useParams()
   const [open, setOpen] = useState(false)
-  const [state, setState] = useState({
-    title: course?.title,
-    description: course?.description,
-  })
 
   const changeInputState = e => {
-    inputChangeHandler(e, setState)
     inputChangeHandler(e, setCourse)
   }
 
@@ -28,6 +23,7 @@ const CourseSettingsLeft = ({ course, setCourse }) => {
     dispatch(deleteCourseRequest(id))
     dispatch(historyPush('/user/courses'))
   }
+
   return (
     <div className="block-form">
       <form className="course-settings__right-form">
@@ -38,7 +34,7 @@ const CourseSettingsLeft = ({ course, setCourse }) => {
               onChange={changeInputState}
               name="title"
               placeholder="Введите название"
-              value={state.title}
+              value={course.title}
               className="block-form__input-block_input"
             />
             <span className="block-form__input-block_label">Описание курса</span>
@@ -46,7 +42,7 @@ const CourseSettingsLeft = ({ course, setCourse }) => {
               onChange={changeInputState}
               name="description"
               placeholder="Введите описание"
-              value={state.description}
+              value={course.description}
               className="block-form__input-block_input"
             />
           </div>
@@ -55,7 +51,7 @@ const CourseSettingsLeft = ({ course, setCourse }) => {
               <span className="block-form__input-block_label">Статус курса</span>
               <div className="block-form__nav-block_item-mini">
                 <span className="block-form__nav-block_item-mini_label">
-                  {course.private ? 'Открытый курс' : 'Закрытый курс'}
+                  {course?.private ? 'Открытый курс' : 'Закрытый курс'}
                 </span>
                 <Switcher onChange={changeInputState} value={course.private} />
               </div>

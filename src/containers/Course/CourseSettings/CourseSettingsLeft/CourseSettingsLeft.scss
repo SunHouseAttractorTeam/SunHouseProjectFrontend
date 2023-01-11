@@ -1,3 +1,5 @@
+@import '../../../../scss/style';
+
 .block-form {
   background: #FFFFFF;
   border-radius: 16px;
@@ -6,7 +8,7 @@
   &__input-block {
     display: flex;
     flex-direction: column;
-    padding: 24px 0 0 20px;
+    padding: 24px 20px;
 
     &_label {
       font-weight: 500;
@@ -52,6 +54,11 @@
       border: none;
       color: #FFFFFF;
       cursor: pointer;
+      transition: all 0.3s;
+
+      &:hover {
+        background: $totalRedColor;
+      }
     }
   }
 

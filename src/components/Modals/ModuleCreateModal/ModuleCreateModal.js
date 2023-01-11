@@ -32,14 +32,12 @@ const ModuleCreateModal = ({ setOpen, id, error }) => {
               className="inputModal"
               error={getFieldError(error, 'title')}
             />
-            <div className="content__test__button-block">
-              <MainButton
-                className="GreenButton content__module__button"
-                text="Создать модуль"
-                onClick={e => handlerClick(e)}
-                type="submit"
-              />
-            </div>
+            <MainButton
+              className="GreenButton content__module__button"
+              text="Создать модуль"
+              onClick={e => handlerClick(e)}
+              type="submit"
+            />
           </form>
         </div>
       </div>

@@ -1,3 +1,6 @@
+@import '../../../scss/style';
+
+
 .content {
   display: flex;
   flex-direction: column;
@@ -17,23 +20,12 @@
     gap: 50px;
   }
 
-  &__btn {
-    background-color: #F2F2F7;
-    border: 3px solid transparent;
-
-    &:hover {
-      border: 3px solid #F2F2F7;
-      background-color: white;
-    }
+  &__btn:hover {
+    background-color: $whiteBorderColor;
   }
 
-  &__btn-two {
-    border: 3px solid transparent;
-
-    &:hover {
-      border: 3px solid #ADFA00;
-      background-color: white;
-    }
+  &__btn-two:hover {
+    background: $whiteBorderColor;
   }
 
   &__text {

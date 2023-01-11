@@ -1,6 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import Cookies from 'js-cookie'
-import { toast } from 'react-toastify'
 import Swal from 'sweetalert2'
 import { hideLoading, showLoading } from 'react-redux-loading-bar'
 import axiosApi from '../../axiosApi'
@@ -12,22 +11,22 @@ import {
   deleteUserFailure,
   deleteUserRequest,
   deleteUserSuccess,
-  facebookLoginFailure,
-  facebookLoginRequest,
-  facebookLoginSuccess,
+  editFailure,
+  editRequest,
+  editSuccess,
   forgotPasswordFailure,
   forgotPasswordRequest,
   forgotPasswordSuccess,
   getAllUsersFailure,
   getAllUsersRequest,
   getAllUsersSuccess,
-  googleLoginFailure,
-  googleLoginRequest,
-  googleLoginSuccess,
   loginUserFailure,
   loginUserRequest,
   loginUserSuccess,
   logoutUser,
+  passwordFailure,
+  passwordRequest,
+  passwordSuccess,
   registrationFailure,
   registrationRequest,
   registrationSuccess,
@@ -37,10 +36,14 @@ import {
   verifyUserFailure,
   verifyUserRequest,
   verifyUserSuccess,
-  vkLoginFailure,
-  vkLoginRequest,
-  vkLoginSuccess,
 } from '../actions/usersActions'
+
+const Toast = Swal.mixin({
+  toast: true,
+  timer: 3000,
+  timerProgressBar: true,
+  showConfirmButton: false,
+})
 
 export function* getAllUsersSaga() {
   try {
@@ -59,6 +62,7 @@ export function* registrationUserSaga({ payload: userData }) {
     const response = yield axiosApi.post('/users', userData)
     yield put(registrationSuccess(response.data))
     yield Swal.fire({
+      toast: false,
       icon: 'success',
       title: `На почту ${response.data.email} отправлено подтверждение`,
     })
@@ -66,86 +70,40 @@ export function* registrationUserSaga({ payload: userData }) {
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(registrationFailure(e.response.data))
-      yield Swal.fire({
+      yield Toast.fire({
         icon: 'error',
         title: 'Данный пользователь уже зарегистрирован',
-        showConfirmButton: false,
       })
     }
   }
 }
 
-export function* loginUserSaga({ payload: userData }) {
+export function* loginUserSaga({ payload }) {
   try {
     yield put(showLoading())
-    const response = yield axiosApi.post('/users/sessions', userData)
+    let response
+    if (!payload) {
+      response = yield axiosApi.post(`/users/sessions`)
+    }
+    if (payload) {
+      response = yield axiosApi.post(`/users/sessions?path=${payload.path}`, payload.userData)
+    }
     yield put(loginUserSuccess(response.data))
     yield put(hideLoading())
-    if (userData) {
+    if (payload.userData) {
       yield put(historyPush('/'))
     }
-    yield Swal.fire({
-      toast: true,
+    yield Toast.fire({
       icon: 'success',
       title: 'Вы успешно вошли в свой аккаунт',
-      timer: 3000,
-      timerProgressBar: true,
-      showConfirmButton: false,
     })
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(loginUserFailure(e.response.data))
-      yield Swal.fire({
+      yield Toast.fire({
         icon: 'error',
         title: 'Введены неверные данные',
-        showConfirmButton: false,
       })
-    }
-  }
-}
-
-export function* facebookLoginSaga({ payload: userData }) {
-  try {
-    yield put(showLoading())
-
-    const response = yield axiosApi.post('/users/facebookLogin/', userData)
-    yield put(facebookLoginSuccess(response.data))
-    yield put(hideLoading())
-    yield put(historyPush('/'))
-  } catch (e) {
-    if (e.response && e.response.data) {
-      yield put(facebookLoginFailure(e.response.data))
-    }
-  }
-}
-
-export function* googleLoginSaga({ payload: userData }) {
-  try {
-    yield put(showLoading())
-
-    const response = yield axiosApi.post('/users/googleLogin/', userData)
-    yield put(googleLoginSuccess(response.data))
-    yield put(hideLoading())
-    yield put(historyPush('/'))
-  } catch (e) {
-    if (e.response && e.response.data) {
-      yield put(googleLoginFailure(e.response.data))
-    }
-  }
-}
-
-export function* vkLoginSaga({ payload: userData }) {
-  try {
-    yield put(showLoading())
-
-    const response = yield axiosApi.post('/users/vkLogin/', userData)
-    yield put(vkLoginSuccess(response.data))
-    yield put(hideLoading())
-
-    yield put(historyPush('/'))
-  } catch (e) {
-    if (e.response && e.response.data) {
-      yield put(vkLoginFailure(e.response.data))
     }
   }
 }
@@ -159,13 +117,9 @@ export function* logoutUserSaga() {
 
     yield put(historyPush('/'))
     yield Cookies.remove('jwt')
-    yield Swal.fire({
-      timer: 3000,
-      toast: true,
+    yield Toast.fire({
       icon: 'info',
       title: 'Вы вышли из своего аккаунта',
-      showConfirmButton: false,
-      timerProgressBar: true,
     })
   } catch (e) {}
 }
@@ -215,17 +169,12 @@ export function* forgotPasswordSaga({ payload: userData }) {
     const response = yield axiosApi.post('/users/forgot', userData)
     yield put(forgotPasswordSuccess(response.data))
     yield put(hideLoading())
+    yield Toast.fire({
+      icon: 'info',
+      title: response.data.message,
+    })
   } catch (e) {
     yield put(forgotPasswordFailure(e))
-    yield toast.error('error', {
-      position: 'top-right',
-      autoClose: 3500,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    })
   }
 }
 
@@ -241,19 +190,62 @@ export function* resetPasswordSaga({ payload: hash }) {
   }
 }
 
+export function* editUserProfileSaga({ payload: userData }) {
+  try {
+    yield put(showLoading())
+
+    const response = yield axiosApi.put('/users/edit', userData)
+    yield put(editSuccess(response.data))
+    yield put(hideLoading())
+    yield Toast.fire({
+      icon: 'success',
+      title: 'Данные успешно сохранены',
+    })
+  } catch (e) {
+    if (e.response && e.response.data) {
+      yield put(editFailure(e.response.data))
+      yield Toast.fire({
+        icon: 'error',
+        title: e.response.data.error,
+      })
+    }
+  }
+}
+
+export function* editUserPasswordSaga({ payload: passwords }) {
+  try {
+    yield put(showLoading())
+
+    yield axiosApi.put('/users/edit_password', { password: passwords.password, newPassword: passwords.newPassword })
+    yield put(passwordSuccess())
+    yield put(hideLoading())
+    yield Toast.fire({
+      icon: 'success',
+      title: 'Пароль успешно изменен',
+    })
+  } catch (e) {
+    if (e.response && e.response.data) {
+      yield put(passwordFailure(e.response.data))
+      yield Toast.fire({
+        icon: 'error',
+        title: e.response.data.error,
+      })
+    }
+  }
+}
+
 const userSagas = [
+  takeEvery(loginUserRequest, loginUserSaga),
   takeEvery(banUnbanRequest, banUnbanSaga),
   takeEvery(deleteUserRequest, deleteUserSaga),
   takeEvery(getAllUsersRequest, getAllUsersSaga),
   takeEvery(registrationRequest, registrationUserSaga),
-  takeEvery(loginUserRequest, loginUserSaga),
   takeEvery(logoutUser, logoutUserSaga),
-  takeEvery(facebookLoginRequest, facebookLoginSaga),
-  takeEvery(googleLoginRequest, googleLoginSaga),
-  takeEvery(vkLoginRequest, vkLoginSaga),
   takeEvery(verifyUserRequest, verifyUserSaga),
   takeEvery(forgotPasswordRequest, forgotPasswordSaga),
   takeEvery(resetPasswordRequest, resetPasswordSaga),
+  takeEvery(editRequest, editUserProfileSaga),
+  takeEvery(passwordRequest, editUserPasswordSaga),
 ]
 
 export default userSagas

@@ -2,13 +2,14 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import MainButton from '../UI/MainButton/MainButton'
 import avatarStub from '../../assets/icons/avatarStub.svg'
+import { apiUrl } from '../../config'
 import './CourseTitle.scss'
 
-const CourseTitle = ({ courseId, title, avatar, description, accessCheck }) => {
+const CourseTitle = ({ courseId, title, description, teacherCheck, image }) => {
   let avatarImage = avatarStub
 
-  if (avatar) {
-    avatarImage = avatar
+  if (image && image !== 'undefined') {
+    avatarImage = `${apiUrl}/${image}`
   }
 
   return (
@@ -16,15 +17,17 @@ const CourseTitle = ({ courseId, title, avatar, description, accessCheck }) => {
       <div className="container">
         <div className="course-title__inner">
           <div className="course-title__left">
-            <div className="course-title__left-image">
-              <img src={avatarImage} alt={title} />
+            <div>
+              <div className="course-title__left-image">
+                <img src={avatarImage} alt={title} />
+              </div>
             </div>
             <div className="course-title__left-info">
               <h2 className="course-title__left-info-title">{title}</h2>
               <p className="course-title__left-info-description">{description}</p>
             </div>
           </div>
-          {accessCheck && accessCheck() && (
+          {teacherCheck && teacherCheck() && (
             <Link to={`/course/${courseId}/settings`} className="course-title__settings-button">
               <MainButton
                 className="WhiteButton"

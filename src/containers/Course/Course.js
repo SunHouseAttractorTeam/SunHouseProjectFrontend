@@ -31,24 +31,24 @@ const Course = () => {
     dispatch(updateCourseRequest({ courseData, id }))
   }
 
-  const accessCheck = () => course.teachers.find(teacher => teacher === user?._id)
+  const teacherCheck = course?.teachers.includes(user._id)
 
   return (
     <>
       {course && (
         <div className="course">
           <Header2 />
-          <CourseBanner course={course} handleSave={handleSave} accessCheck={accessCheck} />
+          <CourseBanner course={course} user={user?._id} handleSave={handleSave} teacherCheck={teacherCheck} />
           <div className="course__bottom">
             <Switch>
               <Route
                 path="/course/:id"
-                exact={!user?.myCourses.find(userCourse => userCourse.course === course._id)}
+                exact={!course.users.find(userId => userId === user._id)}
                 render={() =>
-                  user?.myCourses.find(userCourse => userCourse.course === course._id) ? (
+                    course.users.find(userId => userId === user._id) ? (
                     <CoursePassing />
                   ) : (
-                    <CourseHomepage accessCheck={accessCheck} />
+                    <CourseHomepage teacherCheck={teacherCheck} />
                   )
                 }
               />

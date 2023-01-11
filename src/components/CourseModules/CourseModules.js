@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { deleteLessonRequest } from '../../store/actions/lessonsActions'
 import { deleteTaskRequest } from '../../store/actions/tasksActions'
 import { deleteTestRequest } from '../../store/actions/testsActions'
+import MainButton from '../UI/MainButton/MainButton'
 
 const CourseModules = ({ id, course, handleAddContent, handleAddModule, accessCheck }) => {
   const dispatch = useDispatch()
@@ -88,7 +89,7 @@ const CourseModules = ({ id, course, handleAddContent, handleAddModule, accessCh
                     ) : null}
                     {item.title}
                   </Link>
-                  {accessCheck() && (
+                  {accessCheck && (
                     <div className="course-modules-block__item-actions">
                       <button
                         type="button"
@@ -132,9 +133,12 @@ const CourseModules = ({ id, course, handleAddContent, handleAddModule, accessCh
             </button>
           </div>
         ))}
-      <button type="button" className="course-modules__add-module MainButton" onClick={handleAddModule}>
-        + Модуль
-      </button>
+      <MainButton
+        type="button"
+        className="GreenButton course-modules__add-module"
+        onClick={handleAddModule}
+        text="+ Модуль"
+      />
     </div>
   )
 }

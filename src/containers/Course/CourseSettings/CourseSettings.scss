@@ -5,13 +5,6 @@
   width: 100%;
   gap: 50px;
 
-  &__save-block {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 70px 0;
-  }
-
   &__left {
     width: 30%;
   }
@@ -30,19 +23,33 @@
       margin-bottom: 20px;
 
       &_button {
+        width: 50%;
         background-color: $totalWhiteColor;
-        padding: 17px 100px;
+        padding: 17px 15px;
+        margin: 0 1px;
         border: none;
         font-size: 20px;
         font-weight: 500;
         line-height: 24px;
         border-radius: 15px;
         cursor: pointer;
+
+        &:hover {
+          background: $greyColor;
+        }
       }
+    }
+  }
+
+  &__save-button {
+    margin-top: 40px;
+
+    &:hover {
+      background-color: $whiteBorderColor;;
     }
   }
 }
 
-.active {
+.activeClass {
   background: #F2F2F7;
 }

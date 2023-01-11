@@ -12,6 +12,9 @@ import {
   deleteCourseFailure,
   deleteCourseRequest,
   deleteCourseSuccess,
+  editCourseHeaderImageFailure,
+  editCourseHeaderImageRequest,
+  editCourseHeaderImageSuccess,
   fetchCourseFailure,
   fetchCourseRequest,
   fetchCoursesFailure,
@@ -30,6 +33,14 @@ import {
 } from '../actions/coursesActions'
 import { historyPush } from '../actions/historyActions'
 
+const Toast = Swal.mixin({
+  toast: true,
+  icon: 'success',
+  timer: 3000,
+  timerProgressBar: true,
+  showConfirmButton: false,
+})
+
 export function* fetchCourses() {
   try {
     yield put(showLoading())
@@ -38,6 +49,7 @@ export function* fetchCourses() {
     yield put(hideLoading())
   } catch (e) {
     yield put(fetchCoursesFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -50,6 +62,7 @@ export function* fetchCourse({ payload: id }) {
     yield put(hideLoading())
   } catch (e) {
     yield put(fetchCourseFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -62,6 +75,7 @@ export function* fetchUserCourses({ payload: userId }) {
     yield put(hideLoading())
   } catch (e) {
     yield put(fetchUserCoursesFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -73,21 +87,16 @@ export function* createCourse({ payload: courseData }) {
     yield put(createCourseSuccess())
 
     yield put(hideLoading())
-    yield put(fetchCoursesRequest())
-    yield historyPush(`/course/${response.data._id}`)
+    if (response.data) {
+      yield put(historyPush(`/course/${response.data._id}`))
+    }
 
-    yield Swal.fire({
-      toast: true,
-      icon: 'success',
+    yield Toast.fire({
       title: 'Вы успешно создали курс',
-      timer: 3000,
-      timerProgressBar: true,
-      showConfirmButton: false,
     })
   } catch (e) {
-    if (e.response && e.response.data) {
-      yield put(createCourseFailure(e.response.data))
-    }
+    yield put(createCourseFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -100,16 +109,12 @@ export function* publishCourse({ payload: id }) {
     yield put(hideLoading())
     yield put(fetchCoursesRequest())
 
-    yield Swal.fire({
-      toast: true,
-      icon: 'success',
+    yield Toast.fire({
       title: 'Курс успешно опубликован',
-      timer: 3000,
-      timerProgressBar: true,
-      showConfirmButton: false,
     })
   } catch (e) {
     yield put(publishCourseFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -124,18 +129,31 @@ export function* updateCourse({ payload }) {
     yield put(fetchCourseRequest(id))
     yield put(hideLoading())
 
-    yield put(historyPush(`/course/${id}`))
-
-    yield Swal.fire({
-      toast: true,
-      icon: 'success',
+    yield Toast.fire({
       title: 'Курс успешно изменён',
-      timer: 3000,
-      timerProgressBar: true,
-      showConfirmButton: false,
     })
   } catch (e) {
     yield put(updateCourseFailure(e))
+    yield put(hideLoading())
+  }
+}
+
+export function* editCourseHeaderImageSaga({ payload }) {
+  const { courseId, image } = payload
+
+  try {
+    yield put(showLoading())
+    yield axiosApi.patch(`/courses/edit_image?course=${courseId}`, image)
+    yield put(editCourseHeaderImageSuccess())
+    yield put(hideLoading())
+    yield put(fetchCourseRequest(courseId))
+
+    yield Toast.fire({
+      title: 'Шапка курса успешно изменена',
+    })
+  } catch (e) {
+    yield put(editCourseHeaderImageFailure())
+    yield put(hideLoading())
   }
 }
 
@@ -155,6 +173,7 @@ export function* addUsersCourse({ payload }) {
     yield put(addUsersCourseSuccess())
   } catch (e) {
     yield put(addUsersCourseFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -166,16 +185,12 @@ export function* deleteCourse({ payload: id }) {
     yield put(deleteCourseSuccess())
     yield put(hideLoading())
 
-    yield Swal.fire({
-      toast: true,
-      icon: 'success',
+    yield Toast.fire({
       title: 'Курс успешно удалён',
-      timer: 3000,
-      timerProgressBar: true,
-      showConfirmButton: false,
     })
   } catch (e) {
     yield put(deleteCourseFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -186,6 +201,7 @@ const coursesSagas = [
   takeEvery(fetchUserCoursesRequest, fetchUserCourses),
   takeEvery(createCourseRequest, createCourse),
   takeEvery(updateCourseRequest, updateCourse),
+  takeEvery(editCourseHeaderImageRequest, editCourseHeaderImageSaga),
   takeEvery(addUsersCourseRequest, addUsersCourse),
   takeEvery(deleteCourseRequest, deleteCourse),
 ]
