@@ -20,7 +20,7 @@ const CourseSettingsRight = ({ course }) => {
   const [role, setRole] = useState('users')
   const [isChecked, setIsChecked] = useState(false)
   const [participant, setParticipant] = useState(null)
-  const [email, setEmail] = useState(null)
+  const [userModal, setUserModal] = useState(null)
 
   useEffect(() => {
     dispatch(getAllUsersRequest())
@@ -72,7 +72,7 @@ const CourseSettingsRight = ({ course }) => {
                 className="block-right_name-block_top"
                 onClick={async () => {
                   // await dispatch(getUserRequest(user.email))
-                  await setEmail(user.email)
+                  await setUserModal(user)
                   setUserOpen(true)
                 }}
               >
@@ -108,7 +108,7 @@ const CourseSettingsRight = ({ course }) => {
           </div>
         </div>
       </div>
-      {userOpen ? <CourseUserModal setOpen={setUserOpen} email={email} /> : null}
+      {userOpen ? <CourseUserModal setOpen={setUserOpen} user={userModal} /> : null}
       {open ? (
         <Modal setOpen={setOpen}>
           <Card>

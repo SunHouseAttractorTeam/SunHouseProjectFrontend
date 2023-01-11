@@ -17,6 +17,30 @@
         object-fit: cover;
       }
     }
+
+    &__title {
+      font-size: 24px;
+      font-weight: 700;
+      text-transform: capitalize;
+    }
+
+    &__text {
+      font-weight: 500;
+      font-size: 16px;
+      color: $lightGrey
+    }
+  }
+
+  &__progressbar {
+    margin: 30px 0;
+    padding: 0 10px;
+
+    &__title {
+      text-align: left;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
   }
 
   &__progress {
@@ -52,7 +76,7 @@
       align-items: center;
       border-bottom: 2px solid $whiteBorderColor;
       padding-bottom: 32px;
-      margin-top: 50px;
+      margin-top: 20px;
       margin-bottom: 32px;
     }
 
@@ -81,6 +105,17 @@
           font-size: 14px;
         }
       }
+    }
+  }
+
+  &__tests {
+    padding: 0 10px;
+
+    &__title {
+      text-align: left;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 15px;
     }
   }
 }

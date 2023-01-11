@@ -69,10 +69,11 @@ export function* fetchCourse({ payload: id }) {
   }
 }
 
-export function* getUser({ payload: email }) {
+export function* getUser({ payload: data }) {
+  console.log(data)
   try {
     yield put(showLoading())
-    const response = yield axiosApi(`/users?email=${email}`)
+    const response = yield axiosApi(`/courses/${data.courseId}/course?user=${data.userId}`)
     yield put(getUserSuccess(response.data))
     yield put(hideLoading())
   } catch (e) {
