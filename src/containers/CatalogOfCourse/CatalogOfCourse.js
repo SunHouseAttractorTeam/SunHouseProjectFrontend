@@ -41,7 +41,7 @@ const CatalogOfCourse = () => {
     return () => {
       document.addEventListener('mousedown', handler)
     }
-  })
+  }, [])
 
   useEffect(() => {
     // eslint-disable-next-line prefer-const
@@ -54,7 +54,7 @@ const CatalogOfCourse = () => {
     return () => {
       document.addEventListener('mousedown', handler)
     }
-  })
+  }, [])
 
   const handleMoreImage = () => {
     setNext(next + coursePerPage)
