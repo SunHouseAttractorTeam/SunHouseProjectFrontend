@@ -10,7 +10,7 @@ const SunEditorWYSIWYG = props => (
     name={props.name}
     setOptions={{
       minHeight: 220,
-      buttonList: [['font', 'formatBlock', 'fontSize', 'align', 'fontColor']],
+      buttonList: [['font', 'formatBlock', 'fontSize', 'align', 'fontColor', 'table', 'list', 'image']],
       showPathLabel: false,
       resizeEnable: false,
       charCounter: true,

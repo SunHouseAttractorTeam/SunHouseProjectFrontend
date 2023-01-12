@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Header2 from '../../components/Header2/Header2'
 import Footer from '../../components/Footer/Footer'
 import CourseHomepage from './CourseHomepage/CourseHomepage'
-import { clearCourse, fetchCourseRequest } from '../../store/actions/coursesActions'
+import { clearCourse, fetchCourseRequest, updateCourseRequest } from '../../store/actions/coursesActions'
 import CourseSettings from './CourseSettings/CourseSettings'
 import CourseEdit from './CourseEdit/CourseEdit'
 import CourseBanner from '../../components/CourseBanner/CourseBanner'
@@ -27,21 +27,29 @@ const Course = () => {
     }
   }, [dispatch, id, user])
 
-  const accessCheck = course?.teachers.includes(user._id)
-  
+  const handleSave = courseData => {
+    dispatch(updateCourseRequest({ courseData, id }))
+  }
+
+  const teacherCheck = course?.teachers.includes(user._id)
+
   return (
     <>
       {course && (
         <div className="course">
           <Header2 />
-          <CourseBanner course={course} accessCheck={accessCheck} />
+          <CourseBanner course={course} user={user?._id} handleSave={handleSave} teacherCheck={teacherCheck} />
           <div className="course__bottom">
             <Switch>
               <Route
                 path="/course/:id"
                 exact={!course.users.find(userId => userId === user._id)}
                 render={() =>
-                  course.users.find(userId => userId === user._id) ? <CoursePassing /> : <CourseHomepage accessCheck />
+                    course.users.find(userId => userId === user._id) ? (
+                    <CoursePassing />
+                  ) : (
+                    <CourseHomepage teacherCheck={teacherCheck} />
+                  )
                 }
               />
               <Route path="/course/:id/settings" exact component={CourseSettings} />

@@ -71,7 +71,7 @@ const CourseSettings = () => {
               </button>
             </div>
             {active ? (
-              <CourseSettingsLeft course={course} setCourse={setState} submit={submitFormHandler} />
+              <CourseSettingsLeft course={state} setCourse={setState} submit={submitFormHandler} />
             ) : (
               <CourseSettingsRight course={course} setCourse={setState} submit={submitFormHandler} />
             )}

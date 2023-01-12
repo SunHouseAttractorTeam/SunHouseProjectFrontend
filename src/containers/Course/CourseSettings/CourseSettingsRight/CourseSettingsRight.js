@@ -48,14 +48,12 @@ const CourseSettingsRight = ({ course }) => {
         <div className="container">
           <div className="block-right_top-block">
             <span className="block-right_top-block_title">Все ученики курса</span>
-            <div className="block-right_top-block_btn">
-              <MainButton
-                className="GreenButton block-right_top-block_btn"
-                type="button"
-                onClick={() => setOpen(true)}
-                text="+ Пригласить ученика"
-              />
-            </div>
+            <MainButton
+              className="GreenButton block-right_top-block_btn"
+              type="button"
+              onClick={() => setOpen(true)}
+              text="+ Пригласить ученика"
+            />
           </div>
           <div className="block-right_name-block">
             <div className="block-right_name-block_top">
@@ -68,7 +66,7 @@ const CourseSettingsRight = ({ course }) => {
                 <span className="block-right_name-block_top_name">{user.username}</span>
                 <span>Task</span>
                 <div className="block-right_name-block_top_buttons">
-                  <div>
+                  <i className="block-right_name-block_top_buttons-approve">
                     <svg
                       className="icon"
                       width="24"
@@ -82,15 +80,15 @@ const CourseSettingsRight = ({ course }) => {
                         fill="#828282"
                       />
                     </svg>
-                  </div>
-                  <div>
+                  </i>
+                  <i className="block-right_name-block_top_buttons-reject">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M12 0C5.364 0 0 5.364 0 12C0 18.636 5.364 24 12 24C18.636 24 24 18.636 24 12C24 5.364 18.636 0 12 0ZM17.16 17.16C16.692 17.628 15.936 17.628 15.468 17.16L12 13.692L8.532 17.16C8.064 17.628 7.308 17.628 6.84 17.16C6.372 16.692 6.372 15.936 6.84 15.468L10.308 12L6.84 8.532C6.372 8.064 6.372 7.308 6.84 6.84C7.308 6.372 8.064 6.372 8.532 6.84L12 10.308L15.468 6.84C15.936 6.372 16.692 6.372 17.16 6.84C17.628 7.308 17.628 8.064 17.16 8.532L13.692 12L17.16 15.468C17.616 15.924 17.616 16.692 17.16 17.16Z"
                         fill="#828282"
                       />
                     </svg>
-                  </div>
+                  </i>
                 </div>
               </div>
             ))}

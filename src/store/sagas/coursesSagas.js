@@ -87,8 +87,9 @@ export function* createCourse({ payload: courseData }) {
     yield put(createCourseSuccess())
 
     yield put(hideLoading())
-    yield put(fetchCoursesRequest())
-    yield historyPush(`/course/${response.data._id}`)
+    if (response.data) {
+      yield put(historyPush(`/course/${response.data._id}`))
+    }
 
     yield Toast.fire({
       title: 'Вы успешно создали курс',
