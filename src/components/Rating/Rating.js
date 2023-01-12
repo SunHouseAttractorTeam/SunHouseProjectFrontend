@@ -7,26 +7,35 @@ import './Rating.scss'
 import { inputChangeHandler } from '../UI/Form/Handlers/Handlers'
 import { createRatingRequest } from '../../store/actions/ratingActions'
 
-const RatingBlock = () => {
+const RatingBlock = ({ history }) => {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
   const [reviewData, setReviewData] = useState({
-    rating: null,
+    rating: 0,
     instagram: '',
     review: '',
   })
-  const [rating, setRating] = useState(0)
 
-  const handleRating = rate => setRating(rate)
+  const handleRating = rate =>
+    setReviewData(prev => ({
+      ...prev,
+      rating: rate,
+    }))
 
   const handlerClick = () => {
     setOpen(true)
   }
 
-  const submitFormHandler = e => {
-    e.preventDefault()
-    dispatch(createRatingRequest())
-    setReviewData({ rating: null, instagram: '', review: '' })
+  const submitFormHandler = () => {
+    dispatch(
+      createRatingRequest({
+        rating: reviewData.rating,
+        instagram: reviewData.instagram,
+        review: reviewData.review,
+      }),
+    )
+    setOpen(false)
+    setReviewData({ rating: 0, instagram: '', review: '' })
   }
 
   return (
@@ -55,7 +64,13 @@ const RatingBlock = () => {
           <form className="rating-block__modal">
             <h3 className="rating-block__modal-title">Как вам наш онлайн курс?</h3>
             <p className="rating-block__modal-subtitle">Оцените пожалуйста</p>
-            <Rating fillColor="#ADFA00" size="36px" onClick={handleRating} className="rating-block__modal-stars" />
+            <Rating
+              fillColor="#ADFA00"
+              size="36px"
+              onClick={handleRating}
+              initialValue={reviewData.rating}
+              className="rating-block__modal-stars"
+            />
             <label htmlFor="instagram" className="rating-block__modal-field">
               <span className="rating-block__modal-field-label">Ваш Инстаграм</span>
               <input

@@ -14,7 +14,7 @@ const descriptionSlice = createSlice({
   name,
   initialState,
   reducers: {
-    updateDescriptionRequest(state, action) {
+    updateDescriptionRequest(state) {
       state.updateDescriptionLoading = true
       state.updateDescriptionError = null
     },

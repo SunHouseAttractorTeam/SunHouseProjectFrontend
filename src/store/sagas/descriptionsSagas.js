@@ -1,5 +1,4 @@
 import { put, takeEvery } from 'redux-saga/effects'
-import { historyPush } from '../actions/historyActions'
 
 import axiosApi from '../../axiosApi'
 import {
