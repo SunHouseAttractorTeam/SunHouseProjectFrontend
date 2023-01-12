@@ -5,7 +5,7 @@ import avatarStub from '../../assets/icons/avatarStub.svg'
 import { apiUrl } from '../../config'
 import './CourseTitle.scss'
 
-const CourseTitle = ({ courseId, title, description, teacherCheck, image }) => {
+const CourseTitle = ({ courseId, title, description, teacherCheck, courseCheck, image }) => {
   let avatarImage = avatarStub
 
   if (image && image !== 'undefined') {
@@ -27,7 +27,7 @@ const CourseTitle = ({ courseId, title, description, teacherCheck, image }) => {
               <p className="course-title__left-info-description">{description}</p>
             </div>
           </div>
-          {teacherCheck && teacherCheck() && (
+          {teacherCheck && (
             <Link to={`/course/${courseId}/settings`} className="course-title__settings-button">
               <MainButton
                 className="WhiteButton"
@@ -46,6 +46,11 @@ const CourseTitle = ({ courseId, title, description, teacherCheck, image }) => {
                   </>
                 }
               />
+            </Link>
+          )}
+          {courseCheck && (
+            <Link to={`/course/${courseId}/pass`} className="course-title__settings-button">
+              <MainButton className="WhiteButton" type="button" text="Перейти к прохождению >" />
             </Link>
           )}
         </div>

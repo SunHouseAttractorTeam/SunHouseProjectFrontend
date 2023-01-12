@@ -24,7 +24,7 @@ const CoursePassingModules = ({ id, course }) => (
           {module.data.map(item => (
             <ul key={item._id} className="course-modules-block__items">
               <li key={item.id} className={`course-modules-block__item course-modules-block__item--${item.type}`}>
-                <Link to={`/course/${id}/${item.type}/${item._id}`} className="course-modules-block__item-title">
+                <Link to={`/course/${id}/pass/${item.type}/${item._id}`} className="course-modules-block__item-title">
                   {item.type === 'test' ? (
                     <i>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
