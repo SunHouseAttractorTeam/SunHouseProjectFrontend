@@ -5,6 +5,7 @@ import { createTestRequest } from '../../../store/actions/testsActions'
 import Modal from '../../UI/Modal2/Modal'
 import FormInput from '../../UI/Form/FormInput/FormInput'
 import MainButton from '../../UI/MainButton/MainButton'
+import FormCheck from '../../UI/Form/FormCheck/FormCheck'
 import test from '../../../assets/icons/test.svg'
 import './CreateTestModal.scss'
 
@@ -14,7 +15,6 @@ const CreateTestModal = ({ setOpen, courseId, moduleId, setModalType, error }) =
     title: '',
     correct: 0,
     random: false,
-    count: 0,
   })
 
   const [isChecked, setIsChecked] = useState(true)
@@ -27,7 +27,7 @@ const CreateTestModal = ({ setOpen, courseId, moduleId, setModalType, error }) =
   const handlerClick = e => {
     submitFormHandler(e, dispatch(createTestRequest({ courseId, moduleId, testData })))
     setOpen(false)
-    setTestData({ title: '', correct: 0, random: false, count: 0 })
+    setTestData({ title: '', correct: 0, random: false })
   }
 
   return (
@@ -57,23 +57,10 @@ const CreateTestModal = ({ setOpen, courseId, moduleId, setModalType, error }) =
               error={getFieldError(error, 'correct')}
             />
             <div className="content__test__checkbox">
-              <FormInput onChange={handleOnChangeChecked} type="checkbox" name="random" />
+              <FormCheck onChange={handleOnChangeChecked} />
               <span>Случайный порядок вопросов</span>
             </div>
             <span className="content__test__subtitle">Вопросы будут задаваться в случайном порядке</span>
-            <div className="content__test__count">
-              <span className="content__test__label">Количество попыток</span>
-              <FormInput
-                onChange={e => inputChangeHandler(e, setTestData)}
-                type="number"
-                value={testData.count}
-                name="count"
-                placeholder="0"
-                className="inputModal content__test__input"
-                error={getFieldError(error, 'count')}
-              />
-            </div>
-            <span className="content__test__subtitle">Добавьте описание</span>
             <div className="content__test__button-block">
               <MainButton
                 className="WhiteButton content__btn"
