@@ -60,7 +60,7 @@ export function* fetchCourse({ payload: id }) {
   try {
     yield put(showLoading())
 
-    const response = yield axiosApi(`/courses/${id}`)
+    const response = yield axiosApi(`/courses?id=${id}`)
     yield put(fetchCourseSuccess(response.data))
     yield put(hideLoading())
   } catch (e) {

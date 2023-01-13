@@ -86,13 +86,13 @@ const CourseUserModal = ({ setOpen, user }) => {
               <h4 className="course-user-modal__progressbar__title">Общий прогресс</h4>
               <div className="course-user-modal__progressbar__line">
                 <Progress
-                  percent={userGeneral.coursePercent}
+                  percent={userGeneral.coursePercent ? userGeneral.coursePercent : 0}
                   status="success"
                   strokeWidth={2}
                   trailWidth={2}
                   theme={{
                     success: {
-                      symbol: `${userGeneral.coursePercente}%`,
+                      symbol: `${userGeneral.coursePercente ? userGeneral.coursePercent : 0}%`,
                       color: '#ADFA00',
                       strokeWidth: 3,
                     },
@@ -116,7 +116,7 @@ const CourseUserModal = ({ setOpen, user }) => {
               <div className="course-user-modal__progress">
                 <div className="course-user-modal__progress__circle">
                   <CircularProgressbar
-                    value={userGeneral.coursePercent}
+                    value={(counts.userPassed / counts.testCounts) * 100}
                     strokeWidth={50}
                     styles={buildStyles({
                       textColor: '#1C1C1E',
@@ -129,7 +129,7 @@ const CourseUserModal = ({ setOpen, user }) => {
                 <h4 className="course-user-modal__progress__text">{`${counts.userPassed}/${counts.testCounts}`}</h4>
               </div>
               <MainButton
-                className=" course-user-modal__title__button WhiteButton"
+                className="course-user-modal__title__button WhiteButton"
                 type="button"
                 onClick={onShowMoreBtn}
                 text={
@@ -150,6 +150,11 @@ const CourseUserModal = ({ setOpen, user }) => {
           {showMore && (
             <div className="course-user-modal__tests">
               <h2 className="course-user-modal__tests__title">Тесты студента</h2>
+              {userGeneral.tests.length !== 0 ? (
+                userGeneral.tests.map(test => <div key={test._id}>test</div>)
+              ) : (
+                <p className="course-user-modal__tests__text">Студент еще не прошел ни одного теста</p>
+              )}
             </div>
           )}
         </Modal>

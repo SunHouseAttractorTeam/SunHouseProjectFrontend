@@ -18,6 +18,7 @@ const CourseSettingsRight = ({ course }) => {
   const [open, setOpen] = useState(false)
   const [userOpen, setUserOpen] = useState(false)
   const [role, setRole] = useState('users')
+  const [showMore, setShowMore] = useState(false)
   const [isChecked, setIsChecked] = useState(false)
   const [participant, setParticipant] = useState(null)
   const [userModal, setUserModal] = useState(null)
@@ -40,6 +41,9 @@ const CourseSettingsRight = ({ course }) => {
     await dispatch(fetchCourseRequest(id))
     setOpen(false)
   }
+  const onShowMoreBtn = () => {
+    setShowMore(!showMore)
+  }
 
   if (users) {
     users.map(user => items.push({ id: user._id, name: user.email }))
@@ -49,36 +53,62 @@ const CourseSettingsRight = ({ course }) => {
     <>
       <div className="block-right">
         <div className="container">
-          <div className="block-right_top-block">
-            <span className="block-right_top-block_title">Все ученики курса</span>
-            <div className="block-right_top-block_btn">
+          <div className="block-right__top-block">
+            <span className="block-right__top-block__title">Все ученики курса</span>
+            <div className="block-right__top-block__btn">
               <MainButton
-                className="GreenButton block-right_top-block_btn"
+                className="GreenButton block-right__top-block__btn"
                 type="button"
                 onClick={() => setOpen(true)}
                 text="+ Пригласить ученика"
               />
             </div>
           </div>
-          <div className="block-right_name-block">
-            <div className="block-right_name-block_top">
-              <span className="block-right_name-block_top_title">Имя ученика</span>
-              <span className="block-right_name-block_top_title">Задания учеников</span>
-              <span className="block-right_name-block_top_title">Одобрение задания</span>
+          <div className="block-right__name-block">
+            <div className="block-right__name-block__top">
+              <span className="block-right__name-block__top__title">Имя ученика</span>
+              <span className="block-right__name-block__top__title">Задания учеников</span>
+              <span className="block-right__name-block__top__title">Одобрение задания</span>
             </div>
             {course.users.map(user => (
-              <div
-                key={user._id}
-                className="block-right_name-block_top"
-                onClick={async () => {
-                  // await dispatch(getUserRequest(user.email))
-                  await setUserModal(user)
-                  setUserOpen(true)
-                }}
-              >
-                <span className="block-right_name-block_top_name">{user.username}</span>
-                <span>Task</span>
-                <div className="block-right_name-block_top_buttons">
+              <div key={user._id} className="block-right__name-block__top">
+                <span
+                  className="block-right__name-block__top__name"
+                  onClick={async () => {
+                    // await dispatch(getUserRequest(user.email))
+                    await setUserModal(user)
+                    setUserOpen(true)
+                  }}
+                >
+                  {user.username}
+                </span>
+                <div className="block-right__name-block__center">
+                  <p className="block-right__name-block__center__text">Задание </p>
+                  <MainButton
+                    className="block-right__name-block__center__button WhiteButton"
+                    type="button"
+                    onClick={onShowMoreBtn}
+                    text={
+                      <>
+                        <i>
+                          <svg
+                            width="16"
+                            height="10"
+                            viewBox="0 0 16 10"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M13.1733 1.38686L7.99997 6.56019L2.82664 1.38686C2.30664 0.866856 1.46664 0.866856 0.946641 1.38686C0.426641 1.90686 0.426641 2.74686 0.946641 3.26686L7.06664 9.38686C7.58664 9.90686 8.42664 9.90686 8.94664 9.38686L15.0666 3.26686C15.5866 2.74686 15.5866 1.90686 15.0666 1.38686C14.5466 0.880189 13.6933 0.866856 13.1733 1.38686Z"
+                              fill="#828282"
+                            />
+                          </svg>
+                        </i>
+                      </>
+                    }
+                  />
+                </div>
+                <div className="block-right__name-block__top__buttons">
                   <div>
                     <svg
                       className="icon"
@@ -103,6 +133,11 @@ const CourseSettingsRight = ({ course }) => {
                     </svg>
                   </div>
                 </div>
+                {showMore && (
+                  <div className="block-right__tasks">
+                    <p>Тут будут задания</p>
+                  </div>
+                )}
               </div>
             ))}
           </div>

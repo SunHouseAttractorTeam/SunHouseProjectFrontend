@@ -1,46 +1,70 @@
+@import '../../../../scss/style';
+
 .block-right {
-  background: #FFFFFF;
+  background: $totalWhiteColor;
   border-radius: 16px;
   padding: 14px 12px;
 
-  &_top-block {
+  &__top-block {
     display: flex;
     width: 100%;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 
-    &_title {
+    &__title {
       font-weight: 700;
       font-size: 20px;
     }
 
-    &_btn {
+    &__btn {
       font-weight: 700;
       font-size: 16px;
     }
+
+    &__tasks {
+      width: 100%;
+    }
   }
 
-  &_name-block {
-    &_top {
+  &__name-block {
+    &__center {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+
+      &__text {
+        font-weight: 500;
+        font-size: 14px;
+        color: $lightGrey;
+      }
+
+      &__button {
+        padding: 10px;
+      }
+
+    }
+
+    &__top {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 20px 0 4px 0;
       border-bottom: 2px solid #F2F2F7;
 
-      &_title {
+      &__title {
         font-weight: 500;
         font-size: 14px;
         line-height: 17px;
         color: #828282;
       }
 
-      &_name {
+      &__name {
         font-weight: 500;
         font-size: 16px;
       }
 
-      &_buttons {
+      &__buttons {
         display: flex;
         gap: 20px
       }
