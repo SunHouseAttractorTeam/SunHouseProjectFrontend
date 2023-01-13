@@ -68,7 +68,12 @@ const CourseBanner = ({ course, teacherCheck }) => {
                 />
               </svg>
             </i>
-            <input className="course-banner__image-input-file" type="file" onChange={handleChangeHeaderImage} />
+            <input
+              className="course-banner__image-input-file"
+              type="file"
+              onChange={handleChangeHeaderImage}
+              accept="image/*"
+            />
             {(location.pathname === `/course/${course._id}` ||
               location.pathname === `/course/${course._id}/settings`) && (
               <div className="container course-banner__image-container">

@@ -49,7 +49,7 @@ const Course = () => {
                 render={() => <CourseHomepage teacherCheck={teacherCheck} courseCheck={courseCheck} />}
               />
               <Route path="/course/:id/settings" exact component={CourseSettings} />
-              <Route path="/course/:id/edit" exact render={() => <CourseEdit teacherCheck={teacherCheck} />} />
+              <Route path="/course/:id/edit" render={() => <CourseEdit teacherCheck={teacherCheck} />} />
               <ProtectedRoute
                 isAllowed={courseCheck}
                 redirectTo="/"

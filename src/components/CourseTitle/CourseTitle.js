@@ -27,8 +27,8 @@ const CourseTitle = ({ courseId, title, description, teacherCheck, courseCheck, 
               <p className="course-title__left-info-description">{description}</p>
             </div>
           </div>
-          {teacherCheck && (
-            <Link to={`/course/${courseId}/settings`} className="course-title__settings-button">
+          {teacherCheck ? (
+            <Link to={`/course/${courseId}/settings`} className="course-title__button">
               <MainButton
                 className="WhiteButton"
                 type="button"
@@ -47,11 +47,18 @@ const CourseTitle = ({ courseId, title, description, teacherCheck, courseCheck, 
                 }
               />
             </Link>
-          )}
-          {courseCheck && (
-            <Link to={`/course/${courseId}/pass`} className="course-title__settings-button">
-              <MainButton className="WhiteButton" type="button" text="Перейти к прохождению >" />
-            </Link>
+          ) : (
+            <>
+              {courseCheck ? (
+                <Link to={`/course/${courseId}/pass`} className="course-title__button">
+                  <MainButton className="WhiteButton" type="button" text="Перейти к прохождению >" />
+                </Link>
+              ) : (
+                <Link to={`/course/${courseId}`} className="course-title__button">
+                  <MainButton className="WhiteButton" type="button" text="Записаться на курс" />
+                </Link>
+              )}
+            </>
           )}
         </div>
       </div>
