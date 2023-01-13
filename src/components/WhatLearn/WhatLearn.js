@@ -1,18 +1,15 @@
 import React, { useState } from 'react'
-import './WhatLearn.scss'
-import { useDispatch } from 'react-redux'
 import LearnCardText from './LearnCardText/LearnCardText'
 import Paragraph from '../Paragraph/Paragraph'
 import Modal from '../UI/Modal2/Modal'
-import { updateDescriptionRequest } from '../../store/actions/descriptionsActions'
+import './WhatLearn.scss'
 
-const WhatLearn = ({ match, teacherCheck, section }) => {
-  const dispatch = useDispatch()
+const WhatLearn = ({ match, teacherCheck, willLearn, onVisibilityBlock, block, newWillLearn }) => {
   const [open, setOpen] = useState(false)
   const [description, setDescription] = useState({
     title: '',
-    subtitle: '',
-    file: null,
+    description: '',
+    image: null,
   })
 
   const handleFileChange = e => {
@@ -21,7 +18,7 @@ const WhatLearn = ({ match, teacherCheck, section }) => {
     }
     setDescription(prev => ({
       ...prev,
-      file: e.target.files[0],
+      image: e.target.files[0],
     }))
   }
 
@@ -31,16 +28,15 @@ const WhatLearn = ({ match, teacherCheck, section }) => {
 
   const updateDescription = e => {
     e.preventDefault()
-    if (!section) {
-      setOpen(false)
-      return
-    }
-    dispatch(
-      updateDescriptionRequest({
-        section,
-        text: description,
-      }),
-    )
+
+    newWillLearn.push(description)
+
+    onVisibilityBlock('willLearn', newWillLearn)
+    setDescription({
+      title: '',
+      description: '',
+      image: null,
+    })
     setOpen(false)
   }
 
@@ -54,9 +50,22 @@ const WhatLearn = ({ match, teacherCheck, section }) => {
 
   return (
     <div className="learn-plan-block">
-      <Paragraph title="Чему вы научитесь" match={match} section="whatLearn" teacherCheck={teacherCheck} />
+      <Paragraph
+        title="Чему вы научитесь"
+        match={match}
+        subtitle={block.description}
+        teacherCheck={teacherCheck}
+        type="blockLearn"
+        onVisibility={onVisibilityBlock}
+        isVisibility={block.visibility}
+      />
       {teacherCheck && teacherCheck() ? (
         <>
+          <div className="learn-plan-block__cards">
+            {willLearn.map(item => (
+              <LearnCardText key={item._id} title={item.title} image={item.image} description={item.description} />
+            ))}
+          </div>
           <button type="button" className="learn-plan-block__btn-plus" onClick={e => handlerClick(e)}>
             +
           </button>
@@ -74,8 +83,8 @@ const WhatLearn = ({ match, teacherCheck, section }) => {
                   />
                   <input
                     className="block__add-description"
-                    name="subtitle"
-                    value={description.subtitle}
+                    name="description"
+                    value={description.description}
                     onChange={inputChangeHandler}
                     placeholder="Введите описание..."
                   />
@@ -89,7 +98,7 @@ const WhatLearn = ({ match, teacherCheck, section }) => {
                     />
                     <label className="field__file-wrapper" htmlFor="field__file-2">
                       <div className="field__file-fake">
-                        {description.file ? `${description.file.name}` : 'Файл не выбран'}
+                        {description.image ? `${description.image.name}` : 'Файл не выбран'}
                       </div>
                       <div className="field__file-button">Выбрать</div>
                     </label>
@@ -104,8 +113,8 @@ const WhatLearn = ({ match, teacherCheck, section }) => {
         </>
       ) : (
         <div className="learn-plan-block__cards">
-          {[1, 2, 3, 4].map(item => (
-            <LearnCardText key={item} />
+          {willLearn.map(item => (
+            <LearnCardText key={item._id} title={item.title} image={item.image} description={item.description} />
           ))}
         </div>
       )}

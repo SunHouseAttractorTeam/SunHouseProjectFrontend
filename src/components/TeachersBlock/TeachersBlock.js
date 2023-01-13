@@ -1,14 +1,9 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
 import TeacherCard from './TeacherCard/TeacherCard'
 import CustomSlider from '../UI/CustomSlider/CustomSlider'
-import './TeachersBlock.scss'
-import teacher_1 from '../../assets/icons/teacher_1.svg'
-import teacher_2 from '../../assets/icons/teacher_2.svg'
-import teacher_3 from '../../assets/icons/teacher_3.svg'
 import Paragraph from '../Paragraph/Paragraph'
 import Modal from '../UI/Modal2/Modal'
-import { updateDescriptionRequest } from '../../store/actions/descriptionsActions'
+import './TeachersBlock.scss'
 
 const sliderSettings = [
   {
@@ -37,12 +32,11 @@ const sliderSettings = [
     },
   },
 ]
-const TeachersBlock = ({ title, subtitle, teacherCheck, section }) => {
-  const dispatch = useDispatch()
+const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBlock, block, newTeachers }) => {
   const [open, setOpen] = useState(false)
-  const [description, setDescription] = useState({
-    gmail: '',
-    name: '',
+  const [teacher, setTeacher] = useState({
+    email: '',
+    description: '',
   })
 
   const handlerClick = () => {
@@ -51,22 +45,20 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, section }) => {
 
   const updateDescription = e => {
     e.preventDefault()
-    if (!section) {
-      setOpen(false)
-      return
-    }
-    dispatch(
-      updateDescriptionRequest({
-        section,
-        text: description,
-      }),
-    )
+
+    newTeachers.push(teacher)
+
+    onVisibilityBlock('lendingTeachers', newTeachers)
+    setTeacher({
+      email: '',
+      description: '',
+    })
     setOpen(false)
   }
 
   const inputChangeHandler = e => {
     const { name, value } = e.target
-    setDescription(prev => ({
+    setTeacher(prev => ({
       ...prev,
       [name]: value,
     }))
@@ -75,10 +67,27 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, section }) => {
   return (
     <div className="teachers_block">
       <div className="teachers_block_headline">
-        <Paragraph title={title} subtitle={subtitle} section="teachersBlock" teacherCheck={teacherCheck} />
+        <Paragraph
+          title={title}
+          subtitle={subtitle}
+          teacherCheck={teacherCheck}
+          onVisibility={onVisibilityBlock}
+          type="blockTeachers"
+          isVisibility={block?.visibility}
+        />
       </div>
       {teacherCheck && teacherCheck() ? (
         <>
+          <CustomSlider response={sliderSettings}>
+            {teachers.length !== 0 &&
+              teachers.map(teacherObj => (
+                <TeacherCard
+                  key={teacherObj._id || teacherObj.name}
+                  user={teacherObj.user}
+                  description={teacherObj.description}
+                />
+              ))}
+          </CustomSlider>
           <button type="button" className="teachers_block__btn-plus" onClick={handlerClick}>
             +
           </button>
@@ -88,15 +97,15 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, section }) => {
                 <div className="block__modal">
                   <input
                     className="block__add-description"
-                    name="gmail"
-                    value={description.gmail}
+                    name="email"
+                    value={teacher.email}
                     onChange={inputChangeHandler}
                     placeholder="Введите почту..."
                   />
                   <input
                     className="block__add-description"
-                    name="name"
-                    value={description.name}
+                    name="description"
+                    value={teacher.description}
                     onChange={inputChangeHandler}
                     placeholder="Введите описание..."
                   />
@@ -110,21 +119,14 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, section }) => {
         </>
       ) : (
         <CustomSlider response={sliderSettings}>
-          <TeacherCard
-            image={teacher_1}
-            name="Александр Гаврилин"
-            description="Руководитель правовой практики в сфере ПО, технологий, сделок с брендом и данными ЯНДЕКС"
-          />
-          <TeacherCard
-            image={teacher_2}
-            name="Александр Гаврилин"
-            description="Руководитель правовой практики в сфере ПО, технологий, сделок с брендом и данными ЯНДЕКС"
-          />
-          <TeacherCard
-            image={teacher_3}
-            name="Александр Гаврилин"
-            description="Руководитель правовой практики в сфере ПО, технологий, сделок с брендом и данными ЯНДЕКС"
-          />
+          {teachers.length !== 0 &&
+            teachers.map(teacherObj => (
+              <TeacherCard
+                key={teacherObj._id || teacherObj.name}
+                user={teacherObj.user}
+                description={teacherObj.description}
+              />
+            ))}
         </CustomSlider>
       )}
     </div>

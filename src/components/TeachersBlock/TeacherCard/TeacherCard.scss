@@ -5,6 +5,7 @@
   height: 174px;
   background: $totalWhiteColor;
   border-radius: 16px;
+  margin-left: 12px;
 
   &_content {
     padding: 33px 0 0 33px;
@@ -12,14 +13,14 @@
   }
 
   &_avatar {
-    width: 95px;
-    height: 100px;
+    width: 105px;
+    height: 105px;
     background: $greyColor;
     border-radius: 50%;
 
     &_image {
-      width: 100px;
-      height: 111px;
+      width: 105px;
+      height: 105px;
     }
   }
 

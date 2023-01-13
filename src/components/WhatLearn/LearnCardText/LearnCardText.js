@@ -1,13 +1,16 @@
 import React from 'react'
+import { apiUrl } from '../../../config'
 
-const LearnCardText = () => (
+const LearnCardText = ({ title, description, image }) => (
   <div className="learn-plan-block__card">
-    <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="50" r="50" fill="#ADFA00" />
-    </svg>
+    {image && (
+      <div>
+        <img src={`${apiUrl}/${image}`} alt={title} />
+      </div>
+    )}
     <div className="learn-plan-block__card-description">
-      <p className="learn-plan-block__card-title">Здесь будет текст</p>
-      <button className="learn-plan-block__add-link">добавьте описании если необходимо</button>
+      <p className="learn-plan-block__card-title">{title}</p>
+      <p className="learn-plan-block__add-link">{description}</p>
     </div>
   </div>
 )
