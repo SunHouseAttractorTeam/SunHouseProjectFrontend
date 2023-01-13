@@ -2,9 +2,15 @@
 
 .profile {
   background: linear-gradient(to right, $totalWhiteColor 0%, $totalWhiteColor 30%, $greyColor 30%, $greyColor 100%);
+  @media(max-width: 1020px) {
+    background: $greyColor;
+  }
 
   &__inner {
     display: flex;
+    @media (max-width: 790px) {
+      display: block;
+    }
   }
 
   &__logo {
@@ -19,6 +25,11 @@
     background: $totalWhiteColor;
     padding: 32px 42px 0 7px;
     border-radius: 0 16px 16px 0;
+    @media (max-width: 790px) {
+      margin: 0 auto;
+      padding: 32px 42px 1px 42px;
+      border-radius: 16px;
+    }
 
     &-top {
       &-logo {
@@ -57,6 +68,9 @@
 
     &-bottom {
       padding-bottom: 226px;
+      @media (max-width: 790px) {
+        display: none;
+      }
 
       &-nav {
         font-size: 20px;
