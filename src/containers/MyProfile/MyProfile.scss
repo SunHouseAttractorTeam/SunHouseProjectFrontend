@@ -69,7 +69,7 @@
     &-bottom {
       padding-bottom: 226px;
       @media (max-width: 790px) {
-        display: none;
+        padding-bottom: 100px;
       }
 
       &-nav {
@@ -115,5 +115,8 @@
   &__right {
     flex: 1;
     padding: 28px 0 32px 38px;
+    @media (max-width: 790px) {
+      padding: 28px 10px 28px;
+    }
   }
 }
