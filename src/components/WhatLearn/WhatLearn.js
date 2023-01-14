@@ -4,7 +4,7 @@ import Paragraph from '../Paragraph/Paragraph'
 import Modal from '../UI/Modal2/Modal'
 import './WhatLearn.scss'
 
-const WhatLearn = ({ match, teacherCheck, willLearn, onVisibilityBlock, block }) => {
+const WhatLearn = ({ teacherCheck, willLearn, onVisibilityBlock, block }) => {
   const [open, setOpen] = useState(false)
   const [description, setDescription] = useState({
     title: '',
@@ -52,7 +52,6 @@ const WhatLearn = ({ match, teacherCheck, willLearn, onVisibilityBlock, block })
     <div className="learn-plan-block">
       <Paragraph
         title="Чему вы научитесь"
-        match={match}
         subtitle={block.description}
         teacherCheck={teacherCheck}
         type="blockLearn"

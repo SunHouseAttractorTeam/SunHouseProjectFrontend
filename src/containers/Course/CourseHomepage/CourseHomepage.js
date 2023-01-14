@@ -6,13 +6,11 @@ import CourseTitle from '../../../components/CourseTitle/CourseTitle'
 import WhatLearn from '../../../components/WhatLearn/WhatLearn'
 import TeachersBlock from '../../../components/TeachersBlock/TeachersBlock'
 import CourseProgram from '../../../components/CourseProgram/CourseProgram'
-import MainButton from '../../../components/UI/MainButton/MainButton'
 
 const CourseHomepage = ({ teacherCheck, courseCheck }) => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const course = useSelector(state => state.courses.course)
-  const user = useSelector(state => state.users.user)
   const [courseLending, setCourseLending] = useState(null)
 
   useEffect(() => {
@@ -33,10 +31,6 @@ const CourseHomepage = ({ teacherCheck, courseCheck }) => {
       dispatch(fetchCourseRequest(id))
     }
   }, [dispatch, course, id])
-
-  const teacherCheck = () => course.teachers.find(teacher => teacher === user?._id)
-
-  const courseCheck = () => course.users.find(userId => userId === user?._id)
 
   const onVisibilityBlock = (type, content, name) => {
     if (type === 'lendingTeachers') {
@@ -97,7 +91,6 @@ const CourseHomepage = ({ teacherCheck, courseCheck }) => {
             description={course.description}
             image={course.image}
             teacherCheck={teacherCheck}
-            courseCheck={courseCheck}
           />
           <div className="container">
             <div className="course-homepage__bottom">
@@ -105,7 +98,6 @@ const CourseHomepage = ({ teacherCheck, courseCheck }) => {
                 courseLending && (
                   <>
                     <WhatLearn
-                      match={match}
                       block={courseLending.blockLearn}
                       willLearn={courseLending.willLearn}
                       teacherCheck={teacherCheck}
@@ -137,7 +129,6 @@ const CourseHomepage = ({ teacherCheck, courseCheck }) => {
                     <>
                       {courseLending.blockLearn && courseLending.blockLearn.visibility && (
                         <WhatLearn
-                          match={match}
                           block={courseLending.blockLearn}
                           willLearn={course.willLearn}
                           newWillLearn={courseLending.willLearn}
