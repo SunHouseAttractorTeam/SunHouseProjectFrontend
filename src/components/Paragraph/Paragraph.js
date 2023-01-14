@@ -70,6 +70,7 @@ const Paragraph = ({ title = 'Title', subtitle, section, teacherCheck }) => {
                   name="description"
                   value={description.value}
                   onChange={inputChangeHandler}
+                  type="text"
                 />
                 <button className="block__modal-btn" type="submit">
                   Сохранить

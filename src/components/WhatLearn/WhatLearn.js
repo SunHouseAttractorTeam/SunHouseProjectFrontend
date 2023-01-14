@@ -55,7 +55,7 @@ const WhatLearn = ({ match, teacherCheck, section }) => {
   return (
     <div className="learn-plan-block">
       <Paragraph title="Чему вы научитесь" match={match} section="whatLearn" teacherCheck={teacherCheck} />
-      {teacherCheck && teacherCheck() ? (
+      {teacherCheck ? (
         <>
           <button type="button" className="learn-plan-block__btn-plus" onClick={e => handlerClick(e)}>
             +
@@ -71,6 +71,7 @@ const WhatLearn = ({ match, teacherCheck, section }) => {
                     value={description.title}
                     onChange={inputChangeHandler}
                     placeholder="Введите название..."
+                    type="text"
                   />
                   <input
                     className="block__add-description"
@@ -78,6 +79,7 @@ const WhatLearn = ({ match, teacherCheck, section }) => {
                     value={description.subtitle}
                     onChange={inputChangeHandler}
                     placeholder="Введите описание..."
+                    type="text"
                   />
                   <div className="field__wrapper">
                     <input
@@ -86,6 +88,7 @@ const WhatLearn = ({ match, teacherCheck, section }) => {
                       id="field__file-2"
                       className="field field__file"
                       onChange={handleFileChange}
+                      accept="image/png, image/jpeg, image/jpg,  image/svg, image/webp, image/heic"
                     />
                     <label className="field__file-wrapper" htmlFor="field__file-2">
                       <div className="field__file-fake">
