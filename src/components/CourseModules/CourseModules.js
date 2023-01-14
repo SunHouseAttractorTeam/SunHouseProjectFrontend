@@ -7,7 +7,7 @@ import { deleteTaskRequest } from '../../store/actions/tasksActions'
 import { deleteTestRequest } from '../../store/actions/testsActions'
 import MainButton from '../UI/MainButton/MainButton'
 
-const CourseModules = ({ id, course, handleAddContent, handleAddModule, accessCheck }) => {
+const CourseModules = ({ id, course, handleAddContent, handleAddModule, teacherCheck }) => {
   const dispatch = useDispatch()
   const location = useLocation()
 
@@ -89,7 +89,7 @@ const CourseModules = ({ id, course, handleAddContent, handleAddModule, accessCh
                     ) : null}
                     {item.title}
                   </Link>
-                  {accessCheck && (
+                  {teacherCheck && (
                     <div className="course-modules-block__item-actions">
                       <button
                         type="button"

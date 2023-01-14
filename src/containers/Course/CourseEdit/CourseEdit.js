@@ -61,7 +61,7 @@ const CourseEdit = ({ teacherCheck }) => {
               course={course}
               handleAddModule={handleAddModule}
               handleAddContent={handleAddContent}
-              accessCheck={teacherCheck}
+              teacherCheck={teacherCheck}
             />
           </div>
           <div className="course-edit__right">
