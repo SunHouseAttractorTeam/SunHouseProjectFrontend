@@ -10,46 +10,13 @@
   }
 
   &__right {
-    width: 66%;
-
-    &__buttons-block {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-      background-color: $totalWhiteColor;
-      border-radius: 16px;
-      margin-bottom: 20px;
-
-      &_button {
-        width: 50%;
-        background-color: $totalWhiteColor;
-        padding: 17px 15px;
-        margin: 0 1px;
-        border: none;
-        font-size: 20px;
-        font-weight: 500;
-        line-height: 24px;
-        border-radius: 15px;
-        cursor: pointer;
-
-        &:hover {
-          background: $greyColor;
-        }
-      }
-    }
   }
 
-  &__save-button {
+  &__save-button-block {
     margin-top: 40px;
 
     &:hover {
-      background-color: $whiteBorderColor;;
+      background-color: $whiteBorderColor;
     }
   }
-}
-
-.activeClass {
-  background: #F2F2F7;
 }

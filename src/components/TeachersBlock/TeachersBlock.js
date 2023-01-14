@@ -98,7 +98,7 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBl
           isVisibility={block?.visibility}
         />
       </div>
-      {teacherCheck && teacherCheck() ? (
+      {teacherCheck ? (
         <>
           <CustomSlider response={sliderSettings}>
             {teachers.length !== 0 &&

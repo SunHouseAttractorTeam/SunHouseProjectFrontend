@@ -67,7 +67,7 @@ const Paragraph = ({ title, subtitle, teacherCheck, isVisibility, onVisibility, 
           </Modal>
         )}
       </div>
-      {teacherCheck && teacherCheck() && <EyeButton handleVisible={handleVisible} isVisibility={isVisibility} />}
+      {teacherCheck && <EyeButton handleVisible={handleVisible} isVisibility={isVisibility} />}
     </div>
   )
 }

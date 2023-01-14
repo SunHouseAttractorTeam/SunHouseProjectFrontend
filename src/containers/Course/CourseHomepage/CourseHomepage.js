@@ -6,8 +6,9 @@ import CourseTitle from '../../../components/CourseTitle/CourseTitle'
 import WhatLearn from '../../../components/WhatLearn/WhatLearn'
 import TeachersBlock from '../../../components/TeachersBlock/TeachersBlock'
 import CourseProgram from '../../../components/CourseProgram/CourseProgram'
+import MainButton from '../../../components/UI/MainButton/MainButton'
 
-const CourseHomepage = ({ match }) => {
+const CourseHomepage = ({ teacherCheck, courseCheck }) => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const course = useSelector(state => state.courses.course)
@@ -96,6 +97,7 @@ const CourseHomepage = ({ match }) => {
             description={course.description}
             image={course.image}
             teacherCheck={teacherCheck}
+            courseCheck={courseCheck}
           />
           <div className="container">
             <div className="course-homepage__bottom">

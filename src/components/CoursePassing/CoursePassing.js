@@ -26,7 +26,7 @@ const CoursePassing = () => {
     const checkContentType = () => {
       const content = course.modules[0].data[0]
 
-      history.push(`/course/${id}/${content.type}/${content._id}`)
+      history.push(`/course/${id}/pass/${content.type}/${content._id}`)
     }
 
     if (course) {
@@ -94,9 +94,9 @@ const CoursePassing = () => {
               </div>
               <div className="course-passing__right">
                 <Switch>
-                  <Route path="/course/:courseId/lesson/:lessonId" component={LessonPassing} />
-                  <Route path="/course/:courseId/task/:taskId" component={TaskPassing} />
-                  <Route path="/course/:courseId/test/:testId" component={TestPassing} />
+                  <Route path="/course/:courseId/pass/lesson/:lessonId" component={LessonPassing} />
+                  <Route path="/course/:courseId/pass/task/:taskId" component={TaskPassing} />
+                  <Route path="/course/:courseId/pass/test/:testId" component={TestPassing} />
                 </Switch>
                 <div className="course-passing__controls">
                   <button disabled={disabledWord === 'previous'} onClick={previousEvent} type="button">

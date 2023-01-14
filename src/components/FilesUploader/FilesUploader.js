@@ -22,7 +22,7 @@ const FilesUploader = ({ ...props }) => {
   if (props.type === 'audio') {
     return (
       <div className={`audio-card uploader-block${props.className ? ` ${props.className}` : ''}`}>
-        <input type="file" onChange={onFileChange} ref={inputRef} />
+        <input type="file" onChange={onFileChange} ref={inputRef} accept=".mp3" />
         <p className="uploader-block__label">{props.title || 'Перетащите .mp3 аудиофайл или нажмите для загрузки'}</p>
         <button className="MainButton GreenButton uploader-block__button" onClick={activateInput} type="button">
           Выбрать файл
