@@ -79,7 +79,7 @@ const Paragraph = ({ title = 'Title', subtitle, section, teacherCheck }) => {
           </Modal>
         )}
       </div>
-      {teacherCheck && teacherCheck() && <EyeButton handleVisible={handleVisible} isVisibility={isVisibility} />}
+      {teacherCheck && <EyeButton handleVisible={handleVisible} isVisibility={isVisibility} />}
     </div>
   )
 }

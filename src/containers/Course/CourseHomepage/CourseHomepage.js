@@ -1,32 +1,19 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearCourse, fetchCourseRequest } from '../../../store/actions/coursesActions'
+import { fetchCourseRequest } from '../../../store/actions/coursesActions'
 import CourseTitle from '../../../components/CourseTitle/CourseTitle'
 import WhatLearn from '../../../components/WhatLearn/WhatLearn'
 import TeachersBlock from '../../../components/TeachersBlock/TeachersBlock'
 import { teachers } from '../../../data/teachers'
 import CourseProgram from '../../../components/CourseProgram/CourseProgram'
+import MainButton from '../../../components/UI/MainButton/MainButton'
 
-const CourseHomepage = ({ match }) => {
+const CourseHomepage = ({ teacherCheck, courseCheck }) => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const course = useSelector(state => state.courses.course)
-  const user = useSelector(state => state.users.user)
   const modules = useSelector(state => state.modules.module)
-
-  useEffect(() => {
-    if (user) {
-      dispatch(fetchCourseRequest(id))
-    }
-    return () => {
-      dispatch(clearCourse())
-    }
-  }, [dispatch, id, user])
-
-  const teacherCheck = () => course.teachers.find(teacher => teacher === user?._id)
-
-  const courseCheck = () => course.users.find(userId => userId === user._id)
 
   useEffect(() => {
     if (!course) {
@@ -44,23 +31,20 @@ const CourseHomepage = ({ match }) => {
             description={course.description}
             image={course.image}
             teacherCheck={teacherCheck}
+            courseCheck={courseCheck}
           />
           <div className="container">
             <div className="course-homepage__bottom">
-              <WhatLearn match={match} teacherCheck={teacherCheck} />
+              <WhatLearn teacherCheck={teacherCheck} />
               <TeachersBlock title="Преподователи" teachers={teachers} teacherCheck={teacherCheck} />
               <CourseProgram teacherCheck={teacherCheck} modules={modules} />
-              {teacherCheck() ? (
-                <button type="button" className="course__save-btn MainButton GreenButton">
-                  Сохранить изменения
-                </button>
+              {teacherCheck ? (
+                <MainButton type="button" className="course__save-btn GreenButton" text="Сохранить изменения" />
               ) : (
                 <>
-                  {courseCheck() ? (
-                    <button type="button" className="course__save-btn MainButton GreenButton">
-                      Записаться на курс
-                    </button>
-                  ) : null}
+                  {!courseCheck && (
+                    <MainButton type="button" className="course__save-btn GreenButton" text="Записаться на курс" />
+                  )}
                 </>
               )}
             </div>
