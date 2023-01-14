@@ -11,7 +11,9 @@ const ButtonsContent = ({ titleOne, titleTwo, childrenOne, childrenTwo, onClickO
           <button
             type="button"
             onClick={() => setActive(true)}
-            className={active ? 'title-block__buttons-button--active' : 'title-block__buttons-button'}
+            className={
+              active ? 'title-block__buttons-button title-block__buttons-button--active' : 'title-block__buttons-button'
+            }
           >
             {titleOne}
           </button>
@@ -20,7 +22,9 @@ const ButtonsContent = ({ titleOne, titleTwo, childrenOne, childrenTwo, onClickO
           <button
             type="button"
             onClick={() => setActive(false)}
-            className={active ? 'title-block__buttons-button' : 'title-block__buttons-button--active'}
+            className={
+              active ? 'title-block__buttons-button' : 'title-block__buttons-button title-block__buttons-button--active'
+            }
           >
             {titleTwo}
           </button>
