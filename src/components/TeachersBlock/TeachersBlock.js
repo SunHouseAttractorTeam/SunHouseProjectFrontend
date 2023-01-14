@@ -77,7 +77,7 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, section }) => {
       <div className="teachers_block_headline">
         <Paragraph title={title} subtitle={subtitle} section="teachersBlock" teacherCheck={teacherCheck} />
       </div>
-      {teacherCheck && teacherCheck() ? (
+      {teacherCheck ? (
         <>
           <button type="button" className="teachers_block__btn-plus" onClick={handlerClick}>
             +
