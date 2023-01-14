@@ -94,7 +94,7 @@ const CourseHomepage = ({ teacherCheck, courseCheck }) => {
           />
           <div className="container">
             <div className="course-homepage__bottom">
-              {teacherCheck() ? (
+              {teacherCheck ? (
                 courseLending && (
                   <>
                     <WhatLearn
@@ -157,7 +157,7 @@ const CourseHomepage = ({ teacherCheck, courseCheck }) => {
                       )}
                     </>
                   )}
-                  {courseCheck() ? (
+                  {courseCheck ? (
                     <button type="button" className="course__save-btn MainButton GreenButton">
                       Записаться на курс
                     </button>

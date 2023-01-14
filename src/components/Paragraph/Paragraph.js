@@ -40,12 +40,7 @@ const Paragraph = ({ title, subtitle, teacherCheck, isVisibility, onVisibility, 
       </i>
       <div className="block__card-description">
         <h3 className="block__title" dangerouslySetInnerHTML={{ __html: title }} />
-        <button
-          type="button"
-          className="block__add-link"
-          onClick={e => handlerClick(e)}
-          disabled={teacherCheck && !teacherCheck()}
-        >
+        <button type="button" className="block__add-link" onClick={e => handlerClick(e)} disabled={!teacherCheck}>
           {subtitle || `добавьте описании если необходимо`}
         </button>
         {open && (

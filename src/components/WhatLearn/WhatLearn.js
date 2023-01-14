@@ -20,6 +20,8 @@ const WhatLearn = ({ teacherCheck, willLearn, onVisibilityBlock, block }) => {
     setDescription(prev => ({
       ...prev,
       image: e.target.files[0],
+      title: prev.title,
+      description: prev.description,
     }))
   }
 
@@ -58,7 +60,7 @@ const WhatLearn = ({ teacherCheck, willLearn, onVisibilityBlock, block }) => {
         onVisibility={onVisibilityBlock}
         isVisibility={block.visibility}
       />
-      {teacherCheck && teacherCheck() ? (
+      {teacherCheck ? (
         <>
           <div className="learn-plan-block__cards">
             {newLearn.map(item => (
