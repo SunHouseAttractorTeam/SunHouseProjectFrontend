@@ -45,7 +45,7 @@ const Course = () => {
                 path="/course/:id"
                 exact={!course.users.find(userId => userId === user._id)}
                 render={() =>
-                    course.users.find(userId => userId === user._id) ? (
+                  course.users.find(userId => userId === user._id) ? (
                     <CoursePassing />
                   ) : (
                     <CourseHomepage teacherCheck={teacherCheck} />
