@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import TeacherCard from './TeacherCard/TeacherCard'
 import CustomSlider from '../UI/CustomSlider/CustomSlider'
 import Paragraph from '../Paragraph/Paragraph'
 import Modal from '../UI/Modal2/Modal'
+import Card from '../UI/Cards/Card/Card'
 import './TeachersBlock.scss'
 
 const sliderSettings = [
@@ -32,15 +34,24 @@ const sliderSettings = [
     },
   },
 ]
-const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBlock, block, newTeachers }) => {
+const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBlock, block, searchTeachers }) => {
   const [open, setOpen] = useState(false)
   const [teacher, setTeacher] = useState({
-    email: '',
+    user: '',
     description: '',
   })
+  const currentSearchTeachers = []
+  const newTeachers = [...teachers]
 
   const handlerClick = () => {
     setOpen(true)
+  }
+  const ChangeSearchItem = item => {
+    setTeacher(prev => ({
+      ...prev,
+      user: item,
+      description: prev.description,
+    }))
   }
 
   const updateDescription = e => {
@@ -50,7 +61,7 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBl
 
     onVisibilityBlock('lendingTeachers', newTeachers)
     setTeacher({
-      email: '',
+      user: '',
       description: '',
     })
     setOpen(false)
@@ -62,6 +73,17 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBl
       ...prev,
       [name]: value,
     }))
+  }
+
+  if (searchTeachers) {
+    searchTeachers.map(user =>
+      currentSearchTeachers.push({
+        _id: user._id,
+        name: user.email,
+        avatar: user.avatar,
+        username: user.username,
+      }),
+    )
   }
 
   return (
@@ -95,13 +117,13 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBl
             <Modal setOpen={setOpen}>
               <form onSubmit={updateDescription}>
                 <div className="block__modal">
-                  <input
-                    className="block__add-description"
-                    name="email"
-                    value={teacher.email}
-                    onChange={inputChangeHandler}
-                    placeholder="Введите почту..."
-                  />
+                  <Card>
+                    <ReactSearchAutocomplete
+                      className="inputModal"
+                      items={currentSearchTeachers}
+                      onSelect={ChangeSearchItem}
+                    />
+                  </Card>
                   <input
                     className="block__add-description"
                     name="description"
@@ -122,7 +144,7 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBl
           {teachers.length !== 0 &&
             teachers.map(teacherObj => (
               <TeacherCard
-                key={teacherObj._id || teacherObj.name}
+                key={(teacherObj.user && teacherObj.user._id) || teacherObj.name}
                 user={teacherObj.user}
                 description={teacherObj.description}
               />

@@ -20,8 +20,9 @@ const CourseHomepage = ({ match }) => {
         blockLearn: course.blockLearn,
         blockTeachers: course.blockTeachers,
         blockModules: course.blockModules,
-        willLearn: [],
-        lendingTeachers: [],
+        searchTeachers: course.searchTeachers,
+        willLearn: course.willLearn,
+        lendingTeachers: course.lendingTeachers,
       })
     }
   }, [course])
@@ -104,8 +105,7 @@ const CourseHomepage = ({ match }) => {
                     <WhatLearn
                       match={match}
                       block={courseLending.blockLearn}
-                      willLearn={course.willLearn}
-                      newWillLearn={courseLending.willLearn}
+                      willLearn={courseLending.willLearn}
                       teacherCheck={teacherCheck}
                       onVisibilityBlock={onVisibilityBlock}
                     />
@@ -113,8 +113,8 @@ const CourseHomepage = ({ match }) => {
                       title="Преподаватели"
                       subtitle={courseLending.blockTeachers && courseLending.blockTeachers.description}
                       block={courseLending.blockTeachers}
-                      teachers={course.lendingTeachers}
-                      newTeachers={courseLending.lendingTeachers}
+                      teachers={courseLending.lendingTeachers}
+                      searchTeachers={course.searchTeachers}
                       teacherCheck={teacherCheck}
                       onVisibilityBlock={onVisibilityBlock}
                     />

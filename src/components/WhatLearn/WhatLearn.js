@@ -4,13 +4,14 @@ import Paragraph from '../Paragraph/Paragraph'
 import Modal from '../UI/Modal2/Modal'
 import './WhatLearn.scss'
 
-const WhatLearn = ({ match, teacherCheck, willLearn, onVisibilityBlock, block, newWillLearn }) => {
+const WhatLearn = ({ match, teacherCheck, willLearn, onVisibilityBlock, block }) => {
   const [open, setOpen] = useState(false)
   const [description, setDescription] = useState({
     title: '',
     description: '',
     image: null,
   })
+  const newLearn = [...willLearn]
 
   const handleFileChange = e => {
     if (!e.target.files) {
@@ -29,9 +30,8 @@ const WhatLearn = ({ match, teacherCheck, willLearn, onVisibilityBlock, block, n
   const updateDescription = e => {
     e.preventDefault()
 
-    newWillLearn.push(description)
-
-    onVisibilityBlock('willLearn', newWillLearn)
+    newLearn.push(description)
+    onVisibilityBlock('willLearn', newLearn)
     setDescription({
       title: '',
       description: '',
@@ -62,8 +62,13 @@ const WhatLearn = ({ match, teacherCheck, willLearn, onVisibilityBlock, block, n
       {teacherCheck && teacherCheck() ? (
         <>
           <div className="learn-plan-block__cards">
-            {willLearn.map(item => (
-              <LearnCardText key={item._id} title={item.title} image={item.image} description={item.description} />
+            {newLearn.map(item => (
+              <LearnCardText
+                key={item._id || item.title}
+                title={item.title}
+                image={item.image}
+                description={item.description}
+              />
             ))}
           </div>
           <button type="button" className="learn-plan-block__btn-plus" onClick={e => handlerClick(e)}>
@@ -113,8 +118,13 @@ const WhatLearn = ({ match, teacherCheck, willLearn, onVisibilityBlock, block, n
         </>
       ) : (
         <div className="learn-plan-block__cards">
-          {willLearn.map(item => (
-            <LearnCardText key={item._id} title={item.title} image={item.image} description={item.description} />
+          {newLearn.map(item => (
+            <LearnCardText
+              key={item._id || item.title}
+              title={item.title}
+              image={item.image}
+              description={item.description}
+            />
           ))}
         </div>
       )}

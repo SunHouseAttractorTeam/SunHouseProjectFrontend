@@ -39,7 +39,7 @@ const Paragraph = ({ title, subtitle, teacherCheck, isVisibility, onVisibility, 
         </svg>
       </i>
       <div className="block__card-description">
-        <h3 className="block__title">{title}</h3>
+        <h3 className="block__title" dangerouslySetInnerHTML={{ __html: title }} />
         <button
           type="button"
           className="block__add-link"

@@ -5,7 +5,7 @@ const LearnCardText = ({ title, description, image }) => (
   <div className="learn-plan-block__card">
     {image && (
       <div>
-        <img src={`${apiUrl}/${image}`} alt={title} />
+        <img src={typeof image === 'string' ? `${apiUrl}/${image}` : URL.createObjectURL(image)} alt={title} />
       </div>
     )}
     <div className="learn-plan-block__card-description">
