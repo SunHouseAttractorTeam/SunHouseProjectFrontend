@@ -3,8 +3,7 @@
 .course-settings {
   display: flex;
   width: 100%;
-  flex-wrap: wrap;
-  gap: 40px;
+  gap: 50px;
 
   &__left {
     width: 30%;
@@ -20,8 +19,4 @@
       background-color: $whiteBorderColor;
     }
   }
-}
-
-.activeClass {
-  background: #F2F2F7;
 }

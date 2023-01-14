@@ -61,8 +61,8 @@ const CourseSettingsRight = ({ course }) => {
               <span className="block-right_name-block_top_title">Задания учеников</span>
               <span className="block-right_name-block_top_title">Одобрение задания</span>
             </div>
-            {course.users.map(user => (
-              <div key={user._id} className="block-right_name-block_top">
+            {course.users.map((user, index) => (
+              <div key={index} className="block-right_name-block_top">
                 <span className="block-right_name-block_top_name">{user.username}</span>
                 <span>Task</span>
                 <div className="block-right_name-block_top_buttons">
