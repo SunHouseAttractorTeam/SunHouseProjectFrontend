@@ -31,5 +31,8 @@ export const {
   visibilityRequest,
   visibilitySuccess,
   visibilityFailure,
+  joinTheCourseRequest,
+  joinTheCourseSuccess,
+  joinTheCourseFailure,
   clearCourse,
 } = coursesSlice.actions

@@ -24,6 +24,9 @@ import {
   fetchUserCoursesFailure,
   fetchUserCoursesRequest,
   fetchUserCoursesSuccess,
+  joinTheCourseFailure,
+  joinTheCourseRequest,
+  joinTheCourseSuccess,
   publishCourseFailure,
   publishCourseRequest,
   publishCourseSuccess,
@@ -73,7 +76,7 @@ export function* fetchUserCourses({ payload: userId }) {
   try {
     yield put(showLoading())
 
-    const response = yield axiosApi(`/courses?user=${userId}`)
+    const response = yield axiosApi(`/courses?userId=${userId}`)
     yield put(fetchUserCoursesSuccess(response.data))
     yield put(hideLoading())
   } catch (e) {
@@ -212,6 +215,23 @@ export function* deleteCourse({ payload: id }) {
   }
 }
 
+export function* joinTheCourseSaga({ payload: { userId, courseId } }) {
+  try {
+    yield put(showLoading())
+    yield axiosApi.put(`/courses/${courseId}/add?user=${userId}`)
+    yield put(joinTheCourseSuccess())
+    yield put(hideLoading())
+    yield put(fetchCourseRequest(courseId))
+
+    yield Toast.fire({
+      title: 'Вы успешно записались на курс',
+    })
+  } catch (e) {
+    yield put(joinTheCourseFailure())
+    yield put(hideLoading())
+  }
+}
+
 const coursesSagas = [
   takeEvery(fetchCoursesRequest, fetchCourses),
   takeEvery(publishCourseRequest, publishCourse),
@@ -223,6 +243,7 @@ const coursesSagas = [
   takeEvery(addUsersCourseRequest, addUsersCourse),
   takeEvery(visibilityRequest, visibilityLending),
   takeEvery(deleteCourseRequest, deleteCourse),
+  takeEvery(joinTheCourseRequest, joinTheCourseSaga),
 ]
 
 export default coursesSagas

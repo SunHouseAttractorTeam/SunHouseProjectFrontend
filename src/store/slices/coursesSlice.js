@@ -129,6 +129,17 @@ const coursesSlice = createSlice({
       state.loading = true
       state.error = action.payload
     },
+    joinTheCourseRequest(state) {
+      state.loading = true
+      state.error = null
+    },
+    joinTheCourseSuccess(state) {
+      state.loading = true
+    },
+    joinTheCourseFailure(state, action) {
+      state.loading = true
+      state.error = action.payload
+    },
     clearCourse(state) {
       state.course = null
     },

@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react'
 import { Route, Switch, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import Header2 from '../../components/Header2/Header2'
-import Footer from '../../components/Footer/Footer'
+import Cookies from 'js-cookie'
+import { ProtectedRoute } from '../../utils/utils'
 import { clearCourse, fetchCourseRequest, updateCourseRequest } from '../../store/actions/coursesActions'
+import Header2 from '../../components/Header2/Header2'
 import CourseBanner from '../../components/CourseBanner/CourseBanner'
-import './Course.scss'
 import CourseHomepage from './CourseHomepage/CourseHomepage'
 import CourseSettings from './CourseSettings/CourseSettings'
 import CourseEdit from './CourseEdit/CourseEdit'
-import { ProtectedRoute } from '../../utils/utils'
 import CoursePassing from '../../components/CoursePassing/CoursePassing'
+import Footer from '../../components/Footer/Footer'
+import './Course.scss'
 
 const Course = () => {
   const { id } = useParams()
@@ -28,12 +29,13 @@ const Course = () => {
     }
   }, [dispatch, id, user])
 
+  const teacherCheck = course?.teachers.includes(user?._id)
+
+  const courseCheck = course?.users.findIndex(u => u._id === user?._id) + 1
+
   const handleSave = courseData => {
     dispatch(updateCourseRequest({ courseData, id }))
   }
-
-  const teacherCheck = course?.teachers.includes(user?._id)
-  const courseCheck = course?.users.includes(user?._id)
 
   return (
     <>
@@ -48,13 +50,24 @@ const Course = () => {
                 exact
                 render={() => <CourseHomepage teacherCheck={teacherCheck} courseCheck={courseCheck} />}
               />
-              <Route path="/course/:id/settings" exact component={CourseSettings} />
-              <Route path="/course/:id/edit" render={() => <CourseEdit teacherCheck={teacherCheck} />} />
               <ProtectedRoute
-                isAllowed={courseCheck}
-                redirectTo="/"
+                isAllowed={(Cookies.get('jwt') || user?.token) && teacherCheck}
+                redirectTo={`/course/${id}`}
+                path="/course/:id/settings"
+                exact
+                component={CourseSettings}
+              />
+              <ProtectedRoute
+                isAllowed={(Cookies.get('jwt') || user?.token) && teacherCheck}
+                redirectTo={`/course/${id}`}
+                path="/course/:id/edit"
+                render={() => <CourseEdit teacherCheck={teacherCheck} />}
+              />
+              <ProtectedRoute
+                isAllowed={(Cookies.get('jwt') || user?.token) && courseCheck}
+                redirectTo={`/course/${id}`}
                 path="/course/:id/pass"
-                component={CoursePassing}
+                render={() => <CoursePassing courseCheck={courseCheck} />}
               />
             </Switch>
           </div>
