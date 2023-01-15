@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { inputChangeHandler } from '../../../../components/UI/Form/Handlers/Handlers'
 import banner from '../../../../assets/images/banner.jpg'
 import { apiUrl } from '../../../../config'
 import './CourseSettingsCard.scss'
 
 const CourseSettingsCard = ({ course, setCourse }) => {
+  const [image, setImage] = useState(null)
+
   const changeInputState = e => {
+    setImage(URL.createObjectURL(e.target.files[0]))
     inputChangeHandler({ target: { name: 'image', value: e.target.files[0] } }, setCourse)
   }
 
@@ -13,7 +16,7 @@ const CourseSettingsCard = ({ course, setCourse }) => {
     <div className="left-card">
       <div className="left-card__image-block">
         <img
-          src={course.image ? `${apiUrl}/${course.image}` : banner}
+          src={image || (course.image ? `${apiUrl}/${course.image}` : banner)}
           alt={course.title}
           className="left-card__image-block-image"
         />
@@ -29,7 +32,7 @@ const CourseSettingsCard = ({ course, setCourse }) => {
             />
           </svg>
         </i>
-        <input type="file" onChange={changeInputState} className="left-card__image-block-input" />
+        <input type="file" onChange={changeInputState} className="left-card__image-block-input" accept="image/*" />
       </div>
       <div className="left-card_info-block">
         {course.publish ? (

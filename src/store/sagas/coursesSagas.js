@@ -30,6 +30,9 @@ import {
   updateCourseFailure,
   updateCourseRequest,
   updateCourseSuccess,
+  visibilityFailure,
+  visibilityRequest,
+  visibilitySuccess,
 } from '../actions/coursesActions'
 import { historyPush } from '../actions/historyActions'
 
@@ -57,7 +60,7 @@ export function* fetchCourse({ payload: id }) {
   try {
     yield put(showLoading())
 
-    const response = yield axiosApi(`/courses/${id}`)
+    const response = yield axiosApi(`/courses?id=${id}`)
     yield put(fetchCourseSuccess(response.data))
     yield put(hideLoading())
   } catch (e) {
@@ -177,6 +180,21 @@ export function* addUsersCourse({ payload }) {
   }
 }
 
+export function* visibilityLending({ payload }) {
+  const { formData, id } = payload
+  try {
+    yield put(showLoading())
+
+    yield axiosApi.patch(`/courses/${id}/visible`, formData)
+    yield put(visibilitySuccess())
+    yield put(hideLoading())
+    yield put(fetchCourseRequest(id))
+  } catch (e) {
+    yield put(visibilityFailure(e))
+    yield put(hideLoading())
+  }
+}
+
 export function* deleteCourse({ payload: id }) {
   try {
     yield put(showLoading())
@@ -203,6 +221,7 @@ const coursesSagas = [
   takeEvery(updateCourseRequest, updateCourse),
   takeEvery(editCourseHeaderImageRequest, editCourseHeaderImageSaga),
   takeEvery(addUsersCourseRequest, addUsersCourse),
+  takeEvery(visibilityRequest, visibilityLending),
   takeEvery(deleteCourseRequest, deleteCourse),
 ]
 

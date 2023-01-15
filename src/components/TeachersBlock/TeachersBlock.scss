@@ -3,8 +3,7 @@
 .teachers_block {
   display: flex;
   flex-direction: column;
-  padding: 60px 0 200px ;
-  margin: 0 0 -24px;
+  padding: 60px 0 100px;
   overflow: hidden;
 
   &__btn-plus {
@@ -15,13 +14,14 @@
     border: 4px solid transparent;
     border-radius: 50%;
     background: #d1d1d6;
-    margin: 0 auto;
+    margin: 70px auto 0;
     transition: all .5s ease;
 
     &:hover {
       background: transparent;
       border-color: #d1d1d6;
       transition: all .5s ease;
+      cursor: pointer;
     }
   }
 
