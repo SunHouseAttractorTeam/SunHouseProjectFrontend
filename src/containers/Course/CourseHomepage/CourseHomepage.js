@@ -1,25 +1,85 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchCourseRequest } from '../../../store/actions/coursesActions'
+import { fetchCourseRequest, visibilityRequest } from '../../../store/actions/coursesActions'
 import CourseTitle from '../../../components/CourseTitle/CourseTitle'
 import WhatLearn from '../../../components/WhatLearn/WhatLearn'
 import TeachersBlock from '../../../components/TeachersBlock/TeachersBlock'
-import { teachers } from '../../../data/teachers'
 import CourseProgram from '../../../components/CourseProgram/CourseProgram'
-import MainButton from '../../../components/UI/MainButton/MainButton'
 
 const CourseHomepage = ({ teacherCheck, courseCheck }) => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const course = useSelector(state => state.courses.course)
-  const modules = useSelector(state => state.modules.module)
+  const [courseLending, setCourseLending] = useState(null)
+
+  useEffect(() => {
+    if (course) {
+      setCourseLending({
+        blockLearn: course.blockLearn,
+        blockTeachers: course.blockTeachers,
+        blockModules: course.blockModules,
+        searchTeachers: course.searchTeachers,
+        willLearn: course.willLearn,
+        lendingTeachers: course.lendingTeachers,
+      })
+    }
+  }, [course])
 
   useEffect(() => {
     if (!course) {
       dispatch(fetchCourseRequest(id))
     }
   }, [dispatch, course, id])
+
+  const onVisibilityBlock = (type, content, name) => {
+    if (type === 'lendingTeachers') {
+      setCourseLending(prev => ({
+        ...prev,
+        [type]: content,
+      }))
+      return
+    }
+
+    if (type === 'willLearn') {
+      setCourseLending(prev => ({
+        ...prev,
+        [type]: content,
+      }))
+      return
+    }
+
+    if (type === 'description') {
+      setCourseLending(prev => ({
+        ...prev,
+        [name]: { visibility: prev[name].visibility, description: content },
+      }))
+      return
+    }
+
+    setCourseLending(prev => ({
+      ...prev,
+      [type]: { visibility: content, description: prev[type].description },
+    }))
+  }
+
+  const onSave = () => {
+    const formData = new FormData()
+
+    courseLending.willLearn.forEach(elem => {
+      Object.keys(elem).forEach(key => {
+        if (key === 'image') {
+          return formData.append(key, elem[key])
+        }
+
+        return null
+      })
+    })
+
+    formData.append('payload', JSON.stringify(courseLending))
+
+    dispatch(visibilityRequest({ formData, id }))
+  }
 
   return (
     <>
@@ -31,20 +91,77 @@ const CourseHomepage = ({ teacherCheck, courseCheck }) => {
             description={course.description}
             image={course.image}
             teacherCheck={teacherCheck}
-            courseCheck={courseCheck}
           />
           <div className="container">
             <div className="course-homepage__bottom">
-              <WhatLearn teacherCheck={teacherCheck} />
-              <TeachersBlock title="Преподователи" teachers={teachers} teacherCheck={teacherCheck} />
-              <CourseProgram teacherCheck={teacherCheck} modules={modules} />
               {teacherCheck ? (
-                <MainButton type="button" className="course__save-btn GreenButton" text="Сохранить изменения" />
+                courseLending && (
+                  <>
+                    <WhatLearn
+                      block={courseLending.blockLearn}
+                      willLearn={courseLending.willLearn}
+                      teacherCheck={teacherCheck}
+                      onVisibilityBlock={onVisibilityBlock}
+                    />
+                    <TeachersBlock
+                      title="Преподаватели"
+                      subtitle={courseLending.blockTeachers && courseLending.blockTeachers.description}
+                      block={courseLending.blockTeachers}
+                      teachers={courseLending.lendingTeachers}
+                      searchTeachers={course.searchTeachers}
+                      teacherCheck={teacherCheck}
+                      onVisibilityBlock={onVisibilityBlock}
+                    />
+                    <CourseProgram
+                      block={courseLending.blockModules}
+                      teacherCheck={teacherCheck}
+                      modules={course.modules}
+                      onVisibilityBlock={onVisibilityBlock}
+                    />
+                    <button type="button" className="course__save-btn MainButton GreenButton" onClick={onSave}>
+                      Сохранить изменения
+                    </button>
+                  </>
+                )
               ) : (
                 <>
-                  {!courseCheck && (
-                    <MainButton type="button" className="course__save-btn GreenButton" text="Записаться на курс" />
+                  {courseLending && (
+                    <>
+                      {courseLending.blockLearn && courseLending.blockLearn.visibility && (
+                        <WhatLearn
+                          block={courseLending.blockLearn}
+                          willLearn={course.willLearn}
+                          newWillLearn={courseLending.willLearn}
+                          teacherCheck={teacherCheck}
+                          onVisibilityBlock={onVisibilityBlock}
+                        />
+                      )}
+                      {courseLending.blockTeachers && courseLending.blockTeachers.visibility && (
+                        <TeachersBlock
+                          title="Преподаватели"
+                          subtitle={courseLending.blockTeachers && courseLending.blockTeachers.description}
+                          block={courseLending.blockTeachers}
+                          teachers={course.lendingTeachers}
+                          newTeachers={courseLending.lendingTeachers}
+                          teacherCheck={teacherCheck}
+                          onVisibilityBlock={onVisibilityBlock}
+                        />
+                      )}
+                      {courseLending.blockModules && courseLending.blockModules.visibility && (
+                        <CourseProgram
+                          block={courseLending.blockModules}
+                          teacherCheck={teacherCheck}
+                          modules={course.modules}
+                          onVisibilityBlock={onVisibilityBlock}
+                        />
+                      )}
+                    </>
                   )}
+                  {courseCheck ? (
+                    <button type="button" className="course__save-btn MainButton GreenButton">
+                      Записаться на курс
+                    </button>
+                  ) : null}
                 </>
               )}
             </div>

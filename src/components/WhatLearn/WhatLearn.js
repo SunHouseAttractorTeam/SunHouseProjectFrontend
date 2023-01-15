@@ -1,19 +1,17 @@
 import React, { useState } from 'react'
-import './WhatLearn.scss'
-import { useDispatch } from 'react-redux'
 import LearnCardText from './LearnCardText/LearnCardText'
 import Paragraph from '../Paragraph/Paragraph'
 import Modal from '../UI/Modal2/Modal'
-import { updateDescriptionRequest } from '../../store/actions/descriptionsActions'
+import './WhatLearn.scss'
 
-const WhatLearn = ({ teacherCheck, section }) => {
-  const dispatch = useDispatch()
+const WhatLearn = ({ teacherCheck, willLearn, onVisibilityBlock, block }) => {
   const [open, setOpen] = useState(false)
   const [description, setDescription] = useState({
     title: '',
-    subtitle: '',
-    file: null,
+    description: '',
+    image: null,
   })
+  const newLearn = [...willLearn]
 
   const handleFileChange = e => {
     if (!e.target.files) {
@@ -21,7 +19,9 @@ const WhatLearn = ({ teacherCheck, section }) => {
     }
     setDescription(prev => ({
       ...prev,
-      file: e.target.files[0],
+      image: e.target.files[0],
+      title: prev.title,
+      description: prev.description,
     }))
   }
 
@@ -31,16 +31,14 @@ const WhatLearn = ({ teacherCheck, section }) => {
 
   const updateDescription = e => {
     e.preventDefault()
-    if (!section) {
-      setOpen(false)
-      return
-    }
-    dispatch(
-      updateDescriptionRequest({
-        section,
-        text: description,
-      }),
-    )
+
+    newLearn.push(description)
+    onVisibilityBlock('willLearn', newLearn)
+    setDescription({
+      title: '',
+      description: '',
+      image: null,
+    })
     setOpen(false)
   }
 
@@ -54,9 +52,26 @@ const WhatLearn = ({ teacherCheck, section }) => {
 
   return (
     <div className="learn-plan-block">
-      <Paragraph title="Чему вы научитесь" section="whatLearn" teacherCheck={teacherCheck} />
+      <Paragraph
+        title="Чему вы научитесь"
+        subtitle={block.description}
+        teacherCheck={teacherCheck}
+        type="blockLearn"
+        onVisibility={onVisibilityBlock}
+        isVisibility={block.visibility}
+      />
       {teacherCheck ? (
         <>
+          <div className="learn-plan-block__cards">
+            {newLearn.map(item => (
+              <LearnCardText
+                key={item._id || item.title}
+                title={item.title}
+                image={item.image}
+                description={item.description}
+              />
+            ))}
+          </div>
           <button type="button" className="learn-plan-block__btn-plus" onClick={e => handlerClick(e)}>
             +
           </button>
@@ -74,8 +89,8 @@ const WhatLearn = ({ teacherCheck, section }) => {
                   />
                   <input
                     className="block__add-description"
-                    name="subtitle"
-                    value={description.subtitle}
+                    name="description"
+                    value={description.description}
                     onChange={inputChangeHandler}
                     placeholder="Введите описание..."
                   />
@@ -89,7 +104,7 @@ const WhatLearn = ({ teacherCheck, section }) => {
                     />
                     <label className="field__file-wrapper" htmlFor="field__file-2">
                       <div className="field__file-fake">
-                        {description.file ? `${description.file.name}` : 'Файл не выбран'}
+                        {description.image ? `${description.image.name}` : 'Файл не выбран'}
                       </div>
                       <div className="field__file-button">Выбрать</div>
                     </label>
@@ -104,8 +119,13 @@ const WhatLearn = ({ teacherCheck, section }) => {
         </>
       ) : (
         <div className="learn-plan-block__cards">
-          {[1, 2, 3, 4].map(item => (
-            <LearnCardText key={item} />
+          {newLearn.map(item => (
+            <LearnCardText
+              key={item._id || item.title}
+              title={item.title}
+              image={item.image}
+              description={item.description}
+            />
           ))}
         </div>
       )}

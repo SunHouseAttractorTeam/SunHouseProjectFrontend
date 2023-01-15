@@ -118,6 +118,17 @@ const coursesSlice = createSlice({
       state.publishLoading = false
       state.publishError = action.payload
     },
+    visibilityRequest(state) {
+      state.loading = true
+      state.error = null
+    },
+    visibilitySuccess(state) {
+      state.loading = true
+    },
+    visibilityFailure(state, action) {
+      state.loading = true
+      state.error = action.payload
+    },
     clearCourse(state) {
       state.course = null
     },
