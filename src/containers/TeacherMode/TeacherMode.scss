@@ -1,8 +1,10 @@
-.all-card {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  gap: 30px;
+.teacher-mode {
+  &__cards {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 30px;
+  }
 
   &__teacher {
     display: flex;
