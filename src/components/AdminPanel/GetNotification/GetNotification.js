@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllUsersRequest } from '../../store/actions/usersActions'
-import Title from '../UI/Title/Title'
-import MainButton from '../UI/MainButton/MainButton'
+import { getAllUsersRequest } from '../../../store/actions/usersActions'
+import Title from '../../UI/Title/Title'
+import MainButton from '../../UI/MainButton/MainButton'
 import './GetNotification.scss'
-import Modal from '../UI/Modal2/Modal'
-import { inputChangeHandler } from '../UI/Form/Handlers/Handlers'
-import FormArea from '../UI/Form/FormArea/FormArea'
-import { createNotificationRequest } from '../../store/actions/notificationsActions'
+import Modal from '../../UI/Modal2/Modal'
+import { inputChangeHandler } from '../../UI/Form/Handlers/Handlers'
+import FormArea from '../../UI/Form/FormArea/FormArea'
+import { createNotificationRequest } from '../../../store/actions/notificationsActions'
 
 const GetNotification = () => {
   const dispatch = useDispatch()
