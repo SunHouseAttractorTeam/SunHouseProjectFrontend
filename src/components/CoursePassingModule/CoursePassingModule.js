@@ -46,13 +46,7 @@ const CoursePassingModules = ({ id, course }) => {
               )}
             </div>
             {module.data.map(item => (
-              <ul
-                key={item._id}
-                className="course-modules-block__items"
-                style={{
-                  display: burgerMenu === module._id ? 'block' : 'none',
-                }}
-              >
+              <ul key={item._id} className={`course-modules-block__items${burgerMenu === module._id ? 'isOpen' : ''}`}>
                 <li key={item.id} className={`course-modules-block__item course-modules-block__item--${item.type}`}>
                   <Link to={`/course/${id}/${item.type}/${item._id}`} className="course-modules-block__item-title">
                     {item.type === 'test' ? (

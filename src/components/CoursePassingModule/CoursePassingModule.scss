@@ -32,9 +32,19 @@
     }
 
     &__items {
-      padding: 0;
-      margin: 35px 0 0;
       list-style-type: none;
+      background-color: $totalWhiteColor;
+      overflow: hidden;
+      height: 0;
+      margin: 0;
+      transition: all 1s ease;
+
+      &isOpen {
+        padding: 15px 0;
+        height: 70px;
+        overflow: hidden;
+        transition: all 2.0s ease;
+      }
     }
 
     &__item {
@@ -42,7 +52,7 @@
       align-items: flex-start;
       flex-flow: row nowrap;
       justify-content: space-between;
-
+      
       &:not(:last-of-type) {
         margin-bottom: 20px;
       }
