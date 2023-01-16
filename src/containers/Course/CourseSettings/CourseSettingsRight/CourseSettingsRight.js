@@ -19,7 +19,10 @@ const CourseSettingsRight = ({ course }) => {
   const [open, setOpen] = useState(false)
   const [userOpen, setUserOpen] = useState(false)
   const [role, setRole] = useState('users')
-  const [showMore, setShowMore] = useState(false)
+  const [showMore, setShowMore] = useState({
+    status: false,
+    id: '',
+  })
   const [isChecked, setIsChecked] = useState(false)
   const [participant, setParticipant] = useState(null)
   const [userModal, setUserModal] = useState(null)
@@ -42,8 +45,23 @@ const CourseSettingsRight = ({ course }) => {
     await dispatch(fetchCourseRequest(id))
     setOpen(false)
   }
-  const onShowMoreBtn = () => {
-    setShowMore(!showMore)
+  const onShowMoreBtn = userId => {
+    if (userId === showMore.id) {
+      setShowMore({
+        status: false,
+        id: '',
+      })
+    } else if (showMore.id !== '') {
+      setShowMore({
+        status: showMore.status,
+        id: userId,
+      })
+    } else {
+      setShowMore({
+        status: !showMore.status,
+        id: userId,
+      })
+    }
   }
 
   if (users) {
@@ -89,7 +107,7 @@ const CourseSettingsRight = ({ course }) => {
                     <MainButton
                       className="block-right__name-block__center__button WhiteButton"
                       type="button"
-                      onClick={onShowMoreBtn}
+                      onClick={() => onShowMoreBtn(user.user._id)}
                       text={
                         <>
                           <i>
@@ -135,7 +153,7 @@ const CourseSettingsRight = ({ course }) => {
                       </svg>
                     </div>
                   </div>
-                  {showMore && (
+                  {showMore.status && showMore.id === user.user._id && (
                     <div className="block-right__name-block__top__tasks">
                       <p className="block-right__name-block__top__tasks__text">
                         {user.task.title}:
