@@ -49,14 +49,18 @@ const CourseTitle = ({ courseId, title, description, teacherCheck, courseCheck, 
             </Link>
           ) : (
             <>
-              {courseCheck ? (
-                <Link to={`/course/${courseId}/pass`} className="course-title__button">
-                  <MainButton className="WhiteButton" type="button" text="Перейти к прохождению >" />
-                </Link>
-              ) : (
-                <Link to={`/course/${courseId}`} className="course-title__button">
-                  <MainButton className="WhiteButton" type="button" text="Записаться на курс" />
-                </Link>
+              {courseCheck !== undefined && (
+                <>
+                  {courseCheck ? (
+                    <Link to={`/course/${courseId}/pass`} className="course-title__button">
+                      <MainButton className="WhiteButton" type="button" text="Перейти к прохождению >" />
+                    </Link>
+                  ) : (
+                    <Link to={`/course/${courseId}`} className="course-title__button">
+                      <MainButton className="WhiteButton" type="button" text="Записаться на курс" />
+                    </Link>
+                  )}
+                </>
               )}
             </>
           )}

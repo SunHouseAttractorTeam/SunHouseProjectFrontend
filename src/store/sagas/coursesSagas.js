@@ -21,9 +21,15 @@ import {
   fetchCoursesRequest,
   fetchCoursesSuccess,
   fetchCourseSuccess,
+  fetchTeacherCoursesFailure,
+  fetchTeacherCoursesRequest,
+  fetchTeacherCoursesSuccess,
   fetchUserCoursesFailure,
   fetchUserCoursesRequest,
   fetchUserCoursesSuccess,
+  joinTheCourseFailure,
+  joinTheCourseRequest,
+  joinTheCourseSuccess,
   publishCourseFailure,
   publishCourseRequest,
   publishCourseSuccess,
@@ -69,11 +75,24 @@ export function* fetchCourse({ payload: id }) {
   }
 }
 
+export function* fetchTeacherCourses({ payload: teacherId }) {
+  try {
+    yield put(showLoading())
+
+    const response = yield axiosApi(`/courses?teacherId=${teacherId}`)
+    yield put(fetchTeacherCoursesSuccess(response.data))
+    yield put(hideLoading())
+  } catch (e) {
+    yield put(fetchTeacherCoursesFailure(e))
+    yield put(hideLoading())
+  }
+}
+
 export function* fetchUserCourses({ payload: userId }) {
   try {
     yield put(showLoading())
 
-    const response = yield axiosApi(`/courses?user=${userId}`)
+    const response = yield axiosApi(`/courses?userId=${userId}`)
     yield put(fetchUserCoursesSuccess(response.data))
     yield put(hideLoading())
   } catch (e) {
@@ -212,10 +231,28 @@ export function* deleteCourse({ payload: id }) {
   }
 }
 
+export function* joinTheCourseSaga({ payload: { userId, courseId } }) {
+  try {
+    yield put(showLoading())
+    yield axiosApi.put(`/courses/${courseId}/add?userId=${userId}`)
+    yield put(joinTheCourseSuccess())
+    yield put(hideLoading())
+    yield put(fetchCourseRequest(courseId))
+
+    yield Toast.fire({
+      title: 'Вы успешно записались на курс',
+    })
+  } catch (e) {
+    yield put(joinTheCourseFailure())
+    yield put(hideLoading())
+  }
+}
+
 const coursesSagas = [
   takeEvery(fetchCoursesRequest, fetchCourses),
   takeEvery(publishCourseRequest, publishCourse),
   takeEvery(fetchCourseRequest, fetchCourse),
+  takeEvery(fetchTeacherCoursesRequest, fetchTeacherCourses),
   takeEvery(fetchUserCoursesRequest, fetchUserCourses),
   takeEvery(createCourseRequest, createCourse),
   takeEvery(updateCourseRequest, updateCourse),
@@ -223,6 +260,7 @@ const coursesSagas = [
   takeEvery(addUsersCourseRequest, addUsersCourse),
   takeEvery(visibilityRequest, visibilityLending),
   takeEvery(deleteCourseRequest, deleteCourse),
+  takeEvery(joinTheCourseRequest, joinTheCourseSaga),
 ]
 
 export default coursesSagas

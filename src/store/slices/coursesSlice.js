@@ -41,6 +41,19 @@ const coursesSlice = createSlice({
       state.error = action.payload
     },
 
+    fetchTeacherCoursesRequest(state) {
+      state.loading = true
+      state.error = null
+    },
+    fetchTeacherCoursesSuccess(state, action) {
+      state.loading = false
+      state.courses = action.payload
+    },
+    fetchTeacherCoursesFailure(state, action) {
+      state.loading = false
+      state.error = action.payload
+    },
+
     fetchUserCoursesRequest(state) {
       state.loading = true
       state.error = null
@@ -129,8 +142,22 @@ const coursesSlice = createSlice({
       state.loading = true
       state.error = action.payload
     },
+    joinTheCourseRequest(state) {
+      state.loading = true
+      state.error = null
+    },
+    joinTheCourseSuccess(state) {
+      state.loading = true
+    },
+    joinTheCourseFailure(state, action) {
+      state.loading = true
+      state.error = action.payload
+    },
     clearCourse(state) {
       state.course = null
+    },
+    clearCourses(state) {
+      state.courses = []
     },
   },
 })
