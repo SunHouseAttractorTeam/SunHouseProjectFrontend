@@ -18,9 +18,21 @@ const lendingTeachersSlice = createSlice({
     },
     fetchTeachersSuccess(state, { payload: teachers }) {
       state.loading = false
-      state.reviews = teachers
+      state.teachers = teachers
     },
     fetchTeachersFailure(state, action) {
+      state.loading = false
+      state.error = action.payload
+    },
+    createTeachersRequest(state) {
+      state.loading = true
+      state.error = null
+    },
+    createTeachersSuccess(state) {
+      state.loading = false
+      state.error = null
+    },
+    createTeachersFailure(state, action) {
       state.loading = false
       state.error = action.payload
     },

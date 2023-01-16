@@ -2,6 +2,9 @@ import { put, takeEvery } from 'redux-saga/effects'
 import { hideLoading, showLoading } from 'react-redux-loading-bar'
 import axiosApi from '../../axiosApi'
 import {
+  createTeachersFailure,
+  createTeachersRequest,
+  createTeachersSuccess,
   deleteTeachersFailure,
   deleteTeachersRequest,
   deleteTeachersSuccess,
@@ -22,6 +25,18 @@ export function* fetchTeachersSaga() {
   }
 }
 
+export function* createTeachersSaga({ payload: data }) {
+  try {
+    yield put(showLoading())
+    yield axiosApi.post('/lending_teachers', data)
+    yield put(createTeachersSuccess())
+    yield put(hideLoading())
+  } catch (e) {
+    yield put(hideLoading())
+    yield put(createTeachersFailure(e))
+  }
+}
+
 export function* deleteTeachersSaga({ payload: id }) {
   try {
     axiosApi.delete(`/lending_teachers/${id}`)
@@ -36,6 +51,7 @@ export function* deleteTeachersSaga({ payload: id }) {
 const lendingTeachersSagas = [
   takeEvery(fetchTeachersRequest, fetchTeachersSaga),
   takeEvery(deleteTeachersRequest, deleteTeachersSaga),
+  takeEvery(createTeachersRequest, createTeachersSaga),
 ]
 
 export default lendingTeachersSagas

@@ -8,9 +8,6 @@ import {
   deleteReviewFailure,
   deleteReviewRequest,
   deleteReviewSuccess,
-  editReviewFailure,
-  editReviewRequest,
-  editReviewSuccess,
   fetchReviewsFailure,
   fetchReviewsRequest,
   fetchReviewsSuccess,
@@ -40,19 +37,6 @@ export function* createReview({ payload: reviewData }) {
   }
 }
 
-export function* editReview({ payload }) {
-  const { reviewId, reviewData } = payload
-
-  try {
-    yield put(showLoading())
-    yield axiosApi.put(`/lending_reviews/${reviewId}`, reviewData)
-    yield put(editReviewSuccess())
-    yield put(hideLoading())
-  } catch (e) {
-    yield put(editReviewFailure(e))
-  }
-}
-
 export function* deleteReview({ payload }) {
   const { reviewId } = payload
 
@@ -69,7 +53,6 @@ export function* deleteReview({ payload }) {
 const lendingReviewsSagas = [
   takeEvery(fetchReviewsRequest, fetchReviews),
   takeEvery(createReviewRequest, createReview),
-  takeEvery(editReviewRequest, editReview),
   takeEvery(deleteReviewRequest, deleteReview),
 ]
 

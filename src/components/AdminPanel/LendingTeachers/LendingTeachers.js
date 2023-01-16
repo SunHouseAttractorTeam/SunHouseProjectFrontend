@@ -1,11 +1,11 @@
 import { useDispatch } from 'react-redux'
 import React, { useState } from 'react'
-import { createReviewRequest } from '../../../store/actions/lendingReviewsActions'
 import Title from '../../UI/Title/Title'
 import FormInput from '../../UI/Form/FormInput/FormInput'
 import { inputChangeHandler } from '../../UI/Form/Handlers/Handlers'
 import FormArea from '../../UI/Form/FormArea/FormArea'
 import MainButton from '../../UI/MainButton/MainButton'
+import { createTeachersRequest } from '../../../store/actions/lendingTeachersActions'
 
 const LendingTeachers = () => {
   const dispatch = useDispatch()
@@ -22,7 +22,7 @@ const LendingTeachers = () => {
     Object.keys(state).forEach(key => {
       formData.append(key, state[key])
     })
-    dispatch(createReviewRequest(formData))
+    dispatch(createTeachersRequest(formData))
     setState({ image: '', name: '', description: '' })
   }
   console.log(state)
