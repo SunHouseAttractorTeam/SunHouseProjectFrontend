@@ -47,15 +47,21 @@ const CourseUserModal = ({ setOpen, user }) => {
 
   useEffect(() => {
     // eslint-disable-next-line no-unused-expressions
-    user &&
-      user.tests &&
-      user.tests.length !== 0 &&
-      setCounts(prev => ({
-        ...prev,
-        userPassed: counts.userPassed + 1,
-      }))
-  }, [user])
+    userGeneral &&
+      userGeneral.tests &&
+      userGeneral.tests.length !== 0 &&
+      // eslint-disable-next-line array-callback-return
+      userGeneral.tests.map(test => {
+        if (test.status === true) {
+          setCounts(prev => ({
+            ...prev,
+            userPassed: counts.userPassed + 1,
+          }))
+        }
+      })
+  }, [userGeneral])
 
+  console.log(counts)
   const handlerClick = () => {
     setOpen(false)
   }

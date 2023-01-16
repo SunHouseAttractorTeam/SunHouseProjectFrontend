@@ -62,6 +62,11 @@
         width: 30%;
         font-weight: 500;
         font-size: 16px;
+        cursor: pointer;
+      }
+
+      &__name:hover {
+        color: $lightGreenColor;
       }
 
       &__buttons {

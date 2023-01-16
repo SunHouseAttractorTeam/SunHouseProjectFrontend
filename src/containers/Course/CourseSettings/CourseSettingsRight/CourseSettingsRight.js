@@ -78,7 +78,7 @@ const CourseSettingsRight = ({ course }) => {
                     className="block-right__name-block__top__name"
                     onClick={async () => {
                       // await dispatch(getUserRequest(user.email))
-                      await setUserModal(user)
+                      await setUserModal(user.user)
                       setUserOpen(true)
                     }}
                   >
