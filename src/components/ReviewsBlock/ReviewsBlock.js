@@ -5,6 +5,7 @@ import CustomSlider from '../UI/CustomSlider/CustomSlider'
 import { fetchReviewsRequest } from '../../store/actions/lendingReviewsActions'
 import noPhoto from '../../assets/icons/cosmosChel.png'
 import './ReviewsBlock.scss'
+import { apiUrl } from '../../config'
 
 const sliderSettings = [
   {
@@ -36,13 +37,10 @@ const sliderSettings = [
 const ReviewsBlock = () => {
   const dispatch = useDispatch()
   const lendingReview = useSelector(state => state.reviews.reviews)
-  let cardIcon = noPhoto
+
   useEffect(() => {
     dispatch(fetchReviewsRequest())
   }, [dispatch])
-  if (lendingReview?.image) {
-    cardIcon = `http://localhost:8000/${lendingReview.image}`
-  }
 
   return (
     <div className="review_block">
@@ -53,7 +51,7 @@ const ReviewsBlock = () => {
             {lendingReview.map(review => (
               <ReviewCard
                 key={review._id}
-                img={cardIcon}
+                img={review.image ? `${apiUrl}/${review.image}` : noPhoto}
                 name={review.name}
                 social={review.socialNetwork}
                 content={review.description}
