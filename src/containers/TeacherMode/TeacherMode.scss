@@ -1,19 +1,37 @@
+@import '../../scss/style';
+
 .teacher-mode {
   &__cards {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    gap: 30px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
   }
 
-  &__teacher {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 45%;
+  &__button {
+    position: relative;
+    cursor: pointer;
+    border: none;
+    transition: all .3s ease;
+    border-radius: 16px;
+    background: $totalWhiteColor;
 
     &:hover {
       transform: translateY(-8px);
+
+      & path {
+        fill: $whiteBorderColor;
+      }
+    }
+
+    &-icon {
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    &-text {
+      display: block;
+      font-weight: 700;
+      font-size: 16px;
     }
   }
 }

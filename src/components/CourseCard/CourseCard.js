@@ -1,16 +1,15 @@
 import React from 'react'
-
-import './CourseCard.scss'
 import { Link } from 'react-router-dom'
+import { apiUrl } from '../../config'
 import MainButton from '../UI/MainButton/MainButton'
+import imgNotFound from '../../assets/images/banner.jpg'
+import './CourseCard.scss'
 
-const CourseCard = ({ isLast, title, date, list, price, onClick }) => (
+const CourseCard = ({ isLast, title, list, onClick, image, teacherMode }) => (
   <div className={isLast ? 'course-card course-card--is-last' : 'course-card'} onClick={onClick}>
+    <img src={image ? `${apiUrl}/${image}` : imgNotFound} alt={title} className="course-card__image" />
     <div className="course-card__content">
-      {!isLast && <span className="course-card__profession">профессия</span>}
       <h3 className="course-card__title">{title}</h3>
-      {price && <h6 className="course-card__price">{price} сом</h6>}
-      {!isLast && date && <span className="course-card__date">{date}</span>}
       {isLast && list && (
         <ul className="course-card__list">
           {list.map(item => (
@@ -19,6 +18,9 @@ const CourseCard = ({ isLast, title, date, list, price, onClick }) => (
             </li>
           ))}
         </ul>
+      )}
+      {teacherMode && (
+        <MainButton type="button" className="GreenButton course-card__edit-button" text="Редактировать курс" />
       )}
       {isLast && (
         <Link to="/course-catalog" className="course-card__link">

@@ -43,6 +43,7 @@ const UserCourses = () => {
                   title={course.title}
                   price={course.price}
                   date={course.date}
+                  image={course.image}
                   onClick={() => handleCourse(course._id)}
                 />
               ))}
