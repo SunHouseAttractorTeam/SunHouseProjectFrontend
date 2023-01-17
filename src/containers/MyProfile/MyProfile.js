@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Cookies from 'js-cookie'
 import { useSelector } from 'react-redux'
 import { Switch } from 'react-router-dom'
@@ -15,6 +15,11 @@ import './MyProfile.scss'
 
 const MyProfile = () => {
   const user = useSelector(state => state.users.user)
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <div className="profile">
       <div className="container">
