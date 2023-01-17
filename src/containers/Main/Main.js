@@ -5,19 +5,19 @@ import About from '../../components/About/About'
 import Promo from '../../components/Promo/Promo'
 import CoursesCatalog from '../../components/CoursesCatalog/CoursesCatalog'
 import Partners from '../../components/Partners/Partners'
-import './Main.scss'
+import LendingTeacherBlock from '../../components/LendingTeacherBlock/LendingTeacherBlock'
 import ReviewsBlock from '../../components/ReviewsBlock/ReviewsBlock'
-import LendingTeachersBlock from '../../components/LendingTeachersBlock/LendingTeachersBlock'
+import './Main.scss'
 
 const Main = () => (
   <div className="main">
     <Header />
     <Promo />
-    <LendingTeachersBlock />
     <CoursesCatalog />
     <About />
     <div className="container" />
     <Partners />
+    <LendingTeacherBlock />
     <ReviewsBlock />
     <Footer />
   </div>
