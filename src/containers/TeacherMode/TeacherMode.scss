@@ -8,12 +8,15 @@
   }
 
   &__button {
-    position: relative;
+    display: flex;
+    flex-direction: column;
     cursor: pointer;
     border: none;
     transition: all .3s ease;
-    border-radius: 16px;
-    background: $totalWhiteColor;
+    background: transparent;
+    font-family: inherit;
+    padding: 0;
+    margin-bottom: 10px;
 
     &:hover {
       transform: translateY(-8px);
@@ -23,15 +26,20 @@
       }
     }
 
-    &-icon {
-      display: block;
+    &-top {
+      width: 100%;
+      height: 280px;
+      border-radius: 16px;
       margin-bottom: 20px;
+      background: $totalWhiteColor;
+      display: grid;
+      place-content: center;
     }
 
     &-text {
-      display: block;
-      font-weight: 700;
-      font-size: 16px;
+      font-size: 24px;
+      font-weight: 500;
+      padding-left: 5px;
     }
   }
 }

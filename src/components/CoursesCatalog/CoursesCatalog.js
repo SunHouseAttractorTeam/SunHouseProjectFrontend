@@ -1,8 +1,9 @@
 import React from 'react'
 import CourseCard from '../CourseCard/CourseCard'
 import coursesData from './coursesData'
-import './CoursesCatalog.scss'
 import CustomSlider from '../UI/CustomSlider/CustomSlider'
+import MainButton from '../UI/MainButton/MainButton'
+import './CoursesCatalog.scss'
 
 const sliderSettings = [
   {
@@ -23,6 +24,19 @@ const CoursesCatalog = () => (
         {coursesData.map(item => (
           <CourseCard key={item.title} title={item.title} date={item.date} isLast={item.isLast} list={item.list} />
         ))}
+        <div className="courses-section__card">
+          <div className="courses-section__card-top">
+            <h6 className="courses-section__card-top-title">Все наши курсы</h6>
+            <ul className="courses-section__card-top-list">
+              <li className="courses-section__card-top-list-item">Программирование</li>
+              <li className="courses-section__card-top-list-item">Дизайн и UX</li>
+              <li className="courses-section__card-top-list-item">Маркетинг</li>
+            </ul>
+            <div className="courses-section__card-top-button">
+              <MainButton type="button" className="GreenButton" text="Подробнее" />
+            </div>
+          </div>
+        </div>
       </div>
       <div className="slider">
         <CustomSlider response={sliderSettings}>

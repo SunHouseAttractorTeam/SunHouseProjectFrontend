@@ -35,6 +35,7 @@ const MyProfile = () => {
                 isAllowed={Cookies.get('jwt') && user?.role !== 'ban'}
                 redirectTo={user?.role === 'ban' ? '/user/notifications' : '/login'}
                 path="/user/courses"
+                // transition: all .3s ease;
                 component={UserCourses}
               />
               <ProtectedRoute

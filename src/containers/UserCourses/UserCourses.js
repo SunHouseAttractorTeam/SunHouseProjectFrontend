@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
 import Title from '../../components/UI/Title/Title'
 import BurgerMenu from '../../components/UI/BurgerMenu/BurgerMenu'
-import './UserCourses.scss'
 import { clearCourses, fetchUserCoursesRequest } from '../../store/actions/coursesActions'
 import CourseCard from '../../components/CourseCard/CourseCard'
+import './UserCourses.scss'
 
 const UserCourses = () => {
-  const history = useHistory()
   const user = useSelector(state => state.users.user)
   const courses = useSelector(state => state.courses.courses)
   const dispatch = useDispatch()
@@ -22,10 +20,6 @@ const UserCourses = () => {
       dispatch(clearCourses())
     }
   }, [dispatch, user])
-
-  const handleCourse = id => {
-    history.push(`/course/${id}`)
-  }
 
   return (
     <div className="user-courses">
@@ -44,7 +38,7 @@ const UserCourses = () => {
                   price={course.price}
                   date={course.date}
                   image={course.image}
-                  onClick={() => handleCourse(course._id)}
+                  id={course._id}
                 />
               ))}
             </>
