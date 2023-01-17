@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Title from '../../components/UI/Title/Title'
-import './UserCourses.scss'
 import { clearCourses, fetchUserCoursesRequest } from '../../store/actions/coursesActions'
 import CourseCard from '../../components/CourseCard/CourseCard'
 import './UserCourses.scss'
