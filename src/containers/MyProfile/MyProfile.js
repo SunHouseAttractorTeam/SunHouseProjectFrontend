@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Cookies from 'js-cookie'
 import { useSelector } from 'react-redux'
 import { Switch } from 'react-router-dom'
 import MyProfileTop from '../../components/UI/MyProfileTop/MyProfileTop'
-import MyProfileBottom from './MyProfileBottom/MyProfileBottom'
 import UserCourses from '../UserCourses/UserCourses'
 import TeacherMode from '../TeacherMode/TeacherMode'
 import Notifications from '../Notifications/Notifications'
@@ -12,16 +11,26 @@ import Settings from '../Settings/Settings'
 import Footer from '../../components/Footer/Footer'
 import { ProtectedRoute } from '../../utils/utils'
 import './MyProfile.scss'
+import MyProfileBottom from './MyProfileBottom/MyProfileBottom'
+import BurgerMenu from '../../components/UI/BurgerMenu/BurgerMenu'
 
 const MyProfile = () => {
   const user = useSelector(state => state.users.user)
+  const [toggle, setToggle] = useState(false)
+
   return (
     <div className="profile">
       <div className="container">
         <div className="profile__inner">
           <div className="profile__sidebar">
             <MyProfileTop user={user} />
-            <MyProfileBottom />
+            <div className="profile__sidebar_list" onClick={() => setToggle(toggleItems => !toggleItems)}>
+              <BurgerMenu />
+            </div>
+            <div className="profile__sidebar-bottom-block">
+              <MyProfileBottom />
+            </div>
+            {toggle === true && <MyProfileBottom />}
           </div>
           <div className="profile__right">
             <Switch>

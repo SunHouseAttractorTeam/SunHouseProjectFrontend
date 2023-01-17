@@ -38,7 +38,7 @@ const AllUsers = () => {
   }
   return (
     <div className="users">
-      <Title>Список пользователей</Title>
+      <Title className="title-users">Список пользователей</Title>
       <div className="users__inner-block">
         <h5 className="users__subtitle">Имя пользователя</h5>
         {users?.map(user => (
