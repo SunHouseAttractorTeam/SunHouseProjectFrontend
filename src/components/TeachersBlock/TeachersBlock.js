@@ -35,7 +35,6 @@ const sliderSettings = [
   },
 ]
 const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBlock, block, searchTeachers }) => {
-  const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
   const [teacher, setTeacher] = useState({
     user: '',
@@ -43,6 +42,7 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBl
   })
   const currentSearchTeachers = []
   const newTeachers = [...teachers]
+
   const handlerClick = () => {
     setOpen(true)
   }
@@ -101,8 +101,8 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBl
       {teacherCheck ? (
         <>
           <CustomSlider response={sliderSettings}>
-            {newTeachers.length !== 0 &&
-              newTeachers.map(teacherObj => (
+            {teachers.length !== 0 &&
+              teachers.map(teacherObj => (
                 <TeacherCard
                   key={teacherObj._id || teacherObj.name}
                   user={teacherObj.user}
@@ -141,8 +141,8 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBl
         </>
       ) : (
         <CustomSlider response={sliderSettings}>
-          {newTeachers.length !== 0 &&
-            newTeachers.map(teacherObj => (
+          {teachers.length !== 0 &&
+            teachers.map(teacherObj => (
               <TeacherCard
                 key={(teacherObj.user && teacherObj.user._id) || teacherObj.name}
                 user={teacherObj.user}

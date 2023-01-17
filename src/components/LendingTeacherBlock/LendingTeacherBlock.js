@@ -6,15 +6,19 @@ import { fetchTeachersRequest } from '../../store/actions/lendingTeachersActions
 const LendingTeacherBlock = () => {
   const dispatch = useDispatch()
   const teachers = useSelector(state => state.teachers.teachers)
+  const newTeachers = []
+  teachers.map(teacher => {
+    newTeachers.push({ user: { avatar: teacher.image, username: teacher.name }, description: teacher.description })
+    return teacher
+  })
   useEffect(() => {
     dispatch(fetchTeachersRequest())
   }, [dispatch])
-  console.log(teachers)
   return (
     <TeachersBlock
       title="Преподаватели — <span>практикующие эксперты</span>"
       subtitle="Доверьте свое обучение специалистам"
-      teachers={teachers}
+      teachers={newTeachers}
     />
   )
 }
