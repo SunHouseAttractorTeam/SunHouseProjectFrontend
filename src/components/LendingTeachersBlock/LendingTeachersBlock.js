@@ -7,6 +7,33 @@ import noPhoto from '../../assets/icons/cosmosChel.png'
 import './LendingTeacherBlock.scss'
 import { apiUrl } from '../../config'
 
+const sliderSettings = [
+  {
+    breakpoint: 1170,
+    settings: {
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      centerMode: true,
+      centerPadding: '150px',
+    },
+  },
+  {
+    breakpoint: 870,
+    settings: {
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      centerMode: true,
+      centerPadding: '50px',
+    },
+  },
+  {
+    breakpoint: 700,
+    settings: {
+      slidesToShow: 1,
+      slidesToScroll: 1,
+    },
+  },
+]
 const LendingTeacherBlock = () => {
   const dispatch = useDispatch()
   const teachers = useSelector(state => state.teachers.teachers)
@@ -17,15 +44,15 @@ const LendingTeacherBlock = () => {
 
   return (
     <>
-      <div className="lending-teachers_block">
+      <div className="lending-teachers__block">
         <div className="container">
-          <div className="lending-teachers_block_headline">
-            <div className="lending-teachers_block_text">
-              <h5 className="lending-teachers_block_title">Преподаватели — практикующие эксперты</h5>
-              <span className="lending-teachers_block_subtitle">Доверьте свое обучение специалистам</span>
+          <div className="lending-teachers__block-headline">
+            <div className="lending-teachers__block-text">
+              <h5 className="lending-teachers__block-title">Преподаватели — практикующие эксперты</h5>
+              <span className="lending-teachers__block-subtitle">Доверьте свое обучение специалистам</span>
             </div>
           </div>
-          <CustomSlider>
+          <CustomSlider response={sliderSettings}>
             {teachers.map(teacher => (
               <LendingTeacherCard
                 key={teacher._id}
