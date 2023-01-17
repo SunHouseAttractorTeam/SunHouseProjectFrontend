@@ -11,13 +11,11 @@ const LendingTeacherBlock = () => {
   }, [dispatch])
   console.log(teachers)
   return (
-    <div>
-      <TeachersBlock
-        title="Преподаватели — <span>практикующие эксперты</span>"
-        subtitle="Доверьте свое обучение специалистам"
-        teachers={teachers}
-      />
-    </div>
+    <TeachersBlock
+      title="Преподаватели — <span>практикующие эксперты</span>"
+      subtitle="Доверьте свое обучение специалистам"
+      teachers={teachers}
+    />
   )
 }
 

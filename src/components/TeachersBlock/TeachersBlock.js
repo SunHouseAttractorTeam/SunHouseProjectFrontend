@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react'
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import TeacherCard from './TeacherCard/TeacherCard'
 import CustomSlider from '../UI/CustomSlider/CustomSlider'
@@ -7,7 +6,6 @@ import Paragraph from '../Paragraph/Paragraph'
 import Modal from '../UI/Modal2/Modal'
 import Card from '../UI/Cards/Card/Card'
 import './TeachersBlock.scss'
-import { fetchTeachersRequest } from '../../store/actions/lendingTeachersActions'
 
 const sliderSettings = [
   {
@@ -38,7 +36,6 @@ const sliderSettings = [
 ]
 const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBlock, block, searchTeachers }) => {
   const dispatch = useDispatch()
-  const t = useSelector(state => state.teachers.teachers)
   const [open, setOpen] = useState(false)
   const [teacher, setTeacher] = useState({
     user: '',
@@ -46,11 +43,6 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBl
   })
   const currentSearchTeachers = []
   const newTeachers = [...teachers]
-
-  useEffect(() => {
-    dispatch(fetchTeachersRequest())
-  }, [dispatch])
-  console.log(t)
   const handlerClick = () => {
     setOpen(true)
   }
@@ -109,8 +101,8 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBl
       {teacherCheck ? (
         <>
           <CustomSlider response={sliderSettings}>
-            {t.length !== 0 &&
-              t.map(teacherObj => (
+            {newTeachers.length !== 0 &&
+              newTeachers.map(teacherObj => (
                 <TeacherCard
                   key={teacherObj._id || teacherObj.name}
                   user={teacherObj.user}
@@ -149,8 +141,8 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBl
         </>
       ) : (
         <CustomSlider response={sliderSettings}>
-          {t.length !== 0 &&
-            t.map(teacherObj => (
+          {newTeachers.length !== 0 &&
+            newTeachers.map(teacherObj => (
               <TeacherCard
                 key={(teacherObj.user && teacherObj.user._id) || teacherObj.name}
                 user={teacherObj.user}
