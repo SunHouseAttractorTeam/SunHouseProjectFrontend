@@ -16,13 +16,7 @@ const Main = () => (
     <LendingTeachersBlock />
     <CoursesCatalog />
     <About />
-    <div className="container">
-      {/* <TeachersBlock */}
-      {/*  title="Преподаватели — <span>практикующие эксперты</span>" */}
-      {/*  subtitle="Доверьте свое обучение специалистам" */}
-      {/*  teachers={teachers} */}
-      {/* /> */}
-    </div>
+    <div className="container" />
     <Partners />
     <ReviewsBlock />
     <Footer />

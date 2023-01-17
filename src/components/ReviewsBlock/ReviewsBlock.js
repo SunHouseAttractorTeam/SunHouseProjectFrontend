@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import ReviewCard from './ReviewCard/ReviewCard'
 import CustomSlider from '../UI/CustomSlider/CustomSlider'
 import { fetchReviewsRequest } from '../../store/actions/lendingReviewsActions'
+import { apiUrl } from '../../config'
 import noPhoto from '../../assets/icons/cosmosChel.png'
 import './ReviewsBlock.scss'
-import { apiUrl } from '../../config'
 
 const sliderSettings = [
   {

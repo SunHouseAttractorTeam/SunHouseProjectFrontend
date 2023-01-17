@@ -25,7 +25,6 @@ const LendingTeachers = () => {
     dispatch(createTeachersRequest(formData))
     setState({ image: '', name: '', description: '' })
   }
-  console.log(state)
   return (
     <div className="reviews">
       <Title>Преподаватели</Title>
