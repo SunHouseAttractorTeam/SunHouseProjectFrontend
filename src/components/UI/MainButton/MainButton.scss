@@ -16,10 +16,15 @@
   line-height: 20px;
   cursor: pointer;
   transition: all .3s ease;
+  box-shadow: 0 2px 4px -2px rgba(24, 39, 75, 0.12), 0 4px 4px -2px rgba(24, 39, 75, 0.08);
 }
 
 .GreenButton {
   background-color: $lightGreenColor;
+}
+
+.RedButton {
+  background-color: $totalRedColor;
 }
 
 .WhiteButton {
