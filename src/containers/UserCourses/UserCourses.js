@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Title from '../../components/UI/Title/Title'
-import BurgerMenu from '../../components/UI/BurgerMenu/BurgerMenu'
+import './UserCourses.scss'
 import { clearCourses, fetchUserCoursesRequest } from '../../store/actions/coursesActions'
 import CourseCard from '../../components/CourseCard/CourseCard'
 import './UserCourses.scss'
@@ -25,7 +25,6 @@ const UserCourses = () => {
     <div className="user-courses">
       <div className="user-courses__top">
         <Title>Мои курсы</Title>
-        <BurgerMenu />
       </div>
       <div className="user-courses__bottom">
         <div className="user-courses__bottom-courses">

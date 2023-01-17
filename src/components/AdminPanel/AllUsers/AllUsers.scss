@@ -1,14 +1,12 @@
-@import '../../scss/style';
+@import '../../../scss/style';
 
 .users {
-
-
   &__subtitle {
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
     color: $lightGrey;
-    padding: 32px 0px 24px 24px;
+    padding: 32px 0 24px 24px;
   }
 
   &__inner-block {
@@ -22,7 +20,7 @@
 
   &__names {
     cursor: pointer;
-    padding: 16px 0px 16px 24px;
+    padding: 16px 0 16px 24px;
     font-weight: 500;
     font-size: 16px;
     line-height: 19px;
@@ -30,7 +28,7 @@
 
     &-ban {
       cursor: pointer;
-      padding: 16px 0px 16px 24px;
+      padding: 16px 0 16px 24px;
       font-weight: 500;
       font-size: 16px;
       line-height: 19px;
@@ -89,4 +87,10 @@
   }
 }
 
-
+.title-users {
+  @media (max-width: 538px) {
+    flex-direction: column;
+    text-align: center;
+    font-size: 26px;
+  }
+}

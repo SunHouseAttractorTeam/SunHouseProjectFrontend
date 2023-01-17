@@ -5,11 +5,12 @@ import Cookies from 'js-cookie'
 import MyProfileTop from '../../components/UI/MyProfileTop/MyProfileTop'
 import AdminPanelBottom from './AdminPanelBottom/AdminPanelBottom'
 import { ProtectedRoute } from '../../utils/utils'
-import AllUsers from '../../components/AllUsers/AllUsers'
-import GetNotification from '../../components/GetNotification/GetNotification'
-import LendingReviews from '../../components/LendingReviews/LendingReviews'
-import AdminCoursesControl from '../../components/AdminCoursesControl/AdminCoursesControl'
+import AllUsers from '../../components/AdminPanel/AllUsers/AllUsers'
+import GetNotification from '../../components/AdminPanel/GetNotification/GetNotification'
+import LendingReviews from '../../components/AdminPanel/LendingReviews/LendingReviews'
+import AdminCoursesControl from '../../components/AdminPanel/AdminCoursesControl/AdminCoursesControl'
 import Footer from '../../components/Footer/Footer'
+import AddCategory from '../../components/AdminPanel/AddCategory/AddCategory'
 
 const AdminPanel = () => {
   const user = useSelector(state => state.users.user)
@@ -46,6 +47,12 @@ const AdminPanel = () => {
                 redirectTo="/login"
                 path="/admin_panel/reviews"
                 component={LendingReviews}
+              />
+              <ProtectedRoute
+                isAllowed={Cookies.get('jwt')}
+                redirectTo="/login"
+                path="/admin_panel/course_category_control"
+                component={AddCategory}
               />
             </Switch>
           </div>

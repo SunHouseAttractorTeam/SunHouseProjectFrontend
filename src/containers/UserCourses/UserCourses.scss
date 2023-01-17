@@ -2,7 +2,7 @@
   &__top {
     position: relative;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
   }
 
@@ -11,6 +11,10 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-gap: 20px;
+      @media(max-width: 1020px) {
+        display: flex;
+        flex-direction: column;
+      }
     }
   }
 }

@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { fetchCoursesRequest, publishCourseRequest } from '../../store/actions/coursesActions'
-import Title from '../UI/Title/Title'
+import { fetchCoursesRequest, publishCourseRequest } from '../../../store/actions/coursesActions'
+import Title from '../../UI/Title/Title'
 import './AdminCourseControl.scss'
-import MainButton from '../UI/MainButton/MainButton'
+import MainButton from '../../UI/MainButton/MainButton'
 
 const AdminCoursesControl = () => {
   const history = useHistory()
