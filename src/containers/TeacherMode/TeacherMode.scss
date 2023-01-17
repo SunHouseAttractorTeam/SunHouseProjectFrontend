@@ -17,6 +17,10 @@
     font-family: inherit;
     padding: 0;
     margin-bottom: 10px;
+    
+    @media (max-width: 1040px) {
+      width: 100%;
+    }
 
     &:hover {
       transform: translateY(-8px);
