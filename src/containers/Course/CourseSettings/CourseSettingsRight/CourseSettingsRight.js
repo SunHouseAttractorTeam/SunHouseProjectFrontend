@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
-import { getAllUsersRequest } from '../../../../store/actions/usersActions'
+import { checkUserTaskRequest, getAllUsersRequest } from '../../../../store/actions/usersActions'
 import { addUsersCourseRequest, fetchCourseRequest } from '../../../../store/actions/coursesActions'
 import Modal from '../../../../components/UI/Modal2/Modal'
 import MainButton from '../../../../components/UI/MainButton/MainButton'
@@ -23,6 +23,8 @@ const CourseSettingsRight = ({ course }) => {
     status: false,
     id: '',
   })
+  const [fill, setFill] = useState('#828282')
+  const [fillRed, setFillRed] = useState('#828282')
   const [isChecked, setIsChecked] = useState(false)
   const [participant, setParticipant] = useState(null)
   const [userModal, setUserModal] = useState(null)
@@ -62,6 +64,15 @@ const CourseSettingsRight = ({ course }) => {
         id: userId,
       })
     }
+  }
+
+  const onCheckBtn = async (userId, taskId, value) => {
+    if (value === true) {
+      setFill('#ADFA00')
+    } else {
+      setFillRed('#FF0000')
+    }
+    await dispatch(checkUserTaskRequest({ userId, taskId, courseId: course._id, value }))
   }
 
   if (users) {
@@ -130,27 +141,37 @@ const CourseSettingsRight = ({ course }) => {
                   </div>
                   <div className="block-right__name-block__top__buttons">
                     <div>
-                      <svg
-                        className="icon"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
+                      <button
+                        className="block-right__name-block__top__buttons--allow TransparentButton"
+                        onClick={() => onCheckBtn(user.user._id, user.task._id, true)}
                       >
-                        <path
-                          d="M12 0C5.376 0 0 5.376 0 12C0 18.624 5.376 24 12 24C18.624 24 24 18.624 24 12C24 5.376 18.624 0 12 0ZM8.748 17.148L4.44 12.84C3.972 12.372 3.972 11.616 4.44 11.148C4.908 10.68 5.664 10.68 6.132 11.148L9.6 14.604L17.856 6.348C18.324 5.88 19.08 5.88 19.548 6.348C20.016 6.816 20.016 7.572 19.548 8.04L10.44 17.148C9.984 17.616 9.216 17.616 8.748 17.148Z"
-                          fill="#828282"
-                        />
-                      </svg>
+                        <svg
+                          className="icon"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M12 0C5.376 0 0 5.376 0 12C0 18.624 5.376 24 12 24C18.624 24 24 18.624 24 12C24 5.376 18.624 0 12 0ZM8.748 17.148L4.44 12.84C3.972 12.372 3.972 11.616 4.44 11.148C4.908 10.68 5.664 10.68 6.132 11.148L9.6 14.604L17.856 6.348C18.324 5.88 19.08 5.88 19.548 6.348C20.016 6.816 20.016 7.572 19.548 8.04L10.44 17.148C9.984 17.616 9.216 17.616 8.748 17.148Z"
+                            fill={fill}
+                          />
+                        </svg>
+                      </button>
                     </div>
                     <div>
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M12 0C5.364 0 0 5.364 0 12C0 18.636 5.364 24 12 24C18.636 24 24 18.636 24 12C24 5.364 18.636 0 12 0ZM17.16 17.16C16.692 17.628 15.936 17.628 15.468 17.16L12 13.692L8.532 17.16C8.064 17.628 7.308 17.628 6.84 17.16C6.372 16.692 6.372 15.936 6.84 15.468L10.308 12L6.84 8.532C6.372 8.064 6.372 7.308 6.84 6.84C7.308 6.372 8.064 6.372 8.532 6.84L12 10.308L15.468 6.84C15.936 6.372 16.692 6.372 17.16 6.84C17.628 7.308 17.628 8.064 17.16 8.532L13.692 12L17.16 15.468C17.616 15.924 17.616 16.692 17.16 17.16Z"
-                          fill="#828282"
-                        />
-                      </svg>
+                      <button
+                        className="block-right__name-block__top__buttons--reject TransparentButton"
+                        onClick={() => onCheckBtn(user.user._id, user.task._id, false)}
+                      >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M12 0C5.364 0 0 5.364 0 12C0 18.636 5.364 24 12 24C18.636 24 24 18.636 24 12C24 5.364 18.636 0 12 0ZM17.16 17.16C16.692 17.628 15.936 17.628 15.468 17.16L12 13.692L8.532 17.16C8.064 17.628 7.308 17.628 6.84 17.16C6.372 16.692 6.372 15.936 6.84 15.468L10.308 12L6.84 8.532C6.372 8.064 6.372 7.308 6.84 6.84C7.308 6.372 8.064 6.372 8.532 6.84L12 10.308L15.468 6.84C15.936 6.372 16.692 6.372 17.16 6.84C17.628 7.308 17.628 8.064 17.16 8.532L13.692 12L17.16 15.468C17.616 15.924 17.616 16.692 17.16 17.16Z"
+                            fill={fillRed}
+                          />
+                        </svg>
+                      </button>
                     </div>
                   </div>
                   {showMore.status && showMore.id === user.user._id && (

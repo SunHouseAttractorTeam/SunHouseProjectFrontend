@@ -8,6 +8,9 @@ import {
   banUnbanFailure,
   banUnbanRequest,
   banUnbanSuccess,
+  checkUserTaskFailure,
+  checkUserTaskRequest,
+  checkUserTaskSuccess,
   deleteUserFailure,
   deleteUserRequest,
   deleteUserSuccess,
@@ -234,6 +237,28 @@ export function* editUserPasswordSaga({ payload: passwords }) {
   }
 }
 
+export function* checkUserTask({ payload: data }) {
+  try {
+    yield put(showLoading())
+
+    console.log(data)
+    yield axiosApi.patch(
+      `/users/${data.userId}/update_status?content=${data.taskId}&params=task&course=${data.courseId}&choice=${data.value}`,
+    )
+    yield put(checkUserTaskSuccess())
+
+    yield put(hideLoading())
+  } catch (e) {
+    if (e.response && e.response.data) {
+      yield put(checkUserTaskFailure(e.response.data))
+      yield Toast.fire({
+        icon: 'error',
+        title: e.response.data.error,
+      })
+    }
+  }
+}
+
 const userSagas = [
   takeEvery(loginUserRequest, loginUserSaga),
   takeEvery(banUnbanRequest, banUnbanSaga),
@@ -246,6 +271,7 @@ const userSagas = [
   takeEvery(resetPasswordRequest, resetPasswordSaga),
   takeEvery(editRequest, editUserProfileSaga),
   takeEvery(passwordRequest, editUserPasswordSaga),
+  takeEvery(checkUserTaskRequest, checkUserTask),
 ]
 
 export default userSagas
