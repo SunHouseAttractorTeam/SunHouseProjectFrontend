@@ -40,6 +40,7 @@ import {
   verifyUserRequest,
   verifyUserSuccess,
 } from '../actions/usersActions'
+import { fetchCourseRequest } from '../actions/coursesActions'
 
 const Toast = Swal.mixin({
   toast: true,
@@ -246,7 +247,7 @@ export function* checkUserTask({ payload: data }) {
       `/users/${data.userId}/update_status?content=${data.taskId}&params=task&course=${data.courseId}&choice=${data.value}`,
     )
     yield put(checkUserTaskSuccess())
-
+    yield put(fetchCourseRequest(data.courseId))
     yield put(hideLoading())
   } catch (e) {
     if (e.response && e.response.data) {

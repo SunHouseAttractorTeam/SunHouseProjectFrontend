@@ -9,6 +9,7 @@ import { apiUrl } from '../../../config'
 import MainButton from '../../UI/MainButton/MainButton'
 import 'react-sweet-progress/lib/style.css'
 import { getUserRequest } from '../../../store/actions/coursesActions'
+import TestItem from '../../TestItem/TestItem'
 
 const CourseUserModal = ({ setOpen, user }) => {
   const dispatch = useDispatch()
@@ -157,7 +158,7 @@ const CourseUserModal = ({ setOpen, user }) => {
             <div className="course-user-modal__tests">
               <h2 className="course-user-modal__tests__title">Тесты студента</h2>
               {userGeneral.tests.length !== 0 ? (
-                userGeneral.tests.map(test => <div key={test._id}>test</div>)
+                userGeneral.tests.map(test => <TestItem key={test._id} test={test} />)
               ) : (
                 <p className="course-user-modal__tests__text">Студент еще не прошел ни одного теста</p>
               )}
