@@ -53,6 +53,7 @@ const LendingTeachers = () => {
           <div className="reviews__wrapper-inner">
             <div className="reviews__wrapper-inner2">
               <div className="reviews__input-label">
+                <input type="file" name="image" className="reviews__input-file" onChange={fileChangeHandler} />
                 <img
                   src={image || (state.image ? `${apiUrl}/${state.image}` : null)}
                   alt={state.title}
@@ -68,8 +69,6 @@ const LendingTeachers = () => {
                     </svg>
                   </i>
                 ) : null}
-
-                <input type="file" name="image" className="reviews__input-file" onChange={fileChangeHandler} />
               </div>
               <div className="reviews__wrapper-inner3">
                 <FormInput
@@ -106,10 +105,15 @@ const LendingTeachers = () => {
           </div>
         </div>
         <MainButton
+          disabled={!state.name || !state.image || !state.description}
           text="Добавить"
           onClick={e => submitFormHandler(e)}
           type="submit"
-          className="GreenButton reviews__button"
+          className={
+            state.name && state.description && state.image
+              ? 'GreenButton reviews__button'
+              : 'GreenButton reviews__button reviews__button-disabled'
+          }
         />
       </div>
       <div className="teacher-inner-block">

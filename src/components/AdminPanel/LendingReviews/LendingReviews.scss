@@ -4,6 +4,11 @@
   &__button {
     padding: 10px 114px;
     margin-bottom: 75px;
+
+    &-disabled {
+      cursor: not-allowed;
+      background: grey;
+    }
   }
 
   &__wrapper {
@@ -41,7 +46,7 @@
 
   &__input-label {
     position: relative;
-    display: inline-block;
+    display: block;
     width: 96px;
     height: 96px;
     background-color: $greyColor;
