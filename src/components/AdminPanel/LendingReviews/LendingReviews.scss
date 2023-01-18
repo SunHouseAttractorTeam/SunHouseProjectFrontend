@@ -37,7 +37,6 @@
     font-size: 20px;
     line-height: 25px;
     color: #333333;
-
   }
 
   &__input-label {
@@ -46,7 +45,17 @@
     width: 96px;
     height: 96px;
     background-color: $greyColor;
+    overflow: hidden;
     border-radius: 50%;
+
+    &-image {
+      opacity: 1;
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
   }
 
   &__input-file {
