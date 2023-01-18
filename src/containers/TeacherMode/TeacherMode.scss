@@ -1,14 +1,19 @@
-.all-card {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  gap: 30px;
+.teacher-mode {
+  &__cards {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 30px;
+  }
 
   &__teacher {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 45%;
+    @media (max-width: 1040px) {
+      width: 100%;
+    }
 
     &:hover {
       transform: translateY(-8px);

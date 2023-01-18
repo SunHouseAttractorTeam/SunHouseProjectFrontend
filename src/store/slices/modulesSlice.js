@@ -3,7 +3,6 @@ import { createSlice } from '@reduxjs/toolkit'
 const name = 'modules'
 
 export const initialState = {
-  module: null,
   loading: false,
   error: null,
 }

@@ -22,6 +22,7 @@
     align-items: center;
     padding: 30px 10px 10px 0;
     gap: 5px;
+
   }
 
   &__label {
@@ -36,16 +37,7 @@
     display: block;
     text-align: start;
     padding-bottom: 20px;
-    padding-left: 50px;
-  }
-
-  &__count {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 30px;
-    position: relative;
-    padding: 0 40px;
+    padding-left: 27px;
   }
 
   &__input {

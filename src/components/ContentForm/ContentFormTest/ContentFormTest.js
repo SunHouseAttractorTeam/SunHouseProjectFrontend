@@ -217,21 +217,24 @@ const ContentFormTest = ({ contentData, contentId, handleSave, handleQuestionsSa
               <QuestionsBlock question={q} indexQuestion={index} setQuestion={setQuestionsState} />
             </div>
           ))}
-          <button type="button" onClick={addQuestion} className="question-block__add-button MainButton">
-            + Добавить вопрос
-          </button>
+          <MainButton
+            className="WhiteButton question-block__add-button"
+            type="button"
+            onClick={addQuestion}
+            text="+ Добавить вопрос"
+          />
           <div className="content-form__buttons">
-            <MainButton
-              className="GreenButton content-form__button"
-              type="button"
-              onClick={onClickSave}
-              text="Сохранить"
-            />
             <MainButton
               className="GreenButton content-form__button"
               type="button"
               onClick={handlePreview}
               text={!preview ? 'Предосмотр' : 'Редактирование'}
+            />
+            <MainButton
+              className="GreenButton content-form__button"
+              type="button"
+              onClick={onClickSave}
+              text="Сохранить"
             />
           </div>
         </>

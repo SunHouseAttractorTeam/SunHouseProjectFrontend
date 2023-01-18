@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import ReactPlayer from 'react-player/youtube'
 import { useDispatch } from 'react-redux'
 import Swal from 'sweetalert2'
+import { Interweave } from 'interweave'
 import FilesUploader from '../FilesUploader/FilesUploader'
 import AddContentBlock from '../AddContentBlock/AddContentBlock'
 import SunEditorWYSIWYG from '../UI/SunEditorWYSIWYG/SunEditorWYSIWYG'
@@ -14,7 +15,7 @@ import { deleteLessonRequest } from '../../store/actions/lessonsActions'
 import { deleteTaskRequest } from '../../store/actions/tasksActions'
 import './ContentForm.scss'
 
-const ContentForm = ({ contentData, contentId, handleSave, error }) => {
+const ContentForm = ({ contentData, contentId, handleSave }) => {
   const { courseId } = useParams()
   const dispatch = useDispatch()
   const [data, setData] = useState([{ title: contentData.title }, ...contentData.data])
@@ -110,13 +111,50 @@ const ContentForm = ({ contentData, contentId, handleSave, error }) => {
 
   const onClickSave = () => {
     const formData = new FormData()
+    let checkContent = true
+    let checkVideoLink = true
     data.forEach(elem => {
       Object.keys(elem).forEach(key => {
-        if (key === 'audio' && typeof elem[key] !== 'string') {
-          formData.append(key, elem[key])
+        if (!elem[key]) {
+          checkContent = false
+          return null
         }
+
+        if (key === 'video' && !ReactPlayer.canPlay(elem[key])) {
+          checkVideoLink = false
+          return null
+        }
+
+        if (key === 'audio' && typeof elem[key] !== 'string') {
+          return formData.append(key, elem[key])
+        }
+
+        return null
       })
     })
+
+    if (!checkContent) {
+      return Swal.fire({
+        toast: true,
+        icon: 'error',
+        title: 'Заполните все поля!',
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+      })
+    }
+
+    if (!checkVideoLink) {
+      return Swal.fire({
+        toast: true,
+        icon: 'error',
+        title: 'Ссылка на видео не действительна',
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+      })
+    }
+
     if (lastFile) {
       if (typeof lastFile !== 'string') {
         formData.append('file', lastFile)
@@ -126,7 +164,7 @@ const ContentForm = ({ contentData, contentId, handleSave, error }) => {
       formData.append('payload', JSON.stringify(data))
     }
 
-    handleSave({ courseId, contentId, data: formData })
+    return handleSave({ courseId, contentId, data: formData })
   }
 
   const handlePreview = () => {
@@ -173,11 +211,9 @@ const ContentForm = ({ contentData, contentId, handleSave, error }) => {
                   return (
                     <div key={`${index}textDW`}>
                       {preview ? (
-                        <div
-                          className="content-form__text"
-                          /* eslint-disable-next-line react/no-danger */
-                          dangerouslySetInnerHTML={{ __html: content.text }}
-                        />
+                        <div className="content-form__text">
+                          <Interweave content={content.text} />
+                        </div>
                       ) : (
                         <div className="content-form__editor content-form__item">
                           <SunEditorWYSIWYG setContents={content.text} onChange={e => inputChangeHandler(e, index)} />

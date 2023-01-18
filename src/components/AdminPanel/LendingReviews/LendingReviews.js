@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { inputChangeHandler } from '../UI/Form/Handlers/Handlers'
-import Title from '../UI/Title/Title'
-import MainButton from '../UI/MainButton/MainButton'
-import FormInput from '../UI/Form/FormInput/FormInput'
-import FormArea from '../UI/Form/FormArea/FormArea'
+import { inputChangeHandler } from '../../UI/Form/Handlers/Handlers'
+import Title from '../../UI/Title/Title'
+import MainButton from '../../UI/MainButton/MainButton'
+import FormInput from '../../UI/Form/FormInput/FormInput'
+import FormArea from '../../UI/Form/FormArea/FormArea'
 import './LendingReviews.scss'
-import { createReviewRequest } from '../../store/actions/lendingReviewsActions'
+import { createReviewRequest } from '../../../store/actions/lendingReviewsActions'
 
 const LendingReviews = () => {
   const dispatch = useDispatch()

@@ -8,6 +8,7 @@ import tasksSlice from './slices/tasksSlice'
 import testsSlice from './slices/testsSlice'
 import notificationsSlice from './slices/notificationsSlice'
 import lendingReviewsSlice from './slices/lendingReviewsSlice'
+import modulesSlice from './slices/modulesSlice'
 
 const rootReducer = combineReducers({
   users: usersSlice.reducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   tests: testsSlice.reducer,
   notifications: notificationsSlice.reducer,
   reviews: lendingReviewsSlice.reducer,
+  modules: modulesSlice.reducer,
   loadingBar: loadingBarReducer,
 })
 

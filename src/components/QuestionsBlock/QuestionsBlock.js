@@ -103,9 +103,6 @@ const QuestionsBlock = ({ question, indexQuestion, setQuestion }) => {
           // error={getFieldError('title')}
           className="question-block__input border-style"
         />
-        <button type="button" className="question-block__add-description">
-          + добавить описание
-        </button>
         <p className="question-block__title">Добавьте варианты ответов:</p>
         <div className="question-block__answers">
           {question.answers.map((ans, ind) => (
