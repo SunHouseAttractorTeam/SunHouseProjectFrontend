@@ -46,6 +46,7 @@ const CourseSettingsRight = () => {
     await dispatch(fetchCourseRequest(id))
     setOpen(false)
   }
+
   const onShowMoreBtn = userId => {
     if (userId === showMore.id) {
       setShowMore({
@@ -110,7 +111,9 @@ const CourseSettingsRight = () => {
                   <div className="block-right__name-block__center">
                     <p className="block-right__name-block__center__text">Задание </p>
                     <MainButton
-                      className="block-right__name-block__center__button WhiteButton"
+                      className={`block-right__name-block__center__button ${
+                        showMore.status && showMore.id === user.user._id ? 'open' : null
+                      } WhiteButton`}
                       type="button"
                       onClick={() => onShowMoreBtn(user.user._id)}
                       text={

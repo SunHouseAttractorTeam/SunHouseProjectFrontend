@@ -16,6 +16,7 @@ const CourseUserModal = ({ setOpen, user }) => {
   const course = useSelector(state => state.courses.course)
   const userGeneral = useSelector(state => state.courses.user)
   const [showMore, setShowMore] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
   const [counts, setCounts] = useState({
     testCounts: 0,
     userPassed: 0,
@@ -62,11 +63,11 @@ const CourseUserModal = ({ setOpen, user }) => {
       })
   }, [userGeneral])
 
-  console.log(counts)
   const handlerClick = () => {
     setOpen(false)
   }
   const onShowMoreBtn = () => {
+    setIsOpen(!isOpen)
     setShowMore(!showMore)
   }
 
@@ -136,7 +137,7 @@ const CourseUserModal = ({ setOpen, user }) => {
                 <h4 className="course-user-modal__progress__text">{`${counts.userPassed}/${counts.testCounts}`}</h4>
               </div>
               <MainButton
-                className="course-user-modal__title__button WhiteButton"
+                className={`course-user-modal__title__button ${isOpen ? 'open' : ''} WhiteButton`}
                 type="button"
                 onClick={onShowMoreBtn}
                 text={

@@ -68,13 +68,19 @@
 
     &__button {
       padding: 0;
+      transform: rotate(-90deg);
+      box-shadow: none;
+
+      &.open {
+        transform: rotate(0);
+      }
     }
 
     &__inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 2px solid $whiteBorderColor;
+      border-bottom: 2px solid $darkGreyColor;
       padding-bottom: 32px;
       margin-top: 20px;
       margin-bottom: 32px;
@@ -102,7 +108,7 @@
       &-info {
         &-title {
           font-weight: 700;
-          font-size: 14px;
+          font-size: 16px;
         }
       }
     }
