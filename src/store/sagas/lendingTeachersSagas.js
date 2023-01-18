@@ -31,6 +31,7 @@ export function* createTeachersSaga({ payload: data }) {
     yield axiosApi.post('/lending_teachers', data)
     yield put(createTeachersSuccess())
     yield put(hideLoading())
+    yield put(fetchTeachersRequest())
   } catch (e) {
     yield put(hideLoading())
     yield put(createTeachersFailure(e))
@@ -39,9 +40,10 @@ export function* createTeachersSaga({ payload: data }) {
 
 export function* deleteTeachersSaga({ payload: id }) {
   try {
-    axiosApi.delete(`/lending_teachers/${id}`)
+    yield axiosApi.delete(`/lending_teachers/${id}`)
     yield put(deleteTeachersSuccess())
     yield put(hideLoading())
+    yield put(fetchTeachersRequest())
   } catch (e) {
     yield put(hideLoading())
     yield put(deleteTeachersFailure(e))

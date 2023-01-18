@@ -19,7 +19,9 @@ const Main = () => (
       <LendingTeacherBlock />
     </div>
     <Partners />
-    <ReviewsBlock />
+    <div className="container">
+      <ReviewsBlock />
+    </div>
     <Footer />
   </div>
 )

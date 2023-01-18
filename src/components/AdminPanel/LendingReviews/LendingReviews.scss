@@ -3,6 +3,7 @@
 .reviews {
   &__button {
     padding: 10px 114px;
+    margin-bottom: 75px;
   }
 
   &__wrapper {
@@ -115,6 +116,23 @@
   &__textarea::placeholder {
     font-size: 16px;
     color: $blackDarkColor;
+  }
+}
+
+.teacher-inner-block {
+  &__title {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+
+  &__content {
+    height: 400px;
+    overflow-y: scroll;
+
+    &-card {
+      display: inline-block;
+      margin-bottom: 25px;
+    }
   }
 }
 
