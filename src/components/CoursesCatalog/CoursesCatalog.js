@@ -37,7 +37,7 @@ const CoursesCatalog = () => {
           <h2 className="courses-section__title">Каталог курсов</h2>
           <div className="courses-section__cards">
             {courses.slice(0, 5).map(item => (
-              <CourseCard key={item.title} title={item.title} image={item.image} id={item._id} />
+              <CourseCard key={item.title} title={item.title} image={item.image} id={item._id} price={item.price} />
             ))}
             <div className="courses-section__card">
               <div className="courses-section__card-top">

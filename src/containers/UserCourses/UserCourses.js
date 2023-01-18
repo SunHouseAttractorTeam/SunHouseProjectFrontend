@@ -22,9 +22,7 @@ const UserCourses = () => {
 
   return (
     <div className="user-courses">
-      <div className="user-courses__top">
-        <Title>Мои курсы</Title>
-      </div>
+      <Title>Мои курсы</Title>
       <div className="user-courses__bottom">
         <div className="user-courses__bottom-courses">
           {courses.length ? (
