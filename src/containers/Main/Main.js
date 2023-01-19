@@ -15,8 +15,9 @@ const Main = () => (
     <Header />
     <Promo />
     <CoursesCatalog />
-    <About />
-
+    <div id="about" className="about-block">
+      <About />
+    </div>
     <div className="container">
       <TeachersBlock
         title="Преподаватели — <span>практикующие эксперты</span>"
@@ -25,7 +26,9 @@ const Main = () => (
       />
     </div>
     <Partners />
-    <ReviewsBlock />
+    <div id="review" className="review-block">
+      <ReviewsBlock />
+    </div>
     <Footer />
   </div>
 )
