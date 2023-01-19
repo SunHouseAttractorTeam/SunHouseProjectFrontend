@@ -4,6 +4,7 @@ const name = 'courses'
 
 export const initialState = {
   courses: [],
+  user: null,
   course: null,
   loading: false,
   error: null,
@@ -37,6 +38,19 @@ const coursesSlice = createSlice({
       state.course = action.payload
     },
     fetchCourseFailure(state, action) {
+      state.loading = false
+      state.error = action.payload
+    },
+
+    getUserRequest(state) {
+      state.loading = true
+      state.error = null
+    },
+    getUserSuccess(state, action) {
+      state.user = action.payload
+      state.loading = false
+    },
+    getUserFailure(state, action) {
       state.loading = false
       state.error = action.payload
     },
