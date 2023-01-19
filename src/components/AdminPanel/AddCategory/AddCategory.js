@@ -48,6 +48,7 @@ const AddCategory = () => {
         <MainButton
           disabled={!state.title}
           text="Создать"
+          type="button"
           className={state.title ? 'GreenButton' : 'category__add-category-btn'}
           onClick={e => submitFormHandler(e, dispatch(createCategoryRequest(state)))}
         />
@@ -63,7 +64,12 @@ const AddCategory = () => {
                 <span className="category__inner-block-title">Описание:</span> {category.description}
               </p>
             ) : null}
-            <MainButton text="Удалить категорию" className="RedButton" onClick={() => deleteCategory(category._id)} />
+            <MainButton
+              text="Удалить категорию"
+              className="RedButton"
+              type="button"
+              onClick={() => deleteCategory(category._id)}
+            />
           </div>
         ))}
       </div>

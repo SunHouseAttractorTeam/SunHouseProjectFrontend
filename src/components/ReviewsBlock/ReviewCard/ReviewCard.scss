@@ -1,11 +1,28 @@
 @import "../../../scss/partials/colors";
 
 .review_card {
+  position: relative;
   width: 580px;
   height: 246px;
   background: $totalWhiteColor;
   padding: 32px;
   border-radius: 16px;
+
+  &__delete-btn {
+    position: absolute;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    background-color: inherit;
+    top: 10px;
+    right: 10px;
+
+    &:hover path {
+      fill: darkred;
+    }
+  }
 
   &_info {
     display: flex;

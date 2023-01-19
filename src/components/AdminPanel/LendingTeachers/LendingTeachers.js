@@ -107,8 +107,8 @@ const LendingTeachers = () => {
         <MainButton
           disabled={!state.name || !state.image || !state.description}
           text="Добавить"
+          type="button"
           onClick={e => submitFormHandler(e)}
-          type="submit"
           className={
             state.name && state.description && state.image
               ? 'GreenButton reviews__button'
