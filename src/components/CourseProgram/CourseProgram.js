@@ -1,23 +1,24 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react'
 import Paragraph from '../Paragraph/Paragraph'
-import './CourseProgram.scss'
 import CardProgram from './CardProgram/CardProgram'
-import { fetchModulesRequest } from '../../store/actions/modulesActions'
+import './CourseProgram.scss'
 
-const CourseProgram = ({ teacherCheck }) => {
-  const modules = useSelector(state => state.modules.modules)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(fetchModulesRequest())
-  }, [dispatch])
+const CourseProgram = ({ teacherCheck, modules, block, onVisibilityBlock }) => {
+  const [courseModules] = useState(modules)
 
   return (
     <div className="program-block">
-      <Paragraph title="Программа курса" section="courseProgram" teacherCheck={teacherCheck} />
+      <Paragraph
+        title="Программа курса"
+        subtitle={block.description}
+        teacherCheck={teacherCheck}
+        type="blockModules"
+        isVisibility={block.visibility}
+        onVisibility={onVisibilityBlock}
+      />
       <div className="program-block__cards">
-        {modules && modules.map(item => <CardProgram key={item._id} title={item.title} content={item.data} />)}
+        {courseModules &&
+          courseModules.map(item => <CardProgram key={item._id} title={item.title} content={item.data} />)}
       </div>
     </div>
   )

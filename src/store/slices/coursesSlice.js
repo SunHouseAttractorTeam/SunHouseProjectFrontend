@@ -4,6 +4,7 @@ const name = 'courses'
 
 export const initialState = {
   courses: [],
+  user: null,
   course: null,
   loading: false,
   error: null,
@@ -37,6 +38,32 @@ const coursesSlice = createSlice({
       state.course = action.payload
     },
     fetchCourseFailure(state, action) {
+      state.loading = false
+      state.error = action.payload
+    },
+
+    getUserRequest(state) {
+      state.loading = true
+      state.error = null
+    },
+    getUserSuccess(state, action) {
+      state.user = action.payload
+      state.loading = false
+    },
+    getUserFailure(state, action) {
+      state.loading = false
+      state.error = action.payload
+    },
+
+    fetchTeacherCoursesRequest(state) {
+      state.loading = true
+      state.error = null
+    },
+    fetchTeacherCoursesSuccess(state, action) {
+      state.loading = false
+      state.courses = action.payload
+    },
+    fetchTeacherCoursesFailure(state, action) {
       state.loading = false
       state.error = action.payload
     },
@@ -118,8 +145,33 @@ const coursesSlice = createSlice({
       state.publishLoading = false
       state.publishError = action.payload
     },
+    visibilityRequest(state) {
+      state.loading = true
+      state.error = null
+    },
+    visibilitySuccess(state) {
+      state.loading = true
+    },
+    visibilityFailure(state, action) {
+      state.loading = true
+      state.error = action.payload
+    },
+    joinTheCourseRequest(state) {
+      state.loading = true
+      state.error = null
+    },
+    joinTheCourseSuccess(state) {
+      state.loading = true
+    },
+    joinTheCourseFailure(state, action) {
+      state.loading = true
+      state.error = action.payload
+    },
     clearCourse(state) {
       state.course = null
+    },
+    clearCourses(state) {
+      state.courses = []
     },
   },
 })
