@@ -15,15 +15,13 @@ const BurgerMenu = () => {
   }
 
   return (
-    <div>
-      <nav>
-        <div className="burger-menu" onClick={updateMenu}>
-          <div className={burgerClass} />
-          <div className={burgerClass} />
-          <div className={burgerClass} />
-        </div>
-      </nav>
-    </div>
+    <nav className="burger" onClick={updateMenu}>
+      <div className="burger-menu">
+        <div className={burgerClass} />
+        <div className={burgerClass} />
+        <div className={burgerClass} />
+      </div>
+    </nav>
   )
 }
 
