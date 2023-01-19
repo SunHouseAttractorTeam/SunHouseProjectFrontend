@@ -6,9 +6,9 @@ import TeachersBlock from '../../components/TeachersBlock/TeachersBlock'
 import Promo from '../../components/Promo/Promo'
 import CoursesCatalog from '../../components/CoursesCatalog/CoursesCatalog'
 import Partners from '../../components/Partners/Partners'
-import './Main.scss'
 import ReviewsBlock from '../../components/ReviewsBlock/ReviewsBlock'
 import { teachers } from '../../data/teachers'
+import './Main.scss'
 
 const Main = () => (
   <div className="main">
@@ -16,6 +16,7 @@ const Main = () => (
     <Promo />
     <CoursesCatalog />
     <About />
+
     <div className="container">
       <TeachersBlock
         title="Преподаватели — <span>практикующие эксперты</span>"
