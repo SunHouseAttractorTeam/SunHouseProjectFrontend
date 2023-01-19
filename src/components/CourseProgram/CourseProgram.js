@@ -6,6 +6,8 @@ import './CourseProgram.scss'
 const CourseProgram = ({ teacherCheck, modules, block, onVisibilityBlock }) => {
   const [courseModules] = useState(modules)
 
+  if (!teacherCheck && !courseModules.length) return null
+
   return (
     <div className="program-block">
       <Paragraph

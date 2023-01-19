@@ -1,13 +1,27 @@
 @import '../../scss/style';
 
 .program-block {
-  margin-bottom: 193px;
+  &__check{
+    font-size: 16px;
+    font-weight: 500;
+    text-align: left;
+  }
 
   &__card {
     background: $totalWhiteColor;
     width: 100%;
     border-radius: 16px;
     overflow: hidden;
+
+    &_structure-title{
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+
+      svg{
+        margin-right: 25px;
+      }
+    }
 
     &:not(:last-child) {
       margin-bottom: 24px;
