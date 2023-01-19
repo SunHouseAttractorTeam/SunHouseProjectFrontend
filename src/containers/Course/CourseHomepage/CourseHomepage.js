@@ -87,7 +87,7 @@ const CourseHomepage = ({ teacherCheck, courseCheck }) => {
       return <Redirect to="/login" />
     }
 
-    return dispatch(joinTheCourseRequest({ userId: user._id, courseId: id }))
+    return dispatch(joinTheCourseRequest(id))
   }
 
   return (
@@ -101,6 +101,7 @@ const CourseHomepage = ({ teacherCheck, courseCheck }) => {
             image={course.image}
             teacherCheck={teacherCheck}
             courseCheck={courseCheck}
+            handleJoinTheCourse={handleJoinTheCourse}
           />
           <div className="container">
             <div className="course-homepage__bottom">
