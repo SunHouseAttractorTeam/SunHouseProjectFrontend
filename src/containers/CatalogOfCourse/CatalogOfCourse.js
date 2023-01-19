@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 import { fetchCoursesRequest } from '../../store/actions/coursesActions'
-import coursesCatalog from './catalogOfCourseData'
 import Header from '../../components/Header/Header'
 import CourseCard from '../../components/CourseCard/CourseCard'
 import Footer from '../../components/Footer/Footer'
@@ -11,24 +11,26 @@ import searchIcon from '../../assets/icons/SearchIcon.png'
 import './CatalogOfCourse.scss'
 import ModalOfCategory from '../../components/Modals/ModalOfCategory/ModalOfCategory'
 import ModalSortCourse from '../../components/Modals/ModalSortCourse/ModalSortCourse'
+import { fetchCategoriesRequest } from '../../store/actions/categoriesActions'
 
 const coursePerPage = 5
 
 const CatalogOfCourse = () => {
   const dispatch = useDispatch()
+  const query = useLocation().search
   const sortRef = useRef()
   const categoryRef = useRef()
   const [next, setNext] = useState(coursePerPage)
+  const coursesCatalog = useSelector(state => state.courses.courses)
+  const categories = useSelector(state => state.categories.categories)
   const [toggle, setToggle] = useState(false)
   const [toggleFilter, setToggleFilter] = useState(false)
   const [toggleSort, setToggleSort] = useState(false)
-  const [search, setSearch] = useState('')
-  const [category, setCategory] = useState('все')
-  const [sort, setSort] = useState('сбросить')
 
   useEffect(() => {
-    dispatch(fetchCoursesRequest('/courses'))
-  }, [])
+    dispatch(fetchCoursesRequest(query))
+    dispatch(fetchCategoriesRequest())
+  }, [dispatch, query])
 
   useEffect(() => {
     // eslint-disable-next-line prefer-const
@@ -60,14 +62,6 @@ const CatalogOfCourse = () => {
     setNext(next + coursePerPage)
   }
 
-  const selectedCategory = valueCategory => {
-    setCategory(valueCategory)
-  }
-
-  const sortCourse = valueSort => {
-    setSort(valueSort)
-  }
-
   return (
     <>
       <Header />
@@ -76,14 +70,7 @@ const CatalogOfCourse = () => {
           <div className="courses-section__block">
             <h2 className="courses-section__title">Каталог курсов</h2>
             <div className="icons-block">
-              {toggle === true && (
-                <input
-                  type="text"
-                  placeholder="Поиск..."
-                  className="icon-value"
-                  onChange={e => setSearch(e.target.value)}
-                />
-              )}
+              {toggle === true && <input type="text" placeholder="Поиск..." className="icon-value" />}
               <div className={toggle === false ? 'icons-item' : 'icons-item--active'} onClick={() => setToggle(true)}>
                 <img src={searchIcon} alt="searchIcon" />
               </div>
@@ -96,7 +83,7 @@ const CatalogOfCourse = () => {
                 >
                   <img src={filterIcon} alt="filterIcon" />
                 </div>
-                {toggleSort && <ModalSortCourse sortCourse={sortCourse} />}
+                {toggleSort && <ModalSortCourse />}
               </div>
               <div ref={categoryRef}>
                 <div
@@ -105,19 +92,14 @@ const CatalogOfCourse = () => {
                 >
                   <img src={burgerIcon} alt="burgerIcon" />
                 </div>
-                {toggleFilter && <ModalOfCategory selectedCategory={selectedCategory} />}
+                {toggleFilter && <ModalOfCategory categories={categories} />}
               </div>
             </div>
           </div>
           <div className="courses-section__cards">
-            {category === 'все' && sort === 'сбросить'
-              ? coursesCatalog
-                  ?.slice(0, next)
-                  ?.filter(course => course.title.toLowerCase().includes(search.toLowerCase()))
-                  ?.map(item => <CourseCard key={item.id} title={item.title} date={item.date} price={item.price} />)
-              : coursesCatalog
-                  ?.filter(el => el.title === category || el.filter === sort)
-                  ?.map(item => <CourseCard key={item.id} title={item.title} date={item.date} price={item.price} />)}
+            {coursesCatalog.map(item => (
+              <CourseCard key={item.category._id} title={item.category.title} date={item.dateTime} price={item.price} />
+            ))}
           </div>
           {next < coursesCatalog?.length && (
             <button type="button" className="course-btn" onClick={handleMoreImage}>
