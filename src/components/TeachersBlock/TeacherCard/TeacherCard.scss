@@ -1,11 +1,17 @@
 @import '../../../scss/partials/colors';
 
 .teacher_card {
-  width: 580px;
-  height: 174px;
+  min-width: 580px;
+  min-height: 174px;
   background: $totalWhiteColor;
   border-radius: 16px;
   margin-left: 12px;
+  transition: all .5s ease;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+  }
 
   &_content {
     padding: 33px 0 0 33px;

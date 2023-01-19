@@ -101,6 +101,10 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBl
       {teacherCheck ? (
         <>
           <CustomSlider response={sliderSettings}>
+            <button type="button" className="teachers_block__btn-plus" onClick={handlerClick}>
+              <div className="teachers_block__btn-plus-icon">+</div>
+              <span className="teachers_block__btn-plus-text">Добавить учителя...</span>
+            </button>
             {teachers.length !== 0 &&
               teachers.map(teacherObj => (
                 <TeacherCard
@@ -110,9 +114,6 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBl
                 />
               ))}
           </CustomSlider>
-          <button type="button" className="teachers_block__btn-plus" onClick={handlerClick}>
-            +
-          </button>
           {open && (
             <Modal setOpen={setOpen}>
               <form onSubmit={updateDescription}>
