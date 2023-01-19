@@ -16,9 +16,9 @@ const Nav = ({ user }) => (
         </NavLink>
       </li>
       <li className="main-nav__item">
-        <NavLink to="/about" className="main-nav__link" activeClassName="main-nav__link_active">
+        <a href="#about" className="main-nav__link">
           О школе
-        </NavLink>
+        </a>
       </li>
       <li className="main-nav__item">
         <NavLink to="/page-teachers" className="main-nav__link" activeClassName="main-nav__link_active">
@@ -26,9 +26,9 @@ const Nav = ({ user }) => (
         </NavLink>
       </li>
       <li className="main-nav__item">
-        <NavLink to="/reviews" className="main-nav__link" activeClassName="main-nav__link_active">
+        <a href="#review" className="main-nav__link">
           Отзывы
-        </NavLink>
+        </a>
       </li>
       {!user && (
         <li className="main-nav__item">
