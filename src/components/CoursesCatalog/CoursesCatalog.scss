@@ -112,11 +112,24 @@
   .slider {
     display: block;
 
-    &__item {
-      margin-top: 50px;
+    &__item-course {
+      margin: 50px 0 0;
+
+      & .course-card {
+        margin: 0 10px 0;
+      }
     }
   }
-  .courses-section__cards {
-    display: none;
+
+  .courses-section {
+
+    &__cards {
+      display: none;
+    }
+
+    & .slick-list {
+      overflow: hidden;
+      margin: 0 !important;
+    }
   }
 }

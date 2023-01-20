@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import CourseCard from '../CourseCard/CourseCard'
-import coursesData from './coursesData'
 import CustomSlider from '../UI/CustomSlider/CustomSlider'
 import MainButton from '../UI/MainButton/MainButton'
 import './CoursesCatalog.scss'
@@ -55,9 +54,9 @@ const CoursesCatalog = () => {
           </div>
           <div className="slider">
             <CustomSlider response={sliderSettings}>
-              {coursesData.map(item => (
-                <div className="slider__item" key={item.title}>
-                  <CourseCard title={item.title} date={item.date} isLast={item.isLast} list={item.list} />
+              {courses.slice(0, 5).map(item => (
+                <div className="slider__item-course" key={item.title}>
+                  <CourseCard title={item.title} image={item.image} id={item._id} price={item.price} />
                 </div>
               ))}
             </CustomSlider>

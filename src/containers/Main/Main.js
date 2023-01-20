@@ -1,14 +1,14 @@
 import React from 'react'
+import { teachers } from '../../data/teachers'
 import Header from '../../components/Header/Header'
-import Footer from '../../components/Footer/Footer'
-import About from '../../components/About/About'
-import TeachersBlock from '../../components/TeachersBlock/TeachersBlock'
 import Promo from '../../components/Promo/Promo'
 import CoursesCatalog from '../../components/CoursesCatalog/CoursesCatalog'
+import About from '../../components/About/About'
+import TeachersBlock from '../../components/TeachersBlock/TeachersBlock'
 import Partners from '../../components/Partners/Partners'
-import './Main.scss'
 import ReviewsBlock from '../../components/ReviewsBlock/ReviewsBlock'
-import { teachers } from '../../data/teachers'
+import Footer from '../../components/Footer/Footer'
+import './Main.scss'
 
 const Main = () => (
   <div className="main">
