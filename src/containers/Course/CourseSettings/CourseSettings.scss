@@ -4,12 +4,16 @@
   display: flex;
   width: 100%;
   gap: 50px;
+  flex-wrap: wrap;
+  justify-content: space-between;
 
   &__left {
     width: 30%;
   }
 
   &__right {
+    width: 65%;
+
     &-save-button {
       margin-top: 40px;
 

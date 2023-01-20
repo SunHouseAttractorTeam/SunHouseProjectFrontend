@@ -80,6 +80,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
       border-bottom: 2px solid $darkGreyColor;
       padding-bottom: 32px;
       margin-top: 20px;
@@ -89,6 +90,7 @@
     &__left {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
 
       &-image {
         width: 60px;

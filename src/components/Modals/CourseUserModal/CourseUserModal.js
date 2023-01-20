@@ -39,13 +39,13 @@ const CourseUserModal = ({ setOpen, user }) => {
             if (content.type === 'test') {
               setCounts(prev => ({
                 ...prev,
-                testCounts: counts.testCounts + 1,
+                testCounts: prev.testCounts + 1,
               }))
             }
           })
         }
       })
-  }, [course])
+  }, [course, user])
 
   useEffect(() => {
     // eslint-disable-next-line no-unused-expressions
@@ -57,11 +57,11 @@ const CourseUserModal = ({ setOpen, user }) => {
         if (test.status === true) {
           setCounts(prev => ({
             ...prev,
-            userPassed: counts.userPassed + 1,
+            userPassed: prev.userPassed + 1,
           }))
         }
       })
-  }, [userGeneral])
+  }, [userGeneral, user])
 
   const handlerClick = () => {
     setOpen(false)
@@ -112,10 +112,8 @@ const CourseUserModal = ({ setOpen, user }) => {
           <div className="container">
             <div className="course-user-modal__title__inner">
               <div className="course-user-modal__title__left">
-                <div>
-                  <div className="course-user-modal__title__left-image">
-                    <img src={avatarImage} alt={course.title} />
-                  </div>
+                <div className="course-user-modal__title__left-image">
+                  <img src={avatarImage} alt={course.title} />
                 </div>
                 <div className="course-user-modal__title__left-info">
                   <h2 className="course-user-modal__title__left-info-title">{course.title}</h2>

@@ -12,6 +12,7 @@ const TestItem = ({ test }) => {
     correctAnswers: 0,
   })
   const [showMore, setShowMore] = useState(false)
+
   useEffect(() => {
     dispatch(fetchTestRequest(test.test))
   }, [dispatch, test])
@@ -23,7 +24,7 @@ const TestItem = ({ test }) => {
         ...prev,
         questions: baseTest.questions.length,
       }))
-  }, [baseTest])
+  }, [baseTest, test])
 
   useEffect(() => {
     // eslint-disable-next-line array-callback-return
