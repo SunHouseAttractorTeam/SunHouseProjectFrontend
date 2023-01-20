@@ -112,6 +112,10 @@
           height: 24px;
           margin-right: 24px;
         }
+
+        &--disabled {
+          pointer-events: none;
+        }
       }
     }
   }

@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import './CoursePassingModule.scss'
+import { useSelector } from 'react-redux'
 
 const CoursePassingModules = ({ course }) => {
   const location = useLocation()
+  const user = useSelector(state => state.users.user)
   const [isOpen, setIsOpen] = useState({ status: false, id: '' })
 
   const toggleAccordion = value => {
@@ -69,8 +71,8 @@ const CoursePassingModules = ({ course }) => {
                   isOpen.status && isOpen.id === module._id && `course-passing-modules__block-content--is-open`
                 }`}
               >
-                {module.data.map(item => (
-                  <ul key={item._id} className="course-passing-modules__block-items">
+                <ul className="course-passing-modules__block-items">
+                  {module.data.map(item => (
                     <li
                       key={item.id}
                       className={`course-passing-modules__block-item course-passing-modules__block-item--${item.type} ${
@@ -79,7 +81,10 @@ const CoursePassingModules = ({ course }) => {
                     >
                       <Link
                         to={`/course/${course._id}/pass/${item.type}/${item._id}`}
-                        className="course-passing-modules__block-item-title"
+                        className={`course-passing-modules__block-item-title ${
+                          user[`${item.type}s`].find(elem => elem[item.type] === item._id && elem.status) &&
+                          'course-passing-modules__block-item-title--disabled'
+                        }`}
                       >
                         {item.type === 'test' ? (
                           <i>
@@ -140,8 +145,8 @@ const CoursePassingModules = ({ course }) => {
                         {item.title}
                       </Link>
                     </li>
-                  </ul>
-                ))}
+                  ))}
+                </ul>
               </div>
             </div>
           ))}

@@ -14,24 +14,15 @@ const CoursePassing = () => {
   const dispatch = useDispatch()
   const history = useHistory()
   const course = useSelector(state => state.courses.course)
-  const user = useSelector(state => state.users.user)
+
   const [disabledWord, setDisabledWord] = useState('')
   const path = history.location.pathname
   const thisId = path.split('/').reverse()[0]
+
   useEffect(() => {
     if (!course) {
       dispatch(fetchCourseRequest(id))
     }
-
-    // const checkContentType = () => {
-    //   const content = course.modules[0].data[0]
-    //
-    //   history.push(`/course/${id}/pass/${content.type}/${content._id}`)
-    // }
-    //
-    // if (course) {
-    //   checkContentType()
-    // }
   }, [dispatch, course, id])
 
   useEffect(() => {
@@ -39,7 +30,9 @@ const CoursePassing = () => {
     const lastEvent = lastModule.data[lastModule.data.length - 1]
     const firstModule = course.modules[0]
     const firstEvent = firstModule.data[0]
+
     setDisabledWord('')
+
     if (lastEvent._id === thisId) {
       setDisabledWord('next')
     }
@@ -47,7 +40,7 @@ const CoursePassing = () => {
       setDisabledWord('previous')
     }
   }, [history.location.pathname])
-  const accessCheck = course.teachers.find(teacher => teacher === user?._id)
+
   const nextEvent = () => {
     course.modules.map((elem, i) => {
       elem.data.map((item, index) => {
@@ -82,6 +75,7 @@ const CoursePassing = () => {
       return elem
     })
   }
+
   return (
     <>
       {course && (
@@ -90,7 +84,7 @@ const CoursePassing = () => {
           <div className="container">
             <div className="course-passing__bottom">
               <div className="course-edit__left">
-                <CoursePassingModules id={id} course={course} accessCheck={accessCheck} />
+                <CoursePassingModules id={id} course={course} />
               </div>
               <div className="course-passing__right">
                 <Switch>
