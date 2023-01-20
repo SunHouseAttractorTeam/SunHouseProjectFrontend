@@ -63,6 +63,10 @@ const WhatLearn = ({ teacherCheck, willLearn, onVisibilityBlock, block }) => {
       {teacherCheck ? (
         <>
           <div className="learn-plan-block__cards">
+            <button type="button" className="learn-plan-block__btn-plus" onClick={e => handlerClick(e)}>
+              <div className="learn-plan-block__btn-plus-icon">+</div>
+              <span className="learn-plan-block__btn-plus-text">Добавить блок ...</span>
+            </button>
             {newLearn.map(item => (
               <LearnCardText
                 key={item._id || item.title}
@@ -72,9 +76,6 @@ const WhatLearn = ({ teacherCheck, willLearn, onVisibilityBlock, block }) => {
               />
             ))}
           </div>
-          <button type="button" className="learn-plan-block__btn-plus" onClick={e => handlerClick(e)}>
-            +
-          </button>
           {open && (
             <Modal setOpen={setOpen}>
               <form onSubmit={updateDescription}>
