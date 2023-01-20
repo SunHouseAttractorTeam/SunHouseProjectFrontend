@@ -88,11 +88,13 @@ const CourseSettingsRight = () => {
             />
           </div>
           <div className="block-right__name-block">
-            <div className="block-right__name-block__top">
-              <span className="block-right__name-block__top__title">Имя ученика</span>
-              <span className="block-right__name-block__top__title">Задания учеников</span>
-              <span className="block-right__name-block__top__title">Одобрение задания</span>
-            </div>
+            {course.pendingTasks.length !== 0 && (
+              <div className="block-right__name-block__top">
+                <span className="block-right__name-block__top__title">Имя ученика</span>
+                <span className="block-right__name-block__top__title">Задания учеников</span>
+                <span className="block-right__name-block__top__title">Одобрение задания</span>
+              </div>
+            )}
             {course.pendingTasks.length !== 0 &&
               course.pendingTasks.map(user => (
                 <div key={user._id} className="block-right__name-block__top">

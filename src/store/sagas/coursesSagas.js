@@ -240,6 +240,7 @@ export function* deleteCourse({ payload: id }) {
     yield Toast.fire({
       title: 'Курс успешно удалён',
     })
+    yield put(historyPush(`/user/courses/teacher_mode`))
   } catch (e) {
     yield put(deleteCourseFailure(e))
     yield put(hideLoading())

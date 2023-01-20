@@ -24,11 +24,17 @@ const CourseUserModal = ({ setOpen, user }) => {
   let avatarImage = avatarStub
   let userAvatar = avatarStub
 
+  useEffect(() => {}, [])
+
   useEffect(() => {
     dispatch(getUserRequest({ courseId: course._id, userId: user._id }))
   }, [user, dispatch])
 
   useEffect(() => {
+    setCounts(prev => ({
+      ...prev,
+      testCounts: 0,
+    }))
     // eslint-disable-next-line no-unused-expressions
     course &&
       course.modules &&
@@ -48,6 +54,10 @@ const CourseUserModal = ({ setOpen, user }) => {
   }, [course, user])
 
   useEffect(() => {
+    setCounts(prev => ({
+      ...prev,
+      userPassed: 0,
+    }))
     // eslint-disable-next-line no-unused-expressions
     userGeneral &&
       userGeneral.tests &&

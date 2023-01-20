@@ -6,7 +6,6 @@ import { deleteCourseRequest } from '../../../../store/actions/coursesActions'
 import Switcher from '../../../../components/UI/Switcher/Switcher'
 import Modal from '../../../../components/UI/Modal2/Modal'
 import Card from '../../../../components/UI/Cards/Card/Card'
-import { historyPush } from '../../../../store/actions/historyActions'
 import './CourseSettingsLeft.scss'
 import { inputChangeHandler } from '../../../../components/UI/Form/Handlers/Handlers'
 
@@ -21,7 +20,6 @@ const CourseSettingsLeft = ({ course, setCourse }) => {
 
   const handleDelete = () => {
     dispatch(deleteCourseRequest(id))
-    dispatch(historyPush('/user/courses'))
   }
 
   return (

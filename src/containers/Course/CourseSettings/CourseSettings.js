@@ -49,7 +49,7 @@ const CourseSettings = () => {
               <ButtonsContent
                 titleOne="Основные настройки"
                 titleTwo="Настройки курса"
-                childrenOne={<CourseSettingsLeft course={course} setCourse={setState} submit={submitFormHandler} />}
+                childrenOne={<CourseSettingsLeft course={state} setCourse={setState} submit={submitFormHandler} />}
                 childrenTwo={<CourseSettingsRight course={course} setCourse={setState} submit={submitFormHandler} />}
               />
               <MainButton
