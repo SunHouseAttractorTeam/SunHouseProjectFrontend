@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import './CourseModules.scss'
 import { useDispatch } from 'react-redux'
 import { deleteLessonRequest } from '../../store/actions/lessonsActions'
 import { deleteTaskRequest } from '../../store/actions/tasksActions'
 import { deleteTestRequest } from '../../store/actions/testsActions'
 import MainButton from '../UI/MainButton/MainButton'
+import './CourseModules.scss'
 
-const CourseModules = ({ id, course, handleAddContent, handleAddModule, teacherCheck }) => {
+const CourseModules = ({ course, handleAddContent, handleAddModule, teacherCheck }) => {
   const dispatch = useDispatch()
   const location = useLocation()
 
@@ -42,7 +42,10 @@ const CourseModules = ({ id, course, handleAddContent, handleAddModule, teacherC
                     location.pathname.match(item._id) && 'course-modules-block__item--active'
                   }`}
                 >
-                  <Link to={`/course/${id}/edit/${item.type}/${item._id}`} className="course-modules-block__item-title">
+                  <Link
+                    to={`/course/${course._id}/edit/${item.type}/${item._id}`}
+                    className="course-modules-block__item-title"
+                  >
                     {item.type === 'test' ? (
                       <i>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

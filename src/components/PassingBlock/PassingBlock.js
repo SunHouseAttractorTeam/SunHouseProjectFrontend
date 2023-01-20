@@ -6,12 +6,14 @@ import './PassingBlock.scss'
 const PassingBlock = ({ event }) => {
   const course = useSelector(state => state.courses.course)
   const [numberOf, setNumberOf] = useState(0)
+
   useEffect(() => {
     course.modules.forEach(item => {
       const lessonIndex = item.data.findIndex(lessonAsd => lessonAsd._id === event._id)
       if (lessonIndex !== -1) setNumberOf(lessonIndex + 1)
     })
   }, [])
+
   return (
     <div className="passing">
       <div className="passing_title">

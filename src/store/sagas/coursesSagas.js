@@ -246,10 +246,10 @@ export function* deleteCourse({ payload: id }) {
   }
 }
 
-export function* joinTheCourseSaga({ payload: { userId, courseId } }) {
+export function* joinTheCourseSaga({ payload: courseId }) {
   try {
     yield put(showLoading())
-    yield axiosApi.put(`/courses/${courseId}/add?userId=${userId}`)
+    yield axiosApi.put(`/users/add_course?course=${courseId}`)
     yield put(joinTheCourseSuccess())
     yield put(hideLoading())
     yield put(fetchCourseRequest(courseId))
