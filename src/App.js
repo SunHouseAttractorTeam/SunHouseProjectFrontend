@@ -23,6 +23,10 @@ import './scss/style.scss'
 const App = () => {
   const user = useSelector(state => state.users.user)
   const loading = useSelector(state => state.loadingBar.default)
+  let access = false
+  if (user?.role === 'admin') {
+    access = true
+  }
   return (
     <CookieProvider>
       <LoadingBar loading={loading} style={{ zIndex: 10000000, background: '#ADFA00' }} />
@@ -38,11 +42,12 @@ const App = () => {
         />
         <Route path="/course/:id" component={Course} />
         <ProtectedRoute
-          isAllowed={Cookies.get('jwt') || user?.token}
+          isAllowed={Cookies.get('jwt') || user?.token || access}
           redirectTo="/login"
           path="/admin_panel"
           component={AdminPanel}
         />
+
         <Route path="/course-catalog" component={CatalogOfCourse} />
         <Route path="/page-teachers" component={TeachersPage} />
         <Route path="/about" component={About} />
