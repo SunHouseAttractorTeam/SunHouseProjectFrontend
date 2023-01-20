@@ -29,6 +29,30 @@ const CoursesCatalog = () => {
     }
   }, [dispatch])
 
+  const allCourses = (
+    <div className="courses-section__card">
+      <div className="courses-section__card-top">
+        <h6 className="courses-section__card-top-title">Все наши курсы</h6>
+        <ul className="courses-section__card-top-list">
+          <li className="courses-section__card-top-list-item">Программирование</li>
+          <li className="courses-section__card-top-list-item">Дизайн и UX</li>
+          <li className="courses-section__card-top-list-item">Маркетинг</li>
+        </ul>
+        <div className="courses-section__card-top-button">
+          <MainButton type="button" className="GreenButton" text="Подробнее" />
+        </div>
+      </div>
+    </div>
+  )
+
+  const sliceCourses = courses.slice(0, 5).map(item => (
+    <div className="slider__item-course" key={item.title}>
+      <CourseCard title={item.title} image={item.image} id={item._id} price={item.price} />
+    </div>
+  ))
+
+  sliceCourses.push(<div className="slider__item-course">{allCourses}</div>)
+
   return (
     courses && (
       <section className="courses-section">
@@ -38,28 +62,10 @@ const CoursesCatalog = () => {
             {courses.slice(0, 5).map(item => (
               <CourseCard key={item.title} title={item.title} image={item.image} id={item._id} price={item.price} />
             ))}
-            <div className="courses-section__card">
-              <div className="courses-section__card-top">
-                <h6 className="courses-section__card-top-title">Все наши курсы</h6>
-                <ul className="courses-section__card-top-list">
-                  <li className="courses-section__card-top-list-item">Программирование</li>
-                  <li className="courses-section__card-top-list-item">Дизайн и UX</li>
-                  <li className="courses-section__card-top-list-item">Маркетинг</li>
-                </ul>
-                <div className="courses-section__card-top-button">
-                  <MainButton type="button" className="GreenButton" text="Подробнее" />
-                </div>
-              </div>
-            </div>
+            {allCourses}
           </div>
           <div className="slider">
-            <CustomSlider response={sliderSettings}>
-              {courses.slice(0, 5).map(item => (
-                <div className="slider__item-course" key={item.title}>
-                  <CourseCard title={item.title} image={item.image} id={item._id} price={item.price} />
-                </div>
-              ))}
-            </CustomSlider>
+            <CustomSlider response={sliderSettings}>{sliceCourses}</CustomSlider>
           </div>
         </div>
       </section>
