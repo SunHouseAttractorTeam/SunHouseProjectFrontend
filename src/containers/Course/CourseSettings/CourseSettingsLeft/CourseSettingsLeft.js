@@ -41,6 +41,7 @@ const CourseSettingsLeft = ({ course, setCourse }) => {
             <FormInput
               onChange={changeInputState}
               name="description"
+              cou
               placeholder="Введите описание"
               value={course.description}
               className="block-form__input-block_input"

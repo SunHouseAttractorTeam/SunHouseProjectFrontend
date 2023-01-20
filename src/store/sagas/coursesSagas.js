@@ -200,10 +200,10 @@ export function* addUsersCourse({ payload }) {
 
   try {
     if (role === 'teachers') {
-      yield axiosApi.put(`/courses/add?course=${idCourse}&owner=${idUser}`)
+      yield axiosApi.put(`/courses/${idCourse}/add?courseId=${idCourse}&teacherId=${idUser}`)
     }
     if (role === 'users') {
-      yield axiosApi.put(`/courses/add?course=${idCourse}&user=${idUser}`)
+      yield axiosApi.put(`/courses/${idCourse}/add?courseId=${idCourse}&userId=${idUser}`)
     }
 
     yield put(hideLoading())

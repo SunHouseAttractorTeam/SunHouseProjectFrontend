@@ -80,14 +80,12 @@ const CourseSettingsRight = () => {
         <div className="container">
           <div className="block-right__top-block">
             <span className="block-right__top-block__title">Все ученики курса</span>
-            <div className="block-right__top-block__btn">
-              <MainButton
-                className="GreenButton block-right__top-block__btn"
-                type="button"
-                onClick={() => setOpen(true)}
-                text="+ Пригласить ученика"
-              />
-            </div>
+            <MainButton
+              className="GreenButton block-right__top-block__btn"
+              type="button"
+              onClick={() => setOpen(true)}
+              text="+ Пригласить ученика"
+            />
           </div>
           <div className="block-right__name-block">
             <div className="block-right__name-block__top">
@@ -206,25 +204,41 @@ const CourseSettingsRight = () => {
       {userOpen ? <CourseUserModal setOpen={setUserOpen} user={userModal} /> : null}
       {open ? (
         <Modal setOpen={setOpen}>
-          <Card>
-            <ReactSearchAutocomplete className="inputModal" items={items} onSelect={ChangeSearchItem} />
-            <input
-              type="checkbox"
-              name="student"
-              value="student"
-              onChange={() => handleOnChange('users')}
-              checked={!isChecked}
+          <Card className="block-right__card">
+            <ReactSearchAutocomplete
+              className="inputModal block-right__card__input"
+              items={items}
+              onSelect={ChangeSearchItem}
             />
-            Студент
-            <input
-              type="checkbox"
-              name="teacher"
-              value="teacher"
-              onChange={() => handleOnChange('teachers')}
-              checked={isChecked}
+            <div className="block-right__card__checkboxes">
+              <div className="block-right__card__checkboxes__checkbox">
+                <input
+                  type="checkbox"
+                  name="student"
+                  id="student"
+                  value="student"
+                  onChange={() => handleOnChange('users')}
+                  checked={!isChecked}
+                />
+                <p>Студент</p>
+              </div>
+              <div className="block-right__card__checkboxes__checkbox">
+                <input
+                  type="checkbox"
+                  name="teacher"
+                  value="teacher"
+                  onChange={() => handleOnChange('teachers')}
+                  checked={isChecked}
+                />
+                <p>Учитель</p>
+              </div>
+            </div>
+            <MainButton
+              className="GreenButton block-right__card__btn"
+              type="button"
+              text="+ Пригласить"
+              onClick={addParticipantInCourse}
             />
-            Учитель
-            <MainButton className="GreenButton" type="button" text="+ Пригласить" onClick={addParticipantInCourse} />
           </Card>
         </Modal>
       ) : null}
