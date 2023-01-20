@@ -38,7 +38,7 @@ const App = () => {
         />
         <Route path="/course/:id" component={Course} />
         <ProtectedRoute
-          isAllowed={(Cookies.get('jwt') || user?.token) && user?.role === 'admin'}
+          isAllowed={Cookies.get('jwt') || user?.token}
           redirectTo="/login"
           path="/admin_panel"
           component={AdminPanel}
