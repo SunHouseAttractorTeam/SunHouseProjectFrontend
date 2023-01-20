@@ -8,6 +8,11 @@
     position: relative;
     width: 100%;
 
+    @media (max-width: 415px) {
+      flex-direction: column;
+      flex-wrap: nowrap;
+    }
+
     .logo {
       min-width: 48px;
       margin-top: -31px;
@@ -20,6 +25,10 @@
     font-weight: 700;
     line-height: 45px;
     margin-bottom: 16px;
+
+    @media (max-width: 470px) {
+      font-size: 30px;
+    }
 
     span {
       display: block;
