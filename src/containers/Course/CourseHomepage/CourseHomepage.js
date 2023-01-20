@@ -87,7 +87,9 @@ const CourseHomepage = ({ teacherCheck, courseCheck }) => {
       return <Redirect to="/login" />
     }
 
-    return dispatch(joinTheCourseRequest(id))
+    const firstId = course.modules[0]?.data[0]
+
+    return dispatch(joinTheCourseRequest({ courseId: id, firstId, userId: user._id }))
   }
 
   return (

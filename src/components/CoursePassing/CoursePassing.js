@@ -8,12 +8,14 @@ import './CoursePassing.scss'
 import CoursePassingModules from '../CoursePassingModule/CoursePassingModule'
 import TaskPassing from '../TaskPassing/TaskPassing'
 import TestPassing from '../TestPassing/TestPassing'
+import { updateUserContentStatusRequest } from '../../store/actions/usersActions'
 
 const CoursePassing = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const history = useHistory()
   const course = useSelector(state => state.courses.course)
+  const user = useSelector(state => state.users.user)
 
   const [disabledWord, setDisabledWord] = useState('')
   const path = history.location.pathname
@@ -41,6 +43,19 @@ const CoursePassing = () => {
     }
   }, [history.location.pathname])
 
+  useEffect(() => {
+    course.modules.forEach(elem => {
+      elem.data.forEach(item => {
+        if (item._id === thisId && item.type === 'task') {
+          if (user.tasks.find(task => task.task === item._id).passed !== 'success') {
+            return setDisabledWord('next')
+          }
+        }
+        return null
+      })
+    })
+  }, [])
+
   const nextEvent = () => {
     course.modules.map((elem, i) => {
       elem.data.map((item, index) => {
@@ -51,7 +66,20 @@ const CoursePassing = () => {
             // eslint-disable-next-line prefer-destructuring
             nextObj = course.modules[i + 1].data[0]
           }
-          return history.replace(`${newPath}/${nextObj.type}/${nextObj._id}`)
+
+          console.log(nextObj)
+          console.log(user[`${nextObj.type}s`].find(obj => obj[nextObj.type] === nextObj._id))
+          if (user[`${nextObj.type}s`].find(obj => obj[nextObj.type] === nextObj._id).status) {
+            return history.replace(`${newPath}/${nextObj.type}/${nextObj._id}`)
+          }
+
+          return dispatch(
+            updateUserContentStatusRequest({
+              userId: user._id,
+              content: nextObj,
+              path: `${newPath}/${nextObj.type}/${nextObj._id}`,
+            }),
+          )
         }
         return item
       })
