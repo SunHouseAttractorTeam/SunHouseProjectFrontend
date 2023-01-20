@@ -18,6 +18,9 @@ import {
   fetchTestFailure,
   fetchTestRequest,
   fetchTestSuccess,
+  sendTestAnswersFailure,
+  sendTestAnswersRequest,
+  sendTestAnswersSuccess,
 } from '../actions/testsActions'
 import { fetchCourseRequest } from '../actions/coursesActions'
 import { historyPush } from '../actions/historyActions'
@@ -109,12 +112,29 @@ export function* deleteTest({ payload }) {
   }
 }
 
+export function* sendTestAnswersSaga({ payload: { testId, state } }) {
+  try {
+    yield put(showLoading())
+    yield axiosApi.patch(`/tests/${testId}`, { test: state })
+    yield put(sendTestAnswersSuccess())
+    yield put(hideLoading())
+
+    yield Swal.fire({
+      title: 'Ответы успешно сохранены',
+    })
+  } catch (e) {
+    yield put(sendTestAnswersFailure(e))
+    yield put(hideLoading())
+  }
+}
+
 const testsSagas = [
   takeEvery(createTestRequest, createTest),
   takeEvery(fetchTestRequest, fetchTest),
   takeEvery(editTestRequest, editTest),
   takeEvery(editTestQuestionsRequest, editTestQuestions),
   takeEvery(deleteTestRequest, deleteTest),
+  takeEvery(sendTestAnswersRequest, sendTestAnswersSaga),
 ]
 
 export default testsSagas
