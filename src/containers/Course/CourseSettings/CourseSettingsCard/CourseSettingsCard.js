@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { inputChangeHandler } from '../../../../components/UI/Form/Handlers/Handlers'
-import banner from '../../../../assets/images/banner.jpg'
 import { apiUrl } from '../../../../config'
+import { inputChangeHandler } from '../../../../components/UI/Form/Handlers/Handlers'
+import courseDefaultAvatar from '../../../../assets/images/courseDefaultAvatar.png'
 import './CourseSettingsCard.scss'
 
 const CourseSettingsCard = ({ course, setCourse }) => {
@@ -16,7 +16,7 @@ const CourseSettingsCard = ({ course, setCourse }) => {
     <div className="left-card">
       <div className="left-card__image-block">
         <img
-          src={image || (course.image ? `${apiUrl}/${course.image}` : banner)}
+          src={image || (course.image ? `${apiUrl}/${course.image}` : courseDefaultAvatar)}
           alt={course.title}
           className="left-card__image-block-image"
         />

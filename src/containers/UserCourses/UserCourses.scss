@@ -1,12 +1,4 @@
 .user-courses {
-  &__top {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 21px;
-  }
-
   &__bottom {
     &-courses {
       display: grid;
@@ -15,14 +7,6 @@
       @media(max-width: 1020px) {
         display: flex;
         flex-direction: column;
-      }
-    }
-
-    .course-card {
-      transition: all .3s ease;
-
-      &:hover {
-        transform: translateY(-8px);
       }
     }
   }

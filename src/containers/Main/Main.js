@@ -1,4 +1,5 @@
 import React from 'react'
+import { teachers } from '../../data/teachers'
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 import About from '../../components/About/About'
