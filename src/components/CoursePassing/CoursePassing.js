@@ -23,15 +23,15 @@ const CoursePassing = () => {
       dispatch(fetchCourseRequest(id))
     }
 
-    const checkContentType = () => {
-      const content = course.modules[0].data[0]
-
-      history.push(`/course/${id}/pass/${content.type}/${content._id}`)
-    }
-
-    if (course) {
-      checkContentType()
-    }
+    // const checkContentType = () => {
+    //   const content = course.modules[0].data[0]
+    //
+    //   history.push(`/course/${id}/pass/${content.type}/${content._id}`)
+    // }
+    //
+    // if (course) {
+    //   checkContentType()
+    // }
   }, [dispatch, course, id])
 
   useEffect(() => {

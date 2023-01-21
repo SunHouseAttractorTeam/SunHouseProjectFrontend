@@ -6,7 +6,6 @@
   align-items: center;
   padding: 0 32px;
   background: white;
-  width: 47%;
   border-radius: 16px;
 
   &_title {
@@ -19,7 +18,6 @@
 
   &_input {
     margin-bottom: 16px;
-    padding: 15px 250px 15px 30px;
     border: 2px solid #D1D1D6;
   }
 
@@ -30,7 +28,7 @@
     font-size: 16px;
     font-weight: 600;
     padding: 15px 0;
-    width: 490px;
+    width: 100%;
 
     &:hover {
       background: rgba(144, 206, 1, 0.8);

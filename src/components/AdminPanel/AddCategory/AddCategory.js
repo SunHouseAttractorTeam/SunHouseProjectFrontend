@@ -25,21 +25,6 @@ const AddCategory = () => {
   return (
     <div className="category">
       <Title>Категории курсов</Title>
-      <div className="category__wrapper">
-        {categories.map(category => (
-          <div key={category._id} className="category__inner-block">
-            <p className="category__inner-block-content">
-              <span className="category__inner-block-title">Название:</span> {category.title}
-            </p>
-            {category.description ? (
-              <p className="category__inner-block-content">
-                <span className="category__inner-block-title">Описание:</span> {category.description}
-              </p>
-            ) : null}
-            <MainButton text="Удалить категорию" className="RedButton" onClick={() => deleteCategory(category._id)} />
-          </div>
-        ))}
-      </div>
       <div className="category__add-category">
         <h3 className="category__add-category-title">Тут создаются категории</h3>
         <FormInput
@@ -63,9 +48,30 @@ const AddCategory = () => {
         <MainButton
           disabled={!state.title}
           text="Создать"
+          type="button"
           className={state.title ? 'GreenButton' : 'category__add-category-btn'}
           onClick={e => submitFormHandler(e, dispatch(createCategoryRequest(state)))}
         />
+      </div>
+      <div className="category__wrapper">
+        {categories.map(category => (
+          <div key={category._id} className="category__inner-block">
+            <p className="category__inner-block-content">
+              <span className="category__inner-block-title">Название:</span> {category.title}
+            </p>
+            {category.description ? (
+              <p className="category__inner-block-content">
+                <span className="category__inner-block-title">Описание:</span> {category.description}
+              </p>
+            ) : null}
+            <MainButton
+              text="Удалить категорию"
+              className="RedButton"
+              type="button"
+              onClick={() => deleteCategory(category._id)}
+            />
+          </div>
+        ))}
       </div>
     </div>
   )

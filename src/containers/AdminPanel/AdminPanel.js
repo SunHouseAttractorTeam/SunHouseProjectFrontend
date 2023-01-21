@@ -11,6 +11,7 @@ import LendingReviews from '../../components/AdminPanel/LendingReviews/LendingRe
 import AdminCoursesControl from '../../components/AdminPanel/AdminCoursesControl/AdminCoursesControl'
 import Footer from '../../components/Footer/Footer'
 import AddCategory from '../../components/AdminPanel/AddCategory/AddCategory'
+import LendingTeachers from '../../components/AdminPanel/LendingTeachers/LendingTeachers'
 
 const AdminPanel = () => {
   const user = useSelector(state => state.users.user)
@@ -53,6 +54,12 @@ const AdminPanel = () => {
                 redirectTo="/login"
                 path="/admin_panel/course_category_control"
                 component={AddCategory}
+              />
+              <ProtectedRoute
+                isAllowed={Cookies.get('jwt')}
+                redirectTo="/login"
+                path="/admin_panel/teachers"
+                component={LendingTeachers}
               />
             </Switch>
           </div>

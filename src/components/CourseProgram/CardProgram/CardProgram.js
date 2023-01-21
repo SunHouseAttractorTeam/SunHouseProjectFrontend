@@ -7,6 +7,7 @@ const CardProgram = ({ title, content }) => {
   const toggleAccordion = value => {
     setIsOpen(value)
   }
+
   return (
     <>
       <div className="program-block__card">
