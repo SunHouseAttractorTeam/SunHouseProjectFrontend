@@ -67,8 +67,6 @@ const CoursePassing = () => {
             nextObj = course.modules[i + 1].data[0]
           }
 
-          console.log(nextObj)
-          console.log(user[`${nextObj.type}s`].find(obj => obj[nextObj.type] === nextObj._id))
           if (user[`${nextObj.type}s`].find(obj => obj[nextObj.type] === nextObj._id).status) {
             return history.replace(`${newPath}/${nextObj.type}/${nextObj._id}`)
           }
