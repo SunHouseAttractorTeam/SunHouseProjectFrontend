@@ -53,6 +53,7 @@
 
   &__button {
     text-decoration: none;
+    white-space: nowrap;
 
     @media (max-width: 470px) {
       margin-top: 20px;
