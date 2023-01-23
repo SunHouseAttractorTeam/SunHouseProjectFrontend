@@ -85,7 +85,7 @@ const CoursePassingModules = ({ course, moduleId }) => {
                         location.pathname.match(item._id) && 'course-modules-block__item--active'
                       }`}
                     >
-                      {user && user[`${item.type}s`].find(elem => elem[item.type] === item._id).status ? (
+                      {user && user[`${item.type}s`].find(elem => elem[item.type] === item._id)?.status ? (
                         <Link
                           to={`/course/${course._id}/pass/${item.type}/${item._id}`}
                           className="course-passing-modules__block-item-title"
@@ -154,7 +154,7 @@ const CoursePassingModules = ({ course, moduleId }) => {
                           user &&
                           user[`${module.data[index - 1].type}s`].find(
                             elem => elem[module.data[index - 1].type] === module.data[index - 1]._id,
-                          ).status ? (
+                          )?.status ? (
                             <h6 className="course-passing-modules__block-item-title">
                               <i>
                                 <svg
