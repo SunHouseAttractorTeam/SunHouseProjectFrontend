@@ -17,14 +17,14 @@ import './LendingReviews.scss'
 
 const LendingReviews = () => {
   const dispatch = useDispatch()
-  const [state, setState] = useState({ image: '', name: '', socialNetwork: '', description: '' })
+  const [reviewState, reviewSetState] = useState({ image: '', name: '', socialNetwork: '', description: '' })
   const reviews = useSelector(state => state.reviews.reviews)
   const [image, setImage] = useState(null)
   const fileChangeHandler = e => {
     setImage(URL.createObjectURL(e.target.files[0]))
     const { name } = e.target
     const file = e.target.files[0]
-    setState(prev => ({ ...prev, [name]: file }))
+    reviewSetState(prev => ({ ...prev, [name]: file }))
   }
 
   useEffect(() => {
@@ -34,11 +34,11 @@ const LendingReviews = () => {
   const submitFormHandler = e => {
     e.preventDefault()
     const formData = new FormData()
-    Object.keys(state).forEach(key => {
-      formData.append(key, state[key])
+    Object.keys(reviewState).forEach(key => {
+      formData.append(key, reviewState[key])
     })
     dispatch(createReviewRequest(formData))
-    setState({ image: '', name: '', socialNetwork: '', description: '' })
+    reviewState({ image: '', name: '', socialNetwork: '', description: '' })
     setImage(null)
   }
   const deleteReviewCard = id => {
@@ -54,12 +54,12 @@ const LendingReviews = () => {
             <div className="reviews__wrapper-inner2">
               <div className="reviews__input-label">
                 <img
-                  src={image || (state.image ? `${apiUrl}/${state.image}` : null)}
-                  alt={state.title}
+                  src={image || (reviewState.image ? `${apiUrl}/${reviewState.image}` : null)}
+                  alt={reviewState.title}
                   className="reviews__input-label-image"
                 />
                 <input type="file" name="image" className="reviews__input-file" onChange={fileChangeHandler} />
-                {!state.image ? (
+                {!reviewState.image ? (
                   <i className="reviews__input-img">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -75,18 +75,18 @@ const LendingReviews = () => {
                   required
                   type="text"
                   name="name"
-                  value={state.name}
+                  value={reviewState.name}
                   placeholder="Имя"
                   className="reviews__input"
-                  onChange={e => inputChangeHandler(e, setState)}
+                  onChange={e => inputChangeHandler(e, reviewSetState)}
                 />
                 <FormInput
                   type="text"
                   name="socialNetwork"
-                  value={state.socialNetwork}
+                  value={reviewState.socialNetwork}
                   className="reviews__input"
                   placeholder="instagram"
-                  onChange={e => inputChangeHandler(e, setState)}
+                  onChange={e => inputChangeHandler(e, reviewSetState)}
                 />
               </div>
             </div>
@@ -94,31 +94,31 @@ const LendingReviews = () => {
               <FormArea
                 required
                 name="description"
-                value={state.description}
+                value={reviewState.description}
                 cols="50"
                 rows="10"
                 placeholder="Тут будет текст отзыва"
                 className="reviews__textarea"
-                onChange={e => inputChangeHandler(e, setState)}
+                onChange={e => inputChangeHandler(e, reviewSetState)}
                 max="350"
               />
               <span
                 className={
-                  state.description.length !== 350 ? 'reviews__textarea-counter' : 'reviews__textarea-counter-red'
+                  reviewState.description.length !== 350 ? 'reviews__textarea-counter' : 'reviews__textarea-counter-red'
                 }
               >
-                Количество символов: {state.description.length}/350
+                Количество символов: {reviewState.description.length}/350
               </span>
             </div>
           </div>
         </div>
         <MainButton
-          disabled={!state.name || !state.image || !state.description}
+          disabled={!reviewState.name || !reviewState.image || !reviewState.description}
           text="Добавить"
           onClick={e => submitFormHandler(e)}
           type="submit"
           className={
-            state.name && state.description && state.image && state.socialNetwork
+            reviewState.name && reviewState.description && reviewState.image && reviewState.socialNetwork
               ? 'GreenButton reviews__button'
               : 'GreenButton reviews__button reviews__button-disabled'
           }

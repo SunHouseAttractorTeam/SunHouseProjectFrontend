@@ -1,4 +1,5 @@
 import React from 'react'
+import { teachers } from '../../data/teachers'
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 import About from '../../components/About/About'
@@ -14,12 +15,14 @@ const Main = () => (
     <Header />
     <Promo />
     <CoursesCatalog />
-    <About />
+    <div id="about" className="about-block">
+      <About />
+    </div>
     <div className="container">
       <LendingTeacherBlock />
     </div>
     <Partners />
-    <div className="container">
+    <div id="review" className="review-block">
       <ReviewsBlock />
     </div>
     <Footer />

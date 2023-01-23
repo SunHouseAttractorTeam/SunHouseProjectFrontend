@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Redirect, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchCourseRequest, visibilityRequest } from '../../../store/actions/coursesActions'
+import { fetchCourseRequest, joinTheCourseRequest, visibilityRequest } from '../../../store/actions/coursesActions'
 import CourseTitle from '../../../components/CourseTitle/CourseTitle'
 import WhatLearn from '../../../components/WhatLearn/WhatLearn'
 import TeachersBlock from '../../../components/TeachersBlock/TeachersBlock'
@@ -11,6 +11,7 @@ const CourseHomepage = ({ teacherCheck, courseCheck }) => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const course = useSelector(state => state.courses.course)
+  const user = useSelector(state => state.users.user)
   const [courseLending, setCourseLending] = useState(null)
 
   useEffect(() => {
@@ -81,6 +82,20 @@ const CourseHomepage = ({ teacherCheck, courseCheck }) => {
     dispatch(visibilityRequest({ formData, id }))
   }
 
+  const handleJoinTheCourse = () => {
+    if (!user) {
+      return <Redirect to="/login" />
+    }
+
+    let firstId
+
+    if (course?.modules.length && course.modules[0]?.data.length) {
+      firstId = course.modules[0]?.data[0]
+    }
+
+    return dispatch(joinTheCourseRequest({ courseId: id, firstId, userId: user._id }))
+  }
+
   return (
     <>
       {course && (
@@ -91,6 +106,8 @@ const CourseHomepage = ({ teacherCheck, courseCheck }) => {
             description={course.description}
             image={course.image}
             teacherCheck={teacherCheck}
+            courseCheck={courseCheck}
+            handleJoinTheCourse={handleJoinTheCourse}
           />
           <div className="container">
             <div className="course-homepage__bottom">
@@ -157,8 +174,12 @@ const CourseHomepage = ({ teacherCheck, courseCheck }) => {
                       )}
                     </>
                   )}
-                  {courseCheck ? (
-                    <button type="button" className="course__save-btn MainButton GreenButton">
+                  {!courseCheck ? (
+                    <button
+                      type="button"
+                      className="course__save-btn MainButton GreenButton"
+                      onClick={handleJoinTheCourse}
+                    >
                       Записаться на курс
                     </button>
                   ) : null}

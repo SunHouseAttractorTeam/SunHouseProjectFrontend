@@ -7,25 +7,23 @@ const ButtonsContent = ({ titleOne, titleTwo, childrenOne, childrenTwo, onClickO
   return (
     <div className="title-block">
       <div className="title-block__buttons">
-        <div onClick={onClickOne}>
-          <button
-            type="button"
-            onClick={() => setActive(true)}
-            className={
-              active ? 'title-block__buttons-button title-block__buttons-button--active' : 'title-block__buttons-button'
-            }
-          >
+        <div
+          onClick={onClickOne}
+          className={
+            active ? 'title-block__buttons-item title-block__buttons-item--active' : 'title-block__buttons-item'
+          }
+        >
+          <button type="button" onClick={() => setActive(true)} className="title-block__buttons-button">
             {titleOne}
           </button>
         </div>
-        <div onClick={onClickTwo}>
-          <button
-            type="button"
-            onClick={() => setActive(false)}
-            className={
-              active ? 'title-block__buttons-button' : 'title-block__buttons-button title-block__buttons-button--active'
-            }
-          >
+        <div
+          onClick={onClickTwo}
+          className={
+            active ? 'title-block__buttons-item' : 'title-block__buttons-item title-block__buttons-item--active'
+          }
+        >
+          <button type="button" onClick={() => setActive(false)} className="title-block__buttons-button">
             {titleTwo}
           </button>
         </div>

@@ -23,6 +23,13 @@
     "react/prop-types": 0,
     "no-underscore-dangle": 0,
     "no-return-assign": 1,
+    "prefer-destructuring": [
+      "error",
+      {
+        "object": true,
+        "array": false
+      }
+    ],
     // react
     "no-param-reassign": 0,
     "no-empty": 0,

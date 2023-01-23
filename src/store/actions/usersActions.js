@@ -17,6 +17,9 @@ export const {
   banUnbanRequest,
   banUnbanSuccess,
   banUnbanFailure,
+  checkUserTaskRequest,
+  checkUserTaskSuccess,
+  checkUserTaskFailure,
   verifyUserRequest,
   verifyUserSuccess,
   verifyUserFailure,
@@ -32,4 +35,7 @@ export const {
   passwordRequest,
   passwordSuccess,
   passwordFailure,
+  updateUserContentStatusRequest,
+  updateUserContentStatusSuccess,
+  updateUserContentStatusFailure,
 } = usersSlice.actions

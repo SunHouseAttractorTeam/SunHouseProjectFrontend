@@ -10,13 +10,12 @@
   }
 
   &__right {
-  }
+    &-save-button {
+      margin-top: 40px;
 
-  &__save-button-block {
-    margin-top: 40px;
-
-    &:hover {
-      background-color: $whiteBorderColor;
+      &:hover {
+        background-color: $whiteBorderColor;
+      }
     }
   }
 }

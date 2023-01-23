@@ -45,20 +45,20 @@ const CourseSettings = () => {
             <div className="course-settings__left">
               <CourseSettingsCard course={course} setCourse={setState} />
             </div>
-            <ButtonsContent
-              titleOne="Основные настройки"
-              titleTwo="Настройки курса"
-              childrenOne={<CourseSettingsLeft course={course} setCourse={setState} submit={submitFormHandler} />}
-              childrenTwo={<CourseSettingsRight course={course} setCourse={setState} submit={submitFormHandler} />}
-            />
-          </div>
-          <div className="course-settings__save-button-block">
-            <MainButton
-              className="GreenButton course-settings__save-button-block_save-button"
-              type="submit"
-              text="Сохранить изменения"
-              onClick={submitFormHandler}
-            />
+            <div className="course-settings__right">
+              <ButtonsContent
+                titleOne="Основные настройки"
+                titleTwo="Настройки курса"
+                childrenOne={<CourseSettingsLeft course={state} setCourse={setState} submit={submitFormHandler} />}
+                childrenTwo={<CourseSettingsRight course={course} setCourse={setState} submit={submitFormHandler} />}
+              />
+              <MainButton
+                className="GreenButton course-settings__right-save-button"
+                type="submit"
+                text="Сохранить изменения"
+                onClick={submitFormHandler}
+              />
+            </div>
           </div>
         </>
       )}
