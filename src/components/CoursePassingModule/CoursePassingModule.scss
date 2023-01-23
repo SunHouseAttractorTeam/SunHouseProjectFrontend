@@ -61,7 +61,7 @@
       &--is-open {
         align-content: center;
         background-color: $totalWhiteColor;
-        max-height: 500px;
+        max-height: 100vh;
         transition: all 0.9s ease;
         border-radius: 16px;
       }

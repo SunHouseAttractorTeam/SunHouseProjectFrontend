@@ -18,6 +18,7 @@ const CoursePassing = () => {
   const user = useSelector(state => state.users.user)
 
   const [disabledWord, setDisabledWord] = useState('')
+  const [moduleId, setModuleId] = useState(null)
   const path = history.location.pathname
   const thisId = path.split('/').reverse()[0]
 
@@ -30,8 +31,14 @@ const CoursePassing = () => {
   useEffect(() => {
     const lastModule = course.modules[course.modules.length - 1]
     const lastEvent = lastModule.data[lastModule.data.length - 1]
-    const firstModule = course.modules[0]
-    const firstEvent = firstModule.data[0]
+    let firstModule
+    let firstEvent
+    if (course.modules.length) {
+      firstModule = course.modules[0]
+      if (firstModule.data.length) {
+        firstEvent = firstModule.data[0]
+      }
+    }
 
     setDisabledWord('')
 
@@ -41,20 +48,49 @@ const CoursePassing = () => {
     if (firstEvent._id === thisId) {
       setDisabledWord('previous')
     }
-  }, [history.location.pathname])
+  }, [history.location.pathname, course])
 
   useEffect(() => {
-    course.modules.forEach(elem => {
-      elem.data.forEach(item => {
-        if (item._id === thisId && item.type === 'task') {
-          if (user.tasks.find(task => task.task === item._id).passed !== 'success') {
-            return setDisabledWord('next')
+    if (path.includes('task')) {
+      course.modules.forEach(elem => {
+        elem.data.forEach(item => {
+          if (item._id === thisId && item.type === 'task') {
+            if (user.tasks.find(task => task.task === item._id).passed !== 'success') {
+              return setDisabledWord('next')
+            }
           }
-        }
-        return null
+          return null
+        })
       })
-    })
-  }, [])
+    }
+  }, [course, path])
+
+  useEffect(() => {
+    if (course) {
+      course.modules.forEach(module => {
+        module.data.forEach((item, index) => {
+          if (user[`${item.type}s`]?.find(elem => elem[item.type] === item?._id).status) {
+            if (module.data[index + 1]) {
+              if (
+                !user[`${module.data[index + 1].type}s`]?.find(
+                  elem => elem[module.data[index + 1].type] === module.data[index + 1]._id,
+                ).status
+              ) {
+                setModuleId(module._id)
+                return history.push(`/course/${id}/pass/${item.type}/${item._id}`)
+              }
+
+              return null
+            }
+
+            setModuleId(module._id)
+            return history.push(`/course/${id}/pass/${item.type}/${item._id}`)
+          }
+          return null
+        })
+      })
+    }
+  }, [course])
 
   const nextEvent = () => {
     course.modules.map((elem, i) => {
@@ -64,6 +100,7 @@ const CoursePassing = () => {
           let nextObj = elem.data[index + 1]
           if (!nextObj) {
             // eslint-disable-next-line prefer-destructuring
+            setModuleId(course.modules[i + 1]._id)
             nextObj = course.modules[i + 1].data[0]
           }
 
@@ -92,8 +129,10 @@ const CoursePassing = () => {
           let nextObj = elem.data[index - 1]
           if (!nextObj) {
             // eslint-disable-next-line prefer-destructuring
+            setModuleId(course.modules[i - 1]._id)
             nextObj = course.modules[i - 1].data[course.modules[i - 1].data.length - 1]
           }
+
           return history.replace(`${newPath}/${nextObj.type}/${nextObj._id}`)
         }
         return item
@@ -110,7 +149,7 @@ const CoursePassing = () => {
           <div className="container">
             <div className="course-passing__bottom">
               <div className="course-edit__left">
-                <CoursePassingModules id={id} course={course} />
+                <CoursePassingModules course={course} moduleId={moduleId} />
               </div>
               <div className="course-passing__right">
                 <Switch>

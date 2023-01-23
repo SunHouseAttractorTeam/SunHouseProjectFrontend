@@ -1,12 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import './CoursePassingModule.scss'
 import { useSelector } from 'react-redux'
 
-const CoursePassingModules = ({ course }) => {
+const CoursePassingModules = ({ course, moduleId }) => {
   const location = useLocation()
   const user = useSelector(state => state.users.user)
   const [isOpen, setIsOpen] = useState({ status: false, id: '' })
+
+  useEffect(() => {
+    if (moduleId) {
+      setIsOpen({ status: true, id: moduleId })
+    }
+  }, [moduleId])
 
   const toggleAccordion = value => {
     if (value === isOpen.id) {
@@ -72,14 +78,14 @@ const CoursePassingModules = ({ course }) => {
                 }`}
               >
                 <ul className="course-passing-modules__block-items">
-                  {module.data.map(item => (
+                  {module.data.map((item, index) => (
                     <li
-                      key={item.id}
+                      key={item._id}
                       className={`course-passing-modules__block-item course-passing-modules__block-item--${item.type} ${
                         location.pathname.match(item._id) && 'course-modules-block__item--active'
                       }`}
                     >
-                      {user[`${item.type}s`].find(elem => elem[item.type] === item._id).status ? (
+                      {user && user[`${item.type}s`].find(elem => elem[item.type] === item._id).status ? (
                         <Link
                           to={`/course/${course._id}/pass/${item.type}/${item._id}`}
                           className="course-passing-modules__block-item-title"
@@ -143,23 +149,49 @@ const CoursePassingModules = ({ course }) => {
                           {item.title}
                         </Link>
                       ) : (
-                        <h6 className="course-passing-modules__block-item-title">
-                          <i>
-                            <svg
-                              width="18"
-                              height="21"
-                              viewBox="0 0 12 15"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M9.99984 5.33366H9.33317V4.00033C9.33317 2.16033 7.83984 0.666992 5.99984 0.666992C4.15984 0.666992 2.6665 2.16033 2.6665 4.00033V5.33366H1.99984C1.2665 5.33366 0.666504 5.93366 0.666504 6.66699V13.3337C0.666504 14.067 1.2665 14.667 1.99984 14.667H9.99984C10.7332 14.667 11.3332 14.067 11.3332 13.3337V6.66699C11.3332 5.93366 10.7332 5.33366 9.99984 5.33366ZM5.99984 11.3337C5.2665 11.3337 4.6665 10.7337 4.6665 10.0003C4.6665 9.26699 5.2665 8.66699 5.99984 8.66699C6.73317 8.66699 7.33317 9.26699 7.33317 10.0003C7.33317 10.7337 6.73317 11.3337 5.99984 11.3337ZM3.99984 5.33366V4.00033C3.99984 2.89366 4.89317 2.00033 5.99984 2.00033C7.1065 2.00033 7.99984 2.89366 7.99984 4.00033V5.33366H3.99984Z"
-                                fill="#D1D1D6"
-                              />
-                            </svg>
-                          </i>
-                          {item.title}
-                        </h6>
+                        <>
+                          {module.data[index - 1] &&
+                          user &&
+                          user[`${module.data[index - 1].type}s`].find(
+                            elem => elem[module.data[index - 1].type] === module.data[index - 1]._id,
+                          ).status ? (
+                            <h6 className="course-passing-modules__block-item-title">
+                              <i>
+                                <svg
+                                  width="22"
+                                  height="22"
+                                  viewBox="0 0 16 16"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M8 0C3.584 0 0 3.584 0 8C0 12.416 3.584 16 8 16C12.416 16 16 12.416 16 8C16 3.584 12.416 0 8 0ZM5.832 11.432L2.96 8.56C2.648 8.248 2.648 7.744 2.96 7.432C3.272 7.12 3.776 7.12 4.088 7.432L6.4 9.736L11.904 4.232C12.216 3.92 12.72 3.92 13.032 4.232C13.344 4.544 13.344 5.048 13.032 5.36L6.96 11.432C6.656 11.744 6.144 11.744 5.832 11.432Z"
+                                    fill="#D1D1D6"
+                                  />
+                                </svg>
+                              </i>
+                              {item.title}
+                            </h6>
+                          ) : (
+                            <h6 className="course-passing-modules__block-item-title">
+                              <i>
+                                <svg
+                                  width="18"
+                                  height="21"
+                                  viewBox="0 0 12 15"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M9.99984 5.33366H9.33317V4.00033C9.33317 2.16033 7.83984 0.666992 5.99984 0.666992C4.15984 0.666992 2.6665 2.16033 2.6665 4.00033V5.33366H1.99984C1.2665 5.33366 0.666504 5.93366 0.666504 6.66699V13.3337C0.666504 14.067 1.2665 14.667 1.99984 14.667H9.99984C10.7332 14.667 11.3332 14.067 11.3332 13.3337V6.66699C11.3332 5.93366 10.7332 5.33366 9.99984 5.33366ZM5.99984 11.3337C5.2665 11.3337 4.6665 10.7337 4.6665 10.0003C4.6665 9.26699 5.2665 8.66699 5.99984 8.66699C6.73317 8.66699 7.33317 9.26699 7.33317 10.0003C7.33317 10.7337 6.73317 11.3337 5.99984 11.3337ZM3.99984 5.33366V4.00033C3.99984 2.89366 4.89317 2.00033 5.99984 2.00033C7.1065 2.00033 7.99984 2.89366 7.99984 4.00033V5.33366H3.99984Z"
+                                    fill="#D1D1D6"
+                                  />
+                                </svg>
+                              </i>
+                              {item.title}
+                            </h6>
+                          )}
+                        </>
                       )}
                     </li>
                   ))}
