@@ -36,6 +36,9 @@ import {
   resetPasswordFailure,
   resetPasswordRequest,
   resetPasswordSuccess,
+  updateUserContentStatusFailure,
+  updateUserContentStatusRequest,
+  updateUserContentStatusSuccess,
   verifyUserFailure,
   verifyUserRequest,
   verifyUserSuccess,
@@ -260,6 +263,21 @@ export function* checkUserTask({ payload: data }) {
   }
 }
 
+export function* updateUserContentStatusSaga({ payload: { userId, content, path } }) {
+  try {
+    yield put(showLoading())
+    const response = yield axiosApi.patch(
+      `/users/${userId}/update_status?content=${content._id}&params=${content.type}`,
+    )
+    yield put(updateUserContentStatusSuccess({ type: content.type, data: response.data[`${content.type}s`] }))
+    yield put(hideLoading())
+    yield put(historyPush(path))
+  } catch (e) {
+    yield put(updateUserContentStatusFailure(e))
+    yield put(hideLoading())
+  }
+}
+
 const userSagas = [
   takeEvery(loginUserRequest, loginUserSaga),
   takeEvery(banUnbanRequest, banUnbanSaga),
@@ -273,6 +291,7 @@ const userSagas = [
   takeEvery(editRequest, editUserProfileSaga),
   takeEvery(passwordRequest, editUserPasswordSaga),
   takeEvery(checkUserTaskRequest, checkUserTask),
+  takeEvery(updateUserContentStatusRequest, updateUserContentStatusSaga),
 ]
 
 export default userSagas

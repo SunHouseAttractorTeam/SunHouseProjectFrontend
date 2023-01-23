@@ -44,6 +44,7 @@ import {
   visibilitySuccess,
 } from '../actions/coursesActions'
 import { historyPush } from '../actions/historyActions'
+import { loginUserRequest } from '../actions/usersActions'
 
 const Toast = Swal.mixin({
   toast: true,
@@ -246,12 +247,18 @@ export function* deleteCourse({ payload: id }) {
   }
 }
 
-export function* joinTheCourseSaga({ payload: courseId }) {
+export function* joinTheCourseSaga({ payload: { courseId, firstId, userId } }) {
   try {
     yield put(showLoading())
     yield axiosApi.put(`/users/add_course?course=${courseId}`)
     yield put(joinTheCourseSuccess())
     yield put(hideLoading())
+
+    if (firstId) {
+      yield axiosApi.patch(`/users/${userId}/update_status?content=${firstId._id}&params=${firstId.type}`)
+    }
+
+    yield put(loginUserRequest())
     yield put(fetchCourseRequest(courseId))
 
     yield Toast.fire({

@@ -12,6 +12,7 @@ import CourseEdit from './CourseEdit/CourseEdit'
 import CoursePassing from '../../components/CoursePassing/CoursePassing'
 import Footer from '../../components/Footer/Footer'
 import './Course.scss'
+import CourseCertificate from '../../components/CourseCertificate/CourseCertificate'
 
 const Course = () => {
   const { id } = useParams()
@@ -64,10 +65,16 @@ const Course = () => {
                 render={() => <CourseEdit teacherCheck={teacherCheck} />}
               />
               <ProtectedRoute
-                isAllowed={(Cookies.get('jwt') || user?.token) && courseCheck}
+                isAllowed
                 redirectTo={`/course/${id}`}
                 path="/course/:id/pass"
                 render={() => <CoursePassing courseCheck={courseCheck} />}
+              />
+              <ProtectedRoute
+                isAllowed
+                redirectTo={`/course/${id}`}
+                path="/course/:id/certificate"
+                component={CourseCertificate}
               />
             </Switch>
           </div>

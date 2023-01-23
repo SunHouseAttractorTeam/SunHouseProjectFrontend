@@ -155,6 +155,18 @@ const usersSlice = createSlice({
       state.editLoading = false
       state.editError = action
     },
+    updateUserContentStatusRequest(state) {
+      state.editLoading = true
+      state.editError = null
+    },
+    updateUserContentStatusSuccess(state, action) {
+      state.editLoading = false
+      state.user[`${action.payload.type}s`] = action.payload.data
+    },
+    updateUserContentStatusFailure(state, action) {
+      state.editLoading = false
+      state.editError = action.payload
+    },
   },
 })
 
