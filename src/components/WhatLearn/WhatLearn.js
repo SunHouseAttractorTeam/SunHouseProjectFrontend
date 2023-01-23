@@ -87,6 +87,7 @@ const WhatLearn = ({ teacherCheck, willLearn, onVisibilityBlock, block }) => {
                     value={description.title}
                     onChange={inputChangeHandler}
                     placeholder="Введите название..."
+                    required
                   />
                   <input
                     className="block__add-description"
@@ -94,6 +95,7 @@ const WhatLearn = ({ teacherCheck, willLearn, onVisibilityBlock, block }) => {
                     value={description.description}
                     onChange={inputChangeHandler}
                     placeholder="Введите описание..."
+                    required
                   />
                   <div className="field__wrapper">
                     <input

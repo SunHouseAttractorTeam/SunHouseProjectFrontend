@@ -131,6 +131,7 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBl
                     value={teacher.description}
                     onChange={inputChangeHandler}
                     placeholder="Введите описание..."
+                    required
                   />
                   <button className="block__modal-btn" type="submit">
                     Сохранить

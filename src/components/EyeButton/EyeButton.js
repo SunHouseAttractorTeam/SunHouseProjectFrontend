@@ -1,5 +1,4 @@
 import React from 'react'
-import './EyeButton.js.scss'
 
 const EyeButton = ({ isVisibility, handleVisible }) => (
   <>
