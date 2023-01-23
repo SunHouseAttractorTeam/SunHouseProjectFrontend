@@ -55,7 +55,7 @@ const CoursePassing = () => {
       course.modules.forEach(elem => {
         elem.data.forEach(item => {
           if (item._id === thisId && item.type === 'task') {
-            if (user.tasks.find(task => task.task === item._id).passed !== 'success') {
+            if (user?.tasks.find(task => task.task === item._id).passed !== 'success') {
               return setDisabledWord('next')
             }
           }
@@ -69,7 +69,7 @@ const CoursePassing = () => {
     if (course) {
       course.modules.forEach(module => {
         module.data.forEach((item, index) => {
-          if (user[`${item.type}s`]?.find(elem => elem[item.type] === item?._id).status) {
+          if (user && user[`${item.type}s`].find(elem => elem[item.type] === item?._id).status) {
             if (module.data[index + 1]) {
               if (
                 !user[`${module.data[index + 1].type}s`]?.find(
@@ -90,7 +90,7 @@ const CoursePassing = () => {
         })
       })
     }
-  }, [course])
+  }, [course, user])
 
   const nextEvent = () => {
     course.modules.map((elem, i) => {
