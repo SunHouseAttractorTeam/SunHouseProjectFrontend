@@ -13,7 +13,7 @@ const ImageForm = ({ onChangeAvatar, avatar }) => {
     if (avatar.match(/http/) || avatar.match(/https/)) {
       avatarImg = avatar
     } else {
-      avatarImg = `${apiUrl}/${avatar}`
+      avatarImg = `${apiUrl}/uploads/${avatar}`
     }
   }
 

@@ -69,7 +69,7 @@ const CoursePassing = () => {
     if (course) {
       course.modules.forEach(module => {
         module.data.forEach((item, index) => {
-          if (user && user[`${item.type}s`].find(elem => elem[item.type] === item?._id).status) {
+          if (user && user[`${item.type}s`].find(elem => elem[item.type] === item?._id)?.status) {
             if (module.data[index + 1]) {
               if (
                 !user[`${module.data[index + 1].type}s`]?.find(
