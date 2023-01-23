@@ -15,11 +15,11 @@
     margin-bottom: 20px;
 
     &-item {
+      display: flex;
       text-align: center;
       min-width: 50%;
       background-color: $totalWhiteColor;
       cursor: pointer;
-      padding: 15px 10px;
 
       &--active {
         background: #F2F2F7;
@@ -35,6 +35,8 @@
       font-size: 20px;
       font-weight: 500;
       line-height: 24px;
+      padding: 15px 10px;
+      flex: 1;
     }
   }
 }
