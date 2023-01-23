@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import './TestItem.scss'
-import { useDispatch, useSelector } from 'react-redux'
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar'
-import { fetchTestRequest } from '../../store/actions/testsActions'
 
 const TestItem = ({ test }) => {
-  const dispatch = useDispatch()
-  const baseTest = useSelector(state => state.tests.test)
   const [counts, setCounts] = useState({
     questions: 0,
     correctAnswers: 0,
@@ -14,17 +10,14 @@ const TestItem = ({ test }) => {
   const [showMore, setShowMore] = useState(false)
 
   useEffect(() => {
-    dispatch(fetchTestRequest(test.test))
-  }, [dispatch, test])
-
-  useEffect(() => {
     // eslint-disable-next-line no-unused-expressions
-    baseTest &&
+    test &&
+      test.test.questions &&
       setCounts(prev => ({
         ...prev,
-        questions: baseTest.questions.length,
+        questions: test.test.questions.length,
       }))
-  }, [baseTest, test])
+  }, [test])
 
   useEffect(() => {
     // eslint-disable-next-line array-callback-return
@@ -41,7 +34,7 @@ const TestItem = ({ test }) => {
   }
 
   return (
-    baseTest && (
+    test.test && (
       <div className="test-item">
         <div className="test-item__title-block">
           {test.status ? (
@@ -63,7 +56,7 @@ const TestItem = ({ test }) => {
               </svg>
             </i>
           )}
-          <h4 className="test-item__title-block__title">{baseTest.title}</h4>
+          <h4 className="test-item__title-block__title">{test.test.title}</h4>
         </div>
         <div className="test-item__progress">
           <div className="test-item__progress__circle">
@@ -79,7 +72,9 @@ const TestItem = ({ test }) => {
             />
           </div>
           <h4 className="test-item__progress__text">{Math.round((counts.correctAnswers / counts.questions) * 100)}%</h4>
+          <h4 className="test-item__progress__text">{`${counts.correctAnswers}/${counts.questions}`}</h4>
           <button
+            type="button"
             className={`test-item__progress__moreBtn ${showMore ? 'open' : null} WhiteButton`}
             onClick={() => onShowMore()}
           >
