@@ -9,18 +9,26 @@
 
   &__title {
     font-size: 20px;
-    padding: 0 0 20px 0;
+    padding: 0 0 43px 0;
   }
 
   &__buttons-block {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    gap: 50px;
+    gap: 30px;
+  }
+
+  &__btn {
+    padding: 10px 50px;
   }
 
   &__btn:hover {
     background-color: $whiteBorderColor;
+  }
+
+  &__btn-two {
+    padding: 10px 60px;
   }
 
   &__btn-two:hover {
@@ -28,7 +36,7 @@
   }
 
   &__text {
-    margin: 50px 0;
+    margin: 40px 0;
     display: inline-block;
   }
 
@@ -62,10 +70,28 @@
 
     &__sub {
       font-size: 20px;
+      padding: 12px 0;
     }
 
     &:hover {
       background-color: #F2F2F7;
     }
+  }
+}
+
+@media (max-width: 500px) {
+  .content__select-buttons-block {
+    width: 100%;
+  }
+
+  .content__img {
+    width: 30px;
+  }
+
+  .content__btn-two {
+    padding: 10px 20px;
+  }
+  .content__btn {
+    padding: 10px 20px;
   }
 }
