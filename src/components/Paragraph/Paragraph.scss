@@ -105,11 +105,7 @@
   opacity: 1;
 
   path {
-    fill: #D1D1D6;
+    fill: #828282;
     transition: all .3s ease;
-  }
-
-  &--is-publish{
-    background: url('../../assets/icons/eyeVisible.svg') 0 no-repeat;
   }
 }

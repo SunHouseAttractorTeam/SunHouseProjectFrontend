@@ -73,7 +73,6 @@
 
   &__card {
     display: flex;
-    align-items: center;
     border-radius: 16px;
     background: #FFFFFF;
     width: 100%;
@@ -83,16 +82,19 @@
     word-break: break-word;
     transition: all .5s ease;
 
-    @media (max-width: 600px) {
-    flex-direction: column;
+    @media screen and (min-width: 601px) {
       align-items: center;
+    }
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+      align-items: flex-start;
     }
 
     &:hover {
       cursor: pointer;
       transform: scale(1.02);
     }
-
 
     img {
       border-radius: 50%;
@@ -101,6 +103,10 @@
       height: 100px;
       object-fit: cover;
       margin-right: 24px;
+
+      @media screen and (max-width: 600px) {
+        margin: 0 auto;
+      }
     }
   }
 

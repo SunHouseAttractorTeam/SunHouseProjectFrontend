@@ -1,9 +1,10 @@
+@import '../../scss/style';
+
 .teacher-mode {
   &__cards {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    gap: 30px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
   }
 
   &__button {
@@ -46,3 +47,6 @@
     }
   }
 }
+
+
+
