@@ -7,6 +7,7 @@ const CardProgram = ({ title, content }) => {
   const toggleAccordion = value => {
     setIsOpen(value)
   }
+
   return (
     <>
       <div className="program-block__card">
@@ -30,7 +31,7 @@ const CardProgram = ({ title, content }) => {
         </div>
         <div className={`program-block__card-content accordion-content${isOpen ? ' is-open' : ''}`}>
           {content.map(item => (
-            <div key={item.id}>{item.title}</div>
+            <div key={item._id}>{item.title}</div>
           ))}
         </div>
       </div>

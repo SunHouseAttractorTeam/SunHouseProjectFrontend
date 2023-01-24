@@ -1,57 +1,63 @@
-@import '../../../scss/style';
+.burger {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+}
 
 .burger-menu {
-  &__button {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 10;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background-color: $totalWhiteColor;
-    -webkit-transition: 0.4s;
-    -moz-transition: 0.4s;
-    -o-transition: 0.4s;
-    transition: 0.4s;
-
-    &:hover {
-      background-color: $greyColor;
-    }
+  height: 3em;
+  width: 4em;
+  display: none;
+  justify-content: space-between;
+  cursor: pointer;
+  @media (max-width: 790px) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
+}
 
-  &__button, &__lines {
-    &:hover {
-      filter: brightness(0.6);
-    }
-  }
+.burger-bar {
+  width: 4em;
+  height: 0.5em;
+  background-color: rgb(0, 0, 0);
+  border-radius: 0.5em;
+}
 
-  &__lines,
-  &__lines:after,
-  &__lines:before {
-    position: absolute;
-    width: 18px;
-    height: 2px;
-    background-color: $totalBlackColor;
-    -webkit-transition: 0.4s;
-    -moz-transition: 0.4s;
-    -o-transition: 0.4s;
-    transition: 0.4s;
-  }
+.menu {
+  width: 50%;
+  height: 100vh;
+  background-color: rgb(0, 0, 0);
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
 
-  &__lines {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.hidden {
+  display: none;
+}
 
-    &:before {
-      content: '';
-      top: -5px;
-    }
+.visible {
+  display: inherit;
+}
 
-    &:after {
-      content: '';
-      top: 5px;
-    }
-  }
+.burger-bar.clicked:nth-child(1) {
+  transform: rotate(45deg) translate(0.75em, 1.25em);
+  transition: ease-out 0.2s;
+}
+
+.burger-bar.clicked:nth-child(2) {
+  transform: scale(0.1);
+  transition: ease-out 0.1s;
+}
+
+.burger-bar.clicked:nth-child(3) {
+  transform: rotate(135deg) translate(-0.5em, 1em);
+  transition: ease-out 0.2s;
+}
+
+.burger-bar.unclicked {
+  transform: rotate(0) translate(0);
+  transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s;
 }

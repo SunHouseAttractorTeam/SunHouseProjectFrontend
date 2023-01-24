@@ -5,11 +5,15 @@ import avatarStub from '../../assets/icons/avatarStub.svg'
 import { apiUrl } from '../../config'
 import './CourseTitle.scss'
 
-const CourseTitle = ({ courseId, title, description, teacherCheck, image }) => {
+const CourseTitle = ({ courseId, title, description, teacherCheck, courseCheck, image, handleJoinTheCourse }) => {
   let avatarImage = avatarStub
 
   if (image && image !== 'undefined') {
-    avatarImage = `${apiUrl}/${image}`
+    if (image.includes('fixtures')) {
+      avatarImage = `${apiUrl}/${image}`
+    } else {
+      avatarImage = `${apiUrl}/uploads/${image}`
+    }
   }
 
   return (
@@ -27,8 +31,8 @@ const CourseTitle = ({ courseId, title, description, teacherCheck, image }) => {
               <p className="course-title__left-info-description">{description}</p>
             </div>
           </div>
-          {teacherCheck && teacherCheck() && (
-            <Link to={`/course/${courseId}/settings`} className="course-title__settings-button">
+          {teacherCheck ? (
+            <Link to={`/course/${courseId}/settings`} className="course-title__button">
               <MainButton
                 className="WhiteButton"
                 type="button"
@@ -47,6 +51,27 @@ const CourseTitle = ({ courseId, title, description, teacherCheck, image }) => {
                 }
               />
             </Link>
+          ) : (
+            <>
+              {courseCheck !== undefined && (
+                <>
+                  {courseCheck ? (
+                    <Link to={`/course/${courseId}/pass`} className="course-title__button">
+                      <MainButton className="WhiteButton" type="button" text="Перейти к прохождению >" />
+                    </Link>
+                  ) : (
+                    <div className="course-title__button">
+                      <MainButton
+                        className="WhiteButton"
+                        type="button"
+                        text="Записаться на курс"
+                        onClick={handleJoinTheCourse}
+                      />
+                    </div>
+                  )}
+                </>
+              )}
+            </>
           )}
         </div>
       </div>

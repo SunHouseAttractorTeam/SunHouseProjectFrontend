@@ -3,6 +3,7 @@ import { hideLoading, showLoading } from 'react-redux-loading-bar'
 import Swal from 'sweetalert2'
 import axiosApi from '../../axiosApi'
 import {
+  clearLesson,
   createLessonFailure,
   createLessonRequest,
   createLessonSuccess,
@@ -65,6 +66,7 @@ export function* editLesson({ payload }) {
     yield axiosApi.put(`/lessons/${contentId}?course=${courseId}`, data)
     yield put(editLessonSuccess())
     yield put(hideLoading())
+    yield put(clearLesson())
     yield put(fetchLessonRequest(contentId))
 
     yield Toast.fire({

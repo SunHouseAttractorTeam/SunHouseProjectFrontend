@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './FormInput.scss'
 
-const FormInput = ({ type, name, value, onChange, placeholder, className, error }) => (
+const FormInput = ({ type, name, value, onChange, placeholder, required, className, error }) => (
   <>
     <input
       type={type}
@@ -10,6 +10,7 @@ const FormInput = ({ type, name, value, onChange, placeholder, className, error 
       value={value}
       onChange={onChange}
       placeholder={placeholder}
+      required={required}
       className={!error ? `InputStyle ${className}` : 'InputStyle error'}
     />
     {error && <div className="helper">{error ? <span>{error}</span> : null}</div>}
@@ -17,6 +18,7 @@ const FormInput = ({ type, name, value, onChange, placeholder, className, error 
 )
 
 FormInput.propTypes = {
+  required: PropTypes.bool,
   type: PropTypes.string,
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),

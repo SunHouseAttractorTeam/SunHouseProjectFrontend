@@ -144,6 +144,29 @@ const usersSlice = createSlice({
       state.passwordLoading = false
       state.passwordError = action.payload
     },
+    checkUserTaskRequest(state) {
+      state.editLoading = true
+      state.editError = null
+    },
+    checkUserTaskSuccess(state) {
+      state.editLoading = false
+    },
+    checkUserTaskFailure(state, action) {
+      state.editLoading = false
+      state.editError = action
+    },
+    updateUserContentStatusRequest(state) {
+      state.editLoading = true
+      state.editError = null
+    },
+    updateUserContentStatusSuccess(state, action) {
+      state.editLoading = false
+      state.user[`${action.payload.type}s`] = action.payload.data
+    },
+    updateUserContentStatusFailure(state, action) {
+      state.editLoading = false
+      state.editError = action.payload
+    },
   },
 })
 

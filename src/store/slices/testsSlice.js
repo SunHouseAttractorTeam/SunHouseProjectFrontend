@@ -68,6 +68,17 @@ const testsSlice = createSlice({
       state.loading = false
       state.error = action.payload
     },
+    sendTestAnswersRequest(state) {
+      state.loading = true
+      state.error = null
+    },
+    sendTestAnswersSuccess(state) {
+      state.loading = false
+    },
+    sendTestAnswersFailure(state, action) {
+      state.loading = false
+      state.error = action.payload
+    },
     clearTest(state) {
       state.test = null
     },

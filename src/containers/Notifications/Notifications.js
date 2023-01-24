@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import './Notifications.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchNotificationsRequest, viewNotificationsRequest } from '../../store/actions/notificationsActions'
+import ButtonsContent from '../../components/UI/ButtonsContent/ButtonsContent'
+import Title from '../../components/UI/Title/Title'
+import './Notifications.scss'
 
 const Notifications = () => {
   const dispatch = useDispatch()
@@ -49,48 +51,42 @@ const Notifications = () => {
 
   return (
     <div className="notifications-card__content">
-      <h2 className="notifications-card__title">Уведомления</h2>
-      <div className="notifications-card__view-status">
-        <button
-          type="button"
-          onClick={onActiveBtn}
-          className={
-            active ? 'notifications-card__view-status__view activeClass' : 'notifications-card__view-status__unview'
+      <Title className="notifications-card__title">Уведомления</Title>
+      <div>
+        <ButtonsContent
+          onClickOne={onActiveBtn}
+          onClickTwo={onActiveBtn}
+          titleOne="Просмотренные"
+          titleTwo={
+            <>
+              <i className="notifications-card__view-status__icon "> {icon}</i>
+              Непросмотренные
+            </>
           }
-        >
-          Просмотренные
-        </button>
-        <button
-          type="button"
-          onClick={onActiveBtn}
-          className={
-            active
-              ? 'notifications-card__view-status__unview  new-notifications'
-              : 'notifications-card__view-status__unview activeClass new-notifications'
+          childrenOne={
+            notifications
+              ? notifications.map(notific =>
+                  notific.view ? (
+                    <div className="notifications-card__textBlock" key={notific._id}>
+                      <p className="notifications-card__textBlock__text">{notific.description}</p>
+                    </div>
+                  ) : null,
+                )
+              : notifications
           }
-        >
-          <i className="notifications-card__view-status__icon "> {icon}</i>
-          Непросмотренные
-        </button>
+          childrenTwo={
+            notifications
+              ? notifications.map(notific =>
+                  notific.view === false ? (
+                    <div className="notifications-card__textBlock" key={notific._id}>
+                      <p className="notifications-card__textBlock__text">{notific.description}</p>
+                    </div>
+                  ) : null,
+                )
+              : null
+          }
+        />
       </div>
-      {/* eslint-disable-next-line no-nested-ternary */}
-      {active && notifications
-        ? notifications.map(notific =>
-            notific.view ? (
-              <div className="notifications-card__textBlock" key={notific._id}>
-                <p className="notifications-card__textBlock__text">{notific.description}</p>
-              </div>
-            ) : null,
-          )
-        : notifications
-        ? notifications.map(notific =>
-            notific.view === false ? (
-              <div className="notifications-card__textBlock" key={notific._id}>
-                <p className="notifications-card__textBlock__text">{notific.description}</p>
-              </div>
-            ) : null,
-          )
-        : null}
     </div>
   )
 }
