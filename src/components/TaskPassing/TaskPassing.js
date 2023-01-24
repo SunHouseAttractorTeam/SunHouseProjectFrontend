@@ -6,8 +6,9 @@ import './TaskPassing.scss'
 import PassingBlock from '../PassingBlock/PassingBlock'
 import FilesUploader from '../FilesUploader/FilesUploader'
 import MainButton from '../UI/MainButton/MainButton'
+import CoursePassingControls from '../CoursePassingControls/CoursePassingControls'
 
-const TaskPassing = () => {
+const TaskPassing = ({ setModuleId }) => {
   const dispatch = useDispatch()
   const { courseId, taskId } = useParams()
   const task = useSelector(state => state.tasks.task)
@@ -39,6 +40,7 @@ const TaskPassing = () => {
             onClick={sendHomework}
           />
         </div>
+        <CoursePassingControls setModuleId={setModuleId} />
       </>
     )
   )
