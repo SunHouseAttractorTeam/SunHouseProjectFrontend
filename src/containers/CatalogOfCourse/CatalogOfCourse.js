@@ -8,9 +8,9 @@ import Footer from '../../components/Footer/Footer'
 import burgerIcon from '../../assets/icons/BurgerIcon.png'
 import filterIcon from '../../assets/icons/FilterIcon.png'
 import searchIcon from '../../assets/icons/SearchIcon.png'
-import './CatalogOfCourse.scss'
 import ModalOfCategory from '../../components/Modals/ModalOfCategory/ModalOfCategory'
 import ModalSortCourse from '../../components/Modals/ModalSortCourse/ModalSortCourse'
+import './CatalogOfCourse.scss'
 
 const coursePerPage = 5
 
@@ -28,6 +28,10 @@ const CatalogOfCourse = () => {
 
   useEffect(() => {
     dispatch(fetchCoursesRequest('/courses'))
+  }, [])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
   }, [])
 
   useEffect(() => {

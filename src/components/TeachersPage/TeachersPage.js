@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { getFieldError, inputChangeHandler, submitFormHandler } from '../UI/Form/Handlers/Handlers'
 import Header from '../Header/Header'
@@ -23,9 +23,12 @@ const TeachersPage = () => {
   }
   const sendDataHandler = e => {
     // submitFormHandler(e, dispatch('сюда Request'({ ...data })))
-    console.log(data)
     setShow(false)
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <div className="teachers-page">
@@ -79,7 +82,7 @@ const TeachersPage = () => {
                 rows={5}
                 // error={getFieldError(error, 'description')}
               />
-              <MainButton className="GreenButton" type="submit" text="оправить" />
+              <MainButton className="GreenButton" type="submit" text="отправить" />
             </form>
           </Card>
         </Modal>

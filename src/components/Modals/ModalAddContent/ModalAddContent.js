@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Modal from '../../UI/Modal2/Modal'
 import MainButton from '../../UI/MainButton/MainButton'
 import lesson from '../../../assets/icons/lesson.svg'
@@ -7,9 +7,12 @@ import test from '../../../assets/icons/test.svg'
 import './ModalAddContent.scss'
 
 const ModalAddContent = ({ setOpen, handleClick, setContentType }) => {
+  const [disable, setDisable] = useState(true)
+
   const changeContentTypeAndClass = (event, content) => {
     event.preventDefault()
     setContentType(content)
+    setDisable(false)
     event.currentTarget.classList.toggle('content__select-button__active')
   }
 
@@ -60,7 +63,13 @@ const ModalAddContent = ({ setOpen, handleClick, setContentType }) => {
           </p>
           <div className="content__buttons-block">
             <MainButton className="GreyButton content__btn" text="Отмена" onClick={() => setOpen(false)} type="text" />
-            <MainButton className="GreenButton content__btn-two" text="Далее" onClick={handleClick} type="button" />
+            <MainButton
+              disabled={disable}
+              className="GreenButton content__btn-two"
+              text="Далее"
+              onClick={handleClick}
+              type="button"
+            />
           </div>
         </div>
       </Modal>
