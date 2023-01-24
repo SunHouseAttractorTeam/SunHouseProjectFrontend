@@ -123,15 +123,20 @@ const TestPassing = () => {
                     </li>
                   ))}
                 </ol>
-                {test.questions.length === index + 1 && (
-                  <MainButton
-                    className="GreenButton passing-test__save-button"
-                    text="Сохранить"
-                    onClick={handleSaveAnswers}
-                  />
-                )}
+                {/* {test.questions.length === index + 1 && ( */}
+                {/*  <MainButton */}
+                {/*    className="GreenButton passing-test__save-button" */}
+                {/*    text="Сохранить" */}
+                {/*    onClick={handleSaveAnswers} */}
+                {/*  /> */}
+                {/* )} */}
               </div>
             ))}
+            <MainButton
+              className="GreenButton passing-test__save-button"
+              text="Сохранить"
+              onClick={handleSaveAnswers}
+            />
           </div>
         )}
       </>

@@ -158,15 +158,37 @@ const CoursePassing = () => {
                   <Route path="/course/:courseId/pass/test/:testId" component={TestPassing} />
                 </Switch>
                 <div className="course-passing__controls">
-                  <button disabled={disabledWord === 'previous'} onClick={previousEvent} type="button">
-                    <svg width="8" height="12" viewBox="0 0 8 12" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M6.70994 9.87998L2.82994 5.99998L6.70994 2.11998C7.09994 1.72998 7.09994 1.09998 6.70994 0.70998C6.31994 0.31998 5.68994 0.31998 5.29994 0.70998L0.709941 5.29998C0.319942 5.68998 0.319942 6.31998 0.709941 6.70998L5.29994 11.3C5.68994 11.69 6.31994 11.69 6.70994 11.3C7.08994 10.91 7.09994 10.27 6.70994 9.87998Z" />
-                    </svg>
+                  <button
+                    className="course-passing__controls-button"
+                    disabled={disabledWord === 'previous'}
+                    onClick={previousEvent}
+                    type="button"
+                  >
+                    <i>
+                      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="48" height="48" rx="24" transform="matrix(-1 0 0 1 48 0)" fill="#ADFA00" />
+                        <path
+                          d="M29.4199 31.76L21.6599 24L29.4199 16.24C30.1999 15.46 30.1999 14.2 29.4199 13.42C28.6399 12.64 27.3799 12.64 26.5999 13.42L17.4199 22.6C16.6399 23.38 16.6399 24.64 17.4199 25.42L26.5999 34.6C27.3799 35.38 28.6399 35.38 29.4199 34.6C30.1799 33.82 30.1999 32.54 29.4199 31.76Z"
+                          fill="#F2F2F7"
+                        />
+                      </svg>
+                    </i>
                   </button>
-                  <button disabled={disabledWord === 'next'} onClick={nextEvent} type="button">
-                    <svg width="8" height="12" viewBox="0 0 8 12" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M1.29006 9.87998L5.17006 5.99998L1.29006 2.11998C0.900059 1.72998 0.900059 1.09998 1.29006 0.70998C1.68006 0.31998 2.31006 0.31998 2.70006 0.70998L7.29006 5.29998C7.68006 5.68998 7.68006 6.31998 7.29006 6.70998L2.70006 11.3C2.31006 11.69 1.68006 11.69 1.29006 11.3C0.910059 10.91 0.900059 10.27 1.29006 9.87998Z" />
-                    </svg>
+                  <button
+                    className="course-passing__controls-button"
+                    disabled={disabledWord === 'next'}
+                    onClick={nextEvent}
+                    type="button"
+                  >
+                    <i>
+                      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="48" height="48" rx="24" fill="#ADFA00" />
+                        <path
+                          d="M18.5801 31.76L26.3401 24L18.5801 16.24C17.8001 15.46 17.8001 14.2 18.5801 13.42C19.3601 12.64 20.6201 12.64 21.4001 13.42L30.5801 22.6C31.3601 23.38 31.3601 24.64 30.5801 25.42L21.4001 34.6C20.6201 35.38 19.3601 35.38 18.5801 34.6C17.8201 33.82 17.8001 32.54 18.5801 31.76Z"
+                          fill="white"
+                        />
+                      </svg>
+                    </i>
                   </button>
                 </div>
               </div>

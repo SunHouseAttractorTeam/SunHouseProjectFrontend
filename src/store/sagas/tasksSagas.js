@@ -15,6 +15,9 @@ import {
   fetchTaskFailure,
   fetchTaskRequest,
   fetchTaskSuccess,
+  sendTaskFailure,
+  sendTaskRequest,
+  sendTaskSuccess,
 } from '../actions/tasksActions'
 import { fetchCourseRequest } from '../actions/coursesActions'
 import { historyPush } from '../actions/historyActions'
@@ -94,11 +97,28 @@ export function* deleteTask({ payload }) {
   }
 }
 
+export function* sendTaskSaga({ payload: { courseId, taskId, task } }) {
+  try {
+    yield put(showLoading())
+    yield axiosApi.put(`/users/add_task?course=${courseId}&task=${taskId}`, task)
+    yield put(sendTaskSuccess())
+    yield put(hideLoading())
+
+    yield Toast.fire({
+      title: 'Задание успешно отправлено',
+    })
+  } catch (e) {
+    yield put(hideLoading())
+    yield put(sendTaskFailure(e))
+  }
+}
+
 const tasksSagas = [
   takeEvery(createTaskRequest, createTask),
   takeEvery(fetchTaskRequest, fetchTask),
   takeEvery(editTaskRequest, editTask),
   takeEvery(deleteTaskRequest, deleteTask),
+  takeEvery(sendTaskRequest, sendTaskSaga),
 ]
 
 export default tasksSagas
