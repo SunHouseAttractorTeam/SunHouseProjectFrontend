@@ -5,6 +5,7 @@ import { fetchCourseRequest } from '../../store/actions/coursesActions'
 import './CertificateObtain.scss'
 import certificate from '../../assets/images/certificate.png'
 import Card from '../UI/Cards/Card/Card'
+import { apiUrl } from '../../config'
 
 const CertificateObtain = () => {
   const course = useSelector(state => state.courses.course)
@@ -14,21 +15,40 @@ const CertificateObtain = () => {
     dispatch(fetchCourseRequest(params.id))
   }, [params.id])
 
+  const onBtnCopyLink = async () => {
+    await navigator.clipboard.writeText(apiUrl + certificate)
+  }
   return (
     course && (
       <div className="container">
         <div className="certificate-obtain">
           <h4 className="certificate-obtain__title">{`Поздравляю, вы успешно окончили курс "${course.title}"`}</h4>
           <Card className="certificate-obtain__certificate WhiteCard">
-            <img src={certificate} alt={course.title} />
+            <a
+              href={certificate}
+              target="_blank"
+              rel="noreferrer"
+              className="certificate-obtain__certificate__imageLink"
+            >
+              <img src={certificate} alt={course.title} className="certificate-obtain__certificate__image" />
+            </a>
             <div className="certificate-obtain__certificate__btns">
               <button type="button" className="certificate-obtain__certificate__btns__download MainButton GreenButton">
-                Скачать
+                <a
+                  // href={`${apiUrl}/uploads/${user.certificate}`}
+                  href={certificate}
+                  className="certificate-obtain__certificate__btns__download__link"
+                  target="_blank"
+                  download
+                  rel="noreferrer"
+                >
+                  Скачать
+                </a>
               </button>
               <button
                 type="button"
                 className="certificate-obtain__certificate__btns__linkCopy MainButton GreenButton"
-                // onClick={onBtnCopyLink}
+                onClick={onBtnCopyLink}
               >
                 <i className="certificate-obtain__certificate__btns__linkCopy__icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
