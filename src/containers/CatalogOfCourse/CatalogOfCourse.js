@@ -28,7 +28,7 @@ const CatalogOfCourse = () => {
 
   useEffect(() => {
     dispatch(fetchCoursesRequest('/courses'))
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
     window.scrollTo(0, 0)
