@@ -201,10 +201,10 @@ export function* addUsersCourse({ payload }) {
 
   try {
     if (role === 'teachers') {
-      yield axiosApi.put(`/courses/add?course=${idCourse}&owner=${idUser}`)
+      yield axiosApi.put(`/courses/${idCourse}/add?courseId=${idCourse}&teacherId=${idUser}`)
     }
     if (role === 'users') {
-      yield axiosApi.put(`/courses/add?course=${idCourse}&user=${idUser}`)
+      yield axiosApi.put(`/courses/${idCourse}/add?courseId=${idCourse}&userId=${idUser}`)
     }
 
     yield put(hideLoading())
@@ -241,6 +241,7 @@ export function* deleteCourse({ payload: id }) {
     yield Toast.fire({
       title: 'Курс успешно удалён',
     })
+    yield put(historyPush(`/user/courses/teacher_mode`))
   } catch (e) {
     yield put(deleteCourseFailure(e))
     yield put(hideLoading())
