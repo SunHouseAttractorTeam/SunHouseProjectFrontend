@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
@@ -15,10 +15,9 @@ const CatalogOfCourse = () => {
   const dispatch = useDispatch()
   const courses = useSelector(state => state.courses.courses)
   const categories = useSelector(state => state.categories.categories)
-  // const query = useLocation().search
-  // const sortRef = useRef()
-  // const categoryRef = useRef()
-  // const [next, setNext] = useState(coursePerPage)
+  const sortRef = useRef()
+  const categoryRef = useRef()
+  const [next, setNext] = useState(coursePerPage)
   const [toggle, setToggle] = useState(false)
   const [toggleFilter, setToggleFilter] = useState(false)
   const [toggleSort, setToggleSort] = useState(false)
@@ -30,40 +29,38 @@ const CatalogOfCourse = () => {
   }, [dispatch, sort, category])
 
   useEffect(() => {
-    // dispatch(fetchCoursesRequest())
     dispatch(fetchCategoriesRequest())
   }, [dispatch])
 
-  //
-  // useEffect(() => {
-  //   // eslint-disable-next-line prefer-const
-  //   let handler = e => {
-  //     if (!sortRef.current?.contains(e.target)) {
-  //       setToggleSort(false)
-  //     }
-  //   }
-  //   document.addEventListener('mousedown', handler)
-  //   return () => {
-  //     document.addEventListener('mousedown', handler)
-  //   }
-  // }, [])
-  //
-  // useEffect(() => {
-  //   // eslint-disable-next-line prefer-const
-  //   let handler = e => {
-  //     if (!categoryRef.current?.contains(e.target)) {
-  //       setToggleFilter(false)
-  //     }
-  //   }
-  //   document.addEventListener('mousedown', handler)
-  //   return () => {
-  //     document.addEventListener('mousedown', handler)
-  //   }
-  // }, [])
-  //
-  // const handleMoreImage = () => {
-  //   setNext(next + coursePerPage)
-  // }
+  useEffect(() => {
+    // eslint-disable-next-line prefer-const
+    let handler = e => {
+      if (!sortRef.current?.contains(e.target)) {
+        setToggleSort(false)
+      }
+    }
+    document.addEventListener('mousedown', handler)
+    return () => {
+      document.addEventListener('mousedown', handler)
+    }
+  }, [])
+
+  useEffect(() => {
+    // eslint-disable-next-line prefer-const
+    let handler = e => {
+      if (!categoryRef.current?.contains(e.target)) {
+        setToggleFilter(false)
+      }
+    }
+    document.addEventListener('mousedown', handler)
+    return () => {
+      document.addEventListener('mousedown', handler)
+    }
+  }, [])
+
+  const handleMoreImage = () => {
+    setNext(next + coursePerPage)
+  }
 
   return (
     <>
@@ -91,7 +88,7 @@ const CatalogOfCourse = () => {
                 onClick={() => setToggleSort(toggleSor => !toggleSor)}
               >
                 <i>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M7.14844 3.79219C6.5625 3.94219 6.1125 4.43438 6.02344 5.02969L5.99063 5.24531L4.35938 5.25938C2.79375 5.27344 2.71875 5.27813 2.59688 5.37188C2.34844 5.55469 2.27344 5.70469 2.27344 6C2.27344 6.29531 2.34844 6.44531 2.59688 6.62813C2.71875 6.72188 2.79375 6.72656 4.35938 6.74063L5.99063 6.75469L6.02344 6.975C6.06094 7.25156 6.3 7.70156 6.48281 7.85625C6.55781 7.92188 6.73125 8.02969 6.8625 8.1L7.10156 8.22656H8.25H9.39844L9.69375 8.06719C9.85781 7.97813 10.0406 7.84219 10.1063 7.76719C10.2844 7.55625 10.4391 7.21875 10.4766 6.97031L10.5094 6.75L15.8906 6.74063C21.2438 6.72656 21.2766 6.72656 21.4031 6.62813C21.6516 6.44531 21.7266 6.29531 21.7266 6C21.7266 5.70469 21.6516 5.55469 21.4031 5.37188C21.2766 5.27344 21.2438 5.27344 15.8906 5.25938L10.5094 5.25L10.4766 5.02969C10.4391 4.78125 10.2844 4.44375 10.1063 4.23281C10.0406 4.15781 9.85781 4.02188 9.69375 3.93281L9.39844 3.77344L8.34375 3.76406C7.7625 3.75938 7.22813 3.77344 7.14844 3.79219Z"
                       fill="#2C2C2E"
@@ -113,7 +110,7 @@ const CatalogOfCourse = () => {
                 onClick={() => setToggleFilter(toggleFil => !toggleFil)}
               >
                 <i>
-                  <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg width="18" height="18" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M1 12H17C17.55 12 18 11.55 18 11C18 10.45 17.55 10 17 10H1C0.45 10 0 10.45 0 11C0 11.55 0.45 12 1 12ZM1 7H17C17.55 7 18 6.55 18 6C18 5.45 17.55 5 17 5H1C0.45 5 0 5.45 0 6C0 6.55 0.45 7 1 7ZM0 1C0 1.55 0.45 2 1 2H17C17.55 2 18 1.55 18 1C18 0.45 17.55 0 17 0H1C0.45 0 0 0.45 0 1Z"
                       fill="#2C2C2E"
