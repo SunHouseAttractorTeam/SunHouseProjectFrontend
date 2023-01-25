@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Logo from '../UI/Logo/Logo'
 import MainButton from '../UI/MainButton/MainButton'
@@ -13,7 +14,7 @@ const text =
   'возможности для работы. Eduspace- развивайся вместе с нами!'
 
 const Promo = () => {
-  const onPromoButtonClick = () => {}
+  const user = useSelector(state => state.users.user)
 
   return (
     <div className="promo">
@@ -23,9 +24,11 @@ const Promo = () => {
             <h1 className="promo_title">{title}</h1>
             <Logo className="promo_logo" />
             <p className="promo_text">{text}</p>
-            <Link to="/registration" className="form_loginLink_span">
-              <MainButton className="GreenButton promo_button" text="Зарегистрироваться" onClick={onPromoButtonClick} />
-            </Link>
+            {!user && (
+              <Link to="/registration" className="form_loginLink_span">
+                <MainButton className="GreenButton promo_button" text="Зарегистрироваться" />
+              </Link>
+            )}
           </div>
           <div className="promo_column_right">
             <div className="promo_image">

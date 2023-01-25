@@ -33,7 +33,7 @@ const CatalogOfCourse = () => {
   useEffect(() => {
     // eslint-disable-next-line prefer-const
     let handler = e => {
-      if (!sortRef.current.contains(e.target)) {
+      if (!sortRef.current?.contains(e.target)) {
         setToggleSort(false)
       }
     }
@@ -46,7 +46,7 @@ const CatalogOfCourse = () => {
   useEffect(() => {
     // eslint-disable-next-line prefer-const
     let handler = e => {
-      if (!categoryRef.current.contains(e.target)) {
+      if (!categoryRef.current?.contains(e.target)) {
         setToggleFilter(false)
       }
     }

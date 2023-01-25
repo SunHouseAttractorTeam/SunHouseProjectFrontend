@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import banner from '../../assets/images/banner.svg'
-import MainButton from '../UI/MainButton/MainButton'
-import './CourseBanner.scss'
-import { editCourseHeaderImageRequest } from '../../store/actions/coursesActions'
 import { apiUrl } from '../../config'
+import { editCourseHeaderImageRequest } from '../../store/actions/coursesActions'
+import MainButton from '../UI/MainButton/MainButton'
+import banner from '../../assets/images/banner.svg'
+import './CourseBanner.scss'
 
 const CourseBanner = ({ course, teacherCheck }) => {
   const location = useLocation()
@@ -15,7 +15,11 @@ const CourseBanner = ({ course, teacherCheck }) => {
   let image = banner
 
   if (course.headerImage) {
-    image = `${apiUrl}/${course.headerImage}`
+    if (course.headerImage.includes('fixtures')) {
+      image = `${apiUrl}/${course.headerImage}`
+    } else {
+      image = `${apiUrl}/uploads/${course.headerImage}`
+    }
   }
 
   const handleChangeHeaderImage = e => {
@@ -36,7 +40,7 @@ const CourseBanner = ({ course, teacherCheck }) => {
             to={
               location.pathname !== `/course/${course._id}`
                 ? `/course/${course._id}`
-                : `${user.role === 'admin' ? '/admin_panel' : `/user/${teacherCheck ? 'teacher_mode' : 'courses'}`}`
+                : `${user?.role === 'admin' ? '/admin_panel' : `/user/${teacherCheck ? 'teacher_mode' : 'courses'}`}`
             }
             className="course-banner__course-button"
           >
@@ -68,7 +72,12 @@ const CourseBanner = ({ course, teacherCheck }) => {
                 />
               </svg>
             </i>
-            <input className="course-banner__image-input-file" type="file" onChange={handleChangeHeaderImage} />
+            <input
+              className="course-banner__image-input-file"
+              type="file"
+              onChange={handleChangeHeaderImage}
+              accept="image/*"
+            />
             {(location.pathname === `/course/${course._id}` ||
               location.pathname === `/course/${course._id}/settings`) && (
               <div className="container course-banner__image-container">

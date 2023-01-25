@@ -14,6 +14,7 @@
   &__left {
     display: flex;
     align-items: center;
+    margin-right: 20px;
 
     &-image {
       width: 84px;
@@ -44,8 +45,9 @@
     }
   }
 
-  &__settings-button {
+  &__button {
     text-decoration: none;
+    white-space: nowrap;
 
     & button {
       font-size: 16px;

@@ -8,69 +8,53 @@ import {
   deleteReviewFailure,
   deleteReviewRequest,
   deleteReviewSuccess,
-  editReviewFailure,
-  editReviewRequest,
-  editReviewSuccess,
   fetchReviewsFailure,
   fetchReviewsRequest,
   fetchReviewsSuccess,
 } from '../actions/lendingReviewsActions'
-import { historyPush } from '../actions/historyActions'
 
-export function* fetchReviews() {
+export function* fetchReviewsSaga() {
   try {
     yield put(showLoading())
     const response = yield axiosApi(`/lending_reviews`)
     yield put(fetchReviewsSuccess(response.data))
     yield put(hideLoading())
   } catch (e) {
+    yield put(hideLoading())
     yield put(fetchReviewsFailure(e))
   }
 }
 
-export function* createReview({ payload: reviewData }) {
+export function* createReviewSaga({ payload: reviewData }) {
   try {
     yield put(showLoading())
     yield axiosApi.post(`/lending_reviews`, reviewData)
     yield put(createReviewSuccess())
     yield put(hideLoading())
-    yield put(historyPush('/'))
+    yield put(fetchReviewsRequest())
   } catch (e) {
+    yield put(hideLoading())
     yield put(createReviewFailure(e))
   }
 }
 
-export function* editReview({ payload }) {
-  const { reviewId, reviewData } = payload
-
+export function* deleteReviewSaga({ payload: id }) {
   try {
     yield put(showLoading())
-    yield axiosApi.put(`/lending_reviews/${reviewId}`, reviewData)
-    yield put(editReviewSuccess())
-    yield put(hideLoading())
-  } catch (e) {
-    yield put(editReviewFailure(e))
-  }
-}
-
-export function* deleteReview({ payload }) {
-  const { reviewId } = payload
-
-  try {
-    yield put(showLoading())
-    yield axiosApi.delete(`/lending_reviews/${reviewId}`)
+    yield axiosApi.delete(`/lending_reviews/${id}`)
     yield put(deleteReviewSuccess())
     yield put(hideLoading())
+    yield put(fetchReviewsRequest())
   } catch (e) {
+    yield put(hideLoading())
     yield put(deleteReviewFailure(e))
   }
 }
 
 const lendingReviewsSagas = [
-  takeEvery(fetchReviewsRequest, fetchReviews),
-  takeEvery(createReviewRequest, createReview),
-  takeEvery(editReviewRequest, editReview),
-  takeEvery(deleteReviewRequest, deleteReview),
+  takeEvery(fetchReviewsRequest, fetchReviewsSaga),
+  takeEvery(createReviewRequest, createReviewSaga),
+  takeEvery(deleteReviewRequest, deleteReviewSaga),
 ]
 
 export default lendingReviewsSagas

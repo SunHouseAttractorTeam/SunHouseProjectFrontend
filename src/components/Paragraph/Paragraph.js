@@ -1,20 +1,14 @@
 import React, { useState } from 'react'
-import './Paragraph.scss'
-import { useDispatch, useSelector } from 'react-redux'
 import Modal from '../UI/Modal2/Modal'
-import { updateDescriptionRequest } from '../../store/actions/descriptionsActions'
 import EyeButton from '../EyeButton/EyeButton'
+import './Paragraph.scss'
 
-const Paragraph = ({ title = 'Title', subtitle, section, teacherCheck }) => {
-  const text = useSelector(state => state.description.descriptions[section])
-  const dispatch = useDispatch()
+const Paragraph = ({ title, subtitle, teacherCheck, isVisibility, onVisibility, type }) => {
   const [open, setOpen] = useState(false)
-  const [description, setDescription] = useState('')
-
-  const [isVisibility, setIsVisibility] = useState(false)
+  const [description, setDescription] = useState(subtitle)
 
   const handleVisible = value => {
-    setIsVisibility(value)
+    onVisibility(type, value)
   }
 
   const handlerClick = () => {
@@ -23,16 +17,9 @@ const Paragraph = ({ title = 'Title', subtitle, section, teacherCheck }) => {
 
   const updateDescription = e => {
     e.preventDefault()
-    if (!section) {
-      setOpen(false)
-      return
-    }
-    dispatch(
-      updateDescriptionRequest({
-        section,
-        text: description,
-      }),
-    )
+
+    onVisibility('description', description, type)
+
     setOpen(false)
   }
 
@@ -53,13 +40,9 @@ const Paragraph = ({ title = 'Title', subtitle, section, teacherCheck }) => {
       </i>
       <div className="block__card-description">
         <h3 className="block__title" dangerouslySetInnerHTML={{ __html: title }} />
-        {!subtitle ? (
-          <button type="button" className="block__add-link" onClick={e => handlerClick(e)}>
-            {text || `добавьте описании если необходимо`}
-          </button>
-        ) : (
-          <p className="block__add-link" dangerouslySetInnerHTML={{ __html: subtitle }} />
-        )}
+        <button type="button" className="block__add-link" onClick={e => handlerClick(e)} disabled={!teacherCheck}>
+          {subtitle || `добавьте описании если необходимо`}
+        </button>
         {open && (
           <Modal setOpen={setOpen}>
             <form onSubmit={updateDescription}>
@@ -80,7 +63,7 @@ const Paragraph = ({ title = 'Title', subtitle, section, teacherCheck }) => {
           </Modal>
         )}
       </div>
-      {teacherCheck && teacherCheck() && <EyeButton handleVisible={handleVisible} isVisibility={isVisibility} />}
+      {teacherCheck && <EyeButton handleVisible={handleVisible} isVisibility={isVisibility} />}
     </div>
   )
 }

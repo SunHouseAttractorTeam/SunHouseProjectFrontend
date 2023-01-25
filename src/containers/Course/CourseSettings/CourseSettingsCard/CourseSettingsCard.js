@@ -1,22 +1,31 @@
-import React from 'react'
-import { inputChangeHandler } from '../../../../components/UI/Form/Handlers/Handlers'
-import banner from '../../../../assets/images/banner.jpg'
+import React, { useEffect, useState } from 'react'
 import { apiUrl } from '../../../../config'
+import { inputChangeHandler } from '../../../../components/UI/Form/Handlers/Handlers'
+import courseDefaultAvatar from '../../../../assets/images/courseDefaultAvatar.png'
 import './CourseSettingsCard.scss'
 
 const CourseSettingsCard = ({ course, setCourse }) => {
+  const [image, setImage] = useState(courseDefaultAvatar)
+
+  useEffect(() => {
+    if (course.image) {
+      if (course.image.includes('fixtures')) {
+        setImage(`${apiUrl}/${course.image}`)
+      } else {
+        setImage(`${apiUrl}/uploads/${course.image}`)
+      }
+    }
+  }, [])
+
   const changeInputState = e => {
+    setImage(URL.createObjectURL(e.target.files[0]))
     inputChangeHandler({ target: { name: 'image', value: e.target.files[0] } }, setCourse)
   }
 
   return (
     <div className="left-card">
       <div className="left-card__image-block">
-        <img
-          src={course.image ? `${apiUrl}/${course.image}` : banner}
-          alt={course.title}
-          className="left-card__image-block-image"
-        />
+        <img src={image} alt={course.title} className="left-card__image-block-image" />
         <i className="left-card__image-block-icon">
           <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -29,7 +38,7 @@ const CourseSettingsCard = ({ course, setCourse }) => {
             />
           </svg>
         </i>
-        <input type="file" onChange={changeInputState} className="left-card__image-block-input" />
+        <input type="file" onChange={changeInputState} className="left-card__image-block-input" accept="image/*" />
       </div>
       <div className="left-card_info-block">
         {course.publish ? (

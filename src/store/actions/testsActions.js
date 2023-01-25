@@ -16,5 +16,8 @@ export const {
   deleteTestRequest,
   deleteTestSuccess,
   deleteTestFailure,
+  sendTestAnswersRequest,
+  sendTestAnswersSuccess,
+  sendTestAnswersFailure,
   clearTest,
 } = testsSlice.actions

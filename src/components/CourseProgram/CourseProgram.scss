@@ -1,16 +1,17 @@
 @import '../../scss/style';
 
 .program-block{
-  margin-bottom: 193px;
   &__card{
     background: $totalWhiteColor;
     width: 100%;
     border-radius: 16px;
     overflow: hidden;
-    &:not(:last-child){
+
+    &:not(:last-child) {
       margin-bottom: 24px;
     }
-    &-header{
+
+    &-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -31,12 +32,12 @@
     margin-right: 20px;
     transition: all .5s ease;
 
-    svg{
+    svg {
       transition: all .6s ease;
     }
 
-    &.is-open svg{
-        transform: rotate(90deg);
+    &.is-open svg {
+      transform: rotate(90deg);
     }
 
     &:hover svg circle {

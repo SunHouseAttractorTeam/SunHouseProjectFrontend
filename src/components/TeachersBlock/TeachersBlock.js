@@ -1,14 +1,11 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import TeacherCard from './TeacherCard/TeacherCard'
 import CustomSlider from '../UI/CustomSlider/CustomSlider'
-import './TeachersBlock.scss'
-import teacher_1 from '../../assets/icons/teacher_1.svg'
-import teacher_2 from '../../assets/icons/teacher_2.svg'
-import teacher_3 from '../../assets/icons/teacher_3.svg'
 import Paragraph from '../Paragraph/Paragraph'
 import Modal from '../UI/Modal2/Modal'
-import { updateDescriptionRequest } from '../../store/actions/descriptionsActions'
+import Card from '../UI/Cards/Card/Card'
+import './TeachersBlock.scss'
 
 const sliderSettings = [
   {
@@ -37,48 +34,82 @@ const sliderSettings = [
     },
   },
 ]
-const TeachersBlock = ({ title, subtitle, teacherCheck, section }) => {
-  const dispatch = useDispatch()
+const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBlock, block, searchTeachers }) => {
   const [open, setOpen] = useState(false)
-  const [description, setDescription] = useState({
-    gmail: '',
-    name: '',
+  const [teacher, setTeacher] = useState({
+    user: '',
+    description: '',
   })
+  const currentSearchTeachers = []
+  const newTeachers = [...teachers]
 
   const handlerClick = () => {
     setOpen(true)
   }
+  const ChangeSearchItem = item => {
+    setTeacher(prev => ({
+      ...prev,
+      user: item,
+      description: prev.description,
+    }))
+  }
 
   const updateDescription = e => {
     e.preventDefault()
-    if (!section) {
-      setOpen(false)
-      return
-    }
-    dispatch(
-      updateDescriptionRequest({
-        section,
-        text: description,
-      }),
-    )
+
+    newTeachers.push(teacher)
+
+    onVisibilityBlock('lendingTeachers', newTeachers)
+    setTeacher({
+      user: '',
+      description: '',
+    })
     setOpen(false)
   }
 
   const inputChangeHandler = e => {
     const { name, value } = e.target
-    setDescription(prev => ({
+    setTeacher(prev => ({
       ...prev,
       [name]: value,
     }))
   }
 
+  if (searchTeachers) {
+    searchTeachers.map(user =>
+      currentSearchTeachers.push({
+        _id: user._id,
+        name: user.email,
+        avatar: user.avatar,
+        username: user.username,
+      }),
+    )
+  }
+
   return (
     <div className="teachers_block">
       <div className="teachers_block_headline">
-        <Paragraph title={title} subtitle={subtitle} section="teachersBlock" teacherCheck={teacherCheck} />
+        <Paragraph
+          title={title}
+          subtitle={subtitle}
+          teacherCheck={teacherCheck}
+          onVisibility={onVisibilityBlock}
+          type="blockTeachers"
+          isVisibility={block?.visibility}
+        />
       </div>
       {teacherCheck ? (
         <>
+          <CustomSlider response={sliderSettings}>
+            {teachers.length !== 0 &&
+              teachers.map(teacherObj => (
+                <TeacherCard
+                  key={teacherObj._id || teacherObj.name}
+                  user={teacherObj.user}
+                  description={teacherObj.description}
+                />
+              ))}
+          </CustomSlider>
           <button type="button" className="teachers_block__btn-plus" onClick={handlerClick}>
             +
           </button>
@@ -86,17 +117,17 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, section }) => {
             <Modal setOpen={setOpen}>
               <form onSubmit={updateDescription}>
                 <div className="block__modal">
+                  <Card>
+                    <ReactSearchAutocomplete
+                      className="inputModal"
+                      items={currentSearchTeachers}
+                      onSelect={ChangeSearchItem}
+                    />
+                  </Card>
                   <input
                     className="block__add-description"
-                    name="gmail"
-                    value={description.gmail}
-                    onChange={inputChangeHandler}
-                    placeholder="Введите почту..."
-                  />
-                  <input
-                    className="block__add-description"
-                    name="name"
-                    value={description.name}
+                    name="description"
+                    value={teacher.description}
                     onChange={inputChangeHandler}
                     placeholder="Введите описание..."
                   />
@@ -110,21 +141,14 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, section }) => {
         </>
       ) : (
         <CustomSlider response={sliderSettings}>
-          <TeacherCard
-            image={teacher_1}
-            name="Александр Гаврилин"
-            description="Руководитель правовой практики в сфере ПО, технологий, сделок с брендом и данными ЯНДЕКС"
-          />
-          <TeacherCard
-            image={teacher_2}
-            name="Александр Гаврилин"
-            description="Руководитель правовой практики в сфере ПО, технологий, сделок с брендом и данными ЯНДЕКС"
-          />
-          <TeacherCard
-            image={teacher_3}
-            name="Александр Гаврилин"
-            description="Руководитель правовой практики в сфере ПО, технологий, сделок с брендом и данными ЯНДЕКС"
-          />
+          {teachers.length !== 0 &&
+            teachers.map(teacherObj => (
+              <TeacherCard
+                key={(teacherObj.user && teacherObj.user._id) || teacherObj.name}
+                user={teacherObj.user}
+                description={teacherObj.description}
+              />
+            ))}
         </CustomSlider>
       )}
     </div>
