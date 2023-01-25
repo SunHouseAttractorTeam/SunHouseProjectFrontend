@@ -15,6 +15,7 @@
   padding: 12px;
   background-color: #FFFFFF;
   border-radius: 50%;
+  margin: 0 10px;
   cursor: pointer;
 
   &--active {
@@ -71,15 +72,15 @@
 
   }
 
-  @media screen and (max-width: 905px){
+  @media screen and (max-width: 905px) {
     padding: 1.5vh 13vh 1.5vh 3vh;
   }
 
-  @media screen and (max-width: 845px){
+  @media screen and (max-width: 845px) {
     padding: 1.5vh 1vh 1.5vh 3vh;
   }
 
-  @media screen and (max-width: 600px){
+  @media screen and (max-width: 600px) {
     padding: 1.5vh 1vh 1.5vh 3vh;
   }
 }

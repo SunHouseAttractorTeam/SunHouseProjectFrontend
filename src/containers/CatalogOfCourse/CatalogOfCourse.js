@@ -18,18 +18,13 @@ const CatalogOfCourse = () => {
   const categories = useSelector(state => state.categories.categories)
   const [next, setNext] = useState(coursePerPage)
   const [toggle, setToggle] = useState(false)
-  const [toggleFilter, setToggleFilter] = useState(false)
-  const [toggleSort, setToggleSort] = useState(false)
   const [sort, setSort] = useState('rating')
   const [category, setCategory] = useState('all')
 
   useEffect(() => {
     dispatch(fetchCoursesRequest({ sort, category }))
-  }, [dispatch, sort, category])
-
-  useEffect(() => {
     dispatch(fetchCategoriesRequest())
-  }, [dispatch])
+  }, [dispatch, sort, category])
 
   const handleMoreImage = () => {
     setNext(next + coursePerPage)
@@ -56,12 +51,7 @@ const CatalogOfCourse = () => {
               </div>
               <Popup
                 trigger={
-                  <div
-                    className={
-                      toggleSort === false ? 'icons-item filter-icon-item' : 'icons-item--active-icon filter-icon-item'
-                    }
-                    onClick={() => setToggleSort(toggleSor => !toggleSor)}
-                  >
+                  <div className="icons-item">
                     <i>
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -85,10 +75,7 @@ const CatalogOfCourse = () => {
               </Popup>
               <Popup
                 trigger={
-                  <div
-                    className={toggleFilter === false ? 'icons-item' : 'icons-item--active-icon'}
-                    onClick={() => setToggleFilter(toggleFil => !toggleFil)}
-                  >
+                  <div className="icons-item">
                     <i>
                       <svg width="18" height="18" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
