@@ -4,11 +4,23 @@ import { apiUrl } from '../../config'
 import courseDefaultAvatar from '../../assets/images/courseDefaultAvatar.png'
 import './CourseCard.scss'
 
-const CourseCard = ({ id, title, image, price }) => (
-  <Link className="course-card" to={`/course/${id}`}>
-    <img src={image ? `${apiUrl}/${image}` : courseDefaultAvatar} alt={title} className="course-card__image" />
-    <h5 className="course-card__title">{title}</h5>
-    {price && <span className="course-card__price">{price} сом</span>}
-  </Link>
-)
+const CourseCard = ({ id, title, image, price }) => {
+  let courseImage = courseDefaultAvatar
+
+  if (image) {
+    if (image.includes('fixtures')) {
+      courseImage = `${apiUrl}/${image}`
+    } else {
+      courseImage = `${apiUrl}/uploads/${image}`
+    }
+  }
+
+  return (
+    <Link className="course-card" to={`/course/${id}`}>
+      <img src={courseImage} alt={title} className="course-card__image" />
+      <h5 className="course-card__title">{title}</h5>
+      {price && <span className="course-card__price">{price} сом</span>}
+    </Link>
+  )
+}
 export default CourseCard

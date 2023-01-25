@@ -9,7 +9,11 @@ const CourseTitle = ({ courseId, title, description, teacherCheck, courseCheck, 
   let avatarImage = avatarStub
 
   if (image && image !== 'undefined') {
-    avatarImage = `${apiUrl}/${image}`
+    if (image.includes('fixtures')) {
+      avatarImage = `${apiUrl}/${image}`
+    } else {
+      avatarImage = `${apiUrl}/uploads/${image}`
+    }
   }
 
   return (

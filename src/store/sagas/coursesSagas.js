@@ -44,6 +44,7 @@ import {
   visibilitySuccess,
 } from '../actions/coursesActions'
 import { historyPush } from '../actions/historyActions'
+import { loginUserRequest } from '../actions/usersActions'
 
 const Toast = Swal.mixin({
   toast: true,
@@ -200,10 +201,10 @@ export function* addUsersCourse({ payload }) {
 
   try {
     if (role === 'teachers') {
-      yield axiosApi.put(`/courses/add?course=${idCourse}&owner=${idUser}`)
+      yield axiosApi.put(`/courses/${idCourse}/add?courseId=${idCourse}&teacherId=${idUser}`)
     }
     if (role === 'users') {
-      yield axiosApi.put(`/courses/add?course=${idCourse}&user=${idUser}`)
+      yield axiosApi.put(`/courses/${idCourse}/add?courseId=${idCourse}&userId=${idUser}`)
     }
 
     yield put(hideLoading())
@@ -240,18 +241,25 @@ export function* deleteCourse({ payload: id }) {
     yield Toast.fire({
       title: 'Курс успешно удалён',
     })
+    yield put(historyPush(`/user/courses/teacher_mode`))
   } catch (e) {
     yield put(deleteCourseFailure(e))
     yield put(hideLoading())
   }
 }
 
-export function* joinTheCourseSaga({ payload: courseId }) {
+export function* joinTheCourseSaga({ payload: { courseId, firstId, userId } }) {
   try {
     yield put(showLoading())
     yield axiosApi.put(`/users/add_course?course=${courseId}`)
     yield put(joinTheCourseSuccess())
     yield put(hideLoading())
+
+    if (firstId) {
+      yield axiosApi.patch(`/users/${userId}/update_status?content=${firstId._id}&params=${firstId.type}`)
+    }
+
+    yield put(loginUserRequest())
     yield put(fetchCourseRequest(courseId))
 
     yield Toast.fire({

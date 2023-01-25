@@ -15,7 +15,11 @@ const CourseBanner = ({ course, teacherCheck }) => {
   let image = banner
 
   if (course.headerImage) {
-    image = `${apiUrl}/${course.headerImage}`
+    if (course.headerImage.includes('fixtures')) {
+      image = `${apiUrl}/${course.headerImage}`
+    } else {
+      image = `${apiUrl}/uploads/${course.headerImage}`
+    }
   }
 
   const handleChangeHeaderImage = e => {
