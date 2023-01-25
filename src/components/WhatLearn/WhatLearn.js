@@ -73,6 +73,7 @@ const WhatLearn = ({ teacherCheck, willLearn, onVisibilityBlock, block }) => {
                 title={item.title}
                 image={item.image}
                 description={item.description}
+                teacherCheck={teacherCheck}
               />
             ))}
           </div>

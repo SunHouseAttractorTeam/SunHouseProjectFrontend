@@ -54,7 +54,25 @@
     border: none;
     background: transparent;
     color: #828282;
+  }
 
+
+  &__delete-btn {
+    position: absolute;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    background-color: inherit;
+    top: 10px;
+    right: 10px;
+    opacity: 0;
+    transition: all .5s ease;
+
+    &:hover path {
+      fill: darkred;
+    }
   }
 
   &__cards {
@@ -74,13 +92,19 @@
   &__card {
     display: flex;
     border-radius: 16px;
+    position: relative;
     background: #FFFFFF;
     width: 100%;
     min-height: 148px;
     overflow: hidden;
     padding: 25px;
     word-break: break-word;
-    transition: all .5s ease;
+    transition: all .3s ease;
+
+    &:hover .learn-plan-block__delete-btn {
+      opacity: 1;
+
+    }
 
     @media screen and (min-width: 601px) {
       align-items: center;

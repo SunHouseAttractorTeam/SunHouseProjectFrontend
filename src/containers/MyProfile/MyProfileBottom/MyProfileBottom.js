@@ -74,7 +74,7 @@ const MyProfileBottom = () => {
                   />
                 </svg>
               </i>
-              Режим преподователя
+              Режим преподавателя
             </ProfileSidebarLink>
           ) : null}
           {user?.role !== 'ban' ? (
@@ -137,7 +137,7 @@ const MyProfileBottom = () => {
                   />
                 </svg>
               </i>
-              Насройки профиля
+              Настройки профиля
             </ProfileSidebarLink>
           ) : null}
 
