@@ -8,6 +8,8 @@ import {
   banUnbanFailure,
   banUnbanRequest,
   banUnbanSuccess,
+  checkUserPassedCourseFailure,
+  checkUserPassedCourseSuccess,
   checkUserTaskFailure,
   checkUserTaskRequest,
   checkUserTaskSuccess,
@@ -274,6 +276,22 @@ export function* updateUserContentStatusSaga({ payload: { userId, content, path 
     yield put(historyPush(path))
   } catch (e) {
     yield put(updateUserContentStatusFailure(e))
+    yield put(hideLoading())
+  }
+}
+
+export function* checkUserPassedCourseSaga({ payload: courseId }) {
+  try {
+    yield put(showLoading())
+    const response = yield axiosApi(`/users/passed_course?course=${courseId}`)
+    if (response.data.passed) {
+      yield put(checkUserPassedCourseSuccess(response.data.user))
+    } else {
+      yield put(checkUserPassedCourseSuccess())
+    }
+    yield put(hideLoading())
+  } catch (e) {
+    yield put(checkUserPassedCourseFailure(e))
     yield put(hideLoading())
   }
 }

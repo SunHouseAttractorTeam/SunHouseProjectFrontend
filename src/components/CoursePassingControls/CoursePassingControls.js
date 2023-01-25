@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { updateUserContentStatusRequest } from '../../store/actions/usersActions'
+import { checkUserPassedCourseRequest, updateUserContentStatusRequest } from '../../store/actions/usersActions'
+import MainButton from '../UI/MainButton/MainButton'
 
 const CoursePassingControls = ({ setModuleId }) => {
   const dispatch = useDispatch()
@@ -10,6 +11,7 @@ const CoursePassingControls = ({ setModuleId }) => {
   const user = useSelector(state => state.users.user)
 
   const [disabledWord, setDisabledWord] = useState('')
+  const [endCourse, setEndCourse] = useState(false)
 
   const path = history.location.pathname
   const thisId = path.split('/').reverse()[0]
@@ -28,13 +30,14 @@ const CoursePassingControls = ({ setModuleId }) => {
 
     setDisabledWord('')
 
-    if (lastEvent._id === thisId) {
+    if (lastEvent?._id === thisId) {
+      setEndCourse(true)
       setDisabledWord('next')
     }
-    if (firstEvent._id === thisId) {
+    if (firstEvent?._id === thisId) {
       setDisabledWord('previous')
     }
-  }, [history.location.pathname, course])
+  }, [path, course])
 
   useEffect(() => {
     if (path.includes('task')) {
@@ -100,6 +103,10 @@ const CoursePassingControls = ({ setModuleId }) => {
     })
   }
 
+  const handleCheckUserPassedCourse = () => {
+    dispatch(checkUserPassedCourseRequest(course._id))
+  }
+
   return (
     <div className="course-passing__controls">
       <button
@@ -118,22 +125,26 @@ const CoursePassingControls = ({ setModuleId }) => {
           </svg>
         </i>
       </button>
-      <button
-        className="course-passing__controls-button"
-        disabled={disabledWord === 'next'}
-        onClick={nextEvent}
-        type="button"
-      >
-        <i>
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="48" height="48" rx="24" fill="#ADFA00" />
-            <path
-              d="M18.5801 31.76L26.3401 24L18.5801 16.24C17.8001 15.46 17.8001 14.2 18.5801 13.42C19.3601 12.64 20.6201 12.64 21.4001 13.42L30.5801 22.6C31.3601 23.38 31.3601 24.64 30.5801 25.42L21.4001 34.6C20.6201 35.38 19.3601 35.38 18.5801 34.6C17.8201 33.82 17.8001 32.54 18.5801 31.76Z"
-              fill="white"
-            />
-          </svg>
-        </i>
-      </button>
+      {endCourse ? (
+        <MainButton className="GreenButton course-passing__controls-end-button" type="button" text="Завершить курс" />
+      ) : (
+        <button
+          className="course-passing__controls-button"
+          disabled={disabledWord === 'next'}
+          onClick={nextEvent}
+          type="button"
+        >
+          <i>
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="48" height="48" rx="24" fill="#ADFA00" />
+              <path
+                d="M18.5801 31.76L26.3401 24L18.5801 16.24C17.8001 15.46 17.8001 14.2 18.5801 13.42C19.3601 12.64 20.6201 12.64 21.4001 13.42L30.5801 22.6C31.3601 23.38 31.3601 24.64 30.5801 25.42L21.4001 34.6C20.6201 35.38 19.3601 35.38 18.5801 34.6C17.8201 33.82 17.8001 32.54 18.5801 31.76Z"
+                fill="white"
+              />
+            </svg>
+          </i>
+        </button>
+      )}
     </div>
   )
 }

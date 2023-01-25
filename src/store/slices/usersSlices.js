@@ -153,7 +153,7 @@ const usersSlice = createSlice({
     },
     checkUserTaskFailure(state, action) {
       state.editLoading = false
-      state.editError = action
+      state.editError = action.payload
     },
     updateUserContentStatusRequest(state) {
       state.editLoading = true
@@ -166,6 +166,20 @@ const usersSlice = createSlice({
     updateUserContentStatusFailure(state, action) {
       state.editLoading = false
       state.editError = action.payload
+    },
+    checkUserPassedCourseRequest(state) {
+      state.editLoading = true
+      state.editError = null
+    },
+    checkUserPassedCourseSuccess(state, action) {
+      if (action.payload) {
+        state.user = action.payload
+      }
+      state.editLoading = false
+    },
+    checkUserPassedCourseFailure(state, action) {
+      state.editLoading = false
+      state.editError = action
     },
   },
 })
