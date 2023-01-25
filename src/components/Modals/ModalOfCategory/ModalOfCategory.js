@@ -1,16 +1,32 @@
 import React from 'react'
 import './ModalOfCategory.scss'
-import { Link } from 'react-router-dom'
 
-const ModalOfCategory = ({ categories }) => (
+const ModalOfCategory = ({ categories, setCategory, setToggleFilter }) => (
   <ul className="modal-category">
     <h4 className="modal-category__title">Категории:</h4>
     <div className="modal-category__block">
+      <div>
+        <li
+          className="modal-category__list"
+          onClick={() => {
+            setCategory('all')
+            setToggleFilter(false)
+          }}
+        >
+          Все
+        </li>
+      </div>
       {categories.map(category => (
         <div key={category._id}>
-          <Link className="modal-category__list" to={`course-catalog?category=${category._id}`}>
+          <li
+            className="modal-category__list"
+            onClick={() => {
+              setCategory(category._id)
+              setToggleFilter(false)
+            }}
+          >
             {category.title}
-          </Link>
+          </li>
         </div>
       ))}
     </div>

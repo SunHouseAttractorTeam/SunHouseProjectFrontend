@@ -50,10 +50,23 @@ const Toast = Swal.mixin({
   showConfirmButton: false,
 })
 
-export function* fetchCourses(query) {
+export function* fetchCourses({ payload }) {
   try {
     yield put(showLoading())
-    const response = yield axiosApi(`/courses${query.payload}`)
+    let response
+
+    if (payload) {
+      if (payload.sort && payload.category) {
+        response = yield axiosApi(`/courses?category=${payload.category}&sort=${payload.sort}`)
+      } else if (payload.sort) {
+        response = yield axiosApi(`/courses?sort=${payload.sort}`)
+      } else if (payload.category) {
+        response = yield axiosApi(`/courses?category=${payload.category}`)
+      }
+    } else {
+      response = yield axiosApi(`/courses`)
+    }
+
     yield put(fetchCoursesSuccess(response.data))
     yield put(hideLoading())
   } catch (e) {
