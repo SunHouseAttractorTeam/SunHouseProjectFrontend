@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { LoginSocialGoogle } from 'reactjs-social-login'
 import { loginUserRequest } from '../../../store/actions/usersActions'
 import googleicon from '../../../assets/icons/google.svg'
-import { GoogleAppId } from '../../../config'
+import {apiUrl, GoogleAppId} from '../../../config'
 import './GoogleLogin.scss'
 
 const GoogleLogin = () => {
@@ -15,7 +15,7 @@ const GoogleLogin = () => {
     <LoginSocialGoogle
       client_id={GoogleAppId}
       scope="openid profile email"
-      redirect_uri="http://localhost:3000"
+      redirect_uri={apiUrl}
       discoveryDocs="claims_supported"
       access_type="offline"
       typeResponse="idToken"
