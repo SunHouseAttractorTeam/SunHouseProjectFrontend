@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { Interweave } from 'interweave'
 import { apiUrl } from '../../config'
 import './PassingBlock.scss'
 
 const PassingBlock = ({ event }) => {
   const course = useSelector(state => state.courses.course)
   const [numberOf, setNumberOf] = useState(0)
+
   useEffect(() => {
     course.modules.forEach(item => {
       const lessonIndex = item.data.findIndex(lessonAsd => lessonAsd._id === event._id)
       if (lessonIndex !== -1) setNumberOf(lessonIndex + 1)
     })
   }, [])
+
   return (
     <div className="passing">
       <div className="passing_title">
@@ -28,11 +31,9 @@ const PassingBlock = ({ event }) => {
             case 'text':
               // eslint-disable-next-line react/no-danger
               return (
-                <div
-                  key={`${index}textDW`}
-                  className="passing_block__text"
-                  dangerouslySetInnerHTML={{ __html: event.data[0].text }}
-                />
+                <div key={`${index}textDW`} className="passing_block__text">
+                  <Interweave content={content.text} />
+                </div>
               )
             case 'video':
               // eslint-disable-next-line no-case-declarations

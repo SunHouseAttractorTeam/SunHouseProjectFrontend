@@ -87,7 +87,13 @@ const CourseHomepage = ({ teacherCheck, courseCheck }) => {
       return <Redirect to="/login" />
     }
 
-    return dispatch(joinTheCourseRequest({ userId: user._id, courseId: id }))
+    let firstId
+
+    if (course?.modules.length && course.modules[0]?.data.length) {
+      firstId = course.modules[0]?.data[0]
+    }
+
+    return dispatch(joinTheCourseRequest({ courseId: id, firstId, userId: user._id }))
   }
 
   return (
@@ -101,6 +107,7 @@ const CourseHomepage = ({ teacherCheck, courseCheck }) => {
             image={course.image}
             teacherCheck={teacherCheck}
             courseCheck={courseCheck}
+            handleJoinTheCourse={handleJoinTheCourse}
           />
           <div className="container">
             <div className="course-homepage__bottom">

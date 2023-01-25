@@ -9,8 +9,10 @@ const Avatar = ({ user, className }) => {
   if (user?.avatar) {
     if (user?.avatar.match(/http/) || user?.avatar.match(/https/)) {
       avatarImage = user.avatar
-    } else {
+    } else if (user.avatar.includes('fixtures')) {
       avatarImage = `${apiUrl}/${user.avatar}`
+    } else {
+      avatarImage = `${apiUrl}/uploads/${user.avatar}`
     }
   }
 

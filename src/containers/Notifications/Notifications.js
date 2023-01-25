@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchNotificationsRequest, viewNotificationsRequest } from '../../store/actions/notificationsActions'
 import ButtonsContent from '../../components/UI/ButtonsContent/ButtonsContent'
+import Title from '../../components/UI/Title/Title'
 import './Notifications.scss'
 
 const Notifications = () => {
@@ -50,7 +51,7 @@ const Notifications = () => {
 
   return (
     <div className="notifications-card__content">
-      <h2 className="notifications-card__title">Уведомления</h2>
+      <Title className="notifications-card__title">Уведомления</Title>
       <div>
         <ButtonsContent
           onClickOne={onActiveBtn}

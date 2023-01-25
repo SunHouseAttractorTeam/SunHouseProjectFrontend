@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 import { useSelector } from 'react-redux'
 import { Switch } from 'react-router-dom'
@@ -17,6 +17,10 @@ import BurgerMenu from '../../components/UI/BurgerMenu/BurgerMenu'
 const MyProfile = () => {
   const user = useSelector(state => state.users.user)
   const [toggle, setToggle] = useState(false)
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <div className="profile">
@@ -44,6 +48,7 @@ const MyProfile = () => {
                 isAllowed={Cookies.get('jwt') && user?.role !== 'ban'}
                 redirectTo={user?.role === 'ban' ? '/user/notifications' : '/login'}
                 path="/user/courses"
+                // transition: all .3s ease;
                 component={UserCourses}
               />
               <ProtectedRoute
