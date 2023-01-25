@@ -7,12 +7,23 @@
   flex-wrap: wrap;
   justify-content: space-between;
 
+  @media (max-width: 950px) {
+    justify-content: center;
+  }
+
   &__left {
     width: 30%;
+    @media (max-width: 950px) {
+      width: 50%;
+    }
   }
 
   &__right {
     width: 65%;
+
+    @media (max-width: 950px) {
+      width: 90%;
+    }
 
     &-save-button {
       margin-top: 40px;
