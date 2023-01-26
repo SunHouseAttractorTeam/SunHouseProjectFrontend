@@ -2,11 +2,19 @@
 
 .rating-block{
   .modal {
-    width: 100%;
-    max-width: 780px;
+    width: calc(100vw - 100px);
+    height: calc(100vh - 100px);
 
     &__content {
       padding: 64px 100px 64px 80px;
+
+      @media (max-width: 1024px) {
+      padding: 34px 50px 34px 40px;
+      }
+
+      @media (max-width: 1440px) {
+        padding: 34px 50px 34px 40px;
+      }
     }
   }
 
@@ -20,6 +28,10 @@
 
     &.TextArea {
       padding: 20px;
+
+      @media (max-width: 664px) {
+       height: 100px;
+      }
     }
 
     &-wrapper {
@@ -36,6 +48,7 @@
       right: 0;
       bottom: 0;
       padding: 8px 20px;
+
 
       &::before {
         content: "";
@@ -86,11 +99,19 @@
       font-style: normal;
       font-weight: 500;
       font-size: 20px;
-      margin-bottom: 61px;
+      margin-bottom: 35px;
+
+      @media (max-width: 700px) {
+        margin-bottom: 22px;
+      }
     }
 
     &-stars{
       margin-bottom: 62px;
+
+      @media (max-width: 500px) {
+        margin-bottom: 28px;
+      }
     }
 
     &-field{

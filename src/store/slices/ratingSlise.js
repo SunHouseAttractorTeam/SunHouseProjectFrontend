@@ -3,7 +3,6 @@ import { createSlice } from '@reduxjs/toolkit'
 const name = 'rating'
 
 export const initialState = {
-  ratingForm: [],
   loading: false,
   error: null,
 }

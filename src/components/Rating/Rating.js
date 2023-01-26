@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Rating } from 'react-simple-star-rating'
 import Modal from '../UI/Modal2/Modal'
@@ -7,7 +7,7 @@ import './Rating.scss'
 import { inputChangeHandler } from '../UI/Form/Handlers/Handlers'
 import { createRatingRequest } from '../../store/actions/ratingActions'
 
-const RatingBlock = ({ history }) => {
+const RatingBlock = ({ isOpen }) => {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
   const [reviewData, setReviewData] = useState({
@@ -16,15 +16,15 @@ const RatingBlock = ({ history }) => {
     review: '',
   })
 
+  useEffect(() => {
+    setOpen(isOpen)
+  }, [isOpen])
+
   const handleRating = rate =>
     setReviewData(prev => ({
       ...prev,
       rating: rate,
     }))
-
-  const handlerClick = () => {
-    setOpen(true)
-  }
 
   const submitFormHandler = () => {
     dispatch(
@@ -40,9 +40,6 @@ const RatingBlock = ({ history }) => {
 
   return (
     <div className="rating-block">
-      <button type="button" className="rating-block__add-rating" onClick={e => handlerClick(e)}>
-        добавить рейтинг
-      </button>
       {open && (
         <Modal setOpen={setOpen}>
           <button
@@ -61,7 +58,7 @@ const RatingBlock = ({ history }) => {
               </svg>
             </i>
           </button>
-          <form className="rating-block__modal">
+          <form className="rating-block__modal" onSubmit={e => submitFormHandler(e)}>
             <h3 className="rating-block__modal-title">Как вам наш онлайн курс?</h3>
             <p className="rating-block__modal-subtitle">Оцените пожалуйста</p>
             <Rating
@@ -78,6 +75,7 @@ const RatingBlock = ({ history }) => {
                 name="instagram"
                 id="instagram"
                 value={reviewData.instagram}
+                required
                 onChange={e => inputChangeHandler(e, setReviewData)}
               />
             </label>
@@ -102,7 +100,7 @@ const RatingBlock = ({ history }) => {
                 </span>
               </label>
             </div>
-            <button className="rating-block__modal-btn" type="submit" onClick={e => submitFormHandler(e)}>
+            <button className="rating-block__modal-btn" type="submit">
               Отправить
             </button>
           </form>

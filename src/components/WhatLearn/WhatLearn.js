@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import LearnCardText from './LearnCardText/LearnCardText'
 import Paragraph from '../Paragraph/Paragraph'
 import Modal from '../UI/Modal2/Modal'
-import { updateDescriptionRequest } from '../../store/actions/descriptionsActions'
 import './WhatLearn.scss'
 
 const WhatLearn = ({ teacherCheck, willLearn, onVisibilityBlock, block }) => {

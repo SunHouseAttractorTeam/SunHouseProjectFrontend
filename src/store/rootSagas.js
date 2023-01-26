@@ -11,7 +11,6 @@ import testsSagas from './sagas/testsSagas'
 import notificationsSagas from './sagas/notificationSagas'
 import lendingReviewsSagas from './sagas/lendingReviewsSagas'
 import ratingSagas from './sagas/ratingSagas'
-import visibilitySagas from './sagas/visibilitySagas'
 import lendingTeachersSagas from './sagas/lendingTeachersSagas'
 
 export default function* rootSagas() {
@@ -25,7 +24,6 @@ export default function* rootSagas() {
     ...testsSagas,
     ...notificationsSagas,
     ...lendingReviewsSagas,
-    ...visibilitySagas,
     ...lendingTeachersSagas,
     ...historySagas(history),
     ...ratingSagas,

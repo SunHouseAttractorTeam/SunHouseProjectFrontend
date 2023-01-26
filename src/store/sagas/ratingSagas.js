@@ -6,7 +6,7 @@ import { createRatingFailure, createRatingRequest, createRatingSuccess } from '.
 export function* createRating({ payload: data }) {
   try {
     yield put(showLoading())
-    yield axiosApi.post(`/courses/add-rating`, data)
+    yield axiosApi.post(`/courses/rating_course`, data)
     yield put(createRatingSuccess())
     yield put(hideLoading())
   } catch (e) {

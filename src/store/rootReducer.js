@@ -10,7 +10,6 @@ import notificationsSlice from './slices/notificationsSlice'
 import lendingReviewsSlice from './slices/lendingReviewsSlice'
 import modulesSlice from './slices/modulesSlice'
 import lendingTeachersSlice from './slices/lendingTeachersSlice'
-import visibilitySlice from './slices/visibilitySlice'
 import ratingSlice from './slices/ratingSlise'
 
 const rootReducer = combineReducers({
