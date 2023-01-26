@@ -3,32 +3,28 @@ import { useDispatch, useSelector } from 'react-redux'
 import Popup from 'reactjs-popup'
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
-import './CatalogOfCourse.scss'
 import { fetchCoursesRequest } from '../../store/actions/coursesActions'
 import { fetchCategoriesRequest } from '../../store/actions/categoriesActions'
 import ModalOfCategory from '../../components/Modals/ModalOfCategory/ModalOfCategory'
-import CourseCard from '../../components/CourseCard/CourseCard'
 import ModalSortCourse from '../../components/Modals/ModalSortCourse/ModalSortCourse'
-
-const coursePerPage = 5
+import CourseCard from '../../components/CourseCard/CourseCard'
+import './CatalogOfCourse.scss'
 
 const CatalogOfCourse = () => {
   const dispatch = useDispatch()
   const courses = useSelector(state => state.courses.courses)
   const categories = useSelector(state => state.categories.categories)
-  const [next, setNext] = useState(coursePerPage)
   const [toggle, setToggle] = useState(false)
   const [sort, setSort] = useState('rating')
   const [category, setCategory] = useState('all')
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
     dispatch(fetchCoursesRequest({ sort, category }))
     dispatch(fetchCategoriesRequest())
   }, [dispatch, sort, category])
 
-  const handleMoreImage = () => {
-    setNext(next + coursePerPage)
-  }
+  const filtered = courses.filter(course => course.title.toLowerCase().includes(search.toLowerCase()))
 
   return (
     <>
@@ -38,7 +34,14 @@ const CatalogOfCourse = () => {
           <div className="courses-section__block">
             <h2 className="courses-section__title">Каталог курсов</h2>
             <div className="icons-block">
-              {toggle === true && <input type="text" placeholder="Поиск..." className="icon-value" />}
+              {toggle === true && (
+                <input
+                  type="text"
+                  placeholder="Поиск..."
+                  className="icon-value"
+                  onChange={e => setSearch(e.target.value)}
+                />
+              )}
               <div className={toggle === false ? 'icons-item' : 'icons-item--active'} onClick={() => setToggle(true)}>
                 <i>
                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -92,16 +95,11 @@ const CatalogOfCourse = () => {
             </div>
           </div>
           <div className="courses-section__cards">
-            {courses.map(item => (
+            {filtered.map(item => (
               <CourseCard key={item._id} title={item.title} date={item.dateTime} price={item.price} />
             ))}
           </div>
         </div>
-        {/* {next < courses?.length && ( */}
-        {/*  <button type="button" className="course-btn" onClick={handleMoreImage}> */}
-        {/*    Посмотреть все курсы */}
-        {/*  </button> */}
-        {/* )} */}
       </section>
       <Footer />
     </>
