@@ -1,11 +1,15 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const ProfileSidebarLink = ({ children, to }) => (
   <li className="profile__sidebar-bottom-nav-list-item">
-    <Link className="profile__sidebar-bottom-nav-list-item-link" to={to}>
+    <NavLink
+      className="profile__sidebar-bottom-nav-list-item-link"
+      to={to}
+      activeClassName="profile__sidebar-bottom-nav-list-item-link--active"
+    >
       {children}
-    </Link>
+    </NavLink>
   </li>
 )
 

@@ -17,6 +17,7 @@ import AdminPanel from './containers/AdminPanel/AdminPanel'
 import CatalogOfCourse from './containers/CatalogOfCourse/CatalogOfCourse'
 import TeachersPage from './components/TeachersPage/TeachersPage'
 import './scss/style.scss'
+import CertificateObtain from './components/CertificateObtain/CertificateObtain'
 
 const App = () => {
   const user = useSelector(state => state.users.user)
@@ -38,6 +39,7 @@ const App = () => {
           path="/user"
           component={MyProfile}
         />
+        <Route path="/course/:id/end" exact component={CertificateObtain} />
         <Route path="/course/:id" component={Course} />
         <ProtectedRoute
           isAllowed={Cookies.get('jwt') || user?.token || access}
