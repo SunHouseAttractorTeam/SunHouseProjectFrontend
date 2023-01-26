@@ -28,7 +28,7 @@ const TeacherMode = () => {
 
   return (
     <div className="teacher-mode">
-      <Title>Режим преподователя</Title>
+      <Title>Режим преподавателя</Title>
       <div className="teacher-mode__cards">
         <button type="button" className="teacher-mode__button" onClick={openModal}>
           <div className="teacher-mode__button-top">

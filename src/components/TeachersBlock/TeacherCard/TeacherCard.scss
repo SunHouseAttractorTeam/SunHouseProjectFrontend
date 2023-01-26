@@ -7,6 +7,12 @@
   background: $totalWhiteColor;
   border-radius: 16px;
   margin-left: 12px;
+  transition: all .5s ease;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+  }
 
   &_content {
 
