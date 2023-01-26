@@ -106,24 +106,12 @@ const CatalogOfCourse = () => {
           </div>
           <div className="courses-section__cards">
             {filtered.map(item => (
-              <CourseCard
-                key={item._id}
-                title={item.title}
-                date={item.dateTime}
-                price={item.price}
-                image={item.image}
-              />
+              <CourseCard key={item._id} id={item._id} title={item.title} price={item.price} image={item.image} />
             )) &&
               filtered
                 ?.slice(0, next)
                 ?.map(item => (
-                  <CourseCard
-                    key={item._id}
-                    title={item.title}
-                    date={item.dateTime}
-                    price={item.price}
-                    image={item.image}
-                  />
+                  <CourseCard key={item._id} id={item._id} title={item.title} price={item.price} image={item.image} />
                 ))}
           </div>
           {next < filtered?.length && (
