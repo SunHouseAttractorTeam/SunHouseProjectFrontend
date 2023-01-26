@@ -12,7 +12,7 @@
   color: $darkGreenColor;
   font-weight: 700;
   font-style: normal;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 20px;
   cursor: pointer;
   transition: all .3s ease;
@@ -42,4 +42,10 @@
 .TransparentButton {
   background-color: transparent;
   border: 2px solid $whiteBorderColor;
+}
+
+.MainButton:disabled {
+  cursor: not-allowed;
+  background: #dadada;
+  color: #888888;
 }

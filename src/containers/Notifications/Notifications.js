@@ -51,7 +51,7 @@ const Notifications = () => {
 
   return (
     <div className="notifications-card__content">
-      <Title className="notifications-card__title">Уведомления</Title>
+      <Title>Уведомления</Title>
       <div>
         <ButtonsContent
           onClickOne={onActiveBtn}

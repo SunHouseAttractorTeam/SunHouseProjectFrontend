@@ -7,7 +7,7 @@ import './Settings.scss'
 
 const Settings = () => (
   <div className="settings">
-    <Title className="settings__title">Настройки профиля</Title>
+    <Title>Настройки профиля</Title>
     <div className="settings__block">
       <ButtonsContent
         titleOne="Личные данные"
