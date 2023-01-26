@@ -9,6 +9,7 @@ import {
   banUnbanRequest,
   banUnbanSuccess,
   checkUserPassedCourseFailure,
+  checkUserPassedCourseRequest,
   checkUserPassedCourseSuccess,
   checkUserTaskFailure,
   checkUserTaskRequest,
@@ -286,8 +287,10 @@ export function* checkUserPassedCourseSaga({ payload: courseId }) {
     const response = yield axiosApi(`/users/passed_course?course=${courseId}`)
     if (response.data.passed) {
       yield put(checkUserPassedCourseSuccess(response.data.user))
+      yield put(historyPush(`/course/${courseId}/certificate`))
     } else {
       yield put(checkUserPassedCourseSuccess())
+      yield put(historyPush(`/course/${courseId}`))
     }
     yield put(hideLoading())
   } catch (e) {
@@ -310,6 +313,7 @@ const userSagas = [
   takeEvery(passwordRequest, editUserPasswordSaga),
   takeEvery(checkUserTaskRequest, checkUserTask),
   takeEvery(updateUserContentStatusRequest, updateUserContentStatusSaga),
+  takeEvery(checkUserPassedCourseRequest, checkUserPassedCourseSaga),
 ]
 
 export default userSagas
