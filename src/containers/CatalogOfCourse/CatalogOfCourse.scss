@@ -19,7 +19,8 @@
   cursor: pointer;
 
   &--active {
-    display: none;
+    position: absolute;
+    right: 146px;
   }
 
   &--active-icon {

@@ -10,10 +10,13 @@ import ModalSortCourse from '../../components/Modals/ModalSortCourse/ModalSortCo
 import CourseCard from '../../components/CourseCard/CourseCard'
 import './CatalogOfCourse.scss'
 
+const coursePerPage = 5
+
 const CatalogOfCourse = () => {
   const dispatch = useDispatch()
   const courses = useSelector(state => state.courses.courses)
   const categories = useSelector(state => state.categories.categories)
+  const [next, setNext] = useState(coursePerPage)
   const [toggle, setToggle] = useState(false)
   const [sort, setSort] = useState('rating')
   const [category, setCategory] = useState('all')
@@ -25,6 +28,10 @@ const CatalogOfCourse = () => {
   }, [dispatch, sort, category])
 
   const filtered = courses.filter(course => course.title.toLowerCase().includes(search.toLowerCase()))
+
+  const handleMoreCourses = () => {
+    setNext(next + coursePerPage)
+  }
 
   return (
     <>
@@ -42,7 +49,10 @@ const CatalogOfCourse = () => {
                   onChange={e => setSearch(e.target.value)}
                 />
               )}
-              <div className={toggle === false ? 'icons-item' : 'icons-item--active'} onClick={() => setToggle(true)}>
+              <div
+                className={toggle === false ? 'icons-item' : 'icons-item--active'}
+                onClick={() => setToggle(toggleInput => !toggleInput)}
+              >
                 <i>
                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -54,7 +64,7 @@ const CatalogOfCourse = () => {
               </div>
               <Popup
                 trigger={
-                  <div className="icons-item">
+                  <div>
                     <i>
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -90,15 +100,37 @@ const CatalogOfCourse = () => {
                   </div>
                 }
               >
-                <ModalOfCategory categories={categories} setCategory={setCategory} />
+                <ModalOfCategory categories={categories} />
               </Popup>
             </div>
           </div>
           <div className="courses-section__cards">
             {filtered.map(item => (
-              <CourseCard key={item._id} title={item.title} date={item.dateTime} price={item.price} />
-            ))}
+              <CourseCard
+                key={item._id}
+                title={item.title}
+                date={item.dateTime}
+                price={item.price}
+                image={item.image}
+              />
+            )) &&
+              filtered
+                ?.slice(0, next)
+                ?.map(item => (
+                  <CourseCard
+                    key={item._id}
+                    title={item.title}
+                    date={item.dateTime}
+                    price={item.price}
+                    image={item.image}
+                  />
+                ))}
           </div>
+          {next < filtered?.length && (
+            <button type="button" className="course-btn" onClick={handleMoreCourses}>
+              Посмотреть курсы
+            </button>
+          )}
         </div>
       </section>
       <Footer />
