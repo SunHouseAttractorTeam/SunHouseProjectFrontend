@@ -100,7 +100,7 @@ const CatalogOfCourse = () => {
                   </div>
                 }
               >
-                <ModalOfCategory categories={categories} />
+                <ModalOfCategory categories={categories} setCategory={setCategory} />
               </Popup>
             </div>
           </div>
