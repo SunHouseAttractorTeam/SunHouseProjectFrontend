@@ -3,6 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import Popup from 'reactjs-popup'
 import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
+import burgerIcon from '../../assets/icons/BurgerIcon.png'
+import filterIcon from '../../assets/icons/FilterIcon.png'
+import searchIcon from '../../assets/icons/SearchIcon.png'
+import ModalOfCategory from '../../components/Modals/ModalOfCategory/ModalOfCategory'
+import ModalSortCourse from '../../components/Modals/ModalSortCourse/ModalSortCourse'
 import { fetchCoursesRequest } from '../../store/actions/coursesActions'
 import { fetchCategoriesRequest } from '../../store/actions/categoriesActions'
 import ModalOfCategory from '../../components/Modals/ModalOfCategory/ModalOfCategory'
@@ -26,6 +31,10 @@ const CatalogOfCourse = () => {
     dispatch(fetchCoursesRequest({ sort, category }))
     dispatch(fetchCategoriesRequest())
   }, [dispatch, sort, category])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   const filtered = courses.filter(course => course.title.toLowerCase().includes(search.toLowerCase()))
 
