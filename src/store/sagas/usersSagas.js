@@ -90,6 +90,7 @@ export function* loginUserSaga({ payload }) {
       response = yield axiosApi.post(`/users/sessions`)
     }
     if (payload) {
+      Cookies.remove('jwt')
       response = yield axiosApi.post(`/users/sessions?path=${payload.path}`, payload.userData)
     }
     yield put(loginUserSuccess(response.data))
@@ -242,7 +243,6 @@ export function* checkUserTask({ payload: data }) {
   try {
     yield put(showLoading())
 
-    console.log(data)
     yield axiosApi.patch(
       `/users/${data.userId}/update_status?content=${data.taskId}&params=task&course=${data.courseId}&choice=${data.value}`,
     )
