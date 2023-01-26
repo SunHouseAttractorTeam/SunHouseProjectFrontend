@@ -50,15 +50,21 @@ const WhatLearn = ({ teacherCheck, willLearn, onVisibilityBlock, block }) => {
     }))
   }
 
+  const deleteBlock = index => {
+    newLearn.splice(index, 1)
+
+    onVisibilityBlock('willLearn', newLearn)
+  }
+
   return (
     <div className="learn-plan-block">
       <Paragraph
         title="Чему вы научитесь"
-        subtitle={block.description}
+        subtitle={block?.description}
         teacherCheck={teacherCheck}
         type="blockLearn"
         onVisibility={onVisibilityBlock}
-        isVisibility={block.visibility}
+        isVisibility={block?.visibility}
       />
       {teacherCheck ? (
         <>
@@ -67,13 +73,13 @@ const WhatLearn = ({ teacherCheck, willLearn, onVisibilityBlock, block }) => {
               <div className="learn-plan-block__btn-plus-icon">+</div>
               <span className="learn-plan-block__btn-plus-text">Добавить блок ...</span>
             </button>
-            {newLearn.map(item => (
+            {newLearn.map((item, index) => (
               <LearnCardText
                 key={item._id || item.title}
                 title={item.title}
                 image={item.image}
                 description={item.description}
-                teacherCheck={teacherCheck}
+                deleteBlock={() => deleteBlock(index)}
               />
             ))}
           </div>
@@ -105,6 +111,7 @@ const WhatLearn = ({ teacherCheck, willLearn, onVisibilityBlock, block }) => {
                       id="field__file-2"
                       className="field field__file"
                       onChange={handleFileChange}
+                      accept="image/*"
                     />
                     <label className="field__file-wrapper" htmlFor="field__file-2">
                       <div className="field__file-fake">
