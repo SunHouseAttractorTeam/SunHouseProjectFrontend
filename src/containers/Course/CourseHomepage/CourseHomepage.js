@@ -129,12 +129,14 @@ const CourseHomepage = ({ teacherCheck, courseCheck }) => {
                       teacherCheck={teacherCheck}
                       onVisibilityBlock={onVisibilityBlock}
                     />
-                    <CourseProgram
-                      block={courseLending.blockModules}
-                      teacherCheck={teacherCheck}
-                      modules={course.modules}
-                      onVisibilityBlock={onVisibilityBlock}
-                    />
+                    {course.modules && course.modules.length !== 0 && (
+                      <CourseProgram
+                        block={courseLending.blockModules}
+                        teacherCheck={teacherCheck}
+                        modules={course.modules}
+                        onVisibilityBlock={onVisibilityBlock}
+                      />
+                    )}
                     <button type="button" className="course__save-btn MainButton GreenButton" onClick={onSave}>
                       Сохранить изменения
                     </button>
