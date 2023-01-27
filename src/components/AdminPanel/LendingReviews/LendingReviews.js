@@ -45,7 +45,7 @@ const LendingReviews = () => {
     dispatch(deleteReviewRequest(id))
   }
   return (
-    <div>
+    <>
       <div className="reviews">
         <Title>Отзывы</Title>
         <div className="reviews__wrapper">
@@ -141,7 +141,7 @@ const LendingReviews = () => {
           ))}
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
