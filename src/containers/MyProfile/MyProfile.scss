@@ -115,12 +115,41 @@
               color: inherit;
               display: flex;
               align-items: center;
+
+              &--active {
+                color: $lightGreenColor;
+
+                & path {
+                  fill: $lightGreenColor;
+                  transition: all 0.3ms;
+                }
+              }
             }
 
             &-icon {
+              display: flex;
+              justify-content: center;
+              align-items: center;
               width: 24px;
               height: 24px;
-              padding-right: 56px;
+              margin-right: 32px;
+            }
+
+            &-logout-button {
+              cursor: pointer;
+              width: 100%;
+              padding: 22px 0;
+              display: flex;
+              align-items: center;
+              background: none;
+              border: none;
+              font-size: 20px;
+              font-weight: 700;
+              font-family: inherit;
+
+              &:hover {
+                color: $lightGreenColor;
+              }
             }
           }
         }

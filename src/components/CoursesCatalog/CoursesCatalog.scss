@@ -6,7 +6,6 @@
   &__title {
     display: flex;
     align-items: center;
-    margin-bottom: 32px;
     font-weight: 700;
     font-size: 36px;
     line-height: 45px;
@@ -24,6 +23,12 @@
   &__block {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    @media screen and (max-width: 550px){
+      flex-wrap: wrap;
+      justify-content: center;
+    }
   }
 
   &__cards {
@@ -124,7 +129,7 @@
   .courses-section {
 
     &__cards {
-      display: none;
+      grid-template-columns: repeat(1, 1fr);
     }
 
     & .slick-list {

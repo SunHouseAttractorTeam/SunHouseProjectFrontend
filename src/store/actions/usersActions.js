@@ -38,4 +38,7 @@ export const {
   updateUserContentStatusRequest,
   updateUserContentStatusSuccess,
   updateUserContentStatusFailure,
+  checkUserPassedCourseRequest,
+  checkUserPassedCourseSuccess,
+  checkUserPassedCourseFailure,
 } = usersSlice.actions

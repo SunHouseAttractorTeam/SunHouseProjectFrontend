@@ -2,9 +2,11 @@ import React from 'react'
 
 const ModalSortCourse = ({ sortCourse }) => {
   const sortArray = [
-    { key: 'сбросить', name: 'сбросить', id: 1 },
-    { key: 'новые', name: 'сначало новые', id: 2 },
-    { key: 'старые', name: 'сначало старые', id: 3 },
+    { key: 'rating', name: 'по рейтингу', id: 1 },
+    { key: 'new', name: 'сначало новые', id: 2 },
+    { key: 'old', name: 'сначало старые', id: 3 },
+    { key: 'cheap', name: 'сначало дешевле', id: 4 },
+    { key: 'expensive', name: 'сначало дороже', id: 5 },
   ]
 
   return (
@@ -13,7 +15,13 @@ const ModalSortCourse = ({ sortCourse }) => {
       <div className="modal-category__block">
         {sortArray &&
           sortArray.map(list => (
-            <li key={list.id} className="modal-category__list" onClick={() => sortCourse(list.key)}>
+            <li
+              key={list.id}
+              className="modal-category__list"
+              onClick={() => {
+                sortCourse(list.key)
+              }}
+            >
               {list.name}
             </li>
           ))}

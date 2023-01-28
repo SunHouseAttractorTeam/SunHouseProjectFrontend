@@ -1,13 +1,7 @@
 .modal-category {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  z-index: 3;
-  padding: 10px;
+  padding: 24px 0 24px 24px;
   background: #FFFFFF;
-  top: 87%;
-  width: 266px;
-  right: -20%;
+  width: 334px;
   border-radius: 16px;
   box-shadow: 0 0 9px grey, 0 0 9px grey;
 
@@ -26,6 +20,9 @@
     list-style: none;
     margin-bottom: 16px;
     position: relative;
+    text-decoration: none;
+    color: black;
+    display: block;
 
     &:hover {
       color: #ADFA00;
@@ -51,4 +48,12 @@
       background: url("../../../assets/icons/listIconActive.png") no-repeat;
     }
   }
+}
+
+.popup-content {
+  left: 59.5% !important;
+}
+
+.popup-content2-content {
+  left: 63% !important;
 }

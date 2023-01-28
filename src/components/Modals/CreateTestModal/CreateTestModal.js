@@ -13,7 +13,7 @@ const CreateTestModal = ({ setOpen, courseId, moduleId, setModalType, error }) =
   const dispatch = useDispatch()
   const [testData, setTestData] = useState({
     title: '',
-    correct: 0,
+    correct: 100,
     random: false,
   })
 

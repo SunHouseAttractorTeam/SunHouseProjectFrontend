@@ -11,24 +11,31 @@
   &__controls {
     display: flex;
     justify-content: space-between;
+    margin-top: 30px;
 
-    & button {
-      background-color: $lightGreenColor;
-      background-repeat: no-repeat;
-      background-position: 50%;
+    &-button {
+      display: grid;
+      place-content: center;
+      background: none;
+      overflow: hidden;
       width: 48px;
       height: 48px;
       border: none;
-      border-radius: 90px;
+      border-radius: 50%;
       cursor: pointer;
-      margin-top: 30px;
 
-      &:disabled {
-        background: $lightGrey;
+      &:hover rect {
+        fill: $whiteBorderColor;
       }
 
-      & svg {
-        fill: $totalWhiteColor;
+      &:disabled rect {
+        fill: $whiteBorderColor;
+      }
+    }
+
+    &-end-button {
+      &:hover {
+        background: $whiteBorderColor;
       }
     }
   }

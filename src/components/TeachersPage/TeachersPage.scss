@@ -21,4 +21,16 @@
     padding: 18px 50px;
     margin: 30px 0;
   }
+
+  &__modal_block {
+    padding: 20px;
+
+    &-title {
+      font-size: 20px;
+    }
+
+    &-input {
+      margin: 10px 0;
+    }
+  }
 }

@@ -1,18 +1,29 @@
+@import '../../scss/style';
+
 .icons-block {
   display: flex;
   align-items: center;
   position: relative;
+
+  @media (max-width: 600px) {
+    margin-top: 30px;
+  }
 }
 
 .icons-item {
   position: relative;
-  padding: 12px;
+  height: 48px;
+  width: 48px;
+  display: grid;
+  place-content: center;
   background-color: #FFFFFF;
   border-radius: 50%;
+  margin: 0 10px;
   cursor: pointer;
 
   &--active {
-    display: none;
+    position: absolute;
+    right: 154px;
   }
 
   &--active-icon {
@@ -59,6 +70,23 @@
   padding: 1.5vh 38vh 1.5vh 3vh;
   border-radius: 24px;
   background: transparent;
+
+  @include xl {
+    padding: 1.5vh 20vh 1.5vh 3vh;
+
+  }
+
+  @media screen and (max-width: 905px) {
+    padding: 1.5vh 13vh 1.5vh 3vh;
+  }
+
+  @media screen and (max-width: 845px) {
+    padding: 1.5vh 1vh 1.5vh 3vh;
+  }
+
+  @media screen and (max-width: 600px) {
+    padding: 1.5vh 1vh 1.5vh 3vh;
+  }
 }
 
 .icon-value::placeholder {
