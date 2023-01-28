@@ -250,7 +250,7 @@ export function* checkUserTask({ payload: data }) {
     yield put(showLoading())
 
     yield axiosApi.patch(
-      `/users/${data.userId}/update_status?content=${data.taskId}&params=task&course=${data.courseId}&choice=${data.value}`,
+      `/users/${data.userId}/update_status?content=${data.taskId}&params=passed&course=${data.courseId}&choice=${data.value}`,
     )
     yield put(checkUserTaskSuccess())
     yield put(fetchCourseRequest(data.courseId))
