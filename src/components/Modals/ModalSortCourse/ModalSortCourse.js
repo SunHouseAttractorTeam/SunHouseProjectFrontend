@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ModalSortCourse = ({ sortCourse, setToggleSort }) => {
+const ModalSortCourse = ({ sortCourse }) => {
   const sortArray = [
     { key: 'rating', name: 'по рейтингу', id: 1 },
     { key: 'new', name: 'сначало новые', id: 2 },
@@ -20,7 +20,6 @@ const ModalSortCourse = ({ sortCourse, setToggleSort }) => {
               className="modal-category__list"
               onClick={() => {
                 sortCourse(list.key)
-                setToggleSort(false)
               }}
             >
               {list.name}

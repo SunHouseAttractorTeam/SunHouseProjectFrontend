@@ -17,14 +17,14 @@ import './LendingReviews.scss'
 
 const LendingReviews = () => {
   const dispatch = useDispatch()
-  const [reviewState, reviewSetState] = useState({ image: '', name: '', socialNetwork: '', description: '' })
+  const [reviewState, setReviewState] = useState({ image: '', name: '', socialNetwork: '', description: '' })
   const reviews = useSelector(state => state.reviews.reviews)
   const [image, setImage] = useState(null)
   const fileChangeHandler = e => {
     setImage(URL.createObjectURL(e.target.files[0]))
     const { name } = e.target
     const file = e.target.files[0]
-    reviewSetState(prev => ({ ...prev, [name]: file }))
+    setReviewState(prev => ({ ...prev, [name]: file }))
   }
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const LendingReviews = () => {
       formData.append(key, reviewState[key])
     })
     dispatch(createReviewRequest(formData))
-    reviewState({ image: '', name: '', socialNetwork: '', description: '' })
+    setReviewState({ image: '', name: '', socialNetwork: '', description: '' })
     setImage(null)
   }
   const deleteReviewCard = id => {
@@ -54,7 +54,7 @@ const LendingReviews = () => {
             <div className="reviews__wrapper-inner2">
               <div className="reviews__input-label">
                 <img
-                  src={image || (reviewState.image ? `${apiUrl}/${reviewState.image}` : null)}
+                  src={image || (reviewState.image ? `${apiUrl}/uploads/${reviewState.image}` : null)}
                   alt={reviewState.title}
                   className="reviews__input-label-image"
                 />
@@ -78,7 +78,7 @@ const LendingReviews = () => {
                   value={reviewState.name}
                   placeholder="Имя"
                   className="reviews__input"
-                  onChange={e => inputChangeHandler(e, reviewSetState)}
+                  onChange={e => inputChangeHandler(e, setReviewState)}
                 />
                 <FormInput
                   type="text"
@@ -86,7 +86,7 @@ const LendingReviews = () => {
                   value={reviewState.socialNetwork}
                   className="reviews__input"
                   placeholder="instagram"
-                  onChange={e => inputChangeHandler(e, reviewSetState)}
+                  onChange={e => inputChangeHandler(e, setReviewState)}
                 />
               </div>
             </div>
@@ -99,7 +99,7 @@ const LendingReviews = () => {
                 rows="10"
                 placeholder="Тут будет текст отзыва"
                 className="reviews__textarea"
-                onChange={e => inputChangeHandler(e, reviewSetState)}
+                onChange={e => inputChangeHandler(e, setReviewState)}
                 max="350"
               />
               <span

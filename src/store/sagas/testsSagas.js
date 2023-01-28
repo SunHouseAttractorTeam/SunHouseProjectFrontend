@@ -41,6 +41,7 @@ export function* fetchTest({ payload: id }) {
     yield put(hideLoading())
   } catch (e) {
     yield put(fetchTestFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -60,6 +61,7 @@ export function* createTest({ payload }) {
     })
   } catch (e) {
     yield put(createTestFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -77,6 +79,7 @@ export function* editTest({ payload }) {
     })
   } catch (e) {
     yield put(editTestFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -90,6 +93,7 @@ export function* editTestQuestions({ payload }) {
     yield put(hideLoading())
   } catch (e) {
     yield put(editTestQuestionsFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -109,6 +113,7 @@ export function* deleteTest({ payload }) {
     })
   } catch (e) {
     yield put(deleteTestFailure(e))
+    yield put(hideLoading())
   }
 }
 

@@ -12,7 +12,10 @@
 
 .icons-item {
   position: relative;
-  padding: 12px;
+  height: 48px;
+  width: 48px;
+  display: grid;
+  place-content: center;
   background-color: #FFFFFF;
   border-radius: 50%;
   margin: 0 10px;
@@ -20,7 +23,7 @@
 
   &--active {
     position: absolute;
-    right: 146px;
+    right: 154px;
   }
 
   &--active-icon {

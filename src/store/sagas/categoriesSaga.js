@@ -35,6 +35,7 @@ export function* fetchCategories() {
     yield put(hideLoading())
   } catch (e) {
     yield put(fetchCategoriesFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -46,6 +47,7 @@ export function* fetchCategory({ payload: id }) {
     yield put(hideLoading())
   } catch (e) {
     yield put(fetchCategoryFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -62,6 +64,7 @@ export function* createCategory({ payload: courseData }) {
     })
   } catch (e) {
     yield put(createCategoryFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -75,6 +78,7 @@ export function* updateCategory({ payload }) {
     yield put(hideLoading())
   } catch (e) {
     yield put(updateCategoryFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -91,6 +95,7 @@ export function* deleteCategory({ payload: id }) {
     })
   } catch (e) {
     yield put(deleteCategoryFailure(e))
+    yield put(hideLoading())
   }
 }
 

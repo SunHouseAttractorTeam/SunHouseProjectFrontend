@@ -47,6 +47,7 @@ import {
   verifyUserSuccess,
 } from '../actions/usersActions'
 import { fetchCourseRequest } from '../actions/coursesActions'
+import { sendGFFailure, sendGFRequest, sendGFSuccess } from '../actions/sendGFActions'
 
 const Toast = Swal.mixin({
   toast: true,
@@ -63,6 +64,7 @@ export function* getAllUsersSaga() {
     yield put(hideLoading())
   } catch (e) {
     yield put(getAllUsersFailure(e.response.data))
+    yield put(hideLoading())
   }
 }
 
@@ -85,6 +87,7 @@ export function* registrationUserSaga({ payload: userData }) {
         title: 'Данный пользователь уже зарегистрирован',
       })
     }
+    yield put(hideLoading())
   }
 }
 
@@ -96,6 +99,7 @@ export function* loginUserSaga({ payload }) {
       response = yield axiosApi.post(`/users/sessions`)
     }
     if (payload) {
+      Cookies.remove('jwt')
       response = yield axiosApi.post(`/users/sessions?path=${payload.path}`, payload.userData)
     }
     yield put(loginUserSuccess(response.data))
@@ -115,6 +119,7 @@ export function* loginUserSaga({ payload }) {
         title: 'Введены неверные данные',
       })
     }
+    yield put(hideLoading())
   }
 }
 
@@ -131,7 +136,9 @@ export function* logoutUserSaga() {
       icon: 'info',
       title: 'Вы вышли из своего аккаунта',
     })
-  } catch (e) {}
+  } catch (e) {
+    yield put(hideLoading())
+  }
 }
 
 export function* deleteUserSaga({ payload: id }) {
@@ -146,6 +153,7 @@ export function* deleteUserSaga({ payload: id }) {
     yield put(hideLoading())
   } catch (e) {
     yield put(deleteUserFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -158,6 +166,7 @@ export function* verifyUserSaga(confirmationCode) {
     yield put(hideLoading())
   } catch (e) {
     yield put(verifyUserFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -169,6 +178,7 @@ export function* banUnbanSaga({ payload }) {
     yield put(getAllUsersRequest())
   } catch (e) {
     yield put(banUnbanFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -185,6 +195,7 @@ export function* forgotPasswordSaga({ payload: userData }) {
     })
   } catch (e) {
     yield put(forgotPasswordFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -197,6 +208,7 @@ export function* resetPasswordSaga({ payload: hash }) {
     yield put(hideLoading())
   } catch (e) {
     yield put(resetPasswordFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -219,6 +231,7 @@ export function* editUserProfileSaga({ payload: userData }) {
         title: e.response.data.error,
       })
     }
+    yield put(hideLoading())
   }
 }
 
@@ -241,20 +254,30 @@ export function* editUserPasswordSaga({ payload: passwords }) {
         title: e.response.data.error,
       })
     }
+    yield put(hideLoading())
   }
 }
 
 export function* checkUserTask({ payload: data }) {
   try {
     yield put(showLoading())
-
-    console.log(data)
     yield axiosApi.patch(
-      `/users/${data.userId}/update_status?content=${data.taskId}&params=task&course=${data.courseId}&choice=${data.value}`,
+      `/users/${data.userId}/update_status?content=${data.taskId}&params=passed&course=${data.courseId}&choice=${data.value}`,
     )
     yield put(checkUserTaskSuccess())
     yield put(fetchCourseRequest(data.courseId))
     yield put(hideLoading())
+    if (data.value) {
+      yield Toast.fire({
+        icon: 'success',
+        title: 'Одобрено',
+      })
+    } else {
+      yield Toast.fire({
+        icon: 'success',
+        title: 'Не одобрено',
+      })
+    }
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(checkUserTaskFailure(e.response.data))
@@ -263,6 +286,7 @@ export function* checkUserTask({ payload: data }) {
         title: e.response.data.error,
       })
     }
+    yield put(hideLoading())
   }
 }
 
@@ -277,6 +301,29 @@ export function* updateUserContentStatusSaga({ payload: { userId, content, path 
     yield put(historyPush(path))
   } catch (e) {
     yield put(updateUserContentStatusFailure(e))
+    yield put(hideLoading())
+  }
+}
+
+export function* sendGoogleFormSaga({ payload }) {
+  try {
+    yield put(showLoading())
+    const response = yield axiosApi.post('https://sheet.best/api/sheets/8a0fe7b6-7041-4649-a1fe-0e28f49780e4', payload)
+    yield put(sendGFSuccess(response.data))
+    yield Swal.fire({
+      toast: false,
+      icon: 'success',
+      title: `Сообщение отправлено!`,
+    })
+    yield put(hideLoading())
+  } catch (e) {
+    if (e.response && e.response.data) {
+      yield put(sendGFFailure(e.response.data))
+      yield Toast.fire({
+        icon: 'error',
+        title: 'Сообщение не отправлено!',
+      })
+    }
     yield put(hideLoading())
   }
 }
@@ -313,6 +360,7 @@ const userSagas = [
   takeEvery(passwordRequest, editUserPasswordSaga),
   takeEvery(checkUserTaskRequest, checkUserTask),
   takeEvery(updateUserContentStatusRequest, updateUserContentStatusSaga),
+  takeEvery(sendGFRequest, sendGoogleFormSaga),
   takeEvery(checkUserPassedCourseRequest, checkUserPassedCourseSaga),
 ]
 

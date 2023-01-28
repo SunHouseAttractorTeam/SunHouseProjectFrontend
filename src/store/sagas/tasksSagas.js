@@ -38,6 +38,7 @@ export function* fetchTask({ payload: id }) {
     yield put(hideLoading())
   } catch (e) {
     yield put(fetchTaskFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -57,6 +58,7 @@ export function* createTask({ payload }) {
     })
   } catch (e) {
     yield put(createTaskFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -75,6 +77,7 @@ export function* editTask({ payload }) {
     })
   } catch (e) {
     yield put(editTaskFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -94,13 +97,14 @@ export function* deleteTask({ payload }) {
     })
   } catch (e) {
     yield put(deleteTaskFailure(e))
+    yield put(hideLoading())
   }
 }
 
-export function* sendTaskSaga({ payload: { courseId, taskId, task } }) {
+export function* sendTaskSaga({ payload: { courseId, taskId, file } }) {
   try {
     yield put(showLoading())
-    yield axiosApi.put(`/users/add_task?course=${courseId}&task=${taskId}`, task)
+    yield axiosApi.put(`/users/add_task?course=${courseId}&task=${taskId}`, file)
     yield put(sendTaskSuccess())
     yield put(hideLoading())
 
@@ -108,8 +112,8 @@ export function* sendTaskSaga({ payload: { courseId, taskId, task } }) {
       title: 'Задание успешно отправлено',
     })
   } catch (e) {
-    yield put(hideLoading())
     yield put(sendTaskFailure(e))
+    yield put(hideLoading())
   }
 }
 
