@@ -44,9 +44,8 @@ const CoursesCatalog = () => {
       </div>
     </div>
   )
-
   const sliceCourses = courses.slice(0, 5).map(item => (
-    <div className="slider__item-course" key={item.title}>
+    <div className="slider__item-course" key={item._id}>
       <CourseCard title={item.title} image={item.image} id={item._id} price={item.price} />
     </div>
   ))
@@ -60,7 +59,7 @@ const CoursesCatalog = () => {
           <h2 className="courses-section__title">Каталог курсов</h2>
           <div className="courses-section__cards">
             {courses.slice(0, 5).map(item => (
-              <CourseCard key={item.title} title={item.title} image={item.image} id={item._id} price={item.price} />
+              <CourseCard key={item._id}  title={item.title} image={item.image} id={item._id} price={item.price} />
             ))}
             {allCourses}
           </div>

@@ -1,6 +1,7 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import { hideLoading, showLoading } from 'react-redux-loading-bar'
 import axiosApi from '../../axiosApi'
+import Swal from "sweetalert2";
 import {
   createTeachersFailure,
   createTeachersRequest,
@@ -12,6 +13,14 @@ import {
   fetchTeachersRequest,
   fetchTeachersSuccess,
 } from '../actions/lendingTeachersActions'
+
+
+const Toast = Swal.mixin({
+  toast: true,
+  timer: 3000,
+  timerProgressBar: true,
+  showConfirmButton: false,
+})
 
 export function* fetchTeachersSaga() {
   try {
@@ -32,6 +41,10 @@ export function* createTeachersSaga({ payload: data }) {
     yield put(createTeachersSuccess())
     yield put(hideLoading())
     yield put(fetchTeachersRequest())
+    yield Toast.fire({
+      icon: 'success',
+      title: 'Создано',
+    })
   } catch (e) {
     yield put(hideLoading())
     yield put(createTeachersFailure(e))
