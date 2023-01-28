@@ -6,6 +6,10 @@
   font-size: 36px;
   line-height: 45px;
 
+  @media (max-width: 533px) {
+    font-size: 30px;
+  }
+
   &:before {
     content: '';
     display: inline-block;
@@ -13,5 +17,10 @@
     height: 37px;
     margin-right: 24px;
     background: url('../../../assets/icons/greenSpot.svg') 0 no-repeat;
+
+    @media (max-width: 533px) {
+      margin-right: 10px;
+      width: 65px;
+    }
   }
 }

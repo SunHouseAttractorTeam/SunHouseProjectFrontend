@@ -8,7 +8,8 @@ const Certificate = ({ course, datetime }) => (
       <img src={CertificateImage} className="certificate__image-block-img" alt="Eduspace" />
     </div>
     <div className="certificate__content-block">
-      <h3 className="certificate__content-block-title">Успешное прохождение курса {course}</h3>
+      {/* eslint-disable-next-line react/no-unescaped-entities */}
+      <h3 className="certificate__content-block-title">Успешное прохождение курса "{course}"</h3>
       <p className="certificate__content-block-datetime">{datetime}</p>
     </div>
   </div>
