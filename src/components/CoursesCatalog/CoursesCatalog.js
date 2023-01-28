@@ -50,7 +50,11 @@ const CoursesCatalog = () => {
     </div>
   ))
 
-  sliceCourses.push(<div className="slider__item-course">{allCourses}</div>)
+  sliceCourses.push(
+    <div key="all" className="slider__item-course">
+      {allCourses}
+    </div>,
+  )
 
   return (
     courses && (

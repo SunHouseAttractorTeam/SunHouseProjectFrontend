@@ -19,11 +19,15 @@ const TaskPassing = ({ setModuleId }) => {
   }, [dispatch, taskId])
 
   const lastFileChangeHandler = e => {
-    const file = e.target.files[0]
-    setLastFile(file)
+    const selectedFile = e.target.files[0]
+    setLastFile(selectedFile)
   }
   const sendHomework = () => {
-    dispatch(sendTaskRequest({ courseId, taskId, task: lastFile }))
+    const formData = new FormData()
+
+    formData.append('file', lastFile)
+
+    dispatch(sendTaskRequest({ courseId, taskId, file: formData }))
   }
 
   return (
