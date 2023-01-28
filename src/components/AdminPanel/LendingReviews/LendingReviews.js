@@ -54,7 +54,7 @@ const LendingReviews = () => {
             <div className="reviews__wrapper-inner2">
               <div className="reviews__input-label">
                 <img
-                  src={image || (reviewState.image ? `${apiUrl}/${reviewState.image}` : null)}
+                  src={image || (reviewState.image ? `${apiUrl}/uploads/${reviewState.image}` : null)}
                   alt={reviewState.title}
                   className="reviews__input-label-image"
                 />
