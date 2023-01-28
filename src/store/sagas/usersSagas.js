@@ -250,7 +250,7 @@ export function* checkUserTask({ payload: data }) {
   try {
     yield put(showLoading())
     yield axiosApi.patch(
-      `/users/${data.userId}/update_status?content=${data.taskId}&params=task&course=${data.courseId}&choice=${data.value}`,
+      `/users/${data.userId}/update_status?content=${data.taskId}&params=passed&course=${data.courseId}&choice=${data.value}`,
     )
     yield put(checkUserTaskSuccess())
     yield put(fetchCourseRequest(data.courseId))
@@ -301,6 +301,8 @@ export function* sendGoogleFormSaga({ payload }) {
         title: 'Сообщение не отправлено!',
       })
     }
+  }
+}
 
 export function* checkUserPassedCourseSaga({ payload: courseId }) {
   try {
