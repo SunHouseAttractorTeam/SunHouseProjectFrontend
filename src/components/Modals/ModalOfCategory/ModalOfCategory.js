@@ -1,7 +1,7 @@
 import React from 'react'
 import './ModalOfCategory.scss'
 
-const ModalOfCategory = ({ categories, setCategory, setToggleFilter }) => (
+const ModalOfCategory = ({ categories, setCategory }) => (
   <ul className="modal-category">
     <h4 className="modal-category__title">Категории:</h4>
     <div className="modal-category__block">
@@ -10,7 +10,6 @@ const ModalOfCategory = ({ categories, setCategory, setToggleFilter }) => (
           className="modal-category__list"
           onClick={() => {
             setCategory('all')
-            setToggleFilter(false)
           }}
         >
           Все
@@ -22,7 +21,6 @@ const ModalOfCategory = ({ categories, setCategory, setToggleFilter }) => (
             className="modal-category__list"
             onClick={() => {
               setCategory(category._id)
-              setToggleFilter(false)
             }}
           >
             {category.title}
