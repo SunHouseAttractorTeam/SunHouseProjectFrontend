@@ -5,7 +5,7 @@ import Modal from '../UI/Modal2/Modal'
 import FormArea from '../UI/Form/FormArea/FormArea'
 import './Rating.scss'
 import { inputChangeHandler } from '../UI/Form/Handlers/Handlers'
-import { createRatingRequest } from '../../store/actions/ratingActions'
+import { createRatingRequest } from '../../store/actions/coursesActions'
 
 const RatingBlock = ({ isOpen, courseId }) => {
   const dispatch = useDispatch()

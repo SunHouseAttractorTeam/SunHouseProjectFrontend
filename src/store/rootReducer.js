@@ -10,7 +10,6 @@ import notificationsSlice from './slices/notificationsSlice'
 import lendingReviewsSlice from './slices/lendingReviewsSlice'
 import modulesSlice from './slices/modulesSlice'
 import lendingTeachersSlice from './slices/lendingTeachersSlice'
-import ratingSlice from './slices/ratingSlise'
 
 const rootReducer = combineReducers({
   users: usersSlice.reducer,
@@ -24,7 +23,6 @@ const rootReducer = combineReducers({
   teachers: lendingTeachersSlice.reducer,
   modules: modulesSlice.reducer,
   loadingBar: loadingBarReducer,
-  rating: ratingSlice.reducer,
 })
 
 export default rootReducer
