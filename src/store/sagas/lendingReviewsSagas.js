@@ -1,6 +1,7 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import { hideLoading, showLoading } from 'react-redux-loading-bar'
 import axiosApi from '../../axiosApi'
+import Swal from "sweetalert2";
 import {
   createReviewFailure,
   createReviewRequest,
@@ -12,6 +13,14 @@ import {
   fetchReviewsRequest,
   fetchReviewsSuccess,
 } from '../actions/lendingReviewsActions'
+
+
+const Toast = Swal.mixin({
+  toast: true,
+  timer: 3000,
+  timerProgressBar: true,
+  showConfirmButton: false,
+})
 
 export function* fetchReviewsSaga() {
   try {
@@ -32,6 +41,11 @@ export function* createReviewSaga({ payload: reviewData }) {
     yield put(createReviewSuccess())
     yield put(hideLoading())
     yield put(fetchReviewsRequest())
+    yield Toast.fire({
+      icon: 'success',
+      title: 'Создано',
+    })
+
   } catch (e) {
     yield put(hideLoading())
     yield put(createReviewFailure(e))
