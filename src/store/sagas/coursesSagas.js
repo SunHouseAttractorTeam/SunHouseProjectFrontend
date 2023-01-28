@@ -45,6 +45,9 @@ import {
 } from '../actions/coursesActions'
 import { historyPush } from '../actions/historyActions'
 import { loginUserRequest } from '../actions/usersActions'
+import store from "../configureStore";
+import rootReducer from "../rootReducer";
+import {useSelector} from "react-redux";
 
 const Toast = Swal.mixin({
   toast: true,
@@ -154,15 +157,20 @@ export function* createCourse({ payload: courseData }) {
 export function* publishCourse({ payload: id }) {
   try {
     yield put(showLoading())
-
-    yield axiosApi.post(`/courses/${id}/publish`)
+    const response = yield axiosApi.post(`/courses/${id}/publish`)
     yield put(publishCourseSuccess())
     yield put(hideLoading())
     yield put(fetchCoursesRequest())
-
+    if (response.data.publish === true) {
     yield Toast.fire({
       title: 'Курс успешно опубликован',
     })
+    } else {
+      yield Toast.fire({
+        title: 'Курс снят с публикации',
+      })
+    }
+
   } catch (e) {
     yield put(publishCourseFailure(e))
     yield put(hideLoading())
