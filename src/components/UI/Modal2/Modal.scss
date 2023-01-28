@@ -4,7 +4,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
-  width: 38%;
+  width: 580px;
 
   &__inner {
     background: white;
@@ -44,4 +44,10 @@
   left: 50%;
   transform: translate(-50%, -50%);
   position: fixed;
+}
+
+@media (max-width: 610px) {
+  .modal {
+    width: 96%;
+  }
 }

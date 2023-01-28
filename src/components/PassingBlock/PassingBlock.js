@@ -61,9 +61,15 @@ const PassingBlock = ({ event }) => {
           }
         })}
         {event.file && (
-          <a className="download" href={`${apiUrl}/uploads/${event.file}`} target="_blank" rel="noreferrer">
-            Скачать файл
-          </a>
+          <div className="passing_block__files ">
+            <p className="passing_block__files-title ">Прикреплённые файлы</p>
+            <p className="passing_block__files-file">
+              Файл:{' '}
+              <a href={`${apiUrl}/uploads/${event.file}`} target="_blank" download rel="noreferrer">
+                {event.file}
+              </a>
+            </p>
+          </div>
         )}
       </div>
     </div>

@@ -8,6 +8,9 @@ import {
   banUnbanFailure,
   banUnbanRequest,
   banUnbanSuccess,
+  checkUserPassedCourseFailure,
+  checkUserPassedCourseRequest,
+  checkUserPassedCourseSuccess,
   checkUserTaskFailure,
   checkUserTaskRequest,
   checkUserTaskSuccess,
@@ -44,6 +47,7 @@ import {
   verifyUserSuccess,
 } from '../actions/usersActions'
 import { fetchCourseRequest } from '../actions/coursesActions'
+import { sendGFFailure, sendGFRequest, sendGFSuccess } from '../actions/sendGFActions'
 
 const Toast = Swal.mixin({
   toast: true,
@@ -93,6 +97,7 @@ export function* loginUserSaga({ payload }) {
       response = yield axiosApi.post(`/users/sessions`)
     }
     if (payload) {
+      Cookies.remove('jwt')
       response = yield axiosApi.post(`/users/sessions?path=${payload.path}`, payload.userData)
     }
     yield put(loginUserSuccess(response.data))
@@ -244,8 +249,6 @@ export function* editUserPasswordSaga({ payload: passwords }) {
 export function* checkUserTask({ payload: data }) {
   try {
     yield put(showLoading())
-
-    console.log(data)
     yield axiosApi.patch(
       `/users/${data.userId}/update_status?content=${data.taskId}&params=task&course=${data.courseId}&choice=${data.value}`,
     )
@@ -278,6 +281,45 @@ export function* updateUserContentStatusSaga({ payload: { userId, content, path 
   }
 }
 
+
+export function* sendGoogleFormSaga({ payload }) {
+  try {
+    yield put(showLoading())
+    const response = yield axiosApi.post('https://sheet.best/api/sheets/8a0fe7b6-7041-4649-a1fe-0e28f49780e4', payload)
+    yield put(sendGFSuccess(response.data))
+    yield Swal.fire({
+      toast: false,
+      icon: 'success',
+      title: `Сообщение отправлено!`,
+    })
+    yield put(hideLoading())
+  } catch (e) {
+    if (e.response && e.response.data) {
+      yield put(sendGFFailure(e.response.data))
+      yield Toast.fire({
+        icon: 'error',
+        title: 'Сообщение не отправлено!',
+      })
+    }
+
+export function* checkUserPassedCourseSaga({ payload: courseId }) {
+  try {
+    yield put(showLoading())
+    const response = yield axiosApi(`/users/passed_course?course=${courseId}`)
+    if (response.data.passed) {
+      yield put(checkUserPassedCourseSuccess(response.data.user))
+      yield put(historyPush(`/course/${courseId}/certificate`))
+    } else {
+      yield put(checkUserPassedCourseSuccess())
+      yield put(historyPush(`/course/${courseId}`))
+    }
+    yield put(hideLoading())
+  } catch (e) {
+    yield put(checkUserPassedCourseFailure(e))
+    yield put(hideLoading())
+  }
+}
+
 const userSagas = [
   takeEvery(loginUserRequest, loginUserSaga),
   takeEvery(banUnbanRequest, banUnbanSaga),
@@ -292,6 +334,8 @@ const userSagas = [
   takeEvery(passwordRequest, editUserPasswordSaga),
   takeEvery(checkUserTaskRequest, checkUserTask),
   takeEvery(updateUserContentStatusRequest, updateUserContentStatusSaga),
+  takeEvery(sendGFRequest, sendGoogleFormSaga),
+  takeEvery(checkUserPassedCourseRequest, checkUserPassedCourseSaga),
 ]
 
 export default userSagas

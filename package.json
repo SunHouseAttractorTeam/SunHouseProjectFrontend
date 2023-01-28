@@ -2,6 +2,9 @@
   "name": "sun-house-front",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "16.15.0"
+  },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.6",
     "@testing-library/jest-dom": "^5.16.5",
@@ -27,6 +30,7 @@
     "react-slick": "^0.29.0",
     "react-sweet-progress": "^1.1.2",
     "react-vkontakte-login": "^0.0.4",
+    "reactjs-popup": "^2.0.5",
     "reactjs-social-login": "^2.6.1",
     "redux": "^4.2.0",
     "redux-saga": "^1.2.1",

@@ -104,7 +104,7 @@ export function* deleteTest({ payload }) {
     yield put(hideLoading())
     yield put(historyPush(`/course/${courseId}/edit`))
 
-    yield Swal.fire({
+    yield Toast.fire({
       title: 'Тест успешно удален',
     })
   } catch (e) {
@@ -119,7 +119,7 @@ export function* sendTestAnswersSaga({ payload: { testId, state } }) {
     yield put(sendTestAnswersSuccess())
     yield put(hideLoading())
 
-    yield Swal.fire({
+    yield Toast.fire({
       title: 'Ответы успешно сохранены',
     })
   } catch (e) {
