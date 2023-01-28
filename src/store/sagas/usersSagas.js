@@ -301,6 +301,8 @@ export function* sendGoogleFormSaga({ payload }) {
         title: 'Сообщение не отправлено!',
       })
     }
+  }
+}
 
 export function* checkUserPassedCourseSaga({ payload: courseId }) {
   try {
@@ -339,3 +341,4 @@ const userSagas = [
 ]
 
 export default userSagas
+
