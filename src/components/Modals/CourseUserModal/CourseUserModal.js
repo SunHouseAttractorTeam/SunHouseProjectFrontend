@@ -16,6 +16,7 @@ const CourseUserModal = ({ setOpen, user }) => {
   const course = useSelector(state => state.courses.course)
   const userGeneral = useSelector(state => state.courses.user)
   const [showMore, setShowMore] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
   const [counts, setCounts] = useState({
     testCounts: 0,
     userPassed: 0,
@@ -23,11 +24,17 @@ const CourseUserModal = ({ setOpen, user }) => {
   let avatarImage = avatarStub
   let userAvatar = avatarStub
 
+  useEffect(() => {}, [])
+
   useEffect(() => {
     dispatch(getUserRequest({ courseId: course._id, userId: user._id }))
   }, [user, dispatch])
 
   useEffect(() => {
+    setCounts(prev => ({
+      ...prev,
+      testCounts: 0,
+    }))
     // eslint-disable-next-line no-unused-expressions
     course &&
       course.modules &&
@@ -38,15 +45,19 @@ const CourseUserModal = ({ setOpen, user }) => {
             if (content.type === 'test') {
               setCounts(prev => ({
                 ...prev,
-                testCounts: counts.testCounts + 1,
+                testCounts: prev.testCounts + 1,
               }))
             }
           })
         }
       })
-  }, [course])
+  }, [course, user])
 
   useEffect(() => {
+    setCounts(prev => ({
+      ...prev,
+      userPassed: 0,
+    }))
     // eslint-disable-next-line no-unused-expressions
     userGeneral &&
       userGeneral.tests &&
@@ -56,17 +67,17 @@ const CourseUserModal = ({ setOpen, user }) => {
         if (test.status === true) {
           setCounts(prev => ({
             ...prev,
-            userPassed: counts.userPassed + 1,
+            userPassed: prev.userPassed + 1,
           }))
         }
       })
-  }, [userGeneral])
+  }, [userGeneral, user])
 
-  console.log(counts)
   const handlerClick = () => {
     setOpen(false)
   }
   const onShowMoreBtn = () => {
+    setIsOpen(!isOpen)
     setShowMore(!showMore)
   }
 
@@ -111,10 +122,8 @@ const CourseUserModal = ({ setOpen, user }) => {
           <div className="container">
             <div className="course-user-modal__title__inner">
               <div className="course-user-modal__title__left">
-                <div>
-                  <div className="course-user-modal__title__left-image">
-                    <img src={avatarImage} alt={course.title} />
-                  </div>
+                <div className="course-user-modal__title__left-image">
+                  <img src={avatarImage} alt={course.title} />
                 </div>
                 <div className="course-user-modal__title__left-info">
                   <h2 className="course-user-modal__title__left-info-title">{course.title}</h2>
@@ -136,7 +145,7 @@ const CourseUserModal = ({ setOpen, user }) => {
                 <h4 className="course-user-modal__progress__text">{`${counts.userPassed}/${counts.testCounts}`}</h4>
               </div>
               <MainButton
-                className="course-user-modal__title__button WhiteButton"
+                className={`course-user-modal__title__button ${isOpen ? 'open' : ''} WhiteButton`}
                 type="button"
                 onClick={onShowMoreBtn}
                 text={

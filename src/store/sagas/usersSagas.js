@@ -8,6 +8,9 @@ import {
   banUnbanFailure,
   banUnbanRequest,
   banUnbanSuccess,
+  checkUserPassedCourseFailure,
+  checkUserPassedCourseRequest,
+  checkUserPassedCourseSuccess,
   checkUserTaskFailure,
   checkUserTaskRequest,
   checkUserTaskSuccess,
@@ -94,6 +97,7 @@ export function* loginUserSaga({ payload }) {
       response = yield axiosApi.post(`/users/sessions`)
     }
     if (payload) {
+      Cookies.remove('jwt')
       response = yield axiosApi.post(`/users/sessions?path=${payload.path}`, payload.userData)
     }
     yield put(loginUserSuccess(response.data))
@@ -277,6 +281,7 @@ export function* updateUserContentStatusSaga({ payload: { userId, content, path 
   }
 }
 
+
 export function* sendGoogleFormSaga({ payload }) {
   try {
     yield put(showLoading())
@@ -296,6 +301,22 @@ export function* sendGoogleFormSaga({ payload }) {
         title: 'Сообщение не отправлено!',
       })
     }
+
+export function* checkUserPassedCourseSaga({ payload: courseId }) {
+  try {
+    yield put(showLoading())
+    const response = yield axiosApi(`/users/passed_course?course=${courseId}`)
+    if (response.data.passed) {
+      yield put(checkUserPassedCourseSuccess(response.data.user))
+      yield put(historyPush(`/course/${courseId}/certificate`))
+    } else {
+      yield put(checkUserPassedCourseSuccess())
+      yield put(historyPush(`/course/${courseId}`))
+    }
+    yield put(hideLoading())
+  } catch (e) {
+    yield put(checkUserPassedCourseFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -314,6 +335,7 @@ const userSagas = [
   takeEvery(checkUserTaskRequest, checkUserTask),
   takeEvery(updateUserContentStatusRequest, updateUserContentStatusSaga),
   takeEvery(sendGFRequest, sendGoogleFormSaga),
+  takeEvery(checkUserPassedCourseRequest, checkUserPassedCourseSaga),
 ]
 
 export default userSagas

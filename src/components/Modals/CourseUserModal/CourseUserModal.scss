@@ -2,6 +2,16 @@
 
 .course-user-modal {
 
+  &__backdrop {
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
+  }
+
   &__header {
     &__avatar {
       width: 80px;
@@ -68,13 +78,20 @@
 
     &__button {
       padding: 0;
+      transform: rotate(-90deg);
+      box-shadow: none;
+
+      &.open {
+        transform: rotate(0);
+      }
     }
 
     &__inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 2px solid $whiteBorderColor;
+      flex-wrap: wrap;
+      border-bottom: 2px solid $darkGreyColor;
       padding-bottom: 32px;
       margin-top: 20px;
       margin-bottom: 32px;
@@ -83,6 +100,7 @@
     &__left {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
 
       &-image {
         width: 60px;
@@ -102,7 +120,7 @@
       &-info {
         &-title {
           font-weight: 700;
-          font-size: 14px;
+          font-size: 16px;
         }
       }
     }

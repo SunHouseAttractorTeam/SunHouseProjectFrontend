@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { sendGFRequest } from '../../store/actions/sendGFActions'
 import { inputChangeHandler, submitFormHandler } from '../UI/Form/Handlers/Handlers'
@@ -30,6 +30,10 @@ const TeachersPage = () => {
     submitFormHandler(e, dispatch(sendGFRequest({ ...data })))
     setShow(false)
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <div className="teachers-page">
@@ -105,7 +109,7 @@ const TeachersPage = () => {
                 rows={5}
                 className="inputModal teachers-page__modal_block-input"
               />
-              <MainButton className="GreenButton" type="submit" text="оправить" />
+              <MainButton className="GreenButton" type="submit" text="отправить" />
             </form>
           </div>
         </Modal>
