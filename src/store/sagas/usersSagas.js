@@ -255,6 +255,17 @@ export function* checkUserTask({ payload: data }) {
     yield put(checkUserTaskSuccess())
     yield put(fetchCourseRequest(data.courseId))
     yield put(hideLoading())
+      if (data.value) {
+        yield Toast.fire({
+          icon: 'success',
+          title: 'Одобрено',
+        })
+      } else {
+        yield Toast.fire({
+          icon: 'success',
+          title: 'Не одобрено',
+        })
+      }
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(checkUserTaskFailure(e.response.data))
