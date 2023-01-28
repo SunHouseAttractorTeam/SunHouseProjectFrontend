@@ -58,10 +58,12 @@ const UserMenu = ({ user }) => {
   return (
     <div className="user-menu">
       {/* <Backdrop show={menu} clicked={clickHandler} classname="user-menu__backdrop" /> */}
+      {user?.role !== 'admin' ? (
+        <Link className="user-menu__notification" to="/user/notifications">
+          <i className="user-menu__icon"> {icon} </i>
+        </Link>
+      ) : null}
 
-      <Link className="user-menu__notification" to="/user/notifications">
-        <i className="user-menu__icon"> {icon} </i>
-      </Link>
       <button type="button" className="TransparentButton user-menu__button" onClick={clickHandler}>
         <Avatar user={user} className="user-menu__img" />
       </button>

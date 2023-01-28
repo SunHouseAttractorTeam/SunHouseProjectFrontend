@@ -181,10 +181,31 @@
 }
 
 @media (max-width: 600px) {
-  .reviews__input {
-    width: 80%;
-  }
-  .reviews__textarea {
-    width: 80%;
+  .reviews {
+    &__wrapper {
+      &-inner2 {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+      }
+    }
+    &__input {
+      width: 80%;
+    }
+    &__textarea {
+      width: 80%;
+    &-wrapper {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+      &-counter {
+        right: 30%;
+      }
+      &::placeholder {
+        font-size: 15px;
+      }
+    }
   }
 }

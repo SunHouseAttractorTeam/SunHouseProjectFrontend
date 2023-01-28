@@ -30,7 +30,7 @@ const AdminPanel = () => {
             <div className="profile__sidebar-bottom-block">
               <AdminPanelBottom />
             </div>
-            {toggle === true && <AdminPanelBottom />}
+            <div className="profile__sidebar-bottom-burger">{toggle === true && <AdminPanelBottom />}</div>
           </div>
           <div className="profile__right">
             <Switch>
