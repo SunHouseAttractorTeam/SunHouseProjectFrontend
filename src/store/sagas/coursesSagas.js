@@ -45,9 +45,6 @@ import {
 } from '../actions/coursesActions'
 import { historyPush } from '../actions/historyActions'
 import { loginUserRequest } from '../actions/usersActions'
-import store from "../configureStore";
-import rootReducer from "../rootReducer";
-import {useSelector} from "react-redux";
 
 const Toast = Swal.mixin({
   toast: true,
