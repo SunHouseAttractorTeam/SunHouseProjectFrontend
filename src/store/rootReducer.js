@@ -10,6 +10,7 @@ import notificationsSlice from './slices/notificationsSlice'
 import lendingReviewsSlice from './slices/lendingReviewsSlice'
 import modulesSlice from './slices/modulesSlice'
 import lendingTeachersSlice from './slices/lendingTeachersSlice'
+import SendGFSlice from './slices/sendGFSlice'
 
 const rootReducer = combineReducers({
   users: usersSlice.reducer,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   teachers: lendingTeachersSlice.reducer,
   modules: modulesSlice.reducer,
   loadingBar: loadingBarReducer,
+  GFState: SendGFSlice.reducer,
 })
 
 export default rootReducer
