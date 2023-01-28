@@ -39,17 +39,15 @@ const PassingBlock = ({ event }) => {
               // eslint-disable-next-line no-case-declarations
               const link = content.video.replace('watch?v=', 'embed/')
               return (
-                <>
-                  <iframe
-                    key={index}
-                    width="730"
-                    height="400"
-                    src={link}
-                    title="YouTube video player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </>
+                <iframe
+                  key={index}
+                  width="730"
+                  height="400"
+                  src={link}
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
               )
             case 'audio':
               return (

@@ -97,10 +97,10 @@ export function* deleteTask({ payload }) {
   }
 }
 
-export function* sendTaskSaga({ payload: { courseId, taskId, task } }) {
+export function* sendTaskSaga({ payload: { courseId, taskId, file } }) {
   try {
     yield put(showLoading())
-    yield axiosApi.put(`/users/add_task?course=${courseId}&task=${taskId}`, task)
+    yield axiosApi.put(`/users/add_task?course=${courseId}&task=${taskId}`, file)
     yield put(sendTaskSuccess())
     yield put(hideLoading())
 
