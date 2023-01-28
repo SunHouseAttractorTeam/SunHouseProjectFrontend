@@ -27,7 +27,7 @@ const CertificateObtain = () => {
     course && (
       <div className="container">
         <div className="certificate-obtain">
-          <RatingBlock isOpen={isOpenModal} />
+          <RatingBlock isOpen={isOpenModal} courseId={course._id} />
           <h4 className="certificate-obtain__title">{`Поздравляю, вы успешно окончили курс "${course.title}"`}</h4>
           <Card className="certificate-obtain__certificate WhiteCard">
             <a

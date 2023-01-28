@@ -7,7 +7,7 @@ import './Rating.scss'
 import { inputChangeHandler } from '../UI/Form/Handlers/Handlers'
 import { createRatingRequest } from '../../store/actions/ratingActions'
 
-const RatingBlock = ({ isOpen }) => {
+const RatingBlock = ({ isOpen, courseId }) => {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
   const [reviewData, setReviewData] = useState({
@@ -29,9 +29,12 @@ const RatingBlock = ({ isOpen }) => {
   const submitFormHandler = () => {
     dispatch(
       createRatingRequest({
-        rating: reviewData.rating,
-        instagram: reviewData.instagram,
-        review: reviewData.review,
+        courseId,
+        data: {
+          rating: reviewData.rating,
+          instagram: reviewData.instagram,
+          review: reviewData.review,
+        },
       }),
     )
     setOpen(false)
@@ -75,7 +78,6 @@ const RatingBlock = ({ isOpen }) => {
                 name="instagram"
                 id="instagram"
                 value={reviewData.instagram}
-                required
                 onChange={e => inputChangeHandler(e, setReviewData)}
               />
             </label>
@@ -83,7 +85,6 @@ const RatingBlock = ({ isOpen }) => {
               <label htmlFor="review" className="rating-block__modal-field">
                 <span className="rating-block__modal-field-label">Ваш отзыв</span>
                 <FormArea
-                  required
                   className="rating-block__textarea"
                   name="review"
                   id="review"
