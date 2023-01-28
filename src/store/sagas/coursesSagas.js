@@ -159,15 +159,14 @@ export function* publishCourse({ payload: id }) {
     yield put(hideLoading())
     yield put(fetchCoursesRequest())
     if (response.data.publish === true) {
-    yield Toast.fire({
-      title: 'Курс успешно опубликован',
-    })
+      yield Toast.fire({
+        title: 'Курс успешно опубликован',
+      })
     } else {
       yield Toast.fire({
         title: 'Курс снят с публикации',
       })
     }
-
   } catch (e) {
     yield put(publishCourseFailure(e))
     yield put(hideLoading())
