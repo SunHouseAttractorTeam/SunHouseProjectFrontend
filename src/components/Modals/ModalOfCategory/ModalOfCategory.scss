@@ -1,7 +1,7 @@
 .modal-category {
-  padding: 10px;
+  padding: 24px 0 24px 24px;
   background: #FFFFFF;
-  width: 266px;
+  width: 334px;
   border-radius: 16px;
   box-shadow: 0 0 9px grey, 0 0 9px grey;
 
@@ -48,4 +48,12 @@
       background: url("../../../assets/icons/listIconActive.png") no-repeat;
     }
   }
+}
+
+.popup-content {
+  left: 59.5% !important;
+}
+
+.popup-content2-content {
+  left: 63% !important;
 }
