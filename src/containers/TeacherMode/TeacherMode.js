@@ -28,7 +28,7 @@ const TeacherMode = () => {
 
   return (
     <div className="teacher-mode">
-      <Title>Режим преподователя</Title>
+      <Title>Режим преподавателя</Title>
       <div className="teacher-mode__cards">
         <button type="button" className="teacher-mode__button" onClick={openModal}>
           <div className="teacher-mode__button-top">
@@ -45,7 +45,13 @@ const TeacherMode = () => {
         </button>
         {courses.length > 0 &&
           courses.map(course => (
-            <CourseCard key={course._id} title={course.title} image={course.image} id={course._id} />
+            <CourseCard
+              key={course._id}
+              title={course.title}
+              image={course.image}
+              id={course._id}
+              price={course.price}
+            />
           ))}
       </div>
       {show && <CreateCourseModal setOpen={setShow} />}

@@ -12,8 +12,8 @@ export function* createModule({ payload }) {
     yield put(showLoading())
     yield axiosApi.post(`/modules?course=${id}`, moduleData)
     yield put(createModuleSuccess())
-    yield put(hideLoading())
     yield put(fetchCourseRequest(id))
+    yield put(hideLoading())
 
     yield Swal.fire({
       toast: true,
@@ -25,6 +25,7 @@ export function* createModule({ payload }) {
     })
   } catch (e) {
     yield put(createModuleFailure(e))
+    yield put(hideLoading())
   }
 }
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { getFieldError, inputChangeHandler, submitFormHandler } from '../UI/Form/Handlers/Handlers'
+import { sendGFRequest } from '../../store/actions/sendGFActions'
+import { inputChangeHandler, submitFormHandler } from '../UI/Form/Handlers/Handlers'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import Card from '../UI/Cards/Card/Card'
@@ -14,15 +15,19 @@ const TeachersPage = () => {
   const dispatch = useDispatch()
   const [show, setShow] = useState(false)
   const [data, setData] = useState({
-    title: '',
+    name: '',
+    surname: '',
+    email: '',
+    tel: '',
     description: '',
   })
 
   const openToModalWindow = () => {
     setShow(true)
   }
-  const sendDataHandler = e => {
-    // submitFormHandler(e, dispatch('сюда Request'({ ...data })))
+
+  const submitAndCloseModal = e => {
+    submitFormHandler(e, dispatch(sendGFRequest({ ...data })))
     setShow(false)
   }
 
@@ -62,16 +67,38 @@ const TeachersPage = () => {
       </div>
       {show ? (
         <Modal setOpen={() => setShow(false)}>
-          <Card>
-            <span className="title teachers-page_title">Преподавателям</span>
-            <form className="content__modal__form" onSubmit={sendDataHandler}>
+          <div className="teachers-page__modal_block">
+            <strong className="teachers-page__modal_block-title">Введите информацию</strong>
+            <form className="content__modal__form" onSubmit={submitAndCloseModal}>
               <FormInput
                 onChange={e => inputChangeHandler(e, setData)}
-                name="title"
-                placeholder="Введите название"
-                value={data.title}
-                className="inputModal"
-                // error={getFieldError(error, 'title')}
+                name="name"
+                placeholder="Введите имя"
+                value={data.name}
+                className="inputModal teachers-page__modal_block-input"
+              />
+              <FormInput
+                onChange={e => inputChangeHandler(e, setData)}
+                name="surname"
+                placeholder="Введите фамилию"
+                value={data.surname}
+                className="inputModal teachers-page__modal_block-input"
+              />
+              <FormInput
+                onChange={e => inputChangeHandler(e, setData)}
+                type="text"
+                name="email"
+                placeholder="Введите email"
+                value={data.email}
+                className="inputModal teachers-page__modal_block-input"
+              />
+              <FormInput
+                onChange={e => inputChangeHandler(e, setData)}
+                type="tel"
+                name="tel"
+                placeholder="Введите телефон"
+                value={data.tel}
+                className="inputModal teachers-page__modal_block-input"
               />
               <FormArea
                 onChange={e => inputChangeHandler(e, setData)}
@@ -80,11 +107,11 @@ const TeachersPage = () => {
                 value={data.description}
                 cols={5}
                 rows={5}
-                // error={getFieldError(error, 'description')}
+                className="inputModal teachers-page__modal_block-input"
               />
               <MainButton className="GreenButton" type="submit" text="отправить" />
             </form>
-          </Card>
+          </div>
         </Modal>
       ) : null}
       <Footer />

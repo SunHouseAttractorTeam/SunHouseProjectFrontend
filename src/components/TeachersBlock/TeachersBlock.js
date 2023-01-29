@@ -49,7 +49,7 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBl
   const ChangeSearchItem = item => {
     setTeacher(prev => ({
       ...prev,
-      user: item,
+      user: { _id: item.id, name: item.name, username: item.username, avatar: item.avatar },
       description: prev.description,
     }))
   }
@@ -75,10 +75,16 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBl
     }))
   }
 
+  const deleteTeacher = index => {
+    newTeachers.splice(index, 1)
+
+    onVisibilityBlock('lendingTeachers', newTeachers)
+  }
+
   if (searchTeachers) {
     searchTeachers.map(user =>
       currentSearchTeachers.push({
-        _id: user._id,
+        id: user._id,
         name: user.email,
         avatar: user.avatar,
         username: user.username,
@@ -101,18 +107,21 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBl
       {teacherCheck ? (
         <>
           <CustomSlider response={sliderSettings}>
+            <button type="button" className="teachers_block__btn-plus" onClick={handlerClick}>
+              <div className="teachers_block__btn-plus-icon">+</div>
+              <span className="teachers_block__btn-plus-text">Добавить учителя...</span>
+            </button>
             {teachers.length !== 0 &&
-              teachers.map(teacherObj => (
+              teachers.map((teacherObj, index) => (
                 <TeacherCard
-                  key={teacherObj._id || teacherObj.name}
+                  key={(teacherObj.user && teacherObj.user._id) || teacherObj.name}
                   user={teacherObj.user}
                   description={teacherObj.description}
+                  index={index}
+                  deleteCard={() => deleteTeacher(index)}
                 />
               ))}
           </CustomSlider>
-          <button type="button" className="teachers_block__btn-plus" onClick={handlerClick}>
-            +
-          </button>
           {open && (
             <Modal setOpen={setOpen}>
               <form onSubmit={updateDescription}>
@@ -130,6 +139,7 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBl
                     value={teacher.description}
                     onChange={inputChangeHandler}
                     placeholder="Введите описание..."
+                    required
                   />
                   <button className="block__modal-btn" type="submit">
                     Сохранить

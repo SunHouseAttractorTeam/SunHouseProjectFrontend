@@ -1,5 +1,6 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import { hideLoading, showLoading } from 'react-redux-loading-bar'
+import Swal from 'sweetalert2'
 import axiosApi from '../../axiosApi'
 import {
   createNotificationFailure,
@@ -22,6 +23,13 @@ import {
   viewNotificationsSuccess,
 } from '../actions/notificationsActions'
 
+const Toast = Swal.mixin({
+  toast: true,
+  timer: 3000,
+  timerProgressBar: true,
+  showConfirmButton: false,
+})
+
 export function* fetchNotifications({ payload: userId }) {
   try {
     yield put(showLoading())
@@ -30,6 +38,7 @@ export function* fetchNotifications({ payload: userId }) {
     yield put(hideLoading())
   } catch (e) {
     yield put(fetchNotificationsFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -41,6 +50,7 @@ export function* fetchNotification({ payload: id }) {
     yield put(hideLoading())
   } catch (e) {
     yield put(fetchNotificationFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -51,8 +61,13 @@ export function* createNotification({ payload: notificationData }) {
       yield axiosApi.post(`/notifications`, notificationData)
       yield put(createNotificationSuccess())
       yield put(hideLoading())
+      yield Toast.fire({
+        icon: 'success',
+        title: 'Создано',
+      })
     } catch (e) {
       yield put(createNotificationFailure(e))
+      yield put(hideLoading())
     }
   } else {
     try {
@@ -62,6 +77,7 @@ export function* createNotification({ payload: notificationData }) {
       yield put(hideLoading())
     } catch (e) {
       yield put(createNotificationFailure(e))
+      yield put(hideLoading())
     }
   }
 }
@@ -74,6 +90,7 @@ export function* viewNotification({ payload }) {
     yield put(hideLoading())
   } catch (e) {
     yield put(viewNotificationsFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -87,6 +104,7 @@ export function* editNotification({ payload }) {
     yield put(hideLoading())
   } catch (e) {
     yield put(editNotificationFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -100,6 +118,7 @@ export function* deleteNotification({ payload }) {
     yield put(hideLoading())
   } catch (e) {
     yield put(deleteNotificationFailure(e))
+    yield put(hideLoading())
   }
 }
 

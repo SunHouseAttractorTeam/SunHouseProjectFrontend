@@ -12,6 +12,8 @@ const ImageForm = ({ onChangeAvatar, avatar }) => {
   if (avatar) {
     if (avatar.match(/http/) || avatar.match(/https/)) {
       avatarImg = avatar
+    } else if (avatar.includes('fixtures')) {
+      avatarImg = `${apiUrl}/${avatar}`
     } else {
       avatarImg = `${apiUrl}/uploads/${avatar}`
     }
@@ -31,7 +33,7 @@ const ImageForm = ({ onChangeAvatar, avatar }) => {
 
   return (
     <div className="image-block">
-      <ProfileDescription title="Укажите местоположение" text="Разнообразный и богатый опыт сложившаяся структура" />
+      <ProfileDescription title="Фото аккаунта" text="Разнообразный и богатый опыт сложившаяся структура" />
       <div className="image-block__form">
         <div className="image-block__form-image-block">
           <img src={avatarImg} alt="Avatar" />

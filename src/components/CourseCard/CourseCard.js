@@ -19,7 +19,7 @@ const CourseCard = ({ id, title, image, price }) => {
     <Link className="course-card" to={`/course/${id}`}>
       <img src={courseImage} alt={title} className="course-card__image" />
       <h5 className="course-card__title">{title}</h5>
-      {price && <span className="course-card__price">{price} сом</span>}
+      {price !== undefined && <span className="course-card__price">{price ? `${price} сом` : 'Бесплатно'}</span>}
     </Link>
   )
 }
