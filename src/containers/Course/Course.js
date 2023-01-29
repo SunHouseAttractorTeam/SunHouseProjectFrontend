@@ -10,9 +10,8 @@ import CourseSettings from './CourseSettings/CourseSettings'
 import CourseEdit from './CourseEdit/CourseEdit'
 import CoursePassing from '../../components/CoursePassing/CoursePassing'
 import Footer from '../../components/Footer/Footer'
-import CertificateObtain from "../../components/CertificateObtain/CertificateObtain";
+import CertificateObtain from '../../components/CertificateObtain/CertificateObtain'
 import './Course.scss'
-import CourseCertificate from '../../components/CourseCertificate/CourseCertificate'
 import CourseBanner from '../../components/CourseBanner/CourseBanner'
 
 const Course = () => {

@@ -22,7 +22,7 @@ const CoursesCatalog = () => {
   const courses = useSelector(state => state.courses.courses)
 
   useEffect(() => {
-    dispatch(fetchCoursesRequest({ sort:'rating', category:'all' }))
+    dispatch(fetchCoursesRequest({ sort: 'rating', category: 'all' }))
 
     return () => {
       dispatch(clearCourses())
