@@ -2,7 +2,7 @@
 
 .review_card {
   position: relative;
-  width: 100%;
+  max-width: 580px;
   height: 246px;
   background: $totalWhiteColor;
   padding: 32px;
@@ -94,7 +94,8 @@
 
 @media (max-width: 1013px) {
   .review_card {
-    max-width: 80%;
+    margin-inline: 20px;
     height: fit-content;
+    padding-bottom: 40px;
   }
 }

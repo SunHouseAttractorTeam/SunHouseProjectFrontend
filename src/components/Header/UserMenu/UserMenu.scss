@@ -38,6 +38,10 @@
     display: flex;
     flex-direction: column;
 
+    @include xfl {
+      left: -210%;
+    }
+
     &-item {
       margin-bottom: 3px;
       border-radius: 15px;
