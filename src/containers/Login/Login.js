@@ -40,6 +40,7 @@ const Login = () => {
               endPoint="/registration"
               linkToPage="Зарегистрируйтесь"
               forgotLink="Забыли пароль?"
+              disabled={!user.email || !user.password}
             />
             <div className="formBlock">
               <p className="formBlock_content">

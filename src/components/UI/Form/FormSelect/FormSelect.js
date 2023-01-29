@@ -4,7 +4,7 @@ import '../FormInput/FormInput.scss'
 const FormSelect = ({ items, onChange, error }) => (
   <div>
     <select onChange={onChange} name="category" className={error ? 'InputStyle error' : 'InputStyle'}>
-      <option>Выберите категорию курса</option>
+      <option value="">Выберите категорию курса</option>
       {items.map(item => (
         <option key={item._id} value={item._id}>
           {item.title}

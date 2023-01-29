@@ -11,7 +11,6 @@ import './ModalTaskSetting.scss'
 const ModalTaskSetting = ({ setOpen, courseId, moduleId, setModalType, error }) => {
   const dispatch = useDispatch()
   const [taskData, setTaskData] = useState({ title: '' })
-
   const handlerClick = e => {
     submitFormHandler(e, dispatch(createTaskRequest({ courseId, moduleId, taskData })))
     setOpen(false)
@@ -41,6 +40,7 @@ const ModalTaskSetting = ({ setOpen, courseId, moduleId, setModalType, error }) 
                 onClick={() => setModalType('content')}
               />
               <MainButton
+                disabled={!taskData.title}
                 className="GreenButton content__btn-two"
                 text="Добавить задание"
                 onClick={e => handlerClick(e)}

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import './CourseUserModal.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar'
 import { Progress } from 'react-sweet-progress'
-import Modal from '../../UI/Modal2/Modal'
-import avatarStub from '../../../assets/icons/avatarStub.svg'
 import { apiUrl } from '../../../config'
-import MainButton from '../../UI/MainButton/MainButton'
-import 'react-sweet-progress/lib/style.css'
 import { getUserRequest } from '../../../store/actions/coursesActions'
+import Modal from '../../UI/Modal2/Modal'
+import MainButton from '../../UI/MainButton/MainButton'
 import TestItem from '../../TestItem/TestItem'
+import avatarStub from '../../../assets/icons/avatarStub.svg'
+import 'react-sweet-progress/lib/style.css'
+import './CourseUserModal.scss'
 
 const CourseUserModal = ({ setOpen, user }) => {
   const dispatch = useDispatch()

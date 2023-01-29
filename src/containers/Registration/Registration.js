@@ -39,6 +39,7 @@ const Registration = () => {
               error={error}
               endPoint="/login"
               linkToPage="Войти"
+              disabled={!user.email || !user.password || !user.username}
             />
             <div className="formBlock">
               <p className="formBlock_content">Добро пожаловать в Eduspace</p>

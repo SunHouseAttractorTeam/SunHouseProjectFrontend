@@ -11,7 +11,6 @@ import './CreateLessonModal.scss'
 const CreateLessonModal = ({ setOpen, courseId, moduleId, setModalType, error }) => {
   const dispatch = useDispatch()
   const [lessonData, setLessonData] = useState({ title: '' })
-
   const handlerClick = e => {
     submitFormHandler(e, dispatch(createLessonRequest({ courseId, moduleId, lessonData })))
     setOpen(false)
@@ -42,6 +41,7 @@ const CreateLessonModal = ({ setOpen, courseId, moduleId, setModalType, error })
                 onClick={() => setModalType('content')}
               />
               <MainButton
+                disabled={!lessonData.title}
                 className="GreenButton  content__btn-two"
                 text="Создать занятие"
                 onClick={e => handlerClick(e)}

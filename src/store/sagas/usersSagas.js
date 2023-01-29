@@ -281,7 +281,6 @@ export function* updateUserContentStatusSaga({ payload: { userId, content, path 
   }
 }
 
-
 export function* sendGoogleFormSaga({ payload }) {
   try {
     yield put(showLoading())
@@ -301,6 +300,8 @@ export function* sendGoogleFormSaga({ payload }) {
         title: 'Сообщение не отправлено!',
       })
     }
+  }
+}
 
 export function* checkUserPassedCourseSaga({ payload: courseId }) {
   try {
