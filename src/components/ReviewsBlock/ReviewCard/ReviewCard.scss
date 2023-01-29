@@ -77,7 +77,6 @@
   .review_card {
     width: inherit;
     margin-inline: 20px;
-    height: fit-content;
     padding-bottom: 40px;
 
     &_content {
@@ -95,7 +94,6 @@
 @media (max-width: 1013px) {
   .review_card {
     margin-inline: 20px;
-    height: fit-content;
     padding-bottom: 40px;
   }
 }
