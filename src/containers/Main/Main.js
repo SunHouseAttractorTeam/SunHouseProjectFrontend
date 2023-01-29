@@ -21,7 +21,7 @@ const Main = () => (
       <LendingTeacherBlock />
     </div>
     <Partners />
-    <div id="review" className="review-block">
+    <div id="review" className="container">
       <ReviewsBlock />
     </div>
     <Footer />
