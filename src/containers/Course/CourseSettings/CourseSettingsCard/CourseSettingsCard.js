@@ -9,13 +9,9 @@ const CourseSettingsCard = ({ course, setCourse }) => {
 
   useEffect(() => {
     if (course.image) {
-      if (course.image.includes('fixtures')) {
-        setImage(`${apiUrl}/${course.image}`)
-      } else {
-        setImage(`${apiUrl}/uploads/${course.image}`)
-      }
+      setImage(`${apiUrl}/uploads/${course.image}`)
     }
-  }, [])
+  }, [course])
 
   const changeInputState = e => {
     setImage(URL.createObjectURL(e.target.files[0]))

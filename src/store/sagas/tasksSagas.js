@@ -21,6 +21,7 @@ import {
 } from '../actions/tasksActions'
 import { fetchCourseRequest } from '../actions/coursesActions'
 import { historyPush } from '../actions/historyActions'
+import { loginUserSuccess } from '../actions/usersActions'
 
 const Toast = Swal.mixin({
   toast: true,
@@ -38,6 +39,7 @@ export function* fetchTask({ payload: id }) {
     yield put(hideLoading())
   } catch (e) {
     yield put(fetchTaskFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -57,6 +59,7 @@ export function* createTask({ payload }) {
     })
   } catch (e) {
     yield put(createTaskFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -75,6 +78,7 @@ export function* editTask({ payload }) {
     })
   } catch (e) {
     yield put(editTaskFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -94,22 +98,24 @@ export function* deleteTask({ payload }) {
     })
   } catch (e) {
     yield put(deleteTaskFailure(e))
+    yield put(hideLoading())
   }
 }
 
 export function* sendTaskSaga({ payload: { courseId, taskId, file } }) {
   try {
     yield put(showLoading())
-    yield axiosApi.put(`/users/add_task?course=${courseId}&task=${taskId}`, file)
+    const response = yield axiosApi.put(`/users/add_task?course=${courseId}&task=${taskId}`, file)
     yield put(sendTaskSuccess())
+    yield put(loginUserSuccess(response.data))
     yield put(hideLoading())
 
     yield Toast.fire({
       title: 'Задание успешно отправлено',
     })
   } catch (e) {
-    yield put(hideLoading())
     yield put(sendTaskFailure(e))
+    yield put(hideLoading())
   }
 }
 

@@ -173,6 +173,17 @@ const coursesSlice = createSlice({
     clearCourses(state) {
       state.courses = []
     },
+    createRatingRequest(state) {
+      state.loading = true
+      state.error = null
+    },
+    createRatingSuccess(state) {
+      state.loading = false
+    },
+    createRatingFailure(state, action) {
+      state.loading = true
+      state.error = action.payload
+    },
   },
 })
 

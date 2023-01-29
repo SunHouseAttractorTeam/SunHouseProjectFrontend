@@ -1,23 +1,40 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import Swal from 'sweetalert2'
 import MainButton from '../UI/MainButton/MainButton'
 import { sendTestAnswersRequest } from '../../store/actions/testsActions'
 
 const PassingTest = ({ test }) => {
   const dispatch = useDispatch()
+  const user = useSelector(state => state.users.user)
 
   const [state, setState] = useState([])
+  const [disable, setDisable] = useState(false)
 
   useEffect(() => {
-    if (test) {
-      setState(
-        test.questions.map(q => ({
-          question: q._id,
-          answer: null,
-        })),
-      )
+    setDisable(false)
+
+    if (user) {
+      const userAnswers = user.tests.find(elem => elem.test === test?._id)
+
+      if (userAnswers.answers.length) {
+        const newState = userAnswers.answers.map(obj => ({
+          question: obj.questionId,
+          answer: obj.answerId,
+        }))
+
+        setDisable(true)
+        setState(newState)
+      } else {
+        setState(
+          test.questions.map(q => ({
+            question: q._id,
+            answer: null,
+          })),
+        )
+      }
     }
-  }, [test])
+  }, [test, user])
 
   const handleChoiceAnswer = (questionId, answerId) => {
     setState(prevState => {
@@ -38,7 +55,19 @@ const PassingTest = ({ test }) => {
 
   const handleSaveAnswers = e => {
     e.preventDefault()
-    dispatch(sendTestAnswersRequest({ testId: test._id, state }))
+
+    if (state.find(obj => obj.answer === null)) {
+      return Swal.fire({
+        toast: true,
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        icon: 'error',
+        title: `Вы не ответили на все вопросы!`,
+      })
+    }
+
+    return dispatch(sendTestAnswersRequest({ testId: test._id, state }))
   }
 
   return (
@@ -74,6 +103,7 @@ const PassingTest = ({ test }) => {
                     checked={state[index]?.answer === ans._id}
                     onChange={() => handleChoiceAnswer(question._id, ans._id)}
                     name="status"
+                    disabled={disable}
                   />
                   {state[index]?.answer === ans._id ? (
                     <i>
@@ -100,7 +130,12 @@ const PassingTest = ({ test }) => {
           </ol>
         </div>
       ))}
-      <MainButton className="GreenButton passing-test__save-button" text="Сохранить" onClick={handleSaveAnswers} />
+      <MainButton
+        className="GreenButton passing-test__save-button"
+        text="Сохранить"
+        onClick={handleSaveAnswers}
+        disabled={disable}
+      />
     </div>
   )
 }

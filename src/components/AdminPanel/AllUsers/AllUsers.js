@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import './AllUsers.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import Title from '../../UI/Title/Title'
 import { banUnbanRequest, deleteUserRequest, getAllUsersRequest } from '../../../store/actions/usersActions'
@@ -7,6 +6,7 @@ import Modal from '../../UI/Modal2/Modal'
 import MainButton from '../../UI/MainButton/MainButton'
 import FormInput from '../../UI/Form/FormInput/FormInput'
 import { inputChangeHandler } from '../../UI/Form/Handlers/Handlers'
+import './AllUsers.scss'
 
 const AllUsers = () => {
   const dispatch = useDispatch()
@@ -65,7 +65,11 @@ const AllUsers = () => {
             <div className="users__modal-control">
               <MainButton
                 text={userInfo.role === 'ban' ? ' Разблокировать' : 'Заблокировать'}
-                className={userInfo.role === 'ban' ? 'GreenButton' : 'GreenButton  users__modal-control-yellow'}
+                className={
+                  userInfo.role === 'ban'
+                    ? 'GreenButton users__modal-control-green'
+                    : 'GreenButton  users__modal-control-yellow'
+                }
                 onClick={() => blockUnblock({ id: userInfo?._id, newRole: userInfo?.role })}
               />
               <MainButton

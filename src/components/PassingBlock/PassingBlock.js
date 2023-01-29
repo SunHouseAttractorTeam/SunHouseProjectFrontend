@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Interweave } from 'interweave'
+import ReactPlayer from 'react-player/youtube'
 import { apiUrl } from '../../config'
 import './PassingBlock.scss'
 
@@ -36,17 +37,13 @@ const PassingBlock = ({ event }) => {
                 </div>
               )
             case 'video':
-              // eslint-disable-next-line no-case-declarations
-              const link = content.video.replace('watch?v=', 'embed/')
               return (
-                <iframe
-                  key={index}
-                  width="730"
-                  height="400"
-                  src={link}
-                  title="YouTube video player"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
+                <ReactPlayer
+                  url={content.video}
+                  controls
+                  width="730px"
+                  height="400px"
+                  style={{ marginBottom: '32px' }}
                 />
               )
             case 'audio':
@@ -66,7 +63,7 @@ const PassingBlock = ({ event }) => {
             <p className="passing_block__files-file">
               Файл:{' '}
               <a href={`${apiUrl}/uploads/${event.file}`} target="_blank" download rel="noreferrer">
-                {event.file}
+                {event.file.slice(10)}
               </a>
             </p>
           </div>

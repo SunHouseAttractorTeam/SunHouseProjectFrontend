@@ -42,12 +42,12 @@ import {
   visibilityFailure,
   visibilityRequest,
   visibilitySuccess,
+  createRatingFailure,
+  createRatingRequest,
+  createRatingSuccess,
 } from '../actions/coursesActions'
 import { historyPush } from '../actions/historyActions'
 import { loginUserRequest } from '../actions/usersActions'
-import store from "../configureStore";
-import rootReducer from "../rootReducer";
-import {useSelector} from "react-redux";
 
 const Toast = Swal.mixin({
   toast: true,
@@ -162,15 +162,14 @@ export function* publishCourse({ payload: id }) {
     yield put(hideLoading())
     yield put(fetchCoursesRequest())
     if (response.data.publish === true) {
-    yield Toast.fire({
-      title: 'Курс успешно опубликован',
-    })
+      yield Toast.fire({
+        title: 'Курс успешно опубликован',
+      })
     } else {
       yield Toast.fire({
         title: 'Курс снят с публикации',
       })
     }
-
   } catch (e) {
     yield put(publishCourseFailure(e))
     yield put(hideLoading())
@@ -292,6 +291,17 @@ export function* joinTheCourseSaga({ payload: { courseId, firstId, userId } }) {
   }
 }
 
+export function* createRating({ payload: { courseId, data } }) {
+  try {
+    yield put(showLoading())
+    const response = yield axiosApi.post(`/courses/${courseId}/rating_course`, data)
+    yield put(createRatingSuccess(response.data))
+    yield put(hideLoading())
+  } catch (e) {
+    yield put(createRatingFailure(e))
+  }
+}
+
 const coursesSagas = [
   takeEvery(fetchCoursesRequest, fetchCourses),
   takeEvery(publishCourseRequest, publishCourse),
@@ -306,6 +316,7 @@ const coursesSagas = [
   takeEvery(visibilityRequest, visibilityLending),
   takeEvery(deleteCourseRequest, deleteCourse),
   takeEvery(joinTheCourseRequest, joinTheCourseSaga),
+  takeEvery(createRatingRequest, createRating),
 ]
 
 export default coursesSagas
