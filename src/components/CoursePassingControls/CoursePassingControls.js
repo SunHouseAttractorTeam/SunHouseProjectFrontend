@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { checkUserPassedCourseRequest, updateUserContentStatusRequest } from '../../store/actions/usersActions'
 
-const CoursePassingControls = ({ setModuleId }) => {
+const CoursePassingControls = ({ setModuleId, test }) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const course = useSelector(state => state.courses.course)
@@ -36,6 +36,17 @@ const CoursePassingControls = ({ setModuleId }) => {
       setDisabledWord('previous')
     }
   }, [path, course])
+
+  useEffect(() => {
+    if (user && test) {
+      const questionsLength = test.questions.length
+      const userAnswers = user.tests.find(obj => obj.test === test._id)
+
+      if (questionsLength !== userAnswers.answers.length) {
+        setDisabledWord('next')
+      }
+    }
+  }, [user, test])
 
   useEffect(() => {
     if (path.includes('task')) {

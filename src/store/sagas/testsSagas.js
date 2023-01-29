@@ -23,6 +23,7 @@ import {
   sendTestAnswersSuccess,
 } from '../actions/testsActions'
 import { fetchCourseRequest } from '../actions/coursesActions'
+import { loginUserSuccess } from '../actions/usersActions'
 import { historyPush } from '../actions/historyActions'
 
 const Toast = Swal.mixin({
@@ -120,8 +121,9 @@ export function* deleteTest({ payload }) {
 export function* sendTestAnswersSaga({ payload: { testId, state } }) {
   try {
     yield put(showLoading())
-    yield axiosApi.patch(`/tests/${testId}`, { test: state })
+    const response = yield axiosApi.patch(`/tests/${testId}`, { test: state })
     yield put(sendTestAnswersSuccess())
+    yield put(loginUserSuccess(response.data))
     yield put(hideLoading())
 
     yield Toast.fire({
