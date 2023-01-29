@@ -5,7 +5,7 @@ import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 import ModalOfCategory from '../../components/Modals/ModalOfCategory/ModalOfCategory'
 import ModalSortCourse from '../../components/Modals/ModalSortCourse/ModalSortCourse'
-import { fetchCoursesRequest } from '../../store/actions/coursesActions'
+import { clearCourses, fetchCoursesRequest } from '../../store/actions/coursesActions'
 import { fetchCategoriesRequest } from '../../store/actions/categoriesActions'
 import CourseCard from '../../components/CourseCard/CourseCard'
 import './CatalogOfCourse.scss'
@@ -25,6 +25,10 @@ const CatalogOfCourse = () => {
   useEffect(() => {
     dispatch(fetchCoursesRequest({ sort, category }))
     dispatch(fetchCategoriesRequest())
+
+    return () => {
+      dispatch(clearCourses())
+    }
   }, [dispatch, sort, category])
 
   useEffect(() => {

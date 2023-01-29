@@ -1,5 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 import ProfileSidebarLink from '../../../components/UI/ProfileSidebarLink/ProfileSidebarLink'
 import { logoutUser } from '../../../store/actions/usersActions'
 
