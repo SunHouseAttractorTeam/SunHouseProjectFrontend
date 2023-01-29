@@ -34,7 +34,8 @@ const TestItem = ({ test }) => {
   }
 
   return (
-    test.test && (
+    test.test &&
+    test.answers.length !== 0 && (
       <div className="test-item">
         <div className="test-item__title-block">
           {test.status ? (

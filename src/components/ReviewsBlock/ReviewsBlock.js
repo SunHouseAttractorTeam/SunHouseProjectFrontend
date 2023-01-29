@@ -42,6 +42,7 @@ const ReviewsBlock = () => {
     dispatch(fetchReviewsRequest())
   }, [dispatch])
 
+  console.log(lendingReview)
   return (
     <div className="review_block">
       <div className="container">
@@ -51,7 +52,7 @@ const ReviewsBlock = () => {
             {lendingReview.map(review => (
               <ReviewCard
                 key={review._id}
-                img={review.image ? `${apiUrl}/${review.image}` : noPhoto}
+                img={review.image ? `${apiUrl}${review.image}` : noPhoto}
                 name={review.name}
                 social={review.socialNetwork}
                 content={review.description}

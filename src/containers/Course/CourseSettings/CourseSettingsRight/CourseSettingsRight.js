@@ -79,13 +79,7 @@ const CourseSettingsRight = () => {
       <div className="block-right">
         <div className="container">
           <div className="block-right__top-block">
-            <span className="block-right__top-block__title">Все ученики курса</span>
-            <MainButton
-              className="GreenButton block-right__top-block__btn"
-              type="button"
-              onClick={() => setOpen(true)}
-              text="+ Пригласить ученика"
-            />
+            <span className="block-right__top-block__title">Задания студентов</span>
           </div>
           <div className="block-right__name-block">
             {course.pendingTasks.length !== 0 && (
@@ -203,6 +197,19 @@ const CourseSettingsRight = () => {
           </div>
         </div>
       </div>
+      <Card className="block-right__studentsCard WhiteCard">
+        <div className="block-right__studentsCard__top">
+          <span className="block-right__top-block__title">Все студенты курса </span>
+          <MainButton
+            className="GreenButton block-right__top-block__btn"
+            type="button"
+            onClick={() => setOpen(true)}
+            text="+ Пригласить ученика"
+          />
+        </div>
+        {course && course.users && <div className="block-right__studentsCard__body" />}
+      </Card>
+
       {userOpen ? <CourseUserModal setOpen={setUserOpen} user={userModal} /> : null}
       {open ? (
         <Modal setOpen={setOpen}>
