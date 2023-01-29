@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { fetchCourseRequest } from '../../store/actions/coursesActions'
@@ -6,13 +6,18 @@ import './CertificateObtain.scss'
 import certificate from '../../assets/images/certificate.png'
 import Card from '../UI/Cards/Card/Card'
 import { apiUrl } from '../../config'
+import RatingBlock from '../Rating/Rating'
 
 const CertificateObtain = () => {
   const course = useSelector(state => state.courses.course)
   const dispatch = useDispatch()
   const params = useParams()
+  const [isOpenModal, setIsOpenModal] = useState(false)
   useEffect(() => {
     dispatch(fetchCourseRequest(params.id))
+    setTimeout(() => {
+      setIsOpenModal(true)
+    }, 2000)
   }, [params.id])
 
   const onBtnCopyLink = async () => {
@@ -22,6 +27,7 @@ const CertificateObtain = () => {
     course && (
       <div className="container">
         <div className="certificate-obtain">
+          <RatingBlock isOpen={isOpenModal} courseId={course._id} />
           <h4 className="certificate-obtain__title">{`Поздравляю, вы успешно окончили курс "${course.title}"`}</h4>
           <Card className="certificate-obtain__certificate WhiteCard">
             <a
