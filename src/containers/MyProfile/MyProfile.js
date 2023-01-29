@@ -34,7 +34,7 @@ const MyProfile = () => {
             <div className="profile__sidebar-bottom-block">
               <MyProfileBottom />
             </div>
-            {toggle === true && <MyProfileBottom />}
+            <div className="profile__sidebar-bottom-burger">{toggle === true && <MyProfileBottom />}</div>
           </div>
           <div className="profile__right">
             <Switch>

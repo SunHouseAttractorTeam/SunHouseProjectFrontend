@@ -94,3 +94,17 @@
     font-size: 26px;
   }
 }
+
+  .users__modal-control-red,
+  .users__modal-control-yellow,
+  .users__modal-control-gray,
+  .users__modal-control-green {
+    @media (max-width: 535px) {
+      font-size: 13px;
+      padding: 5px 7%;
+    }
+    @media (max-width: 440px) {
+      font-size: 13px;
+      padding: 5px 3%;
+    }
+    }
