@@ -3,9 +3,9 @@ import { useDispatch } from 'react-redux'
 import { Rating } from 'react-simple-star-rating'
 import Modal from '../UI/Modal2/Modal'
 import FormArea from '../UI/Form/FormArea/FormArea'
-import './Rating.scss'
 import { inputChangeHandler } from '../UI/Form/Handlers/Handlers'
 import { createRatingRequest } from '../../store/actions/coursesActions'
+import './RatingBlock.scss'
 
 const RatingBlock = ({ isOpen, courseId }) => {
   const dispatch = useDispatch()

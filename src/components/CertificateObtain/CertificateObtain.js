@@ -6,7 +6,7 @@ import './CertificateObtain.scss'
 import certificate from '../../assets/images/certificate.png'
 import Card from '../UI/Cards/Card/Card'
 import { apiUrl } from '../../config'
-import RatingBlock from '../Rating/Rating'
+import RatingBlock from '../RatingBlock/RatingBlock'
 
 const CertificateObtain = () => {
   const course = useSelector(state => state.courses.course)
