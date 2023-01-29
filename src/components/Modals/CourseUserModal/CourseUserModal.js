@@ -24,8 +24,6 @@ const CourseUserModal = ({ setOpen, user }) => {
   let avatarImage = avatarStub
   let userAvatar = avatarStub
 
-  useEffect(() => {}, [])
-
   useEffect(() => {
     dispatch(getUserRequest({ courseId: course._id, userId: user._id }))
   }, [user, dispatch])

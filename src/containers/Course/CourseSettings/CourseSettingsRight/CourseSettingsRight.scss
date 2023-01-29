@@ -154,12 +154,45 @@
 
   &__studentsCard {
     margin: 10px 0;
+    padding: 14px 20px;
 
     &__top {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 10px 0;
     }
+
+    &__body {
+      border-top: 2px solid #F2F2F7;
+      margin: 10px 0;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &__title {
+        font-weight: 500;
+        font-size: 16px;
+      }
+
+      &__showInfo {
+        font-size: 14px;
+
+        &:hover {
+          background-color: $lightGreenColor;
+        }
+      }
+    }
+  }
+
+  &__noneText {
+    width: 100%;
+    font-weight: 500;
+    font-size: 14px;
+    color: $lightGrey;
+    text-align: center;
+    padding: 10px 0;
   }
 }
 
