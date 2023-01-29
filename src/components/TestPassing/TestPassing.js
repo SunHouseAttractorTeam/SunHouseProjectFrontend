@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchTestRequest } from '../../store/actions/testsActions'
+import { clearTest, fetchTestRequest } from '../../store/actions/testsActions'
 import PassingBlock from '../PassingBlock/PassingBlock'
 import './TestPassing.scss'
 import CoursePassingControls from '../CoursePassingControls/CoursePassingControls'
@@ -14,6 +14,10 @@ const TestPassing = ({ setModuleId }) => {
 
   useEffect(() => {
     dispatch(fetchTestRequest(testId))
+
+    return () => {
+      dispatch(clearTest())
+    }
   }, [dispatch, testId])
 
   return (

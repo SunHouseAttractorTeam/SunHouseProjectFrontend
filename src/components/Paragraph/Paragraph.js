@@ -53,6 +53,7 @@ const Paragraph = ({ title, subtitle, teacherCheck, isVisibility, onVisibility, 
                   name="description"
                   value={description.value}
                   onChange={inputChangeHandler}
+                  type="text"
                 />
                 <button className="block__modal-btn" type="submit">
                   Сохранить

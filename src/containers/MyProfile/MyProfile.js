@@ -10,9 +10,9 @@ import Certificates from '../Certificates/Certificates'
 import Settings from '../Settings/Settings'
 import Footer from '../../components/Footer/Footer'
 import { ProtectedRoute } from '../../utils/utils'
-import MyProfileBottom from './MyProfileBottom/MyProfileBottom'
 import BurgerMenu from '../../components/UI/BurgerMenu/BurgerMenu'
 import './MyProfile.scss'
+import MyProfileBottom from './MyProfileBottom/MyProfileBottom'
 
 const MyProfile = () => {
   const user = useSelector(state => state.users.user)
@@ -48,7 +48,6 @@ const MyProfile = () => {
                 isAllowed={Cookies.get('jwt') && user?.role !== 'ban'}
                 redirectTo={user?.role === 'ban' ? '/user/notifications' : '/login'}
                 path="/user/courses"
-                // transition: all .3s ease;
                 component={UserCourses}
               />
               <ProtectedRoute

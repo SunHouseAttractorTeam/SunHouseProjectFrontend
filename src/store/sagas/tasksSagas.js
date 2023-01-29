@@ -21,6 +21,7 @@ import {
 } from '../actions/tasksActions'
 import { fetchCourseRequest } from '../actions/coursesActions'
 import { historyPush } from '../actions/historyActions'
+import { loginUserSuccess } from '../actions/usersActions'
 
 const Toast = Swal.mixin({
   toast: true,
@@ -104,8 +105,9 @@ export function* deleteTask({ payload }) {
 export function* sendTaskSaga({ payload: { courseId, taskId, file } }) {
   try {
     yield put(showLoading())
-    yield axiosApi.put(`/users/add_task?course=${courseId}&task=${taskId}`, file)
+    const response = yield axiosApi.put(`/users/add_task?course=${courseId}&task=${taskId}`, file)
     yield put(sendTaskSuccess())
+    yield put(loginUserSuccess(response.data))
     yield put(hideLoading())
 
     yield Toast.fire({

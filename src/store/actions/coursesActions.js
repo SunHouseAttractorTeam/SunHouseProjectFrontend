@@ -42,4 +42,7 @@ export const {
   joinTheCourseFailure,
   clearCourse,
   clearCourses,
+  createRatingRequest,
+  createRatingSuccess,
+  createRatingFailure,
 } = coursesSlice.actions

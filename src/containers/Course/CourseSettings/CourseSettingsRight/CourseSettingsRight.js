@@ -193,7 +193,7 @@ const CourseSettingsRight = () => {
                           download
                           rel="noreferrer"
                         >
-                          {`${user.file}`}
+                          {`${user.file?.slice(10)}`}
                         </a>
                       </p>
                     </div>

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import './UserMenu.scss'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutUser } from '../../../store/actions/usersActions'
 import Avatar from '../../UI/Avatar/Avatar'
 import { fetchNotificationsRequest } from '../../../store/actions/notificationsActions'
+import './UserMenu.scss'
 
 const UserMenu = ({ user }) => {
   const [menu, setMenu] = useState(false)
