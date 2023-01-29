@@ -51,7 +51,7 @@ const ReviewsBlock = () => {
             {lendingReview.map(review => (
               <ReviewCard
                 key={review._id}
-                img={review.image ? `${apiUrl}/${review.image}` : noPhoto}
+                img={review.image ? `${apiUrl}/uploads/${review.image}` : noPhoto}
                 name={review.name}
                 social={review.socialNetwork}
                 content={review.description}

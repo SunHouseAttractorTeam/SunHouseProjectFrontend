@@ -25,7 +25,7 @@ const TestPassing = ({ setModuleId }) => {
       <>
         <PassingBlock event={test} />
         {test && <PassingTest test={test} />}
-        <CoursePassingControls setModuleId={setModuleId} />
+        <CoursePassingControls setModuleId={setModuleId} test={test} />
       </>
     )
   )
