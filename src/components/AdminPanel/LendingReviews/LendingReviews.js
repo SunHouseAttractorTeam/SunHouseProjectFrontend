@@ -45,7 +45,7 @@ const LendingReviews = () => {
     dispatch(deleteReviewRequest(id))
   }
   return (
-    <div>
+    <>
       <div className="reviews">
         <Title>Отзывы</Title>
         <div className="reviews__wrapper">
@@ -131,7 +131,7 @@ const LendingReviews = () => {
           {reviews.map(review => (
             <span key={review._id} className="teacher-inner-block__content-card">
               <ReviewCard
-                img={review.image ? `${apiUrl}/${review.image}` : noPhoto}
+                img={review.image ? `${apiUrl}/uploads/${review.image}` : noPhoto}
                 name={review.name}
                 social={review.socialNetwork}
                 content={review.description}
@@ -141,7 +141,7 @@ const LendingReviews = () => {
           ))}
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

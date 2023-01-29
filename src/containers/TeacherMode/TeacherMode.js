@@ -45,7 +45,13 @@ const TeacherMode = () => {
         </button>
         {courses.length > 0 &&
           courses.map(course => (
-            <CourseCard key={course._id} title={course.title} image={course.image} id={course._id} />
+            <CourseCard
+              key={course._id}
+              title={course.title}
+              image={course.image}
+              id={course._id}
+              price={course.price}
+            />
           ))}
       </div>
       {show && <CreateCourseModal setOpen={setShow} />}

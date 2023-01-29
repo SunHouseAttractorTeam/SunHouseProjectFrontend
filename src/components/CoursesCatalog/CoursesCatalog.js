@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import CourseCard from '../CourseCard/CourseCard'
 import CustomSlider from '../UI/CustomSlider/CustomSlider'
 import MainButton from '../UI/MainButton/MainButton'
-import './CoursesCatalog.scss'
 import { clearCourses, fetchCoursesRequest } from '../../store/actions/coursesActions'
+import './CoursesCatalog.scss'
 
 const sliderSettings = [
   {
@@ -22,7 +22,7 @@ const CoursesCatalog = () => {
   const courses = useSelector(state => state.courses.courses)
 
   useEffect(() => {
-    dispatch(fetchCoursesRequest())
+    dispatch(fetchCoursesRequest({ sort: 'rating', category: 'all' }))
 
     return () => {
       dispatch(clearCourses())

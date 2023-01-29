@@ -310,8 +310,7 @@ export function* sendGoogleFormSaga({ payload }) {
     yield put(showLoading())
     const response = yield axiosApi.post('https://sheet.best/api/sheets/8a0fe7b6-7041-4649-a1fe-0e28f49780e4', payload)
     yield put(sendGFSuccess(response.data))
-    yield Swal.fire({
-      toast: false,
+    yield Toast.fire({
       icon: 'success',
       title: `Сообщение отправлено!`,
     })
@@ -335,9 +334,20 @@ export function* checkUserPassedCourseSaga({ payload: courseId }) {
     if (response.data.passed) {
       yield put(checkUserPassedCourseSuccess(response.data.user))
       yield put(historyPush(`/course/${courseId}/certificate`))
+      yield Swal.fire({
+        toast: false,
+        icon: 'success',
+        title: `Поздравляю вас с прохождением курса!\n Вы получили свой сертификат!`,
+        timer: 3000,
+      })
     } else {
       yield put(checkUserPassedCourseSuccess())
       yield put(historyPush(`/course/${courseId}`))
+      yield Swal.fire({
+        toast: false,
+        icon: 'error',
+        title: `Вы не прошли курс. А надо было учиться, а не делать всё на угад!!!`,
+      })
     }
     yield put(hideLoading())
   } catch (e) {

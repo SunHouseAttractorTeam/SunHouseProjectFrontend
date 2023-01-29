@@ -34,7 +34,7 @@ const AddCategory = () => {
           value={state.title}
           onChange={e => inputChangeHandler(e, setState)}
           placeholder="Название категории"
-          className="category__add-category-input"
+          className="inputModal category__add-category-input"
         />
         <FormArea
           type="text"
