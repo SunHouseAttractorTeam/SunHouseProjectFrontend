@@ -11,8 +11,8 @@ import CourseSettings from './CourseSettings/CourseSettings'
 import CourseEdit from './CourseEdit/CourseEdit'
 import CoursePassing from '../../components/CoursePassing/CoursePassing'
 import Footer from '../../components/Footer/Footer'
+import CertificateObtain from "../../components/CertificateObtain/CertificateObtain";
 import './Course.scss'
-import CourseCertificate from '../../components/CourseCertificate/CourseCertificate'
 
 const Course = () => {
   const { id } = useParams()
@@ -74,7 +74,7 @@ const Course = () => {
                 isAllowed
                 redirectTo={`/course/${id}`}
                 path="/course/:id/certificate"
-                component={CourseCertificate}
+                component={CertificateObtain}
               />
             </Switch>
           </div>

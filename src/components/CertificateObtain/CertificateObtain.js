@@ -41,7 +41,6 @@ const CertificateObtain = () => {
             <div className="certificate-obtain__certificate__btns">
               <button type="button" className="certificate-obtain__certificate__btns__download MainButton GreenButton">
                 <a
-                  // href={`${apiUrl}/uploads/${user.certificate}`}
                   href={certificate}
                   className="certificate-obtain__certificate__btns__download__link"
                   target="_blank"
