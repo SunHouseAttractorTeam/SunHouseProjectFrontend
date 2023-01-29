@@ -9,6 +9,18 @@
     padding: 0;
     transition: all 0.5s;
     flex-wrap: wrap;
+
+
+    @media screen and (max-width: 900px) {
+      position: absolute;
+      top: 53%;
+      left: 48%;
+    }
+    @media screen and (max-width: 576px) {
+      position: absolute;
+      top: 25%;
+      left: 12%;
+    }
   }
 
   &__link {
@@ -149,7 +161,8 @@
     padding: 0.5em 0;
     width: 100%;
     color: $totalWhiteColor;
-    background-color: $darkGreenColor;
+    font-weight: bolder;
+    background-color: inherit;
   }
 
   .main-nav__item {
