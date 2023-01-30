@@ -66,7 +66,7 @@ const CatalogOfCourse = () => {
                 position="bottom right center"
                 className="popup-content"
                 trigger={
-                  <div className="icons-item">
+                  <div className="icons-item" style={{ margin: '0 10px' }}>
                     <i>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path

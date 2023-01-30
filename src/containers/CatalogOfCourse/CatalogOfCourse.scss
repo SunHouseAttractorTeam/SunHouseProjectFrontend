@@ -18,12 +18,15 @@
   place-content: center;
   background-color: #FFFFFF;
   border-radius: 50%;
-  margin: 0 10px;
   cursor: pointer;
+
+  &:nth-child(2) {
+    margin: 0 10px;
+  }
 
   &--active {
     position: absolute;
-    right: 154px;
+    right: 131px;
   }
 
   &--active-icon {
