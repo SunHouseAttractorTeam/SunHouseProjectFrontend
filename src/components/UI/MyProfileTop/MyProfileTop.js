@@ -9,14 +9,12 @@ const MyProfileTop = ({ user }) => (
     </div>
     <div className="profile__sidebar-top-user">
       <Avatar className="profile__sidebar-top-user-avatar" user={user} />
-      <div>
-        <p className="profile__sidebar-top-user-username">
-          {user?.username}{' '}
-          {user?.role === 'ban' ? (
-            <span className="profile__sidebar-top-user-username-ban">Вы забанены, обратитесь к администратору</span>
-          ) : null}
-        </p>
-      </div>
+      <p className="profile__sidebar-top-user-username">
+        {user?.username}{' '}
+        {user?.role === 'ban' ? (
+          <span className="profile__sidebar-top-user-username-ban">Вы забанены, обратитесь к администратору</span>
+        ) : null}
+      </p>
     </div>
   </div>
 )

@@ -10,14 +10,14 @@ const AddContentBlock = ({ addContent, ...props }) => (
         type="button"
         onClick={() => addContent('text')}
       >
-        <p className="add-content-block_type-label">Text</p>
+        <p className="add-content-block__type-label">Text</p>
       </button>
       <button
         className="add-content-block__type add-content-block__type--video"
         type="button"
         onClick={() => addContent('video')}
       >
-        <p className="add-content-block_type-label">Video</p>
+        <p className="add-content-block__type-label">Video</p>
       </button>
       <button
         className="add-content-block__type add-content-block__type--audio"

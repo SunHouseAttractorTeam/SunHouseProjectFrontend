@@ -2,10 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './FormInput.scss'
 
-const FormInput = ({ type, name, value, onChange, placeholder, required, className, error }) => (
+const FormInput = ({ type, name, value, onChange, placeholder, required, className, error, min, max }) => (
   <>
     <input
       type={type}
+      min={min}
+      max={max}
       name={name}
       value={value}
       onChange={onChange}

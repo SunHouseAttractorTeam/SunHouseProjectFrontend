@@ -9,7 +9,7 @@ const VerifyPage = ({ match }) => {
 
   useEffect(() => {
     dispatch(verifyUserRequest(match.params.confirmationCode))
-  }, [match.params])
+  }, [match.params, dispatch])
 
   return (
     <div className="container">

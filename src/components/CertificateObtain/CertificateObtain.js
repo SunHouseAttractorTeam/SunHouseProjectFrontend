@@ -1,27 +1,42 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import { fetchCourseRequest } from '../../store/actions/coursesActions'
 import './CertificateObtain.scss'
 import certificate from '../../assets/images/certificate.png'
 import Card from '../UI/Cards/Card/Card'
-import { apiUrl } from '../../config'
+import RatingBlock from '../RatingBlock/RatingBlock'
 
 const CertificateObtain = () => {
   const course = useSelector(state => state.courses.course)
   const dispatch = useDispatch()
   const params = useParams()
+  const [isOpenModal, setIsOpenModal] = useState(false)
   useEffect(() => {
     dispatch(fetchCourseRequest(params.id))
-  }, [params.id])
+    setTimeout(() => {
+      setIsOpenModal(true)
+    }, 2000)
+  }, [params.id, dispatch])
 
   const onBtnCopyLink = async () => {
-    await navigator.clipboard.writeText(apiUrl + certificate)
+    await navigator.clipboard.writeText(window.location.origin + certificate)
+
+    return Swal.fire({
+      toast: true,
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+      icon: 'success',
+      title: 'Ссылка сохранена в буфер обмена',
+    })
   }
   return (
     course && (
       <div className="container">
         <div className="certificate-obtain">
+          <RatingBlock isOpen={isOpenModal} courseId={course._id} />
           <h4 className="certificate-obtain__title">{`Поздравляю, вы успешно окончили курс "${course.title}"`}</h4>
           <Card className="certificate-obtain__certificate WhiteCard">
             <a
@@ -35,7 +50,6 @@ const CertificateObtain = () => {
             <div className="certificate-obtain__certificate__btns">
               <button type="button" className="certificate-obtain__certificate__btns__download MainButton GreenButton">
                 <a
-                  // href={`${apiUrl}/uploads/${user.certificate}`}
                   href={certificate}
                   className="certificate-obtain__certificate__btns__download__link"
                   target="_blank"

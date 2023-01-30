@@ -15,6 +15,7 @@ const CreateCourseModal = ({ setOpen }) => {
   const [course, setCourse] = useState({
     title: '',
     category: '',
+    price: 0,
   })
 
   const handlerClick = e => {
@@ -44,7 +45,17 @@ const CreateCourseModal = ({ setOpen }) => {
               className="content__modal__select"
               error={getFieldError(error, 'category')}
             />
+            <span className="content__modal__label">Установите цену</span>
+            <FormInput
+              onChange={e => inputChangeHandler(e, setCourse)}
+              value={course.price}
+              name="price"
+              placeholder="Цена курса"
+              className="inputModal"
+              error={getFieldError(error, 'price')}
+            />
             <MainButton
+              disabled={!course.title || !course.category}
               className="GreenButton content__modal__button"
               text="Создать курс"
               onClick={e => handlerClick(e)}

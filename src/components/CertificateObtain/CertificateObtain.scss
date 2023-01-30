@@ -47,14 +47,19 @@
       }
 
       &__linkCopy {
-        padding: 12px 13px;
+        width: 44px;
+        height: 44px;
+        padding: 0;
 
         &:hover {
           background: $lightGrey;
         }
+
+        &__icon {
+          display: grid;
+          place-content: center;
+        }
       }
     }
-
-    //background: $totalWhiteColor;
   }
 }

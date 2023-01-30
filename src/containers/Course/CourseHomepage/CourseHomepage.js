@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Redirect, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import Swal from 'sweetalert2'
 import { fetchCourseRequest, joinTheCourseRequest, visibilityRequest } from '../../../store/actions/coursesActions'
 import CourseTitle from '../../../components/CourseTitle/CourseTitle'
 import WhatLearn from '../../../components/WhatLearn/WhatLearn'
@@ -80,6 +81,15 @@ const CourseHomepage = ({ teacherCheck, courseCheck }) => {
     formData.append('payload', JSON.stringify(courseLending))
 
     dispatch(visibilityRequest({ formData, id }))
+
+    return Swal.fire({
+      toast: true,
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+      icon: 'success',
+      title: 'Изменения успешно сохранены',
+    })
   }
 
   const handleJoinTheCourse = () => {

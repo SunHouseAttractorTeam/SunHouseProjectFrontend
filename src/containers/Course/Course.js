@@ -5,14 +5,14 @@ import Cookies from 'js-cookie'
 import { ProtectedRoute } from '../../utils/utils'
 import { clearCourse, fetchCourseRequest, updateCourseRequest } from '../../store/actions/coursesActions'
 import Header2 from '../../components/Header2/Header2'
-import CourseBanner from '../../components/CourseBanner/CourseBanner'
 import CourseHomepage from './CourseHomepage/CourseHomepage'
 import CourseSettings from './CourseSettings/CourseSettings'
 import CourseEdit from './CourseEdit/CourseEdit'
 import CoursePassing from '../../components/CoursePassing/CoursePassing'
 import Footer from '../../components/Footer/Footer'
+import CertificateObtain from '../../components/CertificateObtain/CertificateObtain'
 import './Course.scss'
-import CourseCertificate from '../../components/CourseCertificate/CourseCertificate'
+import CourseBanner from '../../components/CourseBanner/CourseBanner'
 
 const Course = () => {
   const { id } = useParams()
@@ -30,6 +30,10 @@ const Course = () => {
     }
   }, [dispatch, id, user])
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const teacherCheck = course?.teachers.includes(user?._id)
 
   const courseCheck = course?.users.findIndex(u => u._id === user?._id) + 1
@@ -41,7 +45,7 @@ const Course = () => {
   return (
     <>
       <Header2 />
-      {course && (
+      {course ? (
         <div className="course">
           <CourseBanner course={course} handleSave={handleSave} teacherCheck={teacherCheck} />
           <div className="course__bottom">
@@ -74,10 +78,14 @@ const Course = () => {
                 isAllowed
                 redirectTo={`/course/${id}`}
                 path="/course/:id/certificate"
-                component={CourseCertificate}
+                component={CertificateObtain}
               />
             </Switch>
           </div>
+        </div>
+      ) : (
+        <div className="container">
+          <h2 className="course__not-found">Курс не найден</h2>
         </div>
       )}
       <Footer />

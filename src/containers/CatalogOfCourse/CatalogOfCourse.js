@@ -5,12 +5,12 @@ import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/Footer'
 import ModalOfCategory from '../../components/Modals/ModalOfCategory/ModalOfCategory'
 import ModalSortCourse from '../../components/Modals/ModalSortCourse/ModalSortCourse'
-import { fetchCoursesRequest } from '../../store/actions/coursesActions'
+import { clearCourses, fetchCoursesRequest } from '../../store/actions/coursesActions'
 import { fetchCategoriesRequest } from '../../store/actions/categoriesActions'
 import CourseCard from '../../components/CourseCard/CourseCard'
 import './CatalogOfCourse.scss'
 
-const coursePerPage = 5
+const coursePerPage = 6
 
 const CatalogOfCourse = () => {
   const dispatch = useDispatch()
@@ -25,6 +25,10 @@ const CatalogOfCourse = () => {
   useEffect(() => {
     dispatch(fetchCoursesRequest({ sort, category }))
     dispatch(fetchCategoriesRequest())
+
+    return () => {
+      dispatch(clearCourses())
+    }
   }, [dispatch, sort, category])
 
   useEffect(() => {
@@ -67,9 +71,10 @@ const CatalogOfCourse = () => {
                 </i>
               </div>
               <Popup
+                position="bottom right center"
                 className="popup-content"
                 trigger={
-                  <div className="icons-item">
+                  <div className="icons-item" style={{ margin: '0 10px' }}>
                     <i>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -92,6 +97,7 @@ const CatalogOfCourse = () => {
                 <ModalSortCourse sortCourse={setSort} />
               </Popup>
               <Popup
+                position="bottom right center"
                 className="popup-content2"
                 trigger={
                   <div className="icons-item">
@@ -122,7 +128,7 @@ const CatalogOfCourse = () => {
           </div>
           {next < filtered?.length && (
             <button type="button" className="course-btn" onClick={handleMoreCourses}>
-              Посмотреть курсы
+              Посмотреть курсы ({filtered.length - 6})
             </button>
           )}
         </div>

@@ -13,6 +13,7 @@ const Notifications = () => {
   const unViewNotifications = []
   const [unview, setUnview] = useState([])
   let icon = <div />
+
   useEffect(() => {
     if (user) dispatch(fetchNotificationsRequest(user._id))
   }, [dispatch, user])
