@@ -13,7 +13,7 @@ const CreateTestModal = ({ setOpen, courseId, moduleId, setModalType, error }) =
   const dispatch = useDispatch()
   const [testData, setTestData] = useState({
     title: '',
-    correct: 0,
+    correct: 100,
     random: false,
   })
 
@@ -50,6 +50,8 @@ const CreateTestModal = ({ setOpen, courseId, moduleId, setModalType, error }) =
             <FormInput
               onChange={e => inputChangeHandler(e, setTestData)}
               type="number"
+              min="0"
+              max="100"
               value={testData.correct}
               name="correct"
               placeholder="0"
@@ -69,7 +71,7 @@ const CreateTestModal = ({ setOpen, courseId, moduleId, setModalType, error }) =
                 onClick={() => setModalType('content')}
               />
               <MainButton
-                disabled={!testData.title || testData.correct <= 0}
+                disabled={!testData.title || !testData.correct}
                 className="GreenButton content__btn-two"
                 text="Создать тест"
                 onClick={e => handlerClick(e)}
