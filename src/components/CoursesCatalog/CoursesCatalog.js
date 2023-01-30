@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import CourseCard from '../CourseCard/CourseCard'
 import CustomSlider from '../UI/CustomSlider/CustomSlider'
 import MainButton from '../UI/MainButton/MainButton'
@@ -18,6 +19,7 @@ const sliderSettings = [
 ]
 
 const CoursesCatalog = () => {
+  const history = useHistory()
   const dispatch = useDispatch()
   const courses = useSelector(state => state.courses.courses)
 
@@ -30,7 +32,7 @@ const CoursesCatalog = () => {
   }, [dispatch])
 
   const allCourses = (
-    <div className="courses-section__card">
+    <div className="courses-section__card" onClick={() => history.push('/course-catalog')}>
       <div className="courses-section__card-top">
         <h6 className="courses-section__card-top-title">Все наши курсы</h6>
         <ul className="courses-section__card-top-list">

@@ -14,7 +14,7 @@ const PassingBlock = ({ event }) => {
       const lessonIndex = item.data.findIndex(lessonAsd => lessonAsd._id === event._id)
       if (lessonIndex !== -1) setNumberOf(lessonIndex + 1)
     })
-  }, [])
+  }, [course, event])
 
   return (
     <div className="passing">

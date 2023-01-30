@@ -35,7 +35,7 @@ const CoursePassingControls = ({ setModuleId, test }) => {
     if (firstEvent?._id === thisId) {
       setDisabledWord('previous')
     }
-  }, [path, course])
+  }, [path, course, thisId])
 
   useEffect(() => {
     if (user && test) {
@@ -61,7 +61,7 @@ const CoursePassingControls = ({ setModuleId, test }) => {
         })
       })
     }
-  }, [course, path])
+  }, [course, path, thisId, user])
 
   const nextEvent = () => {
     if (endCourse) {
