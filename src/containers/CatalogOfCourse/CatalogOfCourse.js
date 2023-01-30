@@ -63,6 +63,7 @@ const CatalogOfCourse = () => {
                 </i>
               </div>
               <Popup
+                position="bottom right center"
                 className="popup-content"
                 trigger={
                   <div className="icons-item">
@@ -88,6 +89,7 @@ const CatalogOfCourse = () => {
                 <ModalSortCourse sortCourse={setSort} />
               </Popup>
               <Popup
+                position="bottom right center"
                 className="popup-content2"
                 trigger={
                   <div className="icons-item">
