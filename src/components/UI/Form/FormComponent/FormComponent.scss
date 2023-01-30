@@ -23,15 +23,17 @@
 
   &_btn {
     background: #ADFA00;
-    border: none;
     border-radius: 50px;
     font-size: 16px;
     font-weight: 600;
     padding: 15px 0;
     width: 100%;
+    transition: all .5s ease;
+    border: none;
 
     &:hover {
-      background: rgba(144, 206, 1, 0.8);
+      background: $greyColor;
+      transform: scale(1.03);
     }
 
     &:active {

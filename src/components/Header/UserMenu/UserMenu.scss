@@ -51,6 +51,7 @@
       border: none;
       background: $lightGreenColor;
       display: flex;
+      transition: all .5s ease;
 
       &-child {
         color: black;
@@ -60,7 +61,7 @@
       }
 
       &:hover {
-        background: #fff;;
+        background: $greyColor;
       }
     }
   }
