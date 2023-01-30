@@ -10,7 +10,7 @@ import { fetchCategoriesRequest } from '../../store/actions/categoriesActions'
 import CourseCard from '../../components/CourseCard/CourseCard'
 import './CatalogOfCourse.scss'
 
-const coursePerPage = 5
+const coursePerPage = 6
 
 const CatalogOfCourse = () => {
   const dispatch = useDispatch()
@@ -128,7 +128,7 @@ const CatalogOfCourse = () => {
           </div>
           {next < filtered?.length && (
             <button type="button" className="course-btn" onClick={handleMoreCourses}>
-              Посмотреть курсы
+              Посмотреть курсы ({filtered.length - 6})
             </button>
           )}
         </div>
