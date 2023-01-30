@@ -52,10 +52,6 @@
 
     &:hover {
       transform: translateY(-8px);
-
-      & button {
-        background: $whiteBorderColor;
-      }
     }
 
     &-top {
@@ -104,6 +100,16 @@
 
       &-button {
         margin-top: auto;
+          .btn {
+            margin-top: auto;
+            transition: all .6s ease;
+            border: 3px solid transparent;
+            &:hover {
+              transform: scale(1.05);
+              background: transparent;
+              border-color: $lightGreenColor;
+            }
+        }
       }
     }
   }

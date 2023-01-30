@@ -111,7 +111,7 @@ const WhatLearn = ({ teacherCheck, willLearn, onVisibilityBlock, block }) => {
                       id="field__file-2"
                       className="field field__file"
                       onChange={handleFileChange}
-                      accept="image/*"
+                      accept="image/*, image/HEIC"
                     />
                     <label className="field__file-wrapper" htmlFor="field__file-2">
                       <div className="field__file-fake">

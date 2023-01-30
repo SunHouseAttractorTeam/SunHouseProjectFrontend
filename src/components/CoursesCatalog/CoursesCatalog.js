@@ -39,7 +39,7 @@ const CoursesCatalog = () => {
           <li className="courses-section__card-top-list-item">Маркетинг</li>
         </ul>
         <div className="courses-section__card-top-button">
-          <MainButton type="button" className="GreenButton" text="Подробнее" />
+          <MainButton type="button" className="GreenButton btn" text="Подробнее" />
         </div>
       </div>
     </div>

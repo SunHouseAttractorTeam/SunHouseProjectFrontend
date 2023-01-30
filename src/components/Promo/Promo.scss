@@ -36,6 +36,12 @@
   &_button {
     padding: 16px 48px;
     font-size: 20px;
+    transition: all .5s ease;
+
+    &:hover{
+     background: $greyColor;
+      transform: scale(1.03);
+    }
   }
 
   &_text {
