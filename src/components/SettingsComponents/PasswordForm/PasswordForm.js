@@ -87,7 +87,7 @@ const PasswordForm = () => {
           </div>
         </div>
       </div>
-      <SettingsButton />
+      <SettingsButton disabled={!passwords.oldPassword || !passwords.newPassword || !passwords.reNewPassword} />
     </form>
   )
 }

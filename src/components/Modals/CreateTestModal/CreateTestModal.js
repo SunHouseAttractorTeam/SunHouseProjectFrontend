@@ -50,6 +50,8 @@ const CreateTestModal = ({ setOpen, courseId, moduleId, setModalType, error }) =
             <FormInput
               onChange={e => inputChangeHandler(e, setTestData)}
               type="number"
+              min="0"
+              max="100"
               value={testData.correct}
               name="correct"
               placeholder="0"
@@ -69,6 +71,7 @@ const CreateTestModal = ({ setOpen, courseId, moduleId, setModalType, error }) =
                 onClick={() => setModalType('content')}
               />
               <MainButton
+                disabled={!testData.title || !testData.correct}
                 className="GreenButton content__btn-two"
                 text="Создать тест"
                 onClick={e => handlerClick(e)}

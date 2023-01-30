@@ -10,7 +10,6 @@ import './ModuleCreateModal.scss'
 const ModuleCreateModal = ({ setOpen, id, error }) => {
   const dispatch = useDispatch()
   const [moduleData, setModuleData] = useState({ title: '' })
-
   const handlerClick = e => {
     submitFormHandler(e, dispatch(createModuleRequest({ id, moduleData })))
     setOpen(false)
@@ -33,6 +32,7 @@ const ModuleCreateModal = ({ setOpen, id, error }) => {
               error={getFieldError(error, 'title')}
             />
             <MainButton
+              disabled={!moduleData.title}
               className="GreenButton content__module__button"
               text="Создать модуль"
               onClick={e => handlerClick(e)}

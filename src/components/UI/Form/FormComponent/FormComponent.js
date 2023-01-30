@@ -5,6 +5,7 @@ import FacebookLogin from '../../../services/FacebookLogin/FacebookLogin'
 import GoogleLogin from '../../../services/GoogleLogin/GoogleLogin'
 import VkontakteLogin from '../../../services/VkontakteLogin/VkontakteLogin'
 import { getFieldError } from '../Handlers/Handlers'
+import MainButton from '../../MainButton/MainButton'
 import './FormComponent.scss'
 
 const FormComponent = ({
@@ -20,6 +21,7 @@ const FormComponent = ({
   linkToPage,
   endPoint,
   forgotLink,
+  disabled,
 }) => {
   let form = null
 
@@ -45,9 +47,7 @@ const FormComponent = ({
         <Link to="/forgot" className="form_forgotPass">
           {forgotLink}
         </Link>
-        <button type="submit" className="form_btn">
-          {typeForm}
-        </button>
+        <MainButton className="GreenButton form_btn" disabled={disabled} text={typeForm} />
         <span className="form_text">или регистрация с помощью</span>
         <div className="form_socialLinks">
           <FacebookLogin />

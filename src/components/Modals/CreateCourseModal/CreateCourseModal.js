@@ -55,6 +55,7 @@ const CreateCourseModal = ({ setOpen }) => {
               error={getFieldError(error, 'price')}
             />
             <MainButton
+              disabled={!course.title || !course.category}
               className="GreenButton content__modal__button"
               text="Создать курс"
               onClick={e => handlerClick(e)}
