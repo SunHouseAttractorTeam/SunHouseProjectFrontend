@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import './UserMenu.scss'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutUser } from '../../../store/actions/usersActions'
 import Avatar from '../../UI/Avatar/Avatar'
 import { fetchNotificationsRequest } from '../../../store/actions/notificationsActions'
+import './UserMenu.scss'
 
 const UserMenu = ({ user }) => {
   const [menu, setMenu] = useState(false)
@@ -57,11 +57,12 @@ const UserMenu = ({ user }) => {
 
   return (
     <div className="user-menu">
-      {/* <Backdrop show={menu} clicked={clickHandler} classname="user-menu__backdrop" /> */}
+      {user?.role !== 'admin' ? (
+        <Link className="user-menu__notification" to="/user/notifications">
+          <i className="user-menu__icon"> {icon} </i>
+        </Link>
+      ) : null}
 
-      <Link className="user-menu__notification" to="/user/notifications">
-        <i className="user-menu__icon"> {icon} </i>
-      </Link>
       <button type="button" className="TransparentButton user-menu__button" onClick={clickHandler}>
         <Avatar user={user} className="user-menu__img" />
       </button>

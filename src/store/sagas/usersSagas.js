@@ -64,6 +64,7 @@ export function* getAllUsersSaga() {
     yield put(hideLoading())
   } catch (e) {
     yield put(getAllUsersFailure(e.response.data))
+    yield put(hideLoading())
   }
 }
 
@@ -86,6 +87,7 @@ export function* registrationUserSaga({ payload: userData }) {
         title: 'Данный пользователь уже зарегистрирован',
       })
     }
+    yield put(hideLoading())
   }
 }
 
@@ -117,6 +119,7 @@ export function* loginUserSaga({ payload }) {
         title: 'Введены неверные данные',
       })
     }
+    yield put(hideLoading())
   }
 }
 
@@ -133,7 +136,9 @@ export function* logoutUserSaga() {
       icon: 'info',
       title: 'Вы вышли из своего аккаунта',
     })
-  } catch (e) {}
+  } catch (e) {
+    yield put(hideLoading())
+  }
 }
 
 export function* deleteUserSaga({ payload: id }) {
@@ -148,6 +153,7 @@ export function* deleteUserSaga({ payload: id }) {
     yield put(hideLoading())
   } catch (e) {
     yield put(deleteUserFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -160,6 +166,7 @@ export function* verifyUserSaga(confirmationCode) {
     yield put(hideLoading())
   } catch (e) {
     yield put(verifyUserFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -171,6 +178,7 @@ export function* banUnbanSaga({ payload }) {
     yield put(getAllUsersRequest())
   } catch (e) {
     yield put(banUnbanFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -187,6 +195,7 @@ export function* forgotPasswordSaga({ payload: userData }) {
     })
   } catch (e) {
     yield put(forgotPasswordFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -199,6 +208,7 @@ export function* resetPasswordSaga({ payload: hash }) {
     yield put(hideLoading())
   } catch (e) {
     yield put(resetPasswordFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -221,6 +231,7 @@ export function* editUserProfileSaga({ payload: userData }) {
         title: e.response.data.error,
       })
     }
+    yield put(hideLoading())
   }
 }
 
@@ -243,6 +254,7 @@ export function* editUserPasswordSaga({ payload: passwords }) {
         title: e.response.data.error,
       })
     }
+    yield put(hideLoading())
   }
 }
 
@@ -250,11 +262,22 @@ export function* checkUserTask({ payload: data }) {
   try {
     yield put(showLoading())
     yield axiosApi.patch(
-      `/users/${data.userId}/update_status?content=${data.taskId}&params=task&course=${data.courseId}&choice=${data.value}`,
+      `/users/${data.userId}/update_status?content=${data.taskId}&params=passed&course=${data.courseId}&choice=${data.value}`,
     )
     yield put(checkUserTaskSuccess())
     yield put(fetchCourseRequest(data.courseId))
     yield put(hideLoading())
+    if (data.value) {
+      yield Toast.fire({
+        icon: 'success',
+        title: 'Одобрено',
+      })
+    } else {
+      yield Toast.fire({
+        icon: 'success',
+        title: 'Не одобрено',
+      })
+    }
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(checkUserTaskFailure(e.response.data))
@@ -263,6 +286,7 @@ export function* checkUserTask({ payload: data }) {
         title: e.response.data.error,
       })
     }
+    yield put(hideLoading())
   }
 }
 
@@ -286,8 +310,7 @@ export function* sendGoogleFormSaga({ payload }) {
     yield put(showLoading())
     const response = yield axiosApi.post('https://sheet.best/api/sheets/8a0fe7b6-7041-4649-a1fe-0e28f49780e4', payload)
     yield put(sendGFSuccess(response.data))
-    yield Swal.fire({
-      toast: false,
+    yield Toast.fire({
       icon: 'success',
       title: `Сообщение отправлено!`,
     })
@@ -300,6 +323,7 @@ export function* sendGoogleFormSaga({ payload }) {
         title: 'Сообщение не отправлено!',
       })
     }
+    yield put(hideLoading())
   }
 }
 
@@ -310,9 +334,20 @@ export function* checkUserPassedCourseSaga({ payload: courseId }) {
     if (response.data.passed) {
       yield put(checkUserPassedCourseSuccess(response.data.user))
       yield put(historyPush(`/course/${courseId}/certificate`))
+      yield Swal.fire({
+        toast: false,
+        icon: 'success',
+        title: `Поздравляю вас с прохождением курса!\n Вы получили свой сертификат!`,
+        timer: 3000,
+      })
     } else {
       yield put(checkUserPassedCourseSuccess())
       yield put(historyPush(`/course/${courseId}`))
+      yield Swal.fire({
+        toast: false,
+        icon: 'error',
+        title: `Вы не прошли курс. А надо было учиться, а не делать всё на угад!!!`,
+      })
     }
     yield put(hideLoading())
   } catch (e) {

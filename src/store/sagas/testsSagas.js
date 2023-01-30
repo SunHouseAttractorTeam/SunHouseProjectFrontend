@@ -23,6 +23,7 @@ import {
   sendTestAnswersSuccess,
 } from '../actions/testsActions'
 import { fetchCourseRequest } from '../actions/coursesActions'
+import { loginUserSuccess } from '../actions/usersActions'
 import { historyPush } from '../actions/historyActions'
 
 const Toast = Swal.mixin({
@@ -41,6 +42,7 @@ export function* fetchTest({ payload: id }) {
     yield put(hideLoading())
   } catch (e) {
     yield put(fetchTestFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -60,6 +62,7 @@ export function* createTest({ payload }) {
     })
   } catch (e) {
     yield put(createTestFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -77,6 +80,7 @@ export function* editTest({ payload }) {
     })
   } catch (e) {
     yield put(editTestFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -90,6 +94,7 @@ export function* editTestQuestions({ payload }) {
     yield put(hideLoading())
   } catch (e) {
     yield put(editTestQuestionsFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -109,14 +114,16 @@ export function* deleteTest({ payload }) {
     })
   } catch (e) {
     yield put(deleteTestFailure(e))
+    yield put(hideLoading())
   }
 }
 
 export function* sendTestAnswersSaga({ payload: { testId, state } }) {
   try {
     yield put(showLoading())
-    yield axiosApi.patch(`/tests/${testId}`, { test: state })
+    const response = yield axiosApi.patch(`/tests/${testId}`, { test: state })
     yield put(sendTestAnswersSuccess())
+    yield put(loginUserSuccess(response.data))
     yield put(hideLoading())
 
     yield Toast.fire({

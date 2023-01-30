@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Switch } from 'react-router-dom'
 import Cookies from 'js-cookie'
@@ -12,16 +12,25 @@ import AdminCoursesControl from '../../components/AdminPanel/AdminCoursesControl
 import Footer from '../../components/Footer/Footer'
 import AddCategory from '../../components/AdminPanel/AddCategory/AddCategory'
 import LendingTeachers from '../../components/AdminPanel/LendingTeachers/LendingTeachers'
+import BurgerMenu from '../../components/UI/BurgerMenu/BurgerMenu'
 
 const AdminPanel = () => {
   const user = useSelector(state => state.users.user)
+  const [toggle, setToggle] = useState(false)
+
   return (
     <div className="profile">
       <div className="container">
         <div className="profile__inner">
           <div className="profile__sidebar">
             <MyProfileTop user={user} />
-            <AdminPanelBottom />
+            <div className="profile__sidebar_list" onClick={() => setToggle(toggleItems => !toggleItems)}>
+              <BurgerMenu />
+            </div>
+            <div className="profile__sidebar-bottom-block">
+              <AdminPanelBottom />
+            </div>
+            <div className="profile__sidebar-bottom-burger">{toggle === true && <AdminPanelBottom />}</div>
           </div>
           <div className="profile__right">
             <Switch>

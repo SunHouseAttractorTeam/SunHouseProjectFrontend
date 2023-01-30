@@ -36,6 +36,7 @@ export function* fetchLesson({ payload: id }) {
     yield put(hideLoading())
   } catch (e) {
     yield put(fetchLessonFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -55,6 +56,7 @@ export function* createLesson({ payload }) {
     })
   } catch (e) {
     yield put(createLessonFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -74,6 +76,7 @@ export function* editLesson({ payload }) {
     })
   } catch (e) {
     yield put(editLessonFailure(e))
+    yield put(hideLoading())
   }
 }
 
@@ -93,6 +96,7 @@ export function* deleteLesson({ payload }) {
     })
   } catch (e) {
     yield put(deleteLessonFailure(e))
+    yield put(hideLoading())
   }
 }
 
