@@ -1,6 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import { hideLoading, showLoading } from 'react-redux-loading-bar'
-import Swal from 'sweetalert2'
 import axiosApi from '../../axiosApi'
 import {
   addUsersCourseFailure,
@@ -48,14 +47,7 @@ import {
 } from '../actions/coursesActions'
 import { historyPush } from '../actions/historyActions'
 import { loginUserRequest } from '../actions/usersActions'
-
-const Toast = Swal.mixin({
-  toast: true,
-  icon: 'success',
-  timer: 3000,
-  timerProgressBar: true,
-  showConfirmButton: false,
-})
+import { ToastAlert } from '../../components/UI/Toast/ToastAlert'
 
 export function* fetchCourses({ payload }) {
   try {
@@ -145,8 +137,9 @@ export function* createCourse({ payload: courseData }) {
       yield put(historyPush(`/course/${response.data._id}`))
     }
 
-    yield Toast.fire({
+    yield ToastAlert({
       title: 'Вы успешно создали курс',
+      icon: 'success',
     })
   } catch (e) {
     yield put(createCourseFailure(e))
@@ -162,12 +155,14 @@ export function* publishCourse({ payload: id }) {
     yield put(hideLoading())
     yield put(fetchCoursesRequest())
     if (response.data.publish === true) {
-      yield Toast.fire({
+      yield ToastAlert({
         title: 'Курс успешно опубликован',
+        icon: 'success',
       })
     } else {
-      yield Toast.fire({
+      yield ToastAlert({
         title: 'Курс снят с публикации',
+        icon: 'error',
       })
     }
   } catch (e) {
@@ -187,8 +182,9 @@ export function* updateCourse({ payload }) {
     yield put(fetchCourseRequest(id))
     yield put(hideLoading())
 
-    yield Toast.fire({
+    yield ToastAlert({
       title: 'Курс успешно изменён',
+      icon: 'success',
     })
   } catch (e) {
     yield put(updateCourseFailure(e))
@@ -206,8 +202,9 @@ export function* editCourseHeaderImageSaga({ payload }) {
     yield put(hideLoading())
     yield put(fetchCourseRequest(courseId))
 
-    yield Toast.fire({
+    yield ToastAlert({
       title: 'Шапка курса успешно изменена',
+      icon: 'success',
     })
   } catch (e) {
     yield put(editCourseHeaderImageFailure())
@@ -258,8 +255,9 @@ export function* deleteCourse({ payload: id }) {
     yield put(deleteCourseSuccess())
     yield put(hideLoading())
 
-    yield Toast.fire({
+    yield ToastAlert({
       title: 'Курс успешно удалён',
+      icon: 'success',
     })
     yield put(historyPush(`/user/courses/teacher_mode`))
   } catch (e) {
@@ -282,8 +280,9 @@ export function* joinTheCourseSaga({ payload: { courseId, firstId, userId } }) {
     yield put(loginUserRequest())
     yield put(fetchCourseRequest(courseId))
 
-    yield Toast.fire({
+    yield ToastAlert({
       title: 'Вы успешно записались на курс',
+      icon: 'success',
     })
   } catch (e) {
     yield put(joinTheCourseFailure())

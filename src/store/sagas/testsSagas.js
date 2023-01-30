@@ -1,6 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import { hideLoading, showLoading } from 'react-redux-loading-bar'
-import Swal from 'sweetalert2'
 import axiosApi from '../../axiosApi'
 import {
   createTestFailure,
@@ -25,14 +24,7 @@ import {
 import { fetchCourseRequest } from '../actions/coursesActions'
 import { loginUserSuccess } from '../actions/usersActions'
 import { historyPush } from '../actions/historyActions'
-
-const Toast = Swal.mixin({
-  toast: true,
-  icon: 'success',
-  timer: 3000,
-  timerProgressBar: true,
-  showConfirmButton: false,
-})
+import { ToastAlert } from '../../components/UI/Toast/ToastAlert'
 
 export function* fetchTest({ payload: id }) {
   try {
@@ -57,8 +49,9 @@ export function* createTest({ payload }) {
     yield put(hideLoading())
     yield put(historyPush(`/course/${courseId}/edit/test/${response.data._id}`))
 
-    yield Toast.fire({
+    yield ToastAlert({
       title: 'Тест успешно создан',
+      icon: 'success',
     })
   } catch (e) {
     yield put(createTestFailure(e))
@@ -75,8 +68,9 @@ export function* editTest({ payload }) {
     yield put(fetchTestRequest(contentId))
     yield put(hideLoading())
 
-    yield Toast.fire({
+    yield ToastAlert({
       title: 'Тест успешно изменен',
+      icon: 'success',
     })
   } catch (e) {
     yield put(editTestFailure(e))
@@ -109,8 +103,9 @@ export function* deleteTest({ payload }) {
     yield put(hideLoading())
     yield put(historyPush(`/course/${courseId}/edit`))
 
-    yield Toast.fire({
+    yield ToastAlert({
       title: 'Тест успешно удален',
+      icon: 'success',
     })
   } catch (e) {
     yield put(deleteTestFailure(e))
@@ -126,8 +121,9 @@ export function* sendTestAnswersSaga({ payload: { testId, state } }) {
     yield put(loginUserSuccess(response.data))
     yield put(hideLoading())
 
-    yield Toast.fire({
+    yield ToastAlert({
       title: 'Ответы успешно сохранены',
+      icon: 'success',
     })
   } catch (e) {
     yield put(sendTestAnswersFailure(e))

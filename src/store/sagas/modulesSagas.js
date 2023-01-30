@@ -1,9 +1,9 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import { hideLoading, showLoading } from 'react-redux-loading-bar'
-import Swal from 'sweetalert2'
 import axiosApi from '../../axiosApi'
 import { createModuleFailure, createModuleRequest, createModuleSuccess } from '../actions/modulesActions'
 import { fetchCourseRequest } from '../actions/coursesActions'
+import { ToastAlert } from '../../components/UI/Toast/ToastAlert'
 
 export function* createModule({ payload }) {
   const { id, moduleData } = payload
@@ -15,13 +15,9 @@ export function* createModule({ payload }) {
     yield put(fetchCourseRequest(id))
     yield put(hideLoading())
 
-    yield Swal.fire({
-      toast: true,
+    yield ToastAlert({
       icon: 'success',
       title: 'Модуль успешно создан',
-      timer: 3000,
-      timerProgressBar: true,
-      showConfirmButton: false,
     })
   } catch (e) {
     yield put(createModuleFailure(e))

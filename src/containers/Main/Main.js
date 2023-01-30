@@ -20,7 +20,9 @@ const Main = () => (
     <div className="container">
       <LendingTeacherBlock />
     </div>
-    <Partners />
+    <div id="partners">
+      <Partners />
+    </div>
     <div id="review" className="container reviews-block">
       <ReviewsBlock />
     </div>
