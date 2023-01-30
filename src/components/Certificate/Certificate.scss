@@ -1,41 +1,50 @@
 @import "../../scss/style";
 
 .certificate {
-  max-width: 380px;
   border-radius: 16px;
   background: $totalWhiteColor;
-  padding: 24px;
+  padding: 100px;
 
-  &__image-block {
-    width: 332px;
-    height: 211px;
-    border: 2px solid $whiteBorderColor;
-    border-radius: 16px;
-    overflow: hidden;
+  &__logo {
+    width: 20%;
 
-    &-img {
+    &__image {
       width: 100%;
       height: auto;
     }
   }
 
-  &__content-block {
-    margin-top: 27px;
-    padding: 5px 1px;
 
-    &-title {
-      font-size: 20px;
+  &__content-block {
+    padding: 80px 0;
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    border-bottom: 1px dashed $totalBlackColor;
+
+    &__title {
+      font-size: 84px;
+      text-transform: uppercase;
       font-weight: 700;
-      line-height: 25px;
-      color: $darkGreenColor;
+      color: $totalBlackColor;
+      margin-bottom: 40px;
     }
 
-    &-datetime {
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 19px;
-      color: $totalBlackColor;
-      margin-top: 12px;
+    &__fullName {
+      text-transform: capitalize;
+      font-style: italic;
+      font-size: 42px;
+      border-bottom: 1px solid $totalBlackColor;
+    }
+
+    &__course {
+      padding: 25px 0;
+      font-size: 24px;
+      font-weight: 500;
+    }
+
+    &__description {
+      font-size: 20px;
     }
   }
 }

@@ -1,17 +1,19 @@
 import React from 'react'
 import './Certificate.scss'
-import CertificateImage from '../../assets/images/certificate.png'
+import Logo from '../../assets/logo/eduspace.svg'
 
-const Certificate = ({ course, datetime }) => (
-  <div className="certificate">
-    <div className="certificate__image-block">
-      <img src={CertificateImage} className="certificate__image-block-img" alt="Eduspace" />
+const Certificate = ({course, fullName, description}) => (
+    <div className="certificate">
+        <div className={"certificate__logo"}>
+            <img src={Logo} className={"certificate__logo__image"}/>
+        </div>
+        <div className="certificate__content-block">
+            <h3 className={"certificate__content-block__title"}>Сертификат</h3>
+            <p className={"certificate__content-block__fullName"}>{fullName}</p>
+            <p className={"certificate__content-block__course"}>Успешно прошел курс "{course}"</p>
+            <p className="certificate__content-block__description">{description}</p>
+        </div>
     </div>
-    <div className="certificate__content-block">
-      <h3 className="certificate__content-block-title">Успешное прохождение курса {course}</h3>
-      <p className="certificate__content-block-datetime">{datetime}</p>
-    </div>
-  </div>
 )
 
 export default Certificate
