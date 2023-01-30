@@ -7,9 +7,9 @@ import { addUsersCourseRequest, fetchCourseRequest } from '../../../../store/act
 import Modal from '../../../../components/UI/Modal2/Modal'
 import MainButton from '../../../../components/UI/MainButton/MainButton'
 import Card from '../../../../components/UI/Cards/Card/Card'
-import './CourseSettingsRight.scss'
 import CourseUserModal from '../../../../components/Modals/CourseUserModal/CourseUserModal'
 import { apiUrl } from '../../../../config'
+import './CourseSettingsRight.scss'
 
 const CourseSettingsRight = () => {
   const dispatch = useDispatch()
@@ -19,6 +19,7 @@ const CourseSettingsRight = () => {
   const items = []
   const [open, setOpen] = useState(false)
   const [userOpen, setUserOpen] = useState(false)
+  const [disable, setDisable] = useState(true)
   const [role, setRole] = useState('users')
   const [showMore, setShowMore] = useState({
     status: false,
@@ -34,6 +35,12 @@ const CourseSettingsRight = () => {
 
   const ChangeSearchItem = item => {
     setParticipant(item)
+    if (item) {
+      setDisable(false)
+    }
+    if (!item) {
+      setDisable(true)
+    }
   }
 
   const handleOnChange = e => {
@@ -65,7 +72,6 @@ const CourseSettingsRight = () => {
       })
     }
   }
-
   const onCheckBtn = async (userId, taskId, value) => {
     await dispatch(checkUserTaskRequest({ userId, taskId, courseId: course._id, value }))
   }
@@ -74,6 +80,11 @@ const CourseSettingsRight = () => {
     users.map(user => items.push({ id: user._id, name: user.email }))
   }
 
+  const getChange = e => {
+    if (e.length <= 0) {
+      setDisable(true)
+    }
+  }
   return (
     <>
       <div className="block-right">
@@ -211,6 +222,7 @@ const CourseSettingsRight = () => {
               className="inputModal block-right__card__input"
               items={items}
               onSelect={ChangeSearchItem}
+              onSearch={getChange}
             />
             <div className="block-right__card__checkboxes">
               <div className="block-right__card__checkboxes__checkbox">
@@ -236,6 +248,7 @@ const CourseSettingsRight = () => {
               </div>
             </div>
             <MainButton
+              disabled={disable}
               className="GreenButton block-right__card__btn"
               type="button"
               text="+ Пригласить"

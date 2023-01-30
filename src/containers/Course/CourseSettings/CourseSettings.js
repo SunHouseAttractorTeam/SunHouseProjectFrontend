@@ -53,6 +53,7 @@ const CourseSettings = () => {
                 childrenTwo={<CourseSettingsRight course={course} setCourse={setState} submit={submitFormHandler} />}
               />
               <MainButton
+                disabled={!state.title || !state.description}
                 className="GreenButton course-settings__right-save-button"
                 type="submit"
                 text="Сохранить изменения"

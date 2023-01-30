@@ -103,7 +103,7 @@ const ProfileForm = () => {
         />
         <ImageForm onChangeAvatar={onChangeAvatar} avatar={preview} />
       </div>
-      <SettingsButton />
+      <SettingsButton disabled={!state.username || !state.email} />
     </form>
   )
 }
