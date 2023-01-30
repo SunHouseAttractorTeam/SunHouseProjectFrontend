@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 import MainButton from '../UI/MainButton/MainButton'
 import { sendTestAnswersRequest } from '../../store/actions/testsActions'
 
-const PassingTest = ({ test }) => {
+const PassingTest = ({ test, disabled }) => {
   const dispatch = useDispatch()
   const user = useSelector(state => state.users.user)
 
@@ -17,7 +17,7 @@ const PassingTest = ({ test }) => {
     if (user) {
       const userAnswers = user.tests.find(elem => elem.test === test?._id)
 
-      if (userAnswers.answers.length) {
+      if (userAnswers?.answers.length) {
         const newState = userAnswers.answers.map(obj => ({
           question: obj.questionId,
           answer: obj.answerId,
@@ -35,6 +35,12 @@ const PassingTest = ({ test }) => {
       }
     }
   }, [test, user])
+
+  useEffect(() => {
+    if (disabled) {
+      setDisable(true)
+    }
+  }, [disabled])
 
   const handleChoiceAnswer = (questionId, answerId) => {
     setState(prevState => {
@@ -130,12 +136,14 @@ const PassingTest = ({ test }) => {
           </ol>
         </div>
       ))}
-      <MainButton
-        className="GreenButton passing-test__save-button"
-        text="Сохранить"
-        onClick={handleSaveAnswers}
-        disabled={disable}
-      />
+      {!disabled && (
+        <MainButton
+          className="GreenButton passing-test__save-button"
+          text="Сохранить"
+          onClick={handleSaveAnswers}
+          disabled={disable}
+        />
+      )}
     </div>
   )
 }

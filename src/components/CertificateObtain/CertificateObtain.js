@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import { fetchCourseRequest } from '../../store/actions/coursesActions'
 import './CertificateObtain.scss'
 import certificate from '../../assets/images/certificate.png'
 import Card from '../UI/Cards/Card/Card'
-import { apiUrl } from '../../config'
 import RatingBlock from '../RatingBlock/RatingBlock'
 
 const CertificateObtain = () => {
@@ -18,10 +18,19 @@ const CertificateObtain = () => {
     setTimeout(() => {
       setIsOpenModal(true)
     }, 2000)
-  }, [params.id])
+  }, [params.id, dispatch])
 
   const onBtnCopyLink = async () => {
-    await navigator.clipboard.writeText(apiUrl + certificate)
+    await navigator.clipboard.writeText(window.location.origin + certificate)
+
+    return Swal.fire({
+      toast: true,
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+      icon: 'success',
+      title: 'Ссылка сохранена в буфер обмена',
+    })
   }
   return (
     course && (

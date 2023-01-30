@@ -30,6 +30,10 @@ const Course = () => {
     }
   }, [dispatch, id, user])
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const teacherCheck = course?.teachers.includes(user?._id)
 
   const courseCheck = course?.users.findIndex(u => u._id === user?._id) + 1
@@ -41,7 +45,7 @@ const Course = () => {
   return (
     <>
       <Header2 />
-      {course && (
+      {course ? (
         <div className="course">
           <CourseBanner course={course} handleSave={handleSave} teacherCheck={teacherCheck} />
           <div className="course__bottom">
@@ -78,6 +82,10 @@ const Course = () => {
               />
             </Switch>
           </div>
+        </div>
+      ) : (
+        <div className="container">
+          <h2 className="course__not-found">Курс не найден</h2>
         </div>
       )}
       <Footer />

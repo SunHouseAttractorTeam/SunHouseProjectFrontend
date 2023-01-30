@@ -12,6 +12,7 @@ import VideoInput from '../../VideoInput/VideoInput'
 import AudioPlayer from '../../UI/AudioPlayer/AudioPlayer'
 import { apiUrl } from '../../../config'
 import MainButton from '../../UI/MainButton/MainButton'
+import PassingTest from '../../PassingTest/PassingTest'
 
 const ContentFormTest = ({ contentData, contentId, handleSave, handleQuestionsSave }) => {
   const dispatch = useDispatch()
@@ -30,7 +31,7 @@ const ContentFormTest = ({ contentData, contentId, handleSave, handleQuestionsSa
         },
       ])
     }
-  }, [contentData])
+  }, [contentData, questionsState.length])
 
   const addQuestion = () => {
     setQuestionsState(prev => [...prev, { title: '', answers: [{ title: '', status: false }] }])
@@ -212,17 +213,23 @@ const ContentFormTest = ({ contentData, contentId, handleSave, handleQuestionsSa
               </div>
             )}
           </div>
-          {questionsState.map((q, index) => (
-            <div key={index}>
-              <QuestionsBlock question={q} indexQuestion={index} setQuestion={setQuestionsState} />
-            </div>
-          ))}
-          <MainButton
-            className="WhiteButton question-block__add-button"
-            type="button"
-            onClick={addQuestion}
-            text="+ Добавить вопрос"
-          />
+          {preview ? (
+            <PassingTest test={contentData} disabled />
+          ) : (
+            <>
+              {questionsState.map((q, index) => (
+                <div key={index}>
+                  <QuestionsBlock question={q} indexQuestion={index} setQuestion={setQuestionsState} />
+                </div>
+              ))}
+              <MainButton
+                className="WhiteButton question-block__add-button"
+                type="button"
+                onClick={addQuestion}
+                text="+ Добавить вопрос"
+              />
+            </>
+          )}
           <div className="content-form__buttons">
             <MainButton
               className="GreenButton content-form__button"

@@ -49,7 +49,7 @@ const CoursePassing = () => {
         })
       })
     }
-  }, [course, user])
+  }, [course, user, history, id])
 
   return (
     <>

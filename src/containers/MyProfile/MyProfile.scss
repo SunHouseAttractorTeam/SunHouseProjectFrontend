@@ -58,6 +58,9 @@
         }
 
         &-username {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
           font-size: 20px;
           font-weight: 700;
 
@@ -66,11 +69,6 @@
             color: red;
             font-size: 12px;
           }
-        }
-
-        &-role {
-          font-size: 16px;
-          font-weight: 400;
         }
       }
     }
@@ -92,7 +90,7 @@
 
       &-burger {
         padding-bottom: 50px;
-        @media screen and (min-width: 790px){
+        @media screen and (min-width: 790px) {
           display: none;
         }
       }

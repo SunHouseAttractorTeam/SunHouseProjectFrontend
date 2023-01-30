@@ -7,7 +7,7 @@
   padding: 24px;
 
   &__image-block {
-    width: 332px;
+    max-width: 332px;
     height: 211px;
     border: 2px solid $whiteBorderColor;
     border-radius: 16px;
