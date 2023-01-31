@@ -16,6 +16,7 @@ const CatalogOfCourse = () => {
   const dispatch = useDispatch()
   const courses = useSelector(state => state.courses.courses)
   const categories = useSelector(state => state.categories.categories)
+  const user = useSelector(state => state.users.user)
   const [next, setNext] = useState(coursePerPage)
   const [toggle, setToggle] = useState(false)
   const [sort, setSort] = useState('rating')
@@ -109,13 +110,29 @@ const CatalogOfCourse = () => {
             </div>
           </div>
           <div className="courses-section__cards">
-            {filtered.map(item => (
-              <CourseCard key={item._id} id={item._id} title={item.title} price={item.price} image={item.image} />
-            )) &&
-              filtered
-                ?.slice(0, next)
-                ?.map(item => (
-                  <CourseCard key={item._id} id={item._id} title={item.title} price={item.price} image={item.image} />
+            {user?.role !== 'ban'
+              ? filtered.map(item => (
+                  <CourseCard
+                    key={item._id}
+                    id={`/course/${item._id}`}
+                    title={item.title}
+                    price={item.price}
+                    image={item.image}
+                  />
+                )) &&
+                filtered
+                  ?.slice(0, next)
+                  ?.map(item => (
+                    <CourseCard
+                      key={item._id}
+                      id={`/course/${item._id}`}
+                      title={item.title}
+                      price={item.price}
+                      image={item.image}
+                    />
+                  ))
+              : filtered.map(item => (
+                  <CourseCard key={item._id} id="/user" title={item.title} price={item.price} image={item.image} />
                 ))}
           </div>
           {next < filtered?.length && (

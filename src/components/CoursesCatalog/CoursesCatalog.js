@@ -20,6 +20,7 @@ const sliderSettings = [
 const CoursesCatalog = () => {
   const dispatch = useDispatch()
   const courses = useSelector(state => state.courses.courses)
+  const user = useSelector(state => state.users.user)
 
   useEffect(() => {
     dispatch(fetchCoursesRequest())
@@ -47,7 +48,7 @@ const CoursesCatalog = () => {
 
   const sliceCourses = courses.slice(0, 5).map(item => (
     <div className="slider__item-course" key={item.title}>
-      <CourseCard title={item.title} image={item.image} id={item._id} price={item.price} />
+      <CourseCard title={item.title} image={item.image} id={`/course/${item._id}`} price={item.price} />
     </div>
   ))
 
@@ -59,9 +60,21 @@ const CoursesCatalog = () => {
         <div className="container courses-section__container">
           <h2 className="courses-section__title">Каталог курсов</h2>
           <div className="courses-section__cards">
-            {courses.slice(0, 5).map(item => (
-              <CourseCard key={item.title} title={item.title} image={item.image} id={item._id} price={item.price} />
-            ))}
+            {user?.role !== 'ban'
+              ? courses
+                  .slice(0, 5)
+                  .map(item => (
+                    <CourseCard
+                      key={item.title}
+                      title={item.title}
+                      image={item.image}
+                      id={`/course/${item._id}`}
+                      price={item.price}
+                    />
+                  ))
+              : courses.map(item => (
+                  <CourseCard key={item.title} title={item.title} image={item.image} id="/user" price={item.price} />
+                ))}
             {allCourses}
           </div>
           <div className="slider">
