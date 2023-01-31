@@ -49,7 +49,7 @@ const TeacherMode = () => {
               key={course._id}
               title={course.title}
               image={course.image}
-              id={course._id}
+              id={`/course/${course._id}`}
               price={course.price}
             />
           ))}

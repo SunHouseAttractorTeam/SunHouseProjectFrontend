@@ -33,7 +33,7 @@ const UserCourses = () => {
                   title={course.title}
                   date={course.date}
                   image={course.image}
-                  id={course._id}
+                  id={`/course/${course._id}`}
                 />
               ))}
             </>
