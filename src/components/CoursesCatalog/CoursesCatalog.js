@@ -70,7 +70,7 @@ const CoursesCatalog = () => {
                   .slice(0, 5)
                   .map(item => (
                     <CourseCard
-                      key={item.title}
+                      key={item._id}
                       title={item.title}
                       image={item.image}
                       id={`/course/${item._id}`}
