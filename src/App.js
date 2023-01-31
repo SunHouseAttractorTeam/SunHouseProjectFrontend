@@ -18,7 +18,6 @@ import CatalogOfCourse from './containers/CatalogOfCourse/CatalogOfCourse'
 import TeachersPage from './components/TeachersPage/TeachersPage'
 import './scss/style.scss'
 import CertificateObtain from './components/CertificateObtain/CertificateObtain'
-import Certificates from "./containers/Certificates/Certificates";
 
 const App = () => {
     const user = useSelector(state => state.users.user)
@@ -34,7 +33,6 @@ const App = () => {
                 <Route path="/" exact component={Main}/>
                 <Route path="/registration" component={Registration}/>
                 <Route path="/login" component={Login}/>
-                <Route path={"/certificates"} component={Certificates}/>
                 <ProtectedRoute
                     isAllowed={Cookies.get('jwt') || user?.token}
                     redirectTo="/login"
