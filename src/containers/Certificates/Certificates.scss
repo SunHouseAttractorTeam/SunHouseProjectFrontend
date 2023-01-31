@@ -4,5 +4,11 @@
     flex-wrap: wrap;
     gap: 20px;
     margin-top: 52px;
+
+    &__certificate {
+      width: 100%;
+      margin-bottom: 20px;
+    }
   }
+
 }
