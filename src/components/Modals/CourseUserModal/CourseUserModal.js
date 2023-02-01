@@ -95,7 +95,6 @@ const CourseUserModal = ({ setOpen, user }) => {
     } else {
       userAvatar = `${apiUrl}/uploads/${userGeneral.avatar}`
     }
-    // userAvatar = `${apiUrl}/uploads/${userGeneral.avatar}`
   }
 
   return (
@@ -112,19 +111,21 @@ const CourseUserModal = ({ setOpen, user }) => {
             <div className="course-user-modal__progressbar">
               <h4 className="course-user-modal__progressbar__title">Общий прогресс</h4>
               <div className="course-user-modal__progressbar__line">
-                <Progress
-                  percent={userGeneral.coursePercent ? userGeneral.coursePercent : 0}
-                  status="success"
-                  strokeWidth={2}
-                  trailWidth={2}
-                  theme={{
-                    success: {
-                      symbol: `${userGeneral.coursePercente ? userGeneral.coursePercent : 0}%`,
-                      color: '#ADFA00',
-                      strokeWidth: 3,
-                    },
-                  }}
-                />
+                {userGeneral && (
+                  <Progress
+                    percent={userGeneral.coursePercent ? userGeneral.coursePercent : 0}
+                    status="success"
+                    strokeWidth={2}
+                    trailWidth={2}
+                    theme={{
+                      success: {
+                        symbol: `${userGeneral?.coursePercent || 0}%`,
+                        color: '#ADFA00',
+                        strokeWidth: 3,
+                      },
+                    }}
+                  />
+                )}
               </div>
             </div>
           </div>
