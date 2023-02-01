@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import { checkUserTaskRequest, getAllUsersRequest } from '../../../../store/actions/usersActions'
-import { addUsersCourseRequest, fetchCourseRequest } from '../../../../store/actions/coursesActions'
+import { addUsersCourseRequest } from '../../../../store/actions/coursesActions'
 import Modal from '../../../../components/UI/Modal2/Modal'
 import MainButton from '../../../../components/UI/MainButton/MainButton'
 import Card from '../../../../components/UI/Cards/Card/Card'
@@ -52,7 +52,6 @@ const CourseSettingsRight = () => {
 
   const addParticipantInCourse = async () => {
     await dispatch(addUsersCourseRequest({ idCourse: id, idUser: participant.id, role }))
-    await dispatch(fetchCourseRequest(id))
     setOpen(false)
   }
 

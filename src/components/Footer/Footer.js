@@ -1,21 +1,16 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+import { useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { fetchCoursesRequest } from '../../store/actions/coursesActions'
 import Logo from '../UI/Logo/Logo'
 import FooterIcon from './FooterIcon/FooterIcon'
 import FooterLink from './FooterLink/FooterLink'
-import { information } from './footerData'
+import { courses, information } from './footerData'
 import { historyPush } from '../../store/actions/historyActions'
 import './Footer.scss'
 
 const Footer = () => {
   const dispatch = useDispatch()
-  const courses = useSelector(state => state.courses.courses)
 
-  useEffect(() => {
-    dispatch(fetchCoursesRequest())
-  }, [dispatch])
   return (
     <footer className="footer">
       <div className="container">
@@ -36,7 +31,7 @@ const Footer = () => {
             {courses &&
               courses.map(course => (
                 <NavLink to={`/course/${course._id}`} key={course._id} className="footer_link">
-                  {course.title}
+                  {course}
                 </NavLink>
               ))}
           </div>
