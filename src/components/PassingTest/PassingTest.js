@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Swal from 'sweetalert2'
 import MainButton from '../UI/MainButton/MainButton'
 import { sendTestAnswersRequest } from '../../store/actions/testsActions'
+import { ToastAlert } from '../UI/Toast/ToastAlert'
 
 const PassingTest = ({ test, disabled }) => {
   const dispatch = useDispatch()
@@ -63,11 +63,8 @@ const PassingTest = ({ test, disabled }) => {
     e.preventDefault()
 
     if (state.find(obj => obj.answer === null)) {
-      return Swal.fire({
-        toast: true,
+      return ToastAlert({
         timer: 3000,
-        timerProgressBar: true,
-        showConfirmButton: false,
         icon: 'error',
         title: `Вы не ответили на все вопросы!`,
       })

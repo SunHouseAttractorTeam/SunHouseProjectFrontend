@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import Swal from 'sweetalert2'
+import { ToastAlert } from '../UI/Toast/ToastAlert'
 import { clearTask, fetchTaskRequest, sendTaskRequest } from '../../store/actions/tasksActions'
 import PassingBlock from '../PassingBlock/PassingBlock'
 import FilesUploader from '../FilesUploader/FilesUploader'
@@ -44,11 +44,8 @@ const TaskPassing = ({ setModuleId }) => {
   }
   const sendHomework = () => {
     if (!lastFile) {
-      return Swal.fire({
-        toast: true,
+      return ToastAlert({
         timer: 3000,
-        timerProgressBar: true,
-        showConfirmButton: false,
         icon: 'error',
         title: `Выберите файл!`,
       })

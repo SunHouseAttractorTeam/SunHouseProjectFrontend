@@ -1,6 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import { hideLoading, showLoading } from 'react-redux-loading-bar'
-import Swal from 'sweetalert2'
 import axiosApi from '../../axiosApi'
 import {
   createTeachersFailure,
@@ -13,13 +12,7 @@ import {
   fetchTeachersRequest,
   fetchTeachersSuccess,
 } from '../actions/lendingTeachersActions'
-
-const Toast = Swal.mixin({
-  toast: true,
-  timer: 3000,
-  timerProgressBar: true,
-  showConfirmButton: false,
-})
+import { ToastAlert } from '../../components/UI/Toast/ToastAlert'
 
 export function* fetchTeachersSaga() {
   try {
@@ -40,7 +33,7 @@ export function* createTeachersSaga({ payload: data }) {
     yield put(createTeachersSuccess())
     yield put(hideLoading())
     yield put(fetchTeachersRequest())
-    yield Toast.fire({
+    yield ToastAlert({
       icon: 'success',
       title: 'Создано',
     })
