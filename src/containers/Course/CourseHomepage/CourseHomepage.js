@@ -176,14 +176,16 @@ const CourseHomepage = ({ teacherCheck, courseCheck }) => {
                           onVisibilityBlock={onVisibilityBlock}
                         />
                       )}
-                      {courseLending.blockModules && courseLending.blockModules.visibility && (
-                        <CourseProgram
-                          block={courseLending.blockModules}
-                          teacherCheck={teacherCheck}
-                          modules={course.modules}
-                          onVisibilityBlock={onVisibilityBlock}
-                        />
-                      )}
+                      {courseLending.blockModules &&
+                        course?.modules?.length !== 0 &&
+                        courseLending.blockModules.visibility && (
+                          <CourseProgram
+                            block={courseLending.blockModules}
+                            teacherCheck={teacherCheck}
+                            modules={course.modules}
+                            onVisibilityBlock={onVisibilityBlock}
+                          />
+                        )}
                     </>
                   )}
                   {!courseCheck ? (
