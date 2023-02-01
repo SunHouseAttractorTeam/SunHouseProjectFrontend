@@ -4,5 +4,10 @@
     flex-wrap: wrap;
     gap: 20px;
     margin-top: 52px;
+
+    @media (max-width: 790px) {
+     flex-direction: column;
+      align-items: center;
+    }
   }
 }

@@ -8,7 +8,7 @@
     position: relative;
     width: 100%;
 
-    @media (max-width: 415px) {
+    @media (max-width: 591px) {
       flex-direction: column;
       flex-wrap: nowrap;
     }
@@ -26,8 +26,8 @@
     line-height: 45px;
     margin-bottom: 16px;
 
-    @media (max-width: 470px) {
-      font-size: 30px;
+    @media (max-width: 600px) {
+      font-size: 28px;
     }
 
     span {
