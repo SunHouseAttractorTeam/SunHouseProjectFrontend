@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import Swal from 'sweetalert2'
+import { ToastAlert } from '../../UI/Toast/ToastAlert'
 import FormInput from '../../UI/Form/FormInput/FormInput'
 import SettingsButton from '../SettingsButton/SettingsButton'
 import { inputChangeHandler, submitFormHandler } from '../../UI/Form/Handlers/Handlers'
@@ -19,25 +19,19 @@ const PasswordForm = () => {
     e.preventDefault()
 
     if (!passwords.newPassword || !passwords.oldPassword) {
-      Swal.fire({
-        toast: true,
+      ToastAlert({
         icon: 'error',
         title: 'Введите верные данные!',
         timer: 3000,
-        timerProgressBar: true,
-        showConfirmButton: false,
       })
       return
     }
 
     if (passwords.newPassword !== passwords.reNewPassword) {
-      Swal.fire({
-        toast: true,
+      ToastAlert({
         icon: 'error',
         title: 'Повторный пароль не совподает!',
         timer: 3000,
-        timerProgressBar: true,
-        showConfirmButton: false,
       })
       return
     }

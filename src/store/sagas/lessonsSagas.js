@@ -1,6 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import { hideLoading, showLoading } from 'react-redux-loading-bar'
-import Swal from 'sweetalert2'
 import axiosApi from '../../axiosApi'
 import {
   clearLesson,
@@ -19,14 +18,7 @@ import {
 } from '../actions/lessonsActions'
 import { fetchCourseRequest } from '../actions/coursesActions'
 import { historyPush } from '../actions/historyActions'
-
-const Toast = Swal.mixin({
-  toast: true,
-  icon: 'success',
-  timer: 3000,
-  timerProgressBar: true,
-  showConfirmButton: false,
-})
+import { ToastAlert } from '../../components/UI/Toast/ToastAlert'
 
 export function* fetchLesson({ payload: id }) {
   try {
@@ -51,8 +43,9 @@ export function* createLesson({ payload }) {
     yield put(hideLoading())
     yield put(historyPush(`/course/${courseId}/edit/lesson/${response.data._id}`))
 
-    yield Toast.fire({
+    yield ToastAlert.fire({
       title: 'Занятие успешно создано',
+      icon: 'success',
     })
   } catch (e) {
     yield put(createLessonFailure(e))
@@ -71,8 +64,9 @@ export function* editLesson({ payload }) {
     yield put(clearLesson())
     yield put(fetchLessonRequest(contentId))
 
-    yield Toast.fire({
+    yield ToastAlert({
       title: 'Занятие успешно изменено',
+      icon: 'success',
     })
   } catch (e) {
     yield put(editLessonFailure(e))
@@ -91,8 +85,9 @@ export function* deleteLesson({ payload }) {
     yield put(hideLoading())
     yield put(historyPush(`/course/${courseId}/edit`))
 
-    yield Toast.fire({
+    yield ToastAlert({
       title: 'Занятие успешно удалено',
+      icon: 'success',
     })
   } catch (e) {
     yield put(deleteLessonFailure(e))

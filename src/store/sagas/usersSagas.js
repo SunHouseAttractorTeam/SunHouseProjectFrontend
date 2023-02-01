@@ -1,6 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import Cookies from 'js-cookie'
-import Swal from 'sweetalert2'
 import { hideLoading, showLoading } from 'react-redux-loading-bar'
 import axiosApi from '../../axiosApi'
 import { historyPush } from '../actions/historyActions'
@@ -48,13 +47,7 @@ import {
 } from '../actions/usersActions'
 import { fetchCourseRequest } from '../actions/coursesActions'
 import { sendGFFailure, sendGFRequest, sendGFSuccess } from '../actions/sendGFActions'
-
-const Toast = Swal.mixin({
-  toast: true,
-  timer: 3000,
-  timerProgressBar: true,
-  showConfirmButton: false,
-})
+import { ToastAlert } from '../../components/UI/Toast/ToastAlert'
 
 export function* getAllUsersSaga() {
   try {
@@ -73,7 +66,7 @@ export function* registrationUserSaga({ payload: userData }) {
     yield put(showLoading())
     const response = yield axiosApi.post('/users', userData)
     yield put(registrationSuccess(response.data))
-    yield Swal.fire({
+    yield ToastAlert({
       toast: false,
       icon: 'success',
       title: `На почту ${response.data.email} отправлено подтверждение`,
@@ -82,7 +75,7 @@ export function* registrationUserSaga({ payload: userData }) {
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(registrationFailure(e.response.data))
-      yield Toast.fire({
+      yield ToastAlert({
         icon: 'error',
         title: 'Данный пользователь уже зарегистрирован',
       })
@@ -107,14 +100,14 @@ export function* loginUserSaga({ payload }) {
     if (payload.userData) {
       yield put(historyPush('/'))
     }
-    yield Toast.fire({
+    yield ToastAlert({
       icon: 'success',
       title: 'Вы успешно вошли в свой аккаунт',
     })
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(loginUserFailure(e.response.data))
-      yield Toast.fire({
+      yield ToastAlert({
         icon: 'error',
         title: 'Введены неверные данные',
       })
@@ -132,7 +125,7 @@ export function* logoutUserSaga() {
 
     yield put(historyPush('/'))
     yield Cookies.remove('jwt')
-    yield Toast.fire({
+    yield ToastAlert({
       icon: 'info',
       title: 'Вы вышли из своего аккаунта',
     })
@@ -189,7 +182,7 @@ export function* forgotPasswordSaga({ payload: userData }) {
     const response = yield axiosApi.post('/users/forgot', userData)
     yield put(forgotPasswordSuccess(response.data))
     yield put(hideLoading())
-    yield Toast.fire({
+    yield ToastAlert({
       icon: 'info',
       title: response.data.message,
     })
@@ -219,14 +212,14 @@ export function* editUserProfileSaga({ payload: userData }) {
     const response = yield axiosApi.put('/users/edit', userData)
     yield put(editSuccess(response.data))
     yield put(hideLoading())
-    yield Toast.fire({
+    yield ToastAlert({
       icon: 'success',
       title: 'Данные успешно сохранены',
     })
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(editFailure(e.response.data))
-      yield Toast.fire({
+      yield ToastAlert({
         icon: 'error',
         title: e.response.data.error,
       })
@@ -242,14 +235,14 @@ export function* editUserPasswordSaga({ payload: passwords }) {
     yield axiosApi.put('/users/edit_password', { password: passwords.password, newPassword: passwords.newPassword })
     yield put(passwordSuccess())
     yield put(hideLoading())
-    yield Toast.fire({
+    yield ToastAlert({
       icon: 'success',
       title: 'Пароль успешно изменен',
     })
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(passwordFailure(e.response.data))
-      yield Toast.fire({
+      yield ToastAlert({
         icon: 'error',
         title: e.response.data.error,
       })
@@ -268,12 +261,12 @@ export function* checkUserTask({ payload: data }) {
     yield put(fetchCourseRequest(data.courseId))
     yield put(hideLoading())
     if (data.value) {
-      yield Toast.fire({
+      yield ToastAlert({
         icon: 'success',
         title: 'Одобрено',
       })
     } else {
-      yield Toast.fire({
+      yield ToastAlert({
         icon: 'success',
         title: 'Не одобрено',
       })
@@ -281,7 +274,7 @@ export function* checkUserTask({ payload: data }) {
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(checkUserTaskFailure(e.response.data))
-      yield Toast.fire({
+      yield ToastAlert({
         icon: 'error',
         title: e.response.data.error,
       })
@@ -310,7 +303,7 @@ export function* sendGoogleFormSaga({ payload }) {
     yield put(showLoading())
     const response = yield axiosApi.post('https://sheet.best/api/sheets/8a0fe7b6-7041-4649-a1fe-0e28f49780e4', payload)
     yield put(sendGFSuccess(response.data))
-    yield Toast.fire({
+    yield ToastAlert({
       icon: 'success',
       title: `Сообщение отправлено!`,
     })
@@ -318,7 +311,7 @@ export function* sendGoogleFormSaga({ payload }) {
   } catch (e) {
     if (e.response && e.response.data) {
       yield put(sendGFFailure(e.response.data))
-      yield Toast.fire({
+      yield ToastAlert({
         icon: 'error',
         title: 'Сообщение не отправлено!',
       })
@@ -334,7 +327,7 @@ export function* checkUserPassedCourseSaga({ payload: courseId }) {
     if (response.data.passed) {
       yield put(checkUserPassedCourseSuccess(response.data.user))
       yield put(historyPush(`/course/${courseId}/certificate`))
-      yield Swal.fire({
+      yield ToastAlert.fire({
         toast: false,
         icon: 'success',
         title: `Поздравляю вас с прохождением курса!\n Вы получили свой сертификат!`,
@@ -343,7 +336,7 @@ export function* checkUserPassedCourseSaga({ payload: courseId }) {
     } else {
       yield put(checkUserPassedCourseSuccess())
       yield put(historyPush(`/course/${courseId}`))
-      yield Swal.fire({
+      yield ToastAlert.fire({
         toast: false,
         icon: 'error',
         title: `Вы не прошли курс. А надо было учиться, а не делать всё на угад!!!`,

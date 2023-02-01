@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Swal from 'sweetalert2'
 import PersonalForm from './PersonalForm/PersonalForm'
 import LocationForm from './LocationForm/LocationForm'
 import ImageForm from './ImageForm/ImageForm'
 import SettingsButton from '../SettingsButton/SettingsButton'
 import { inputChangeHandler } from '../../UI/Form/Handlers/Handlers'
 import { editRequest } from '../../../store/actions/usersActions'
+import { ToastAlert } from '../../UI/Toast/ToastAlert'
 import './ProfileForm.scss'
 
 const ProfileForm = () => {
@@ -64,13 +64,10 @@ const ProfileForm = () => {
     e.preventDefault()
 
     if (state.username === '' || state.email === '') {
-      Swal.fire({
-        toast: true,
+      ToastAlert({
         icon: 'error',
         title: 'username или email не может быть пустыми!',
         timer: 3000,
-        timerProgressBar: true,
-        showConfirmButton: false,
       })
 
       return

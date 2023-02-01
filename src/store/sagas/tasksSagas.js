@@ -1,6 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import { hideLoading, showLoading } from 'react-redux-loading-bar'
-import Swal from 'sweetalert2'
 import axiosApi from '../../axiosApi'
 import {
   createTaskFailure,
@@ -22,14 +21,7 @@ import {
 import { fetchCourseRequest } from '../actions/coursesActions'
 import { historyPush } from '../actions/historyActions'
 import { loginUserSuccess } from '../actions/usersActions'
-
-const Toast = Swal.mixin({
-  toast: true,
-  icon: 'success',
-  timer: 3000,
-  timerProgressBar: true,
-  showConfirmButton: false,
-})
+import { ToastAlert } from '../../components/UI/Toast/ToastAlert'
 
 export function* fetchTask({ payload: id }) {
   try {
@@ -54,8 +46,9 @@ export function* createTask({ payload }) {
     yield put(hideLoading())
     yield put(historyPush(`/course/${courseId}/edit/task/${response.data._id}`))
 
-    yield Toast.fire({
+    yield ToastAlert({
       title: 'Задание успешно создано',
+      icon: 'success',
     })
   } catch (e) {
     yield put(createTaskFailure(e))
@@ -73,8 +66,9 @@ export function* editTask({ payload }) {
     yield put(hideLoading())
     yield put(fetchTaskRequest(contentId))
 
-    yield Toast.fire({
+    yield ToastAlert({
       title: 'Задание успешно изменено',
+      icon: 'success',
     })
   } catch (e) {
     yield put(editTaskFailure(e))
@@ -93,8 +87,9 @@ export function* deleteTask({ payload }) {
     yield put(hideLoading())
     yield put(historyPush(`/course/${courseId}/edit`))
 
-    yield Toast.fire({
+    yield ToastAlert({
       title: 'Задание успешно удалено',
+      icon: 'success',
     })
   } catch (e) {
     yield put(deleteTaskFailure(e))
@@ -110,8 +105,9 @@ export function* sendTaskSaga({ payload: { courseId, taskId, file } }) {
     yield put(loginUserSuccess(response.data))
     yield put(hideLoading())
 
-    yield Toast.fire({
+    yield ToastAlert({
       title: 'Задание успешно отправлено',
+      icon: 'success',
     })
   } catch (e) {
     yield put(sendTaskFailure(e))
