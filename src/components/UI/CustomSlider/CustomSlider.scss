@@ -1,5 +1,7 @@
+@import '../../../scss/style';
+
 .button {
-  background-color: #FFFFFF;
+  background-color: $whiteBorderColor;
   background-repeat: no-repeat;
   background-position: 50%;
   width: 24px;

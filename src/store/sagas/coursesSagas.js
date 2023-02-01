@@ -9,6 +9,9 @@ import {
   createCourseFailure,
   createCourseRequest,
   createCourseSuccess,
+  createRatingFailure,
+  createRatingRequest,
+  createRatingSuccess,
   deleteCourseFailure,
   deleteCourseRequest,
   deleteCourseSuccess,
@@ -42,9 +45,6 @@ import {
   visibilityFailure,
   visibilityRequest,
   visibilitySuccess,
-  createRatingFailure,
-  createRatingRequest,
-  createRatingSuccess,
 } from '../actions/coursesActions'
 import { historyPush } from '../actions/historyActions'
 import { loginUserRequest } from '../actions/usersActions'
@@ -229,6 +229,7 @@ export function* addUsersCourse({ payload }) {
 
     yield put(hideLoading())
     yield put(addUsersCourseSuccess())
+    yield put(fetchCoursesRequest(idCourse))
   } catch (e) {
     yield put(addUsersCourseFailure(e))
     yield put(hideLoading())

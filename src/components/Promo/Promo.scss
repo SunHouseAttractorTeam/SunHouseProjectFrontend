@@ -13,6 +13,7 @@
   }
 
   &_column_left {
+    z-index: 1;
     width: 50%;
   }
 
@@ -91,7 +92,7 @@
     &_title {
       font-size: 28px;
     }
-    
+
     &_column {
 
       &_left {
