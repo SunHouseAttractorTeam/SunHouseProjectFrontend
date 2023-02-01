@@ -84,7 +84,14 @@ const CourseUserModal = ({ setOpen, user }) => {
   }
 
   if (userGeneral && userGeneral.avatar !== 'undefined') {
-    userAvatar = `${apiUrl}/${userGeneral.avatar}`
+    if (userGeneral?.avatar.match(/http/) || userGeneral?.avatar.match(/https/)) {
+      userAvatar = userGeneral.avatar
+    } else if (userGeneral.avatar.includes('fixtures')) {
+      userAvatar = `${apiUrl}/${userGeneral.avatar}`
+    } else {
+      userAvatar = `${apiUrl}/uploads/${userGeneral.avatar}`
+    }
+    // userAvatar = `${apiUrl}/uploads/${userGeneral.avatar}`
   }
 
   return (

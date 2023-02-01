@@ -1,6 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import { hideLoading, showLoading } from 'react-redux-loading-bar'
-import Swal from 'sweetalert2'
 import axiosApi from '../../axiosApi'
 import {
   createCategoryFailure,
@@ -19,13 +18,7 @@ import {
   updateCategoryRequest,
   updateCategorySuccess,
 } from '../actions/categoriesActions'
-
-const Toast = Swal.mixin({
-  toast: true,
-  timer: 3000,
-  timerProgressBar: true,
-  showConfirmButton: false,
-})
+import { ToastAlert } from '../../components/UI/Toast/ToastAlert'
 
 export function* fetchCategories() {
   try {
@@ -58,7 +51,7 @@ export function* createCategory({ payload: courseData }) {
     yield put(createCategorySuccess())
     yield put(hideLoading())
     yield put(fetchCategoriesRequest())
-    yield Toast.fire({
+    yield ToastAlert({
       icon: 'success',
       title: 'Создано',
     })
@@ -89,7 +82,7 @@ export function* deleteCategory({ payload: id }) {
     yield put(deleteCategorySuccess())
     yield put(hideLoading())
     yield put(fetchCategoriesRequest())
-    yield Toast.fire({
+    yield ToastAlert({
       icon: 'success',
       title: 'Удалено',
     })

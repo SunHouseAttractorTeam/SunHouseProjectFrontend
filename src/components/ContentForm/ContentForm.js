@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import ReactPlayer from 'react-player/youtube'
 import { useDispatch } from 'react-redux'
-import Swal from 'sweetalert2'
 import { Interweave } from 'interweave'
+import { ToastAlert } from '../UI/Toast/ToastAlert'
 import FilesUploader from '../FilesUploader/FilesUploader'
 import AddContentBlock from '../AddContentBlock/AddContentBlock'
 import SunEditorWYSIWYG from '../UI/SunEditorWYSIWYG/SunEditorWYSIWYG'
@@ -95,13 +95,10 @@ const ContentForm = ({ contentData, contentId, handleSave }) => {
     const fileSize = e.target.files[0].size
 
     if (fileSize > maxSize) {
-      return Swal.fire({
-        toast: true,
+      return ToastAlert({
         icon: 'error',
         title: 'Выберите файл не более 2 гигабайт',
         timer: 3000,
-        timerProgressBar: true,
-        showConfirmButton: false,
       })
     }
 
@@ -134,24 +131,18 @@ const ContentForm = ({ contentData, contentId, handleSave }) => {
     })
 
     if (!checkContent) {
-      return Swal.fire({
-        toast: true,
+      return ToastAlert({
         icon: 'error',
         title: 'Заполните все поля!',
         timer: 2000,
-        timerProgressBar: true,
-        showConfirmButton: false,
       })
     }
 
     if (!checkVideoLink) {
-      return Swal.fire({
-        toast: true,
+      return ToastAlert({
         icon: 'error',
         title: 'Ссылка на видео не действительна',
         timer: 2000,
-        timerProgressBar: true,
-        showConfirmButton: false,
       })
     }
 

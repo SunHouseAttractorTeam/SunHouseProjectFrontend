@@ -22,6 +22,7 @@ const CoursesCatalog = () => {
   const history = useHistory()
   const dispatch = useDispatch()
   const courses = useSelector(state => state.courses.courses)
+  const user = useSelector(state => state.users.user)
 
   useEffect(() => {
     dispatch(fetchCoursesRequest({ sort: 'rating', category: 'all' }))
@@ -64,9 +65,21 @@ const CoursesCatalog = () => {
         <div className="container courses-section__container">
           <h2 className="courses-section__title">Каталог курсов</h2>
           <div className="courses-section__cards">
-            {courses.slice(0, 5).map(item => (
-              <CourseCard key={item._id} title={item.title} image={item.image} id={item._id} price={item.price} />
-            ))}
+            {user?.role !== 'ban'
+              ? courses
+                  .slice(0, 5)
+                  .map(item => (
+                    <CourseCard
+                      key={item._id}
+                      title={item.title}
+                      image={item.image}
+                      id={`/course/${item._id}`}
+                      price={item.price}
+                    />
+                  ))
+              : courses.map(item => (
+                  <CourseCard key={item.title} title={item.title} image={item.image} id="/user" price={item.price} />
+                ))}
             {allCourses}
           </div>
           <div className="slider">

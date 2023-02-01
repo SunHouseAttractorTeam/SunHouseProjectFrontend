@@ -93,7 +93,7 @@ const TeachersBlock = ({ title, subtitle, teacherCheck, teachers, onVisibilityBl
   }
 
   return (
-    <div className="teachers_block">
+    <div className="teachers_block" id="teacher">
       <div className="teachers_block_headline">
         <Paragraph
           title={title}

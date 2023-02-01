@@ -19,6 +19,7 @@ const Course = () => {
   const dispatch = useDispatch()
   const user = useSelector(state => state.users.user)
   const course = useSelector(state => state.courses.course)
+  const error = useSelector(state => state.courses.state)
 
   useEffect(() => {
     if (id) {
@@ -45,7 +46,7 @@ const Course = () => {
   return (
     <>
       <Header2 />
-      {course ? (
+      {course && (
         <div className="course">
           <CourseBanner course={course} handleSave={handleSave} teacherCheck={teacherCheck} />
           <div className="course__bottom">
@@ -83,9 +84,10 @@ const Course = () => {
             </Switch>
           </div>
         </div>
-      ) : (
+      )}
+      {error && (
         <div className="container">
-          <h2 className="course__not-found">Курс не найден</h2>
+          <h2 className="course__not-found">Курс не найден {error}</h2>
         </div>
       )}
       <Footer />
