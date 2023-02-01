@@ -45,4 +45,5 @@ export const {
   createRatingRequest,
   createRatingSuccess,
   createRatingFailure,
+  clearCourseUser,
 } = coursesSlice.actions

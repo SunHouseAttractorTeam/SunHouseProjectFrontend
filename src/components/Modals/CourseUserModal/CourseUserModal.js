@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar'
 import { Progress } from 'react-sweet-progress'
 import { apiUrl } from '../../../config'
-import { getUserRequest } from '../../../store/actions/coursesActions'
+import { clearCourseUser, getUserRequest } from '../../../store/actions/coursesActions'
 import Modal from '../../UI/Modal2/Modal'
 import MainButton from '../../UI/MainButton/MainButton'
 import TestItem from '../../TestItem/TestItem'
@@ -26,6 +26,10 @@ const CourseUserModal = ({ setOpen, user }) => {
 
   useEffect(() => {
     dispatch(getUserRequest({ courseId: course._id, userId: user._id }))
+
+    return () => {
+      dispatch(clearCourseUser())
+    }
   }, [user, dispatch, course])
 
   useEffect(() => {

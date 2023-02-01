@@ -226,7 +226,7 @@ export function* addUsersCourse({ payload }) {
 
     yield put(hideLoading())
     yield put(addUsersCourseSuccess())
-    yield put(fetchCoursesRequest(idCourse))
+    yield put(fetchCourseRequest(idCourse))
   } catch (e) {
     yield put(addUsersCourseFailure(e))
     yield put(hideLoading())

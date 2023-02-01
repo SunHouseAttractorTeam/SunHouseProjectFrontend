@@ -184,6 +184,9 @@ const coursesSlice = createSlice({
       state.loading = true
       state.error = action.payload
     },
+    clearCourseUser(state) {
+      state.user = null
+    },
   },
 })
 

@@ -1,15 +1,15 @@
 @import '../../scss/style';
 
-.rating-block{
+.rating-block {
   .modal {
-    width: calc(100vw - 100px);
+    width: 40%;
     height: calc(100vh - 100px);
 
     &__content {
       padding: 64px 100px 64px 80px;
 
       @media (max-width: 1024px) {
-      padding: 34px 50px 34px 40px;
+        padding: 34px 50px 34px 40px;
       }
 
       @media (max-width: 1440px) {
@@ -30,7 +30,7 @@
       padding: 20px;
 
       @media (max-width: 664px) {
-       height: 100px;
+        height: 100px;
       }
     }
 
@@ -73,7 +73,7 @@
     color: $blackDarkColor;
   }
 
-  &__modal{
+  &__modal {
     &-close {
       position: absolute;
       right: 24px;
@@ -88,14 +88,14 @@
       }
     }
 
-    &-title{
+    &-title {
       font-style: normal;
       font-weight: 700;
       font-size: 24px;
       margin-bottom: 24px;
     }
 
-    &-subtitle{
+    &-subtitle {
       font-style: normal;
       font-weight: 500;
       font-size: 20px;
@@ -106,7 +106,7 @@
       }
     }
 
-    &-stars{
+    &-stars {
       margin-bottom: 62px;
 
       @media (max-width: 500px) {
@@ -114,19 +114,19 @@
       }
     }
 
-    &-field{
+    &-field {
       display: flex;
       flex-direction: column;
 
-      &:not(:last-child){
+      &:not(:last-child) {
         margin-bottom: 24px;
       }
 
-      &:last-child{
+      &:last-child {
         margin-bottom: 32px;
       }
 
-      &-label{
+      &-label {
         display: block;
         font-style: normal;
         font-weight: 500;
@@ -137,7 +137,7 @@
         margin-bottom: 16px;
       }
 
-      &-input{
+      &-input {
         display: block;
         width: 100%;
         height: 60px;

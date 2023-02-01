@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import Swal from 'sweetalert2'
 import { fetchCourseRequest } from '../../store/actions/coursesActions'
 import './CertificateObtain.scss'
 import certificate from '../../assets/images/certificate.png'
 import Card from '../UI/Cards/Card/Card'
 import RatingBlock from '../RatingBlock/RatingBlock'
+import { ToastAlert } from '../UI/Toast/ToastAlert'
 
 const CertificateObtain = () => {
   const course = useSelector(state => state.courses.course)
@@ -23,11 +23,7 @@ const CertificateObtain = () => {
   const onBtnCopyLink = async () => {
     await navigator.clipboard.writeText(window.location.origin + certificate)
 
-    return Swal.fire({
-      toast: true,
-      timer: 3000,
-      timerProgressBar: true,
-      showConfirmButton: false,
+    return ToastAlert({
       icon: 'success',
       title: 'Ссылка сохранена в буфер обмена',
     })
