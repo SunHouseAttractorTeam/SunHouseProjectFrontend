@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { LoginSocialGoogle } from 'reactjs-social-login'
 import { loginUserRequest } from '../../../store/actions/usersActions'
 import googleicon from '../../../assets/icons/google.svg'
-import {apiUrl, GoogleAppId} from '../../../config'
+import { apiUrl, GoogleAppId } from '../../../config'
 import './GoogleLogin.scss'
 
 const GoogleLogin = () => {

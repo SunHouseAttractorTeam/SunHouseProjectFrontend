@@ -6,8 +6,8 @@
         url('Gilroy-Regular.woff2') format('woff2'),
         url('Gilroy-Regular.woff') format('woff'),
         url('Gilroy-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+                    font-weight: normal;
+                    font-style: normal;
 }
 
 @font-face {
